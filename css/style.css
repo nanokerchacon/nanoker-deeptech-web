@@ -1,3 +1,76 @@
+/* =====================
+   HERO BRIDGE BLOCK
+===================== */
+.hero-intro {
+  width: min(760px, 92vw);
+  margin-top: 30px;
+  padding: 24px 24px 20px;
+  border-radius: 20px;
+  background:
+    linear-gradient(135deg, rgba(0, 180, 255, 0.12), rgba(0, 255, 255, 0.07) 45%, rgba(0, 0, 0, 0.28));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  text-align: center;
+}
+
+.hero-intro-text {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.08rem;
+  line-height: 1.68;
+  margin: 0;
+  text-align: center;
+}
+
+.hero-intro-actions {
+  margin-top: 17px;
+  display: flex;
+  justify-content: center;
+  gap: 13px;
+  flex-wrap: wrap;
+}
+
+.hero-intro-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  border-radius: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+
+.hero-intro-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.12);
+}
+
+.hero-intro-btn.primary {
+  border: 1px solid rgba(0,180,255,0.45);
+  background: rgba(0,180,255,0.16);
+  color: rgba(255,255,255,0.95);
+  box-shadow: 0 0 16px rgba(0, 180, 255, 0.2);
+}
+
+.hero-intro-btn.primary:hover {
+  background: rgba(0,180,255,0.2);
+  border-color: rgba(0,180,255,0.65);
+  box-shadow: 0 0 24px rgba(0, 180, 255, 0.26);
+}
+
+@media (max-width: 768px) {
+  .hero-intro {
+    width: min(760px, 92vw);
+    padding: 22px 20px 18px;
+  }
+}
+
 :root {
   --font-main: "DM Sans", sans-serif;
   --font-tech: "JetBrains Mono", monospace;
@@ -480,6 +553,11 @@ body::before{
   text-transform: uppercase;
   opacity: 0.5;
   animation: blink 2s infinite;
+}
+
+.hero .hero-scroll{
+  position: static;
+  margin-top: 22px;
 }
 
 @keyframes blink{
