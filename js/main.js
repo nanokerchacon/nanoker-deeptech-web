@@ -17,35 +17,37 @@ function getNavbarEl() {
 }
 
 function getBgSections() {
-  // ✅ Nuevo (limpio): cualquier sección que tenga data-bg="hero|quantum|semi|..."
+  // Incluye hero explícitamente + secciones con y sin data-bg para evitar huecos.
+  const heroEl =
+    document.querySelector(".nk-hero") ||
+    document.getElementById("top") ||
+    document.querySelector("header[data-bg='hero']");
+  const sections = Array.from(document.querySelectorAll(".section"));
   const dataSections = Array.from(document.querySelectorAll("[data-bg]"));
-  if (dataSections.length) return dataSections;
 
-  // Compat: tu estructura antigua por ids
-  const legacyIds = [
-    "sec-quantum",
-    "sec-semi",
-    "sec-extreme",
-    "sec-medical",
-    "sec-implantes",
-    "sec-value",
-  ];
-  return legacyIds
-    .map((id) => document.getElementById(id))
-    .filter(Boolean)
-    .map((el) => {
-      // mapeo a estados del three
-      const map = {
-        "sec-quantum": "quantum",
-        "sec-semi": "semi",
-        "sec-extreme": "extreme",
-        "sec-medical": "medical",
-        "sec-implantes": "implantes",
-        "sec-value": "value",
-      };
-      el.dataset.bg = map[el.id] || "hero";
-      return el;
-    });
+  const observed = [];
+  const seen = new Set();
+  [heroEl, ...sections, ...dataSections].filter(Boolean).forEach((el) => {
+    if (seen.has(el)) return;
+    seen.add(el);
+    observed.push(el);
+  });
+
+  if (observed.length) return observed;
+
+  // Compat extrema si no hay estructura moderna.
+  return [document.body];
+}
+
+function resolveBgState(el) {
+  if (!el) return "base";
+  if (el.dataset?.bg) return el.dataset.bg;
+
+  const ancestor = el.closest("[data-bg]");
+  if (ancestor?.dataset?.bg) return ancestor.dataset.bg;
+
+  if (el.id === "top" || el.classList?.contains("nk-hero")) return "hero";
+  return "base";
 }
 
 function setThreeState(state) {
@@ -103,7 +105,7 @@ window.addEventListener("DOMContentLoaded", () => {
   // 5) Background state by visible section (data-bg)
   const bgSections = getBgSections();
 
-  // Si no hay secciones con data-bg, al menos mantenemos hero
+  // Si no hay elementos observables, mantenemos hero.
   if (!bgSections.length) {
     setThreeState("hero");
     return;
@@ -132,7 +134,7 @@ window.addEventListener("DOMContentLoaded", () => {
           }
         });
 
-        const state = best?.dataset?.bg || "hero";
+        const state = resolveBgState(best);
         setThreeState(state);
       },
       { passive: true }
@@ -143,21 +145,60 @@ window.addEventListener("DOMContentLoaded", () => {
 
   // IntersectionObserver PRO: elige la más visible
   let currentBg = "hero";
+  let lastState = "hero";
+  let lastChangeTime = performance.now();
+  let bgStateTimer = null;
+
+  const visibility = new Map(bgSections.map((el) => [el, 0]));
 
   const bgObserver = new IntersectionObserver(
     (entries) => {
-      // elegimos el entry con más intersectionRatio
-      const visible = entries
-        .filter((e) => e.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      entries.forEach((entry) => {
+        visibility.set(entry.target, entry.isIntersecting ? entry.intersectionRatio : 0);
+      });
 
-      if (!visible) return;
+      let bestEl = null;
+      let bestRatio = 0;
+      visibility.forEach((ratio, el) => {
+        if (ratio > bestRatio) {
+          bestRatio = ratio;
+          bestEl = el;
+        }
+      });
 
-      const state = visible.target?.dataset?.bg || "hero";
-      if (state && state !== currentBg) {
-        currentBg = state;
-        setThreeState(state);
+      const state = resolveBgState(bestEl);
+      if (!state) return;
+
+      if (state === currentBg) {
+        if (bgStateTimer) {
+          clearTimeout(bgStateTimer);
+          bgStateTimer = null;
+        }
+        lastState = state;
+        return;
       }
+
+      const now = performance.now();
+      if (state !== lastState) {
+        lastState = state;
+        lastChangeTime = now;
+      }
+
+      const elapsed = now - lastChangeTime;
+      if (elapsed < 200) {
+        if (bgStateTimer) clearTimeout(bgStateTimer);
+        bgStateTimer = setTimeout(() => {
+          if (lastState !== currentBg) {
+            currentBg = lastState;
+            setThreeState(lastState);
+          }
+          bgStateTimer = null;
+        }, 200 - elapsed);
+        return;
+      }
+
+      currentBg = state;
+      setThreeState(state);
     },
     {
       // Punto de lectura: el centro de pantalla aproximadamente

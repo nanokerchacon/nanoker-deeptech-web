@@ -7,15 +7,29 @@ export function initThreeBackground() {
   // --- CONFIGURACIÓN ---
   const STATES = {
     hero: {
-      color: new THREE.Color(0xffffff),
-      emissive: new THREE.Color(0x000000),
-      roughness: 0.1,
-      metalness: 1.0,
+      // oscuro y cinematográfico (el foco blanco lo hace CSS en el hero)
+      color: new THREE.Color(0x0b1016),
+      emissive: new THREE.Color(0x05070a),
+      roughness: 0.22,
+      metalness: 0.85,
       waveType: 0,
       freq: 0.2,
       amp: 1.0,
-      bloom: 0.55,
-      particles: 0.1,
+      bloom: 0.22,
+      particles: 0.08,
+      noGrid: 0.0,
+      showValueBackdrop: 0.0,
+    },
+    base: {
+      color: new THREE.Color(0x080b10),
+      emissive: new THREE.Color(0x030507),
+      roughness: 0.28,
+      metalness: 0.82,
+      waveType: 0,
+      freq: 0.2,
+      amp: 1.0,
+      bloom: 0.18,
+      particles: 0.06,
       noGrid: 0.0,
       showValueBackdrop: 0.0,
     },
@@ -84,6 +98,19 @@ export function initThreeBackground() {
       noGrid: 0.0,
       showValueBackdrop: 0.0,
     },
+    competitive: {
+      color: new THREE.Color(0x08101f),
+      emissive: new THREE.Color(0x3b82f6),
+      roughness: 0.18,
+      metalness: 0.86,
+      waveType: 1,
+      freq: 0.9,
+      amp: 0.55,
+      bloom: 0.62,
+      particles: 0.18,
+      noGrid: 0.0,
+      showValueBackdrop: 0.0,
+    },
     implantes: {
       color: new THREE.Color(0x0b0b0b),
       emissive: new THREE.Color(0xf5f5f2),
@@ -93,6 +120,32 @@ export function initThreeBackground() {
       freq: 1.0,
       amp: 0.6,
       bloom: 0.55,
+      particles: 0.22,
+      noGrid: 0.0,
+      showValueBackdrop: 0.0,
+    },
+    sovereignty: {
+      color: new THREE.Color(0x160a02),
+      emissive: new THREE.Color(0xdf6d0f),
+      roughness: 0.26,
+      metalness: 0.72,
+      waveType: 0,
+      freq: 0.45,
+      amp: 0.7,
+      bloom: 0.58,
+      particles: 0.16,
+      noGrid: 0.0,
+      showValueBackdrop: 0.0,
+    },
+    cta: {
+      color: new THREE.Color(0x051018),
+      emissive: new THREE.Color(0x8b5cf6),
+      roughness: 0.16,
+      metalness: 0.84,
+      waveType: 2,
+      freq: 0.8,
+      amp: 0.6,
+      bloom: 0.64,
       particles: 0.22,
       noGrid: 0.0,
       showValueBackdrop: 0.0,
@@ -492,7 +545,7 @@ export function initThreeBackground() {
 
     const sectionDim = Math.min(medicalDim, implantesDim);
 
-    bloomPass.strength = current.bloom * pulseBloom * sectionDim;
+    bloomPass.strength = Math.min(0.75, current.bloom * pulseBloom * sectionDim);
     bloomPass.radius = 0.75 + pulse * 0.12;
     bloomPass.threshold = 0.12;
 

@@ -100,29 +100,131 @@
 
       /* Hero bridge block */
       .hero-bridge {
+        position: relative;
         display: flex;
         justify-content: center;
-        padding: 90px 20px 70px;
+        padding: 92px 20px 78px;
+        overflow: hidden;
+
+        /* continuidad: mismo negro al final, azul solo como tinte */
+        background: linear-gradient(
+          180deg,
+          rgba(3, 9, 12, 0.98) 0%,
+          rgba(2, 6, 8, 0.99) 45%,
+          #000 100%
+        );
+
+        /* evita línea de 1px por antialiasing entre secciones */
+        margin-top: -1px;
+      }
+      .hero-bridge::before{
+        content:"";
+        position:absolute;
+        inset:-10%;
+        pointer-events:none;
+        background: radial-gradient(50% 40% at 50% 10%, rgba(120,200,255,.06), transparent 62%);
+        filter: blur(18px);
+        opacity: .35;
+      }
+      .hero-bridge::after{
+        content:"";
+        position:absolute;
+        inset:0;
+        pointer-events:none;
+        background: radial-gradient(100% 80% at 50% 0%, rgba(0,0,0,0), rgba(0,0,0,.55));
+        opacity: .10;
       }
       .hero-bridge-content {
         max-width: 980px;
         text-align: center;
+        position: relative;
+        z-index: 1;
+      }
+      .hero-bridge-panel{
+        position: relative;
+        padding: 40px 42px 34px;
+        border-radius: 22px;
+
+        /* glass oscuro pro */
+        background: rgba(8, 12, 16, 0.58);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+
+        /* borde energético sutil */
+        border: 1px solid rgba(120,200,255,0.22);
+
+        /* sombra cinematográfica */
+        box-shadow:
+          0 30px 90px rgba(0,0,0,.65),
+          0 0 42px rgba(0,180,255,.10),
+          inset 0 0 28px rgba(120,200,255,.06);
+      }
+      .hero-bridge-panel::before{
+        content:"";
+        position:absolute;
+        inset:0;
+        border-radius: 22px;
+        background:
+          linear-gradient(90deg, rgba(120,200,255,.55), transparent 18%) top left / 34px 2px no-repeat,
+          linear-gradient(180deg, rgba(120,200,255,.55), transparent 18%) top left / 2px 34px no-repeat,
+          linear-gradient(270deg, rgba(120,200,255,.40), transparent 22%) top right / 34px 2px no-repeat,
+          linear-gradient(180deg, rgba(120,200,255,.40), transparent 22%) top right / 2px 34px no-repeat,
+          linear-gradient(90deg, rgba(120,200,255,.30), transparent 22%) bottom left / 34px 2px no-repeat,
+          linear-gradient(0deg, rgba(120,200,255,.30), transparent 22%) bottom left / 2px 34px no-repeat,
+          linear-gradient(270deg, rgba(120,200,255,.24), transparent 26%) bottom right / 34px 2px no-repeat,
+          linear-gradient(0deg, rgba(120,200,255,.24), transparent 26%) bottom right / 2px 34px no-repeat;
+        opacity: .55;
+        pointer-events:none;
+      }
+      .hero-bridge-panel::after{
+        content:"";
+        position:absolute;
+        inset:0;
+        border-radius: 22px;
+        background: linear-gradient(90deg, transparent, rgba(120,200,255,.16), transparent);
+        transform: translateX(-40%);
+        opacity: .0;
+        pointer-events:none;
+        animation: nkSweep 2.6s ease-in-out 0.6s 1 forwards;
+      }
+      @keyframes nkSweep{
+        0%   { opacity: 0; transform: translateX(-55%); }
+        35%  { opacity: .55; }
+        100% { opacity: 0; transform: translateX(55%); }
+      }
+      .hero-bridge-eyebrow{
+        font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: 12px;
+        letter-spacing: .22em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,.70);
+        margin-bottom: 14px;
+        opacity: .85;
       }
       .hero-bridge-text {
-        font-size: 1.25rem;
+        font-size: 1.22rem;
         line-height: 1.65;
-        color: rgba(255,255,255,0.92);
-        margin-bottom: 38px;
+        color: rgba(255,255,255,0.88);
+        margin: 0 auto 26px;
+        max-width: 900px;
       }
       .hero-bridge-text strong {
-        font-weight: 700;
         color: #fff;
+        font-weight: 700;
       }
       .hero-bridge-actions {
         display: flex;
-        gap: 18px;
+        gap: 16px;
         justify-content: center;
         flex-wrap: wrap;
+        margin-top: 8px;
+      }
+      @media (max-width: 820px){
+        .hero-bridge-panel{ padding: 30px 22px 26px; }
+        .hero-bridge-text{ font-size: 1.08rem; }
+      }
+      @media (prefers-reduced-motion: reduce){
+        .hero-bridge-panel::after{ animation: none; opacity: 0; }
       }
       .btn.primary {
         background: rgba(0,180,255,0.15);
@@ -171,17 +273,18 @@
 
       <div class="nav-center">
         <a href="#top" class="nav-link" data-i18n="nav.home">Home</a>
-        <a href="#sec-platform" class="nav-link" data-i18n="nav.capabilities">Capacidades</a>
-        <a href="#sec-materials" class="nav-link" data-i18n="nav.materials">Materiales</a>
+        <a href="#sec-bottleneck" class="nav-link" data-i18n="nav.company">Empresa</a>
         <a href="#sec-sectors" class="nav-link" data-i18n="nav.sectors">Sectores</a>
+        <a href="#sec-materials" class="nav-link" data-i18n="nav.materials">Materiales</a>
+        <a href="#sec-platform" class="nav-link" data-i18n="nav.capabilities">Capacidades</a>
         <a href="#sec-rnd" class="nav-link" data-i18n="nav.rnd">I+D</a>
-        <a href="#sec-advantages" class="nav-link" data-i18n="nav.advantages">Ventajas</a>
         <a href="#contact" class="nav-link" data-i18n="nav.contact">Contacto</a>
       </div>
 
       <div class="nav-actions">
-        <a href="./access.html" class="nav-cta" data-i18n="nav.partner">Acceso Partners</a>
-        <button class="nav-lang" type="button" data-lang-toggle aria-label="Language">ES</button>
+        <button class="nav-lang" type="button" data-lang-toggle aria-label="Language">
+          <span class="is-active">ES</span> / <span>EN</span>
+        </button>
       </div>
 
       <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
@@ -190,36 +293,48 @@
     </nav>
 
     <!-- ================= HERO ================= -->
-<header class="hero" id="top" data-bg="hero">
-  <h1 data-i18n="hero.title">nanoker</h1>
+<header class="nk-hero hero" id="top" data-bg="hero" role="banner">
+  <div class="nk-hero__inner">
+    <h1 class="nk-hero__brand">nanoker</h1>
 
-  <p class="hero-tagline">
-    <span class="neon-underline" data-i18n="hero.taglineMain">
-      DeepTech Materials for Critical Industries.
-    </span><br />
+    <p class="nk-hero__tagline">DeepTech Materials for Critical Industries.</p>
+    <span class="nk-hero__divider" aria-hidden="true"></span>
 
-    <span data-i18n="hero.taglineSub">
-      Materiales avanzados con especificación garantizada, trazabilidad completa y escalabilidad industrial.
-      De precursor a componente terminado.
-    </span>
-  </p>
-
-  <div class="hero-intro">
-    <p class="hero-intro-text">
-      La transición de la DeepTech europea desde prototipo a producción industrial depende de un factor crítico: el dominio de los materiales avanzados.
-      Nanoker integra capacidades en cerámicas técnicas, diamante CVD, SiC y zafiro para ofrecer soluciones con especificación garantizada, trazabilidad completa y escalabilidad industrial.
+    <p class="nk-hero__lead">
+      Materiales avanzados con especificación garantizada, trazabilidad completa y
+      escalabilidad industrial. De precursor a componente terminado.
     </p>
-    <div class="hero-intro-actions">
-      <a class="hero-intro-btn primary" href="#sec-sectors">Explorar sectores</a>
-      <a class="hero-intro-btn" href="#contact">Contactar con ingeniería</a>
-    </div>
   </div>
 
-  <div class="hero-scroll" data-i18n="hero.scroll">Scroll to Explore</div>
+  <a class="nk-hero__scroll" href="#explorar" aria-label="Desplázate para explorar">
+    <span class="nk-hero__scrollText">DESPLÁZATE PARA EXPLORAR</span>
+    <span class="nk-hero__scrollDot" aria-hidden="true"></span>
+  </a>
 </header>
 
+<section class="hero-bridge" aria-label="Introducción">
+  <div class="hero-bridge-content">
+    <div class="hero-bridge-panel">
+      <div class="hero-bridge-eyebrow">EU DEEPTECH · MATERIALS INFRASTRUCTURE</div>
 
-    <div class="content-wrapper">
+      <p class="hero-bridge-text">
+        La transición de la DeepTech europea desde prototipo a producción industrial depende de un factor crítico:
+        <strong>el dominio de los materiales avanzados.</strong>
+        <br /><br />
+        Nanoker integra capacidades en cerámicas técnicas, diamante CVD, SiC y zafiro para ofrecer soluciones con
+        especificación garantizada, trazabilidad completa y escalabilidad industrial.
+      </p>
+
+      <div class="hero-bridge-actions">
+        <a class="btn primary" href="#sec-sectors">Explorar sectores</a>
+        <a class="btn ghost" href="#contact">Contactar con ingeniería</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <div class="content-wrapper" id="explorar">
       <!-- ================= 01 - BOTTLENECK ================= -->
       <section class="section layout-left" id="sec-bottleneck" data-bg="quantum">
         <div class="card q-theme">
@@ -358,46 +473,66 @@
           </a>
 
           <p data-i18n="sections.sectors.text">
-            Un reto común: fiabilidad bajo condiciones extremas. Nos integramos en roadmaps tecnológicos
+            Fiabilidad bajo condiciones extremas. Nos integramos en roadmaps tecnológicos
             de OEMs y sistemas donde el material define rendimiento, coste total y escalabilidad.
           </p>
 
-          <div class="mini-grid">
-            <div class="mini-tile">
-              <strong data-i18n="sections.sectors.tiles.semiconductors.title">Semiconductores</strong>
-              <span data-i18n="sections.sectors.tiles.semiconductors.text">Fab-grade, pureza, defectos, trazabilidad.</span>
+          <div class="specs">
+            <div class="spec-item">
+              <dt>INDUSTRIA</dt>
+              <dd>Avanzada</dd>
             </div>
-            <div class="mini-tile">
-              <strong data-i18n="sections.sectors.tiles.quantum.title">Cuántica & Sensores</strong>
-              <span data-i18n="sections.sectors.tiles.quantum.text">Control atómico, centros NV, estabilidad.</span>
+            <div class="spec-item">
+              <dt>FOTÓNICA</dt>
+              <dd>Tecnologías ópticas</dd>
             </div>
-            <div class="mini-tile">
-              <strong data-i18n="sections.sectors.tiles.energy.title">Energía & Potencia</strong>
-              <span data-i18n="sections.sectors.tiles.energy.text">Gestión térmica, >200°C, alta tensión.</span>
+            <div class="spec-item">
+              <dt>CIENCIA</dt>
+              <dd>Infraestructuras críticas</dd>
             </div>
-            <div class="mini-tile">
-              <strong data-i18n="sections.sectors.tiles.defense.title">Defensa & Espacio</strong>
-              <span data-i18n="sections.sectors.tiles.defense.text">Rad-hard, extremos, fallo no permitido.</span>
-            </div>
-            <div class="mini-tile">
-              <strong data-i18n="sections.sectors.tiles.photonics.title">Fotónica</strong>
-              <span data-i18n="sections.sectors.tiles.photonics.text">UV–IR, alta potencia, óptica avanzada.</span>
-            </div>
-            <div class="mini-tile">
-              <strong data-i18n="sections.sectors.tiles.health.title">Salud</strong>
-              <span data-i18n="sections.sectors.tiles.health.text">Biocompatibilidad, trazabilidad, regulación.</span>
+            <div class="spec-item">
+              <dt>RETO COMÚN</dt>
+              <dd>Fiabilidad extrema</dd>
             </div>
           </div>
 
           <a class="card-cta" href="#sec-rnd">
-            <span data-i18n="sections.sectors.cta">Ver I+D y escalado</span>
-            <span aria-hidden="true">→</span>
+            <span>Explorar sectores →</span>
           </a>
         </div>
       </section>
 
+      <!-- ================= 06 - COMPETITIVE ================= -->
+      <section class="section layout-left" id="sec-competitive" data-bg="competitive">
+        <div class="card competitive-theme">
+          <span class="card-tag">BLOQUE 6 · VENTAJA COMPETITIVA</span>
+          <h2>Ventajas<br /><b>estructurales</b></h2>
+
+          <div class="specs">
+            <div class="spec-item">
+              <dt>Integración vertical completa</dt>
+              <dd>Control total de calidad y proceso.</dd>
+            </div>
+            <div class="spec-item">
+              <dt>Ventaja energética estructural</dt>
+              <dd>Producción intensiva optimizada con electricidad renovable competitiva.</dd>
+            </div>
+            <div class="spec-item">
+              <dt>Sostenibilidad y CBAM-ready</dt>
+              <dd>Producción alineada con defensa, aeroespacial y transición verde.</dd>
+            </div>
+            <div class="spec-item">
+              <dt>Protección de IP europea</dt>
+              <dd>Marco jurídico robusto y proximidad a clientes estratégicos.</dd>
+            </div>
+          </div>
+
+          <a class="card-cta" href="#sec-sovereignty"><span>Ver mensaje estratégico</span><span aria-hidden="true">→</span></a>
+        </div>
+      </section>
+
       <!-- ================= 05 - R&D ================= -->
-      <section class="section layout-left" id="sec-rnd" data-bg="implantes">
+      <section class="section layout-right" id="sec-rnd" data-bg="implantes">
         <div class="card i-theme">
           <span class="card-tag" data-i18n="sections.rnd.tag">05 · R&amp;D to 24/7</span>
 
@@ -431,52 +566,34 @@
             </div>
           </div>
 
-          <a class="card-cta" href="#sec-advantages">
+          <a class="card-cta" href="#sec-sovereignty">
             <span data-i18n="sections.rnd.cta">Ventaja estructural europea</span>
             <span aria-hidden="true">→</span>
           </a>
         </div>
       </section>
 
-      <!-- ================= ADVANTAGES ================= -->
-      <section class="section value-section" id="sec-advantages" data-bg="value">
-        <div class="value-content">
-          <h2 data-i18n-html="advantages.titleHtml">Ventajas<br /><b>estructurales.</b></h2>
-          <p data-i18n="advantages.subtitle">
-            Integración vertical + especificación certificada + seguridad de suministro europea.
-            Los materiales críticos no son intercambiables: son infraestructura tecnológica.
-          </p>
+      <!-- ================= 08 - SOVEREIGNTY ================= -->
+      <section class="section layout-left" id="sec-sovereignty" data-bg="sovereignty">
+        <div class="card sovereignty-theme">
+          <span class="card-tag">BLOQUE 8 · MENSAJE ESTRATÉGICO</span>
+          <h2>Soberanía<br /><b>tecnológica europea</b></h2>
+          <p>Europa no puede liderar en semiconductores, cuántica o defensa mientras dependa de cadenas de suministro externas para materiales críticos.</p>
+          <p><b>Nanoker</b> contribuye a construir una infraestructura industrial europea capaz de garantizar calidad, coste y suministro en sectores estratégicos.</p>
+          <a class="card-cta" href="#sec-cta"><span>Ir al CTA final</span><span aria-hidden="true">→</span></a>
+        </div>
+      </section>
 
-          <div class="value-grid">
-            <article class="value-card">
-              <span class="value-eyebrow">01</span>
-              <h3 data-i18n="advantages.items.0.title">Integración vertical</h3>
-              <p data-i18n="advantages.items.0.text">Control total de proceso, metrología y QA/QC.</p>
-            </article>
-
-            <article class="value-card">
-              <span class="value-eyebrow">02</span>
-              <h3 data-i18n="advantages.items.1.title">Ventaja energética</h3>
-              <p data-i18n="advantages.items.1.text">Producción intensiva en energía optimizada y competitiva.</p>
-            </article>
-
-            <article class="value-card">
-              <span class="value-eyebrow">03</span>
-              <h3 data-i18n="advantages.items.2.title">CBAM-ready & sostenibilidad</h3>
-              <p data-i18n="advantages.items.2.text">Producción alineada con defensa, aeroespacial y transición verde.</p>
-            </article>
-
-            <article class="value-card">
-              <span class="value-eyebrow">04</span>
-              <h3 data-i18n="advantages.items.3.title">IP europea & lock-in</h3>
-              <p data-i18n="advantages.items.3.text">Marco jurídico robusto + cualificación que consolida suministro.</p>
-            </article>
+      <!-- ================= 09 - CTA ================= -->
+      <section class="section cta-section" id="sec-cta" data-bg="cta">
+        <div class="cta-panel">
+          <span class="cta-kicker">BLOQUE 9 · CTA FINAL</span>
+          <h2>¿Estás desarrollando<br /><b>una tecnología crítica?</b></h2>
+          <p>Cuéntanos tu aplicación y trabajemos juntos en la arquitectura material que la haga viable.</p>
+          <div class="cta-actions">
+            <a class="btn primary" href="#contact">Solicitar evaluación técnica</a>
+            <a class="btn ghost" href="#contact">Contactar</a>
           </div>
-
-          <p style="margin-top:18px; opacity:.9;" data-i18n="advantages.closing">
-            Europa no puede liderar en semiconductores, cuántica o defensa mientras dependa de cadenas externas
-            para materiales críticos. Nanoker contribuye a construir esa base industrial.
-          </p>
         </div>
       </section>
 
@@ -504,7 +621,7 @@
               <li><a href="#sec-materials" data-i18n="footer.colSite.links.materials">Materiales</a></li>
               <li><a href="#sec-sectors" data-i18n="footer.colSite.links.sectors">Sectores</a></li>
               <li><a href="#sec-rnd" data-i18n="footer.colSite.links.rnd">I+D</a></li>
-              <li><a href="#sec-advantages" data-i18n="footer.colSite.links.advantages">Ventajas</a></li>
+              <li><a href="#sec-sovereignty" data-i18n="footer.colSite.links.advantages">Ventajas</a></li>
             </ul>
           </div>
 
@@ -578,7 +695,7 @@
           });
         });
 
-        const sectionIds = ["top","sec-bottleneck","sec-platform","sec-materials","sec-sectors","sec-rnd","sec-advantages","contact"];
+        const sectionIds = ["top","sec-bottleneck","sec-platform","sec-materials","sec-sectors","sec-rnd","contact"];
         const sections = sectionIds.map((id) => document.getElementById(id)).filter(Boolean);
 
         const navLinks = Array.from(document.querySelectorAll(".nav-center .nav-link"));
@@ -612,3 +729,4 @@
     <script type="module" src="./js/main.js?v=10"></script>
   </body>
 </html>
+
