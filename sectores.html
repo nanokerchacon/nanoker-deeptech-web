@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nanoker | Sectores</title>
+
+    <link rel="icon" href="./favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-pack/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-pack/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon-pack/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="./favicon-pack/android-chrome-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="./favicon-pack/android-chrome-512x512.png" />
+    <meta name="theme-color" content="#020202" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/style.css?v=11" />
+
+    <style>
+      :root {
+        --sect-bg: #050505;
+        --sect-border: rgba(255, 255, 255, 0.11);
+        --sect-dim: rgba(255, 255, 255, 0.74);
+        --sect-red: #c93b3b;
+        --sect-red-soft: rgba(201, 59, 59, 0.3);
+        --sect-surface: rgba(255, 255, 255, 0.02);
+      }
+
+      body.sectores-page {
+        background: var(--sect-bg);
+      }
+
+      body.sectores-page::before {
+        opacity: 0.06;
+      }
+
+      .sect-main {
+        position: relative;
+        padding-top: var(--nav-h);
+        background:
+          radial-gradient(80% 220px at 88% 15%, rgba(255, 255, 255, 0.04), transparent 70%),
+          linear-gradient(180deg, #050505 0%, #040404 48%, #030303 100%);
+      }
+
+      .sect-main::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        background-image: radial-gradient(rgba(255, 255, 255, 0.09) 0.35px, transparent 0.35px);
+        background-size: 3px 3px;
+        opacity: 0.03;
+      }
+
+      .sect-main > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .sect-container {
+        width: min(1120px, calc(100% - 40px));
+        margin: 0 auto;
+      }
+
+      .sect-section {
+        padding: 70px 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .sect-hero {
+        border-top: 0;
+        padding: 88px 0 76px;
+      }
+
+      .sect-hero h1 {
+        margin: 0;
+        font-size: clamp(2.3rem, 6.1vw, 4.4rem);
+        letter-spacing: -0.03em;
+        line-height: 1.04;
+        font-weight: 500;
+      }
+
+      .sect-subtitle {
+        margin: 16px 0 0;
+        max-width: 840px;
+        font-size: clamp(1.02rem, 2.2vw, 1.24rem);
+        color: rgba(255, 255, 255, 0.88);
+        line-height: 1.55;
+      }
+
+      .sect-intro {
+        margin: 20px 0 0;
+        max-width: 860px;
+        color: var(--sect-dim);
+        line-height: 1.72;
+      }
+
+      .sect-divider {
+        margin-top: 28px;
+        height: 1px;
+        width: 100%;
+        background: linear-gradient(
+          90deg,
+          var(--sect-red-soft) 0%,
+          rgba(255, 255, 255, 0.17) 16%,
+          rgba(255, 255, 255, 0.08) 100%
+        );
+      }
+
+      .sect-heading {
+        margin: 0 0 10px;
+        font-size: clamp(1.7rem, 4vw, 2.45rem);
+        letter-spacing: -0.02em;
+        font-weight: 500;
+      }
+
+      .sect-phrase {
+        margin: 0 0 18px;
+        font-family: var(--font-tech);
+        font-size: 0.76rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.64);
+      }
+
+      .sect-text {
+        margin: 0 0 22px;
+        color: var(--sect-dim);
+        line-height: 1.7;
+        max-width: 900px;
+      }
+
+      .sect-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .sect-box {
+        border: 1px solid var(--sect-border);
+        background: var(--sect-surface);
+        padding: 16px 18px;
+      }
+
+      .sect-box h3 {
+        margin: 0 0 12px;
+        font-size: 0.8rem;
+        font-family: var(--font-tech);
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--sect-red);
+      }
+
+      .sect-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 8px;
+      }
+
+      .sect-list li {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        color: rgba(255, 255, 255, 0.9);
+        line-height: 1.5;
+      }
+
+      .sect-list li::before {
+        content: "";
+        width: 14px;
+        height: 14px;
+        margin-top: 0.31em;
+        border-radius: 50%;
+        border: 1px solid rgba(201, 59, 59, 0.55);
+        background: radial-gradient(circle at 50% 50%, rgba(201, 59, 59, 0.75) 0 2px, transparent 3px);
+        flex: 0 0 14px;
+      }
+
+      .sect-cta {
+        text-align: center;
+        padding: 88px 0;
+      }
+
+      .sect-cta p {
+        margin: 0;
+        font-size: clamp(1.3rem, 3.3vw, 2rem);
+        line-height: 1.35;
+        color: rgba(255, 255, 255, 0.94);
+      }
+
+      [data-reveal] {
+        opacity: 0;
+        transform: translateY(8px);
+        transition: opacity 420ms ease, transform 420ms ease;
+      }
+
+      [data-reveal].is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 860px) {
+        .sect-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .sect-section {
+          padding: 56px 0;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        [data-reveal] {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body class="sectores-page">
+    <nav class="nav" data-nav>
+      <a href="./index.html" class="nav-logo" aria-label="Nanoker Home">
+        <img src="./img/brand/logo-nanoker-26-hd.png" alt="Nanoker" />
+      </a>
+
+      <div class="nav-center">
+        <a href="./index.html#top" class="nav-link" data-i18n="nav.home">Home</a>
+        <a href="empresa.html" class="nav-link" data-i18n="nav.company">Empresa</a>
+        <a href="sectores.html" class="nav-link is-active" data-i18n="nav.sectors">Sectores</a>
+        <a href="materiales.html" class="nav-link" data-i18n="nav.materials">Materiales</a>
+        <a href="capacidades.html" class="nav-link" data-i18n="nav.capabilities">Capacidades</a>
+        <a href="id.html" class="nav-link" data-i18n="nav.rnd">I+D</a>
+        <a href="#contact" class="nav-link" data-i18n="nav.contact">Contacto</a>
+      </div>
+
+      <div class="nav-actions">
+        <button class="nav-lang" type="button" data-lang-toggle aria-label="Language">
+          <span class="is-active">ES</span> / <span>EN</span>
+        </button>
+      </div>
+
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+        ☰ <span class="sr-only" data-i18n="nav.menu">Open menu</span>
+      </button>
+    </nav>
+
+    <main class="sect-main" id="top">
+      <section class="sect-section sect-hero" data-reveal>
+        <div class="sect-container">
+          <h1>Sectores</h1>
+          <p class="sect-subtitle">
+            Materiales avanzados para industrias donde el rendimiento depende del control del material.
+          </p>
+          <p class="sect-intro">
+            Nanoker desarrolla materiales estratégicos y componentes de alta precisión para sectores críticos donde la
+            fiabilidad, trazabilidad y escalabilidad industrial son esenciales.
+          </p>
+          <div class="sect-divider" aria-hidden="true"></div>
+        </div>
+      </section>
+
+      <section class="sect-section" data-reveal>
+        <div class="sect-container">
+          <h2 class="sect-heading">Industria y Fabricación Avanzada</h2>
+          <p class="sect-phrase">Materiales de alta precisión para entornos industriales exigentes.</p>
+          <p class="sect-text">
+            La fabricación avanzada requiere materiales capaces de operar bajo desgaste, corrosión, altas temperaturas
+            y esfuerzos mecánicos continuos.
+          </p>
+          <div class="sect-grid">
+            <article class="sect-box">
+              <h3>Retos</h3>
+              <ul class="sect-list">
+                <li>Desgaste y abrasión</li>
+                <li>Estabilidad a alta temperatura</li>
+                <li>Conductividad térmica controlada</li>
+                <li>Precisión dimensional</li>
+                <li>Repetibilidad lote a lote</li>
+              </ul>
+            </article>
+            <article class="sect-box">
+              <h3>Soluciones</h3>
+              <ul class="sect-list">
+                <li>Cerámicas técnicas avanzadas</li>
+                <li>Composites funcionales térmicos</li>
+                <li>Componentes de precisión industrial</li>
+              </ul>
+            </article>
+            <article class="sect-box">
+              <h3>Materiales clave</h3>
+              <ul class="sect-list">
+                <li>Alúmina del 92/96/99,7/99,8/99,99% de pureza</li>
+                <li>Circona (YTZP, CeTZP, CaPSZ, MgPSZ, YFSZ)</li>
+                <li>Composites (ATZ, ZTA, ATiCSiC, ZTiN)</li>
+                <li>B4C, SiC, Si3N4, TiB2</li>
+                <li>AIN y AIN mecanizable</li>
+                <li>Composites Grafito-Mo/Cr, Diamante-Cu/Al</li>
+              </ul>
+            </article>
+            <article class="sect-box">
+              <h3>Casos</h3>
+              <ul class="sect-list">
+                <li>Componentes EDM</li>
+                <li>Heat sinks estructurales</li>
+                <li>Piezas para automatización</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="sect-section" data-reveal>
+        <div class="sect-container">
+          <h2 class="sect-heading">Energía y Electrónica de Potencia</h2>
+          <p class="sect-phrase">
+            Materiales estratégicos para sistemas eléctricos de alta eficiencia y densidad de potencia.
+          </p>
+          <div class="sect-grid">
+            <article class="sect-box">
+              <h3>Retos</h3>
+              <ul class="sect-list">
+                <li>Gestión térmica extrema</li>
+                <li>Aislamiento eléctrico con alta conductividad térmica</li>
+                <li>Operación a &gt;200ºC</li>
+                <li>Reducción de pérdidas por efecto Joule</li>
+                <li>Fiabilidad a largo plazo</li>
+              </ul>
+            </article>
+            <article class="sect-box">
+              <h3>Soluciones</h3>
+              <ul class="sect-list">
+                <li>SiC WBG</li>
+                <li>Diamante CVD térmico</li>
+                <li>AIN alta conductividad</li>
+                <li>AIN mecanizable</li>
+                <li>Composites térmicos</li>
+              </ul>
+            </article>
+            <article class="sect-box">
+              <h3>Materiales</h3>
+              <ul class="sect-list">
+                <li>SiC (poly &amp; SC)</li>
+                <li>Diamante CVD (thermal grade)</li>
+                <li>AIN y AIN mecanizable (tipo Shapal)</li>
+                <li>Carbon-Metal Composites: Grafito-Mo/Cr, Diamante-Cu/Al</li>
+              </ul>
+            </article>
+            <article class="sect-box">
+              <h3>Casos</h3>
+              <ul class="sect-list">
+                <li>Disipadores para módulos de potencia</li>
+                <li>Componentes térmicos para sistemas aeroespaciales</li>
+                <li>Electrónica de alta frecuencia</li>
+              </ul>
+            </article>
+            <article class="sect-box">
+              <h3>Aplicaciones</h3>
+              <ul class="sect-list">
+                <li>Disipadores de potencia</li>
+                <li>Electrónica aeroespacial</li>
+                <li>Alta frecuencia</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="sect-section" data-reveal>
+        <div class="sect-container">
+          <h2 class="sect-heading">Salud y Dispositivos Médicos</h2>
+          <p class="sect-phrase">
+            Cerámicas técnicas y biocerámicas para aplicaciones médicas donde calidad, trazabilidad y regulación son
+            críticas.
+          </p>
+          <p class="sect-text">
+            El sector biomédico requiere materiales biocompatibles, estables y totalmente trazables bajo normativa
+            estricta (ISO 13485, MDR). Nanoker aporta experiencia industrial validada en dispositivos de alta
+            precisión.
+          </p>
+          <div class="sect-grid">
+            <article class="sect-box">
+              <h3>Retos</h3>
+              <ul class="sect-list">
+                <li>Biocompatibilidad certificada</li>
+                <li>Estabilidad mecánica y química</li>
+                <li>Integración con sistemas electrónicos</li>
+                <li>Trazabilidad completa</li>
+              </ul>
+            </article>
+            <article class="sect-box">
+              <h3>Soluciones</h3>
+              <ul class="sect-list">
+                <li>Biocerámicas grado biomédico</li>
+                <li>Nanocomposites biocompatibles grado biomédico</li>
+                <li>Componentes complejos para cirugía guiada</li>
+                <li>Implantes y sistemas intervencionistas</li>
+              </ul>
+            </article>
+            <article class="sect-box">
+              <h3>Materiales</h3>
+              <ul class="sect-list">
+                <li>Alúmina grado biomédico</li>
+                <li>Circona YTZP grado biomédico</li>
+                <li>Composites ATZ y TZP</li>
+                <li>Nanocomposites CeTZP-A</li>
+              </ul>
+            </article>
+            <article class="sect-box">
+              <h3>Casos</h3>
+              <ul class="sect-list">
+                <li>Tornillos para cirugía cerebral guiada</li>
+                <li>Componentes para oncología intervencionista</li>
+                <li>Implante Inperio</li>
+                <li>Sistema Cerioss</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="sect-section" data-reveal>
+        <div class="sect-container">
+          <h2 class="sect-heading">Semiconductores y equipamiento de fabricación</h2>
+          <p class="sect-phrase">
+            Materiales "fab-grade" para procesos críticos con control total de especificación, defectos y
+            trazabilidad.
+          </p>
+          <p class="sect-text">
+            La industrialización DeepTech depende de materiales con pureza extrema, estabilidad lote a lote y
+            capacidad de escalado. Nanoker integra cerámicas técnicas con sustratos estratégicos como SiC, diamante y
+            zafiro.
+          </p>
+          <div class="sect-grid">
+            <article class="sect-box">
+              <h3>Retos</h3>
+              <ul class="sect-list">
+                <li>Pureza grado semiconductor</li>
+                <li>Control de defectos</li>
+                <li>Resistencia al ataque por plasma</li>
+                <li>Reducción de lead times</li>
+                <li>Independencia de proveedores externos</li>
+              </ul>
+            </article>
+            <article class="sect-box">
+              <h3>Soluciones</h3>
+              <ul class="sect-list">
+                <li>SiC wafers y componentes</li>
+                <li>Diamante CVD (thermal / quantum / optical grade)</li>
+                <li>Zafiro EPI-ready</li>
+                <li>Cerámicas SPS/HIP para entornos extremos</li>
+              </ul>
+            </article>
+            <article class="sect-box">
+              <h3>Capacidades clave</h3>
+              <ul class="sect-list">
+                <li>MPCVD</li>
+                <li>KV</li>
+                <li>PVT</li>
+                <li>SPS/HIP</li>
+                <li>Dopaje NV / B / P</li>
+                <li>CMP y acabado device-ready</li>
+                <li>QA/QC completo</li>
+              </ul>
+            </article>
+            <article class="sect-box">
+              <h3>Casos</h3>
+              <ul class="sect-list">
+                <li>Componentes para sistemas EUV</li>
+                <li>Cerámicas resistentes a plasma</li>
+                <li>Diamante para gestión térmica RF</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="sect-section" data-reveal>
+        <div class="sect-container">
+          <h2 class="sect-heading">Fotónica y Óptica Avanzada</h2>
+          <p class="sect-phrase">
+            Materiales ópticos para transmisión amplia, alta potencia y estabilidad en entornos extremos.
+          </p>
+          <p class="sect-text">
+            La fotónica avanzada requiere materiales con baja absorción, alta transmisión y estabilidad térmica
+            excepcional.
+          </p>
+          <div class="sect-grid">
+            <article class="sect-box">
+              <h3>Retos</h3>
+              <ul class="sect-list">
+                <li>Alta potencia láser</li>
+                <li>Transmisión UV / IR / THz</li>
+                <li>Resistencia química</li>
+                <li>Precisión óptica</li>
+              </ul>
+            </article>
+            <article class="sect-box">
+              <h3>Soluciones</h3>
+              <ul class="sect-list">
+                <li>Diamante óptico</li>
+                <li>Zafiro óptico</li>
+                <li>ALON y espinelas</li>
+                <li>Fotónica integrada en AIN</li>
+              </ul>
+            </article>
+            <article class="sect-box">
+              <h3>Aplicaciones</h3>
+              <ul class="sect-list">
+                <li>Ventanas X</li>
+                <li>Domos IR</li>
+                <li>Láser de alta potencia</li>
+                <li>Espectroscopía multi-longitud de onda</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="sect-section" data-reveal>
+        <div class="sect-container">
+          <h2 class="sect-heading">Cuántica y Sensores de Nueva Generación</h2>
+          <p class="sect-phrase">Materiales habilitadores para tecnologías cuánticas y sensado de ultra precisión.</p>
+          <p class="sect-text">
+            El diamante con centros NV permite magnetometría, navegación GPS-denied y sensado de alta sensibilidad sin
+            criogenia.
+          </p>
+          <div class="sect-grid">
+            <article class="sect-box">
+              <h3>Retos</h3>
+              <ul class="sect-list">
+                <li>Control de defectos a escala atómica</li>
+                <li>Dopaje preciso</li>
+                <li>Estabilidad térmica</li>
+                <li>Escalabilidad industrial</li>
+              </ul>
+            </article>
+            <article class="sect-box">
+              <h3>Soluciones</h3>
+              <ul class="sect-list">
+                <li>Diamante NV-grade</li>
+                <li>Dopaje on-demand (B / P / N)</li>
+                <li>Estructuras multicapa personalizadas</li>
+              </ul>
+            </article>
+            <article class="sect-box">
+              <h3>Aplicaciones</h3>
+              <ul class="sect-list">
+                <li>Quantum gyroscopes</li>
+                <li>Magnetometría avanzada</li>
+                <li>Sensores en entornos hostiles</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="sect-section" data-reveal>
+        <div class="sect-container">
+          <h2 class="sect-heading">Aeroespacial, Defensa y Espacio</h2>
+          <p class="sect-phrase">Materiales para sistemas críticos donde el fallo no es una opción.</p>
+          <div class="sect-grid">
+            <article class="sect-box">
+              <h3>Retos</h3>
+              <ul class="sect-list">
+                <li>Radiación</li>
+                <li>Temperaturas extremas</li>
+                <li>Blindaje transparente</li>
+                <li>Gestión térmica crítica</li>
+                <li>TCE nulo o a la carta</li>
+              </ul>
+            </article>
+            <article class="sect-box">
+              <h3>Soluciones</h3>
+              <ul class="sect-list">
+                <li>ALON</li>
+                <li>Diamante CVD</li>
+                <li>SiC estructural</li>
+                <li>B₄C</li>
+                <li>LAS-SiC</li>
+              </ul>
+            </article>
+            <article class="sect-box">
+              <h3>Aplicaciones</h3>
+              <ul class="sect-list">
+                <li>Radar</li>
+                <li>Sensores IR</li>
+                <li>Electrónica rad-hard</li>
+                <li>Protección balística avanzada</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="sect-section" data-reveal>
+        <div class="sect-container">
+          <h2 class="sect-heading">Ciencia e Infraestructuras</h2>
+          <p class="sect-phrase">
+            Materiales y componentes para grandes instalaciones científicas e instrumentación avanzada.
+          </p>
+          <p class="sect-text">
+            Big Science exige estabilidad dimensional extrema, pureza material y fiabilidad en condiciones fuera de
+            estándar industrial.
+          </p>
+          <div class="sect-grid">
+            <article class="sect-box">
+              <h3>Retos</h3>
+              <ul class="sect-list">
+                <li>Entornos de radiación</li>
+                <li>Vacío y plasma</li>
+                <li>Estabilidad térmica</li>
+                <li>Componentes ultraestables</li>
+              </ul>
+            </article>
+            <article class="sect-box">
+              <h3>Soluciones</h3>
+              <ul class="sect-list">
+                <li>Cerámicas grado CERN</li>
+                <li>Ventanas para radiación</li>
+                <li>Composites térmicos avanzados</li>
+              </ul>
+            </article>
+            <article class="sect-box">
+              <h3>Aplicaciones</h3>
+              <ul class="sect-list">
+                <li>Detectores</li>
+                <li>Sistemas de colimación</li>
+                <li>Instrumentación científica</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="sect-section sect-cta" data-reveal>
+        <div class="sect-container">
+          <p>¿Tu sector requiere control extremo del material? Contacta con ingeniería.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer" id="contact">
+      <div class="footer-grid">
+        <div class="f-brand">
+          <h3 data-i18n="footer.brandTitle">nanoker</h3>
+          <p data-i18n-html="footer.brandTextHtml">
+            Plataforma industrial europea para tecnologías críticas.<br />
+            Materiales avanzados con especificación garantizada, trazabilidad completa y escalabilidad industrial.
+          </p>
+          <p style="margin-top: 12px; opacity: 0.9" data-i18n-html="footer.noteHtml">
+            <b>Contacto técnico:</b> procesamos solicitudes en <b>3–5 días laborables</b>.
+          </p>
+        </div>
+
+        <div class="f-col">
+          <h4 data-i18n="footer.colSite.title">Site</h4>
+          <ul>
+            <li><a href="./index.html#top" data-i18n="footer.colSite.links.home">Home</a></li>
+            <li><a href="./index.html#sec-platform" data-i18n="footer.colSite.links.capabilities">Capacidades</a></li>
+            <li><a href="./index.html#sec-materials" data-i18n="footer.colSite.links.materials">Materiales</a></li>
+            <li><a href="sectores.html" data-i18n="footer.colSite.links.sectors">Sectores</a></li>
+            <li><a href="./index.html#sec-rnd" data-i18n="footer.colSite.links.rnd">I+D</a></li>
+            <li><a href="./index.html#sec-sovereignty" data-i18n="footer.colSite.links.advantages">Ventajas</a></li>
+          </ul>
+        </div>
+
+        <div class="f-col">
+          <h4 data-i18n="footer.colHubs.title">Industrial Hubs</h4>
+          <ul>
+            <li><a href="#" data-i18n="footer.colHubs.links.oviedo">Oviedo — Desarrollo & Validación</a></li>
+            <li><a href="#" data-i18n="footer.colHubs.links.leon">León — Hub industrial</a></li>
+            <li><a href="#" data-i18n="footer.colHubs.links.supply">European Supply</a></li>
+          </ul>
+        </div>
+
+        <div class="f-col">
+          <h4 data-i18n="footer.colConnect.title">Connect</h4>
+          <ul>
+            <li><a href="mailto:info@nanoker.com" class="contact-data">info@nanoker.com</a></li>
+            <li><a href="tel:+34985000000" class="contact-data">+34 985 000 000</a></li>
+            <li>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Pol%C3%ADgono+de+Olloniego%2C+Parcela+22A%2C+Nave+6%2C+33660+Oviedo%2C+Asturias%2C+Spain"
+                class="contact-data"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Polígono de Olloniego, Parcela 22A, Nave 6, 33660 Oviedo, Asturias, Spain
+              </a>
+            </li>
+            <li style="margin-top: 20px">
+              <a href="https://www.linkedin.com/company/nanoker-research-sl/" data-i18n="footer.colConnect.links.linkedin">LinkedIn ↗</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="f-copy">
+        <div class="system-status">
+          <div class="status-dot"></div>
+          <span>
+            <span data-i18n="footer.system.label">SYSTEM STATUS:</span>
+            <span data-i18n="footer.system.value">OPERATIONAL</span>
+          </span>
+        </div>
+
+        <div>
+          <span data-i18n="footer.legal.copyright">© 2026 Nanoker Research S.L.</span>
+          <a href="#" data-i18n="footer.legal.privacy">Privacy Policy</a>
+          <a href="#" data-i18n="footer.legal.notice">Legal Notice</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        const nav = document.querySelector("[data-nav]");
+        const btn = document.querySelector(".nav-toggle");
+        const links = document.querySelectorAll(".nav-center .nav-link");
+        if (nav && btn) {
+          btn.addEventListener("click", () => {
+            const open = !nav.classList.contains("is-open");
+            nav.classList.toggle("is-open", open);
+            btn.setAttribute("aria-expanded", open ? "true" : "false");
+          });
+        }
+
+        links.forEach((a) => {
+          a.addEventListener("click", () => {
+            nav?.classList.remove("is-open");
+            btn?.setAttribute("aria-expanded", "false");
+          });
+        });
+
+        const revealEls = document.querySelectorAll("[data-reveal]");
+        if (!("IntersectionObserver" in window)) {
+          revealEls.forEach((el) => el.classList.add("is-visible"));
+          return;
+        }
+
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) entry.target.classList.add("is-visible");
+            });
+          },
+          { threshold: 0.14, rootMargin: "0px 0px -8% 0px" }
+        );
+        revealEls.forEach((el) => io.observe(el));
+      })();
+    </script>
+
+    <script type="module">
+      import { initLanguageSwitcher } from "./js/lang.js";
+
+      initLanguageSwitcher({ observeDOM: true });
+    </script>
+  </body>
+</html>

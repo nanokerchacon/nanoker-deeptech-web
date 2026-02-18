@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nanoker | Investigación e Innovación</title>
+
+    <link rel="icon" href="./favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-pack/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-pack/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon-pack/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="./favicon-pack/android-chrome-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="./favicon-pack/android-chrome-512x512.png" />
+    <meta name="theme-color" content="#020202" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/style.css?v=11" />
+
+    <style>
+      body.id-page { background: #050505; }
+      body.id-page::before { opacity: 0.06; }
+
+      .id-main {
+        position: relative;
+        padding-top: var(--nav-h);
+        background:
+          radial-gradient(82% 220px at 88% 15%, rgba(255, 255, 255, 0.04), transparent 70%),
+          linear-gradient(180deg, #050505 0%, #040404 48%, #030303 100%);
+      }
+      .id-main::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        background-image: radial-gradient(rgba(255, 255, 255, 0.09) 0.35px, transparent 0.35px);
+        background-size: 3px 3px;
+        opacity: 0.03;
+      }
+      .id-main > * { position: relative; z-index: 1; }
+
+      .page-id {
+        --id-accent: #8B5CF6;
+        --id-accent-soft: rgba(139, 92, 246, 0.34);
+        --id-border: rgba(255, 255, 255, 0.11);
+        --id-dim: rgba(255, 255, 255, 0.74);
+        --id-surface: rgba(255, 255, 255, 0.02);
+      }
+
+      .page-id .id-accent { color: var(--id-accent); }
+      .page-id .id-glow { text-shadow: 0 0 8px rgba(139, 92, 246, 0.35); }
+
+      .id-container { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+      .id-section { padding: 70px 0; border-top: 1px solid rgba(255, 255, 255, 0.08); }
+      .id-hero { border-top: 0; padding: 88px 0 76px; }
+
+      .id-eyebrow {
+        margin: 0 0 14px;
+        font-family: var(--font-tech);
+        font-size: 0.74rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .id-hero h1 {
+        margin: 0;
+        font-size: clamp(2.3rem, 6vw, 4.4rem);
+        letter-spacing: -0.03em;
+        line-height: 1.04;
+        font-weight: 500;
+      }
+
+      .id-hero p {
+        margin: 18px 0 0;
+        max-width: 940px;
+        color: var(--id-dim);
+        line-height: 1.7;
+      }
+
+      .id-divider {
+        margin-top: 28px;
+        height: 1px;
+        width: 100%;
+        background: linear-gradient(90deg, var(--id-accent-soft) 0%, rgba(255, 255, 255, 0.17) 16%, rgba(255, 255, 255, 0.08) 100%);
+      }
+
+      .id-heading {
+        margin: 0 0 10px;
+        font-size: clamp(1.7rem, 4vw, 2.45rem);
+        letter-spacing: -0.02em;
+        font-weight: 500;
+      }
+
+      .id-subtitle {
+        margin: 0 0 18px;
+        font-family: var(--font-tech);
+        font-size: 0.76rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.64);
+      }
+
+      .id-text { margin: 0 0 18px; color: var(--id-dim); line-height: 1.7; max-width: 940px; }
+
+      .id-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 8px;
+      }
+      .id-list li {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        color: rgba(255, 255, 255, 0.9);
+      }
+      .id-list li::before {
+        content: "";
+        width: 14px;
+        height: 14px;
+        margin-top: 0.3em;
+        border-radius: 50%;
+        border: 1px solid rgba(139, 92, 246, 0.52);
+        background: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.72) 0 2px, transparent 3px);
+        flex: 0 0 14px;
+      }
+
+      .id-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+      .id-card {
+        border: 1px solid var(--id-border);
+        background: var(--id-surface);
+        padding: 18px 20px;
+      }
+      .id-card h3 {
+        margin: 0 0 8px;
+        font-size: clamp(1.2rem, 2vw, 1.5rem);
+        letter-spacing: -0.01em;
+        font-weight: 500;
+      }
+      .id-claim {
+        margin: 0 0 12px;
+        font-family: var(--font-tech);
+        font-size: 0.75rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--id-accent);
+      }
+
+      .id-rail {
+        border-top: 1px solid var(--id-border);
+        border-bottom: 1px solid var(--id-border);
+        padding: 14px 0;
+      }
+      .id-rail-tags {
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 0;
+        list-style: none;
+      }
+      .id-rail-tags li {
+        border: 1px solid rgba(139, 92, 246, 0.33);
+        padding: 7px 12px;
+        font-family: var(--font-tech);
+        font-size: 0.7rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.78);
+      }
+
+      [data-reveal] { opacity: 0; transform: translateY(8px); transition: opacity 420ms ease, transform 420ms ease; }
+      [data-reveal].is-visible { opacity: 1; transform: translateY(0); }
+
+      @media (max-width: 980px) {
+        .id-grid { grid-template-columns: 1fr; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        [data-reveal] { opacity: 1; transform: none; transition: none; }
+      }
+    </style>
+  </head>
+
+  <body class="id-page">
+    <nav class="nav" data-nav>
+      <a href="./index.html" class="nav-logo" aria-label="Nanoker Home">
+        <img src="./img/brand/logo-nanoker-26-hd.png" alt="Nanoker" />
+      </a>
+      <div class="nav-center">
+        <a href="./index.html#top" class="nav-link" data-i18n="nav.home">Home</a>
+        <a href="empresa.html" class="nav-link" data-i18n="nav.company">Empresa</a>
+        <a href="sectores.html" class="nav-link" data-i18n="nav.sectors">Sectores</a>
+        <a href="materiales.html" class="nav-link" data-i18n="nav.materials">Materiales</a>
+        <a href="capacidades.html" class="nav-link" data-i18n="nav.capabilities">Capacidades</a>
+        <a href="id.html" class="nav-link is-active" data-i18n="nav.rnd">I+D</a>
+        <a href="#contact" class="nav-link" data-i18n="nav.contact">Contacto</a>
+      </div>
+      <div class="nav-actions">
+        <button class="nav-lang" type="button" data-lang-toggle aria-label="Language">
+          <span class="is-active">ES</span> / <span>EN</span>
+        </button>
+      </div>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+        ☰ <span class="sr-only" data-i18n="nav.menu">Open menu</span>
+      </button>
+    </nav>
+
+    <main class="id-main page-id" id="top">
+      <section class="id-section id-hero" data-reveal>
+        <div class="id-container">
+          <p class="id-eyebrow">I+D INDUSTRIAL</p>
+          <h1><span class="id-accent id-glow">Investigación</span> orientada a industrialización</h1>
+          <p class="id-subtitle">En DeepTech, la investigación solo tiene valor cuando puede escalarse.</p>
+          <p>Nuestra actividad de I+D está diseñada para industrializar materiales avanzados con especificación certificada y repetibilidad lote a lote.</p>
+          <div class="id-divider"></div>
+        </div>
+      </section>
+
+      <section class="id-section" data-reveal>
+        <div class="id-container">
+          <h2 class="id-heading">Filosofía</h2>
+          <p class="id-subtitle">Del laboratorio a la producción 24/7</p>
+          <p class="id-text">
+            La mayoría de desarrollos en materiales avanzados se detienen en la validación experimental.<br />
+            Nuestro modelo integra:
+          </p>
+          <div class="id-grid">
+            <article class="id-card">
+              <h3>Materiales de alta exigencia</h3>
+              <p class="id-claim">Estructura y funcionalidad</p>
+              <ul class="id-list">
+                <li>Control microestructural avanzado</li>
+                <li>Optimización térmica y mecánica</li>
+                <li>Formulaciones para entornos extremos</li>
+              </ul>
+            </article>
+            <article class="id-card">
+              <h3>Procesos escalables</h3>
+              <p class="id-claim">Diseño para industria</p>
+              <ul class="id-list">
+                <li>Ventanas de proceso reproducibles</li>
+                <li>Robustez estadística de fabricación</li>
+                <li>Compatibilidad con cadena de suministro</li>
+              </ul>
+            </article>
+            <article class="id-card">
+              <h3>Validación y cualificación</h3>
+              <p class="id-claim">Evidencia técnica</p>
+              <ul class="id-list">
+                <li>Protocolos de verificación acelerada</li>
+                <li>Metrología y trazabilidad completa</li>
+                <li>Integración con requisitos OEM</li>
+              </ul>
+            </article>
+            <article class="id-card">
+              <h3>Diamante y materiales cuánticos</h3>
+              <ul class="id-list">
+                <li>Crecimiento MPCVD avanzado</li>
+                <li>Control de centros NV</li>
+                <li>Dopaje atómico controlado</li>
+                <li>Arquitecturas multicapa</li>
+              </ul>
+              <p class="id-claim" style="margin-top: 14px;">Aplicaciones en:</p>
+              <ul class="id-list">
+                <li>Sensores cuánticos</li>
+                <li>Magnetometría</li>
+                <li>Electrónica de potencia</li>
+                <li>Gestión térmica extrema</li>
+              </ul>
+            </article>
+          </div>
+          <div class="id-rail" aria-label="Pipeline de filosofía de industrialización">
+            <p class="id-subtitle" style="margin: 0; letter-spacing: 0.08em;">
+              Investigación básica ➔ Validación técnica ➔ Cualificación industrial ➔ Escalado productivo
+            </p>
+          </div>
+          <p class="id-text" style="margin-top: 16px; margin-bottom: 0;">
+            El objetivo no es demostrar viabilidad científica, sino asegurar fabricación industrial estable.
+          </p>
+        </div>
+      </section>
+
+      <section class="id-section" data-reveal>
+        <div class="id-container">
+          <h2 class="id-heading">Áreas estratégicas de investigación</h2>
+          <div class="id-grid">
+            <article class="id-card">
+              <h3>Control de defectología</h3>
+              <ul class="id-list">
+                <li>Reducción de dislocaciones en crecimiento cristalino</li>
+                <li>Ingeniería de defectos en diamante (NV, B, P)</li>
+                <li>Optimización microestructural en SPS/HIP</li>
+                <li>Control de pureza grado semiconductor</li>
+              </ul>
+              <p class="id-text" style="margin-top: 14px; margin-bottom: 0;">
+                En materiales avanzados, el defecto es el límite del rendimiento.
+              </p>
+            </article>
+            <article class="id-card">
+              <h3>Materiales Beyond Standard</h3>
+              <p class="id-text" style="margin-bottom: 0;">
+                Desarrollo de formulaciones propietarias que superan especificaciones comerciales convencionales. Cuando las cerámicas estándar fallan a 1200ºC, nuestras formulaciones mantienen integridad estructural más allá.
+              </p>
+            </article>
+            <article class="id-card">
+              <h3>Diamante y materiales cuánticos</h3>
+              <ul class="id-list">
+                <li>Crecimiento MPCVD avanzado</li>
+                <li>Control de centros NV</li>
+                <li>Dopaje atómico controlado</li>
+                <li>Arquitecturas multicapa</li>
+              </ul>
+              <p class="id-claim" style="margin-top: 14px;">Aplicaciones en:</p>
+              <ul class="id-list">
+                <li>Sensores cuánticos</li>
+                <li>Magnetometría</li>
+                <li>Electrónica de potencia</li>
+                <li>Gestión térmica extrema</li>
+              </ul>
+            </article>
+            <article class="id-card">
+              <h3>SiC y WBG</h3>
+              <ul class="id-list">
+                <li>Optimización de crecimiento PVT/CVD</li>
+                <li>Reducción de defectos en sustratos</li>
+                <li>Densificación avanzada</li>
+                <li>Preparación EPI-ready</li>
+              </ul>
+              <p class="id-text" style="margin-top: 14px; margin-bottom: 0;">
+                Orientado a semiconductores de banda ancha y electrónica de alta eficiencia.
+              </p>
+            </article>
+            <article class="id-card">
+              <h3>Integración material-dispositivo</h3>
+              <ul class="id-list">
+                <li>Interfaces térmicas</li>
+                <li>Compatibilidad con procesos de fab</li>
+                <li>Estabilidad bajo plasma</li>
+                <li>Component-ready fabrication</li>
+              </ul>
+              <p class="id-text" style="margin-top: 14px; margin-bottom: 0;">
+                No investigamos el material aislado, sino su integración real en sistema.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="id-section" data-reveal>
+        <div class="id-container">
+          <h2 class="id-heading">Infraestructura de I+D</h2>
+          <p class="id-subtitle">Capacidades experimentales</p>
+          <ul class="id-list">
+            <li>Reactores MPCVD</li>
+            <li>SPS/HIP</li>
+            <li>Sistemas de crecimiento cristalino</li>
+            <li>Laboratorios de caracterización</li>
+            <li>Metrología avanzada</li>
+          </ul>
+          <p class="id-text" style="margin-top: 16px; margin-bottom: 0;">
+            Instalaciones diseñadas para transición directa a línea industrial.
+          </p>
+        </div>
+      </section>
+
+      <section class="id-section" data-reveal>
+        <div class="id-container">
+          <h2 class="id-heading">Colaboración científica e industrial</h2>
+          <p class="id-subtitle">Ecosistema europeo</p>
+          <p class="id-text">Colaboramos con:</p>
+          <ul class="id-list">
+            <li>Centros de investigación</li>
+            <li>Universidades</li>
+            <li>OEMs industriales</li>
+            <li>Programas estratégicos europeos</li>
+          </ul>
+          <p class="id-text" style="margin-top: 16px; margin-bottom: 0;">
+            Nuestro origen científico se traduce en capacidad industrial validada.
+          </p>
+        </div>
+      </section>
+
+      <section class="id-section" data-reveal>
+        <div class="id-container">
+          <h2 class="id-heading">Roadmap tecnológico</h2>
+          <p class="id-subtitle">Industrialización en oleadas</p>
+          <ul class="id-list">
+            <li>Fase 1 — Desarrollo y cualificación</li>
+            <li>Fase 2 — Estabilización de proceso</li>
+            <li>Fase 3 — Escalado industrial</li>
+            <li>Fase 4 — Operación continua 24/7</li>
+          </ul>
+          <p class="id-text" style="margin-top: 16px; margin-bottom: 0;">
+            Cada avance en I+D está diseñado para integrarse en producción.
+          </p>
+        </div>
+      </section>
+
+      <section class="id-section" data-reveal>
+        <div class="id-container">
+          <h2 class="id-heading">Impacto estratégico</h2>
+          <p class="id-subtitle">Infraestructura material para la soberanía tecnológica</p>
+          <p class="id-text">Europa no puede liderar en:</p>
+          <ul class="id-list">
+            <li>Semiconductores avanzados</li>
+            <li>Tecnologías cuánticas</li>
+            <li>Defensa de nueva generación</li>
+            <li>Fotónica integrada</li>
+          </ul>
+          <p class="id-text">Sin controlar los materiales que los habilitan.</p>
+          <p class="id-text" style="margin-bottom: 0;">
+            Nuestra I+D no es incremental.<br />
+            Es estructural.
+          </p>
+        </div>
+      </section>
+
+      <section class="id-section" data-reveal>
+        <div class="id-container">
+          <h2 class="id-heading">Mensaje final</h2>
+          <p class="id-subtitle">Investigación con propósito industrial</p>
+          <p class="id-text">
+            La diferencia entre laboratorio y liderazgo industrial es la capacidad de fabricar con especificación certificada y estabilidad lote a lote.
+          </p>
+          <p class="id-text" style="margin-top: 16px; margin-bottom: 0;">
+            <span style="font-size: 1.08em; font-weight: 600; color: rgba(229, 219, 255, 0.96); text-shadow: 0 0 8px rgba(139, 92, 246, 0.35);">
+              Ahí es donde enfocamos nuestra investigación.
+            </span>
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer" id="contact">
+      <div class="footer-grid">
+        <div class="f-brand">
+          <h3 data-i18n="footer.brandTitle">nanoker</h3>
+          <p data-i18n-html="footer.brandTextHtml">
+            Plataforma industrial europea para tecnologías críticas.<br />
+            Materiales avanzados con especificación garantizada, trazabilidad completa y escalabilidad industrial.
+          </p>
+          <p style="margin-top: 12px; opacity: 0.9" data-i18n-html="footer.noteHtml">
+            <b>Contacto técnico:</b> procesamos solicitudes en <b>3–5 días laborables</b>.
+          </p>
+        </div>
+        <div class="f-col">
+          <h4 data-i18n="footer.colSite.title">Site</h4>
+          <ul>
+            <li><a href="./index.html#top" data-i18n="footer.colSite.links.home">Home</a></li>
+            <li><a href="./index.html#sec-platform" data-i18n="footer.colSite.links.capabilities">Capacidades</a></li>
+            <li><a href="materiales.html" data-i18n="footer.colSite.links.materials">Materiales</a></li>
+            <li><a href="sectores.html" data-i18n="footer.colSite.links.sectors">Sectores</a></li>
+            <li><a href="id.html" data-i18n="footer.colSite.links.rnd">I+D</a></li>
+            <li><a href="./index.html#sec-sovereignty" data-i18n="footer.colSite.links.advantages">Ventajas</a></li>
+          </ul>
+        </div>
+        <div class="f-col">
+          <h4 data-i18n="footer.colHubs.title">Industrial Hubs</h4>
+          <ul>
+            <li><a href="#" data-i18n="footer.colHubs.links.oviedo">Oviedo — Desarrollo & Validación</a></li>
+            <li><a href="#" data-i18n="footer.colHubs.links.leon">León — Hub industrial</a></li>
+            <li><a href="#" data-i18n="footer.colHubs.links.supply">European Supply</a></li>
+          </ul>
+        </div>
+        <div class="f-col">
+          <h4 data-i18n="footer.colConnect.title">Connect</h4>
+          <ul>
+            <li><a href="mailto:info@nanoker.com" class="contact-data">info@nanoker.com</a></li>
+            <li><a href="tel:+34985000000" class="contact-data">+34 985 000 000</a></li>
+            <li>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Pol%C3%ADgono+de+Olloniego%2C+Parcela+22A%2C+Nave+6%2C+33660+Oviedo%2C+Asturias%2C+Spain"
+                class="contact-data"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Polígono de Olloniego, Parcela 22A, Nave 6, 33660 Oviedo, Asturias, Spain
+              </a>
+            </li>
+            <li style="margin-top: 20px">
+              <a href="https://www.linkedin.com/company/nanoker-research-sl/" data-i18n="footer.colConnect.links.linkedin">LinkedIn ↗</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="f-copy">
+        <div class="system-status">
+          <div class="status-dot"></div>
+          <span>
+            <span data-i18n="footer.system.label">SYSTEM STATUS:</span>
+            <span data-i18n="footer.system.value">OPERATIONAL</span>
+          </span>
+        </div>
+        <div>
+          <span data-i18n="footer.legal.copyright">© 2026 Nanoker Research S.L.</span>
+          <a href="#" data-i18n="footer.legal.privacy">Privacy Policy</a>
+          <a href="#" data-i18n="footer.legal.notice">Legal Notice</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        const nav = document.querySelector("[data-nav]");
+        const btn = document.querySelector(".nav-toggle");
+        const links = document.querySelectorAll(".nav-center .nav-link");
+        if (nav && btn) {
+          btn.addEventListener("click", () => {
+            const open = !nav.classList.contains("is-open");
+            nav.classList.toggle("is-open", open);
+            btn.setAttribute("aria-expanded", open ? "true" : "false");
+          });
+        }
+        links.forEach((a) => {
+          a.addEventListener("click", () => {
+            nav?.classList.remove("is-open");
+            btn?.setAttribute("aria-expanded", "false");
+          });
+        });
+
+        const revealEls = document.querySelectorAll("[data-reveal]");
+        if (!("IntersectionObserver" in window)) {
+          revealEls.forEach((el) => el.classList.add("is-visible"));
+          return;
+        }
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) entry.target.classList.add("is-visible");
+            });
+          },
+          { threshold: 0.14, rootMargin: "0px 0px -8% 0px" }
+        );
+        revealEls.forEach((el) => io.observe(el));
+      })();
+    </script>
+
+    <script type="module">
+      import { initLanguageSwitcher } from "./js/lang.js";
+      initLanguageSwitcher({ observeDOM: true });
+    </script>
+  </body>
+</html>

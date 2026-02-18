@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nanoker | Materiales</title>
+
+    <link rel="icon" href="./favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-pack/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-pack/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon-pack/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="./favicon-pack/android-chrome-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="./favicon-pack/android-chrome-512x512.png" />
+    <meta name="theme-color" content="#020202" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/style.css?v=11" />
+
+    <style>
+      :root {
+        --mat-bg: #050505;
+        --mat-border: rgba(255, 255, 255, 0.11);
+        --mat-dim: rgba(255, 255, 255, 0.74);
+        --mat-red: #3B82F6;
+        --mat-red-soft: rgba(59, 130, 246, 0.3);
+        --mat-surface: rgba(255, 255, 255, 0.02);
+      }
+
+      body.materiales-page { background: var(--mat-bg); }
+      body.materiales-page::before { opacity: 0.06; }
+
+      .mat-main {
+        position: relative;
+        padding-top: var(--nav-h);
+        background:
+          radial-gradient(82% 220px at 88% 15%, rgba(255, 255, 255, 0.04), transparent 70%),
+          linear-gradient(180deg, #050505 0%, #040404 48%, #030303 100%);
+      }
+      .mat-main::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        background-image: radial-gradient(rgba(255, 255, 255, 0.09) 0.35px, transparent 0.35px);
+        background-size: 3px 3px;
+        opacity: 0.03;
+      }
+      .mat-main > * { position: relative; z-index: 1; }
+
+      .mat-container { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+      .mat-section { padding: 70px 0; border-top: 1px solid rgba(255, 255, 255, 0.08); }
+      .mat-hero { border-top: 0; padding: 88px 0 76px; }
+
+      .mat-eyebrow {
+        margin: 0 0 14px;
+        font-family: var(--font-tech);
+        font-size: 0.74rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .mat-hero h1 {
+        margin: 0;
+        font-size: clamp(2.3rem, 6vw, 4.4rem);
+        letter-spacing: -0.03em;
+        line-height: 1.04;
+        font-weight: 500;
+      }
+
+      .mat-hero p {
+        margin: 18px 0 0;
+        max-width: 940px;
+        color: var(--mat-dim);
+        line-height: 1.7;
+      }
+
+      .mat-divider {
+        margin-top: 28px;
+        height: 1px;
+        width: 100%;
+        background: linear-gradient(90deg, var(--mat-red-soft) 0%, rgba(255, 255, 255, 0.17) 16%, rgba(255, 255, 255, 0.08) 100%);
+      }
+
+      .mat-heading {
+        margin: 0 0 10px;
+        font-size: clamp(1.7rem, 4vw, 2.45rem);
+        letter-spacing: -0.02em;
+        font-weight: 500;
+      }
+
+      .mat-subtitle {
+        margin: 0 0 18px;
+        font-family: var(--font-tech);
+        font-size: 0.76rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.64);
+      }
+
+      .mat-text { margin: 0 0 18px; color: var(--mat-dim); line-height: 1.7; max-width: 940px; }
+      .mat-deliver { margin-top: 26px; }
+      .mat-glow {
+        color: #93c5fd;
+        text-shadow: 0 0 6px rgba(80, 160, 255, 0.4);
+      }
+
+      .mat-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 8px;
+      }
+      .mat-list li {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        color: rgba(255, 255, 255, 0.9);
+      }
+      .mat-list li::before {
+        content: "";
+        width: 14px;
+        height: 14px;
+        margin-top: 0.3em;
+        border-radius: 50%;
+        border: 1px solid rgba(59, 130, 246, 0.55);
+        background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.75) 0 2px, transparent 3px);
+        flex: 0 0 14px;
+      }
+
+      .mat-portfolio { display: grid; gap: 14px; }
+      .mat-card {
+        border: 1px solid var(--mat-border);
+        background: var(--mat-surface);
+        padding: 18px 20px;
+      }
+      .mat-card h3 {
+        margin: 0 0 8px;
+        font-size: clamp(1.2rem, 2vw, 1.5rem);
+        letter-spacing: -0.01em;
+        font-weight: 500;
+      }
+      .mat-claim {
+        margin: 0 0 12px;
+        font-family: var(--font-tech);
+        font-size: 0.75rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--mat-red);
+      }
+
+      .mat-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+      .mat-block {
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.01);
+        padding: 12px;
+      }
+      .mat-block h4 {
+        margin: 0 0 8px;
+        font-family: var(--font-tech);
+        font-size: 0.7rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .mat-cols { columns: 2; column-gap: 18px; }
+      .mat-pipeline {
+        border-top: 1px solid var(--mat-border);
+        border-bottom: 1px solid var(--mat-border);
+        padding: 16px 0;
+        color: rgba(255, 255, 255, 0.9);
+        line-height: 1.65;
+      }
+      .mat-flow-wrap {
+        border-top: 1px solid var(--mat-border);
+        border-bottom: 1px solid var(--mat-border);
+        padding: 16px 10px 14px;
+      }
+      .mat-diagram {
+        position: relative;
+        border: 1px solid rgba(59, 130, 246, 0.28);
+        background: rgba(8, 14, 24, 0.35);
+        padding: 34px 14px 14px;
+      }
+      .mat-diagram-lines {
+        position: absolute;
+        inset: 10px 10px auto 10px;
+        width: calc(100% - 20px);
+        height: 88px;
+        pointer-events: none;
+      }
+      .mat-diagram-grid {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+        gap: 8px;
+      }
+      .mat-stage {
+        position: relative;
+        text-align: center;
+        padding-top: 4px;
+      }
+      .mat-stage-icon {
+        width: 42px;
+        height: 42px;
+        margin: 0 auto 10px;
+        display: block;
+        filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.3));
+      }
+      .mat-stage-label {
+        margin: 0;
+        font-family: var(--font-tech);
+        font-size: 0.61rem;
+        letter-spacing: 0.08em;
+        line-height: 1.32;
+        color: rgba(255, 255, 255, 0.84);
+        text-transform: uppercase;
+      }
+      .mat-material-strip {
+        margin: 14px 0 0;
+        text-align: center;
+        font-family: var(--font-tech);
+        font-size: 0.66rem;
+        letter-spacing: 0.1em;
+        color: rgba(255, 255, 255, 0.62);
+      }
+      .mat-map-scroll {
+        overflow-x: auto;
+        overflow-y: hidden;
+        border: 1px solid rgba(59, 130, 246, 0.26);
+        background: rgba(7, 11, 19, 0.45);
+      }
+      .mat-map-svg {
+        display: block;
+        width: 100%;
+        min-width: 1220px;
+        height: auto;
+      }
+      .mat-map-line {
+        stroke: rgba(147, 197, 253, 0.5);
+        stroke-width: 1;
+        fill: none;
+      }
+      .mat-map-box {
+        fill: rgba(255, 255, 255, 0.02);
+        stroke: rgba(147, 197, 253, 0.5);
+        stroke-width: 1;
+      }
+      .mat-map-label {
+        fill: rgba(255, 255, 255, 0.88);
+        font-family: var(--font-tech);
+        font-size: 11px;
+        letter-spacing: 0.04em;
+      }
+
+      [data-reveal] { opacity: 0; transform: translateY(8px); transition: opacity 420ms ease, transform 420ms ease; }
+      [data-reveal].is-visible { opacity: 1; transform: translateY(0); }
+
+      @media (max-width: 980px) {
+        .mat-grid { grid-template-columns: 1fr; }
+        .mat-cols { columns: 1; }
+        .mat-flow-wrap { padding: 14px 0; }
+        .mat-diagram {
+          padding: 12px 12px 8px;
+        }
+        .mat-diagram-lines {
+          display: none;
+        }
+        .mat-diagram-grid {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+        .mat-stage {
+          text-align: left;
+          display: grid;
+          grid-template-columns: 42px minmax(0, 1fr);
+          gap: 12px;
+          align-items: center;
+          padding: 2px 0 12px;
+        }
+        .mat-stage:not(:last-child)::after {
+          content: "";
+          position: absolute;
+          left: 20px;
+          bottom: 0;
+          width: 1px;
+          height: 10px;
+          background: rgba(59, 130, 246, 0.45);
+        }
+        .mat-stage-icon { margin: 0; }
+        .mat-stage-label { font-size: 0.6rem; }
+        .mat-material-strip { text-align: left; line-height: 1.5; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        [data-reveal] { opacity: 1; transform: none; transition: none; }
+      }
+    </style>
+  </head>
+
+  <body class="materiales-page">
+    <nav class="nav" data-nav>
+      <a href="./index.html" class="nav-logo" aria-label="Nanoker Home">
+        <img src="./img/brand/logo-nanoker-26-hd.png" alt="Nanoker" />
+      </a>
+      <div class="nav-center">
+        <a href="./index.html#top" class="nav-link" data-i18n="nav.home">Home</a>
+        <a href="empresa.html" class="nav-link" data-i18n="nav.company">Empresa</a>
+        <a href="sectores.html" class="nav-link" data-i18n="nav.sectors">Sectores</a>
+        <a href="materiales.html" class="nav-link is-active" data-i18n="nav.materials">Materiales</a>
+        <a href="capacidades.html" class="nav-link" data-i18n="nav.capabilities">Capacidades</a>
+        <a href="id.html" class="nav-link" data-i18n="nav.rnd">I+D</a>
+        <a href="#contact" class="nav-link" data-i18n="nav.contact">Contacto</a>
+      </div>
+      <div class="nav-actions">
+        <button class="nav-lang" type="button" data-lang-toggle aria-label="Language">
+          <span class="is-active">ES</span> / <span>EN</span>
+        </button>
+      </div>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+        ☰ <span class="sr-only" data-i18n="nav.menu">Open menu</span>
+      </button>
+    </nav>
+
+    <main class="mat-main" id="top">
+      <section class="mat-section mat-hero" data-reveal>
+        <div class="mat-container">
+          <p class="mat-eyebrow">MATERIALES</p>
+          <h1>Materiales Estratégicos <span style="color: #3B82F6;">DeepTech</span></h1>
+          <p>
+            Controlar el material es controlar el rendimiento, la fiabilidad y la escalabilidad de las tecnologías
+            críticas.
+          </p>
+          <p>
+            Nanoker integra un portfolio de materiales avanzados que constituyen la base física de la nueva DeepTech
+            europea: semiconductores de banda ancha, fotónica avanzada, sensores cuánticos, defensa y sistemas
+            energéticos de alta eficiencia.
+          </p>
+          <div class="mat-divider" aria-hidden="true"></div>
+        </div>
+      </section>
+
+      <section class="mat-section" data-reveal>
+        <div class="mat-container">
+          <h2 class="mat-heading">Filosofía</h2>
+          <p class="mat-subtitle">Más que materias primas: arquitectura material</p>
+          <p class="mat-text">No suministramos materiales estándar. Desarrollamos materiales:</p>
+          <ul class="mat-list">
+            <li>Con pureza controlada</li>
+            <li>Con defectología optimizada</li>
+            <li>Con propiedades funcionales diseñadas</li>
+            <li>Con trazabilidad completa</li>
+            <li>Listos para cualificación industrial</li>
+          </ul>
+          <p class="mat-text mat-deliver">
+            Cada material se entrega como “<span class="mat-glow">component-ready</span>” o
+            “<span class="mat-glow">device-ready</span>”, no como commodity.
+          </p>
+        </div>
+      </section>
+
+      <section class="mat-section" data-reveal>
+        <div class="mat-container">
+          <h2 class="mat-heading">Portfolio de Materiales</h2>
+          <div class="mat-portfolio">
+            <article class="mat-card">
+              <h3>DIAMANTE CVD (Poly &amp; Single Crystal)</h3>
+              <p class="mat-claim">El material extremo</p>
+              <p class="mat-text">
+                El diamante es el semiconductor con mayor conductividad térmica, mayor campo de ruptura y mayor dureza
+                conocida.
+              </p>
+              <div class="mat-grid">
+                <div class="mat-block">
+                  <h4>Capacidades clave</h4>
+                  <ul class="mat-list">
+                    <li>Crecimiento MPCVD con tecnología propietaria</li>
+                    <li>Monocristal hasta 4&quot; (escalable)</li>
+                    <li>Control de defectos a escala atómica</li>
+                    <li>Dopaje on-demand (NV / B / P)</li>
+                    <li>Capas multicapa personalizadas</li>
+                  </ul>
+                </div>
+                <div class="mat-block">
+                  <h4>Grados disponibles</h4>
+                  <ul class="mat-list">
+                    <li>Quantum Grade (centros NV controlados)</li>
+                    <li>Thermal Grade (heat spreading extremo)</li>
+                    <li>Optical Grade (transmisión amplia UV-IR)</li>
+                    <li>Semiconductor Grade (SBD / FET ready)</li>
+                  </ul>
+                </div>
+                <div class="mat-block">
+                  <h4>Aplicaciones</h4>
+                  <ul class="mat-list">
+                    <li>Sensores cuánticos</li>
+                    <li>Magnetometría</li>
+                    <li>Gestión térmica RF</li>
+                    <li>Electrónica de potencia</li>
+                    <li>Ventanas ópticas y X-ray</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+            <article class="mat-card">
+              <h3>SILICON CARBIDE (SiC)</h3>
+              <p class="mat-claim">El pilar de la electrónica de potencia</p>
+              <p class="mat-text">Material crítico para WBG (Wide Band Gap), alta eficiencia y operación &gt;200ºC.</p>
+              <div class="mat-grid">
+                <div class="mat-block">
+                  <h4>Capacidades</h4>
+                  <ul class="mat-list">
+                    <li>Crecimiento PVT / evo</li>
+                    <li>Sustratos 4H-SiC</li>
+                    <li>EPI-ready</li>
+                    <li>Densificación SPS/HIP para aplicaciones estructurales como sustrato</li>
+                    <li>Wafering + CMP</li>
+                  </ul>
+                </div>
+                <div class="mat-block">
+                  <h4>Ventajas</h4>
+                  <ul class="mat-list">
+                    <li>Reducción de pérdidas energéticas</li>
+                    <li>Mayor densidad de potencia</li>
+                    <li>Escalabilidad industrial europea</li>
+                  </ul>
+                </div>
+                <div class="mat-block">
+                  <h4>Aplicaciones</h4>
+                  <ul class="mat-list">
+                    <li>Inversores EV</li>
+                    <li>Convertidores de alta eficiencia</li>
+                    <li>RF de alta frecuencia</li>
+                    <li>Componentes fab-grade</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+            <article class="mat-card">
+              <h3>ZAFIRO (Al2O3 Monocristalino)</h3>
+              <p class="mat-claim">Óptica y electrónica de alta estabilidad</p>
+              <p class="mat-text">Material estratégico para aplicaciones ópticas y SOS (Silicon-on-Sapphire).</p>
+              <div class="mat-grid">
+                <div class="mat-block">
+                  <h4>Capacidades</h4>
+                  <ul class="mat-list">
+                    <li>Crecimiento KV</li>
+                    <li>Wafers hasta 8&quot;</li>
+                    <li>EPI-ready</li>
+                    <li>Óptica de alta transmisión</li>
+                    <li>Bajo estrés interno</li>
+                  </ul>
+                </div>
+                <div class="mat-block">
+                  <h4>Aplicaciones</h4>
+                  <ul class="mat-list">
+                    <li>SOS (electrónica rad-hard)</li>
+                    <li>Ventanas ópticas</li>
+                    <li>Domos IR</li>
+                    <li>Fotónica integrada</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+            <article class="mat-card">
+              <h3>CERÁMICAS TÉCNICAS SPS / HIP</h3>
+              <p class="mat-claim">Beyond Standard Ceramics</p>
+              <p class="mat-text">
+                Nanoker desarrolla formulaciones propietarias que superan especificaciones comerciales convencionales.
+              </p>
+              <div class="mat-grid">
+                <div class="mat-block">
+                  <h4>Materiales</h4>
+                  <ul class="mat-list mat-cols">
+                    <li>Alúminas 92/96/99,7/99,8/99,99% pureza</li>
+                    <li>Circonas (YTZP, MgPSZ, YFSZ, CaPSZ, CaFSZ)</li>
+                    <li>AIN</li>
+                    <li>Composites ATZ / ZTA</li>
+                    <li>Nanocomposites CeTZP-A</li>
+                    <li>Composites electroconductores (EDM)</li>
+                    <li>Composites térmicos (Grafito-Mo/Cr, KALMAN, KBNC, Diamond-Cu/Al)</li>
+                    <li>Composites de CTE nulo LAS-SiC</li>
+                  </ul>
+                </div>
+                <div class="mat-block">
+                  <h4>Capacidades</h4>
+                  <ul class="mat-list">
+                    <li>SPS (Spark Plasma Sintering)</li>
+                    <li>HIP</li>
+                    <li>Calaje con presión</li>
+                    <li>Síntesis química</li>
+                    <li>Mecanizado de alta precisión</li>
+                    <li>Mecanizado EDM</li>
+                    <li>Micro-waterjet</li>
+                  </ul>
+                </div>
+                <div class="mat-block">
+                  <h4>Aplicaciones</h4>
+                  <ul class="mat-list">
+                    <li>Componentes resistentes a plasma</li>
+                    <li>Gestión térmica</li>
+                    <li>Blindaje transparente</li>
+                    <li>Dispositivos médicos</li>
+                    <li>Componentes estructurales extremos</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+            <article class="mat-card">
+              <h3>BIOCERÁMICAS</h3>
+              <p class="mat-claim">Materiales para longevidad y biocompatibilidad</p>
+              <p class="mat-text">Diseñadas para dispositivos médicos avanzados bajo normativa estricta.</p>
+              <div class="mat-grid">
+                <div class="mat-block">
+                  <h4>Capacidades</h4>
+                  <ul class="mat-list">
+                    <li>ISO 13485</li>
+                    <li>Trazabilidad completa</li>
+                    <li>Integración con sensores y sistemas digitales</li>
+                  </ul>
+                </div>
+                <div class="mat-block">
+                  <h4>Aplicaciones</h4>
+                  <ul class="mat-list">
+                    <li>Implantes</li>
+                    <li>Cirugía guiada</li>
+                    <li>Oncología intervencionista</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="mat-section" data-reveal>
+        <div class="mat-container">
+          <h2 class="mat-heading">Ventaja diferencial</h2>
+          <p class="mat-subtitle">Integración vertical completa</p>
+          <div class="mat-flow-wrap">
+            <div class="mat-diagram" aria-label="Pipeline de integración vertical">
+              <svg class="mat-diagram-lines" viewBox="0 0 1400 88" preserveAspectRatio="none" aria-hidden="true">
+                <defs>
+                  <marker id="mat-arrow" markerWidth="8" markerHeight="6" refX="6.5" refY="3" orient="auto">
+                    <path d="M0 0L7 3L0 6Z" fill="rgba(147, 197, 253, 0.78)" />
+                  </marker>
+                </defs>
+                <path d="M70 16H1330" stroke="rgba(59, 130, 246, 0.28)" stroke-width="1" fill="none" />
+                <path d="M78 16L100 42M278 16L300 42M478 16L500 42M678 16L700 42M878 16L900 42M1078 16L1100 42M1278 16L1300 42" stroke="rgba(147, 197, 253, 0.62)" stroke-width="1.2" fill="none" />
+                <path d="M100 42V58M300 42V58M500 42V58M700 42V58M900 42V58M1100 42V58M1300 42V58" stroke="rgba(147, 197, 253, 0.62)" stroke-width="1.2" fill="none" />
+                <path d="M124 58H276M324 58H476M524 58H676M724 58H876M924 58H1076M1124 58H1276" stroke="rgba(147, 197, 253, 0.72)" stroke-width="1.2" fill="none" marker-end="url(#mat-arrow)" />
+              </svg>
+
+              <div class="mat-diagram-grid">
+                <div class="mat-stage">
+                  <svg class="mat-stage-icon" viewBox="0 0 42 42" aria-hidden="true">
+                    <defs><linearGradient id="mat-g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9ec5ff"/><stop offset="1" stop-color="#3b82f6"/></linearGradient></defs>
+                    <path d="M17 6h8v4l4 7v14H13V17l4-7z" fill="url(#mat-g1)" />
+                    <path d="M15 23h12v6H15z" fill="rgba(15,23,42,0.35)" />
+                  </svg>
+                  <p class="mat-stage-label">Síntesis y Formulación</p>
+                </div>
+                <div class="mat-stage">
+                  <svg class="mat-stage-icon" viewBox="0 0 42 42" aria-hidden="true">
+                    <defs><linearGradient id="mat-g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9ec5ff"/><stop offset="1" stop-color="#3b82f6"/></linearGradient></defs>
+                    <circle cx="21" cy="11" r="4" fill="url(#mat-g2)" />
+                    <circle cx="11" cy="21" r="4" fill="url(#mat-g2)" />
+                    <circle cx="31" cy="21" r="4" fill="url(#mat-g2)" />
+                    <circle cx="21" cy="31" r="4" fill="url(#mat-g2)" />
+                    <path d="M21 11L11 21L21 31L31 21Z" fill="rgba(59, 130, 246, 0.28)" />
+                  </svg>
+                  <p class="mat-stage-label">Crecimiento Cristalino (CVD/PVT/HME)</p>
+                </div>
+                <div class="mat-stage">
+                  <svg class="mat-stage-icon" viewBox="0 0 42 42" aria-hidden="true">
+                    <defs><linearGradient id="mat-g3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9ec5ff"/><stop offset="1" stop-color="#3b82f6"/></linearGradient></defs>
+                    <rect x="10" y="9" width="22" height="6" rx="1.5" fill="url(#mat-g3)" />
+                    <rect x="13" y="16" width="16" height="12" rx="2" fill="rgba(59, 130, 246, 0.85)" />
+                    <rect x="9" y="29" width="24" height="4" rx="1.5" fill="url(#mat-g3)" />
+                  </svg>
+                  <p class="mat-stage-label">Densificación Avanzada (SPS/HIP)</p>
+                </div>
+                <div class="mat-stage">
+                  <svg class="mat-stage-icon" viewBox="0 0 42 42" aria-hidden="true">
+                    <defs><linearGradient id="mat-g4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9ec5ff"/><stop offset="1" stop-color="#3b82f6"/></linearGradient></defs>
+                    <path d="M10 30h8l13-13-8-8L10 22z" fill="url(#mat-g4)" />
+                    <circle cx="27" cy="15" r="5" fill="rgba(15, 23, 42, 0.35)" />
+                    <path d="M25 11h4v8h-4z" fill="rgba(147, 197, 253, 0.95)" />
+                  </svg>
+                  <p class="mat-stage-label">Mecanizado de Precisión</p>
+                </div>
+                <div class="mat-stage">
+                  <svg class="mat-stage-icon" viewBox="0 0 42 42" aria-hidden="true">
+                    <defs><linearGradient id="mat-g5" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9ec5ff"/><stop offset="1" stop-color="#3b82f6"/></linearGradient></defs>
+                    <circle cx="21" cy="21" r="12" fill="url(#mat-g5)" />
+                    <circle cx="21" cy="21" r="6.5" fill="rgba(15, 23, 42, 0.35)" />
+                    <ellipse cx="16.5" cy="16" rx="3.5" ry="2" fill="rgba(219, 234, 254, 0.8)" />
+                  </svg>
+                  <p class="mat-stage-label">Acabado Superficial y CMP</p>
+                </div>
+                <div class="mat-stage">
+                  <svg class="mat-stage-icon" viewBox="0 0 42 42" aria-hidden="true">
+                    <defs><linearGradient id="mat-g6" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9ec5ff"/><stop offset="1" stop-color="#3b82f6"/></linearGradient></defs>
+                    <rect x="10" y="28" width="18" height="4" rx="1.2" fill="url(#mat-g6)" />
+                    <rect x="18" y="10" width="8" height="12" rx="2" transform="rotate(-24 22 16)" fill="url(#mat-g6)" />
+                    <rect x="22" y="20" width="4" height="8" rx="1" fill="rgba(59, 130, 246, 0.9)" />
+                    <circle cx="30" cy="28" r="4.2" fill="rgba(147, 197, 253, 0.85)" />
+                  </svg>
+                  <p class="mat-stage-label">Metrología y QA/QC</p>
+                </div>
+                <div class="mat-stage">
+                  <svg class="mat-stage-icon" viewBox="0 0 42 42" aria-hidden="true">
+                    <defs><linearGradient id="mat-g7" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9ec5ff"/><stop offset="1" stop-color="#3b82f6"/></linearGradient></defs>
+                    <path d="M8 32h26V17l-6-4-5 3-5-3-4 3-6-4z" fill="url(#mat-g7)" />
+                    <rect x="11" y="20" width="3" height="4" fill="rgba(15, 23, 42, 0.35)" />
+                    <rect x="17" y="20" width="3" height="4" fill="rgba(15, 23, 42, 0.35)" />
+                    <rect x="23" y="20" width="3" height="4" fill="rgba(15, 23, 42, 0.35)" />
+                  </svg>
+                  <p class="mat-stage-label">Cualificación y Escalado Industrial</p>
+                </div>
+              </div>
+            </div>
+            <p class="mat-material-strip">
+              Diamante | Carburo de Silicio | Zafiro | Cerámicas Técnicas | Composites Carbono-Metal
+            </p>
+          </div>
+          <p class="mat-text">Esto permite:</p>
+          <ul class="mat-list">
+            <li>Reducción dramática del riesgo de suministro</li>
+            <li>Optimización del coste total de propiedad</li>
+            <li>Lock-in por cualificación</li>
+            <li>Estabilidad lote a lote</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="mat-section" data-reveal>
+        <div class="mat-container">
+          <h2 class="mat-heading">Mapa visual</h2>
+          <div class="mat-map-scroll" style="overflow: hidden;" aria-label="Ecosistema estratégico de materiales DeepTech">
+            <svg class="mat-map-svg" style="min-width: 0;" viewBox="0 0 1400 540" role="img" aria-label="Mapa visual de aplicaciones, materiales estratégicos y capacidades industriales">
+              <defs>
+                <filter id="mat-map-mid-glow" x="-12%" y="-24%" width="124%" height="148%">
+                  <feDropShadow dx="0" dy="0" stdDeviation="1.1" flood-color="#60a5fa" flood-opacity="0.22" />
+                </filter>
+              </defs>
+              <g font-family="var(--font-tech)" font-size="13" letter-spacing="0.12em" fill="#b7c5d8" opacity="0.7">
+                <text x="700" y="19" text-anchor="middle">APLICACIONES</text>
+                <text x="700" y="205" text-anchor="middle">MATERIALES ESTRATÉGICOS</text>
+                <text x="700" y="367" text-anchor="middle">CAPACIDADES INDUSTRIALES</text>
+              </g>
+              <g class="mat-map-connections">
+                <path class="mat-map-line" d="M110 104L170 218" />
+                <path class="mat-map-line" d="M290 104L170 218" />
+                <path class="mat-map-line" d="M290 104L430 218" />
+                <path class="mat-map-line" d="M470 104L430 218" />
+                <path class="mat-map-line" d="M470 104L700 218" />
+                <path class="mat-map-line" d="M650 104L430 218" />
+                <path class="mat-map-line" d="M650 104L700 218" />
+                <path class="mat-map-line" d="M650 104L970 218" />
+                <path class="mat-map-line" d="M830 104L430 218" />
+                <path class="mat-map-line" d="M830 104L700 218" />
+                <path class="mat-map-line" d="M830 104L970 218" />
+                <path class="mat-map-line" d="M1010 104L700 218" />
+                <path class="mat-map-line" d="M1010 104L970 218" />
+                <path class="mat-map-line" d="M1190 104L970 218" />
+                <path class="mat-map-line" d="M1190 104L1230 218" />
+                <path class="mat-map-line" d="M1290 104L1230 218" />
+
+                <path class="mat-map-line" d="M170 268V340" />
+                <path class="mat-map-line" d="M430 268V340" />
+                <path class="mat-map-line" d="M700 268V340" />
+                <path class="mat-map-line" d="M970 268V340" />
+                <path class="mat-map-line" d="M1230 268V340" />
+
+                <path class="mat-map-line" d="M170 340H140" />
+                <path class="mat-map-line" d="M170 340H360" />
+                <path class="mat-map-line" d="M430 340H580" />
+                <path class="mat-map-line" d="M700 340H800" />
+                <path class="mat-map-line" d="M970 340H1020" />
+                <path class="mat-map-line" d="M1230 340H1240" />
+
+                <path class="mat-map-line" d="M140 340V380" />
+                <path class="mat-map-line" d="M360 340V380" />
+                <path class="mat-map-line" d="M580 340V380" />
+                <path class="mat-map-line" d="M800 340V380" />
+                <path class="mat-map-line" d="M1020 340V380" />
+                <path class="mat-map-line" d="M1240 340V380" />
+              </g>
+
+              <g class="mat-map-top">
+                <rect class="mat-map-box" x="30" y="30" width="160" height="74" rx="3" />
+                <text class="mat-map-label" x="110" y="62" text-anchor="middle">
+                  <tspan x="110" dy="0">Quantum</tspan><tspan x="110" dy="15">Technologies</tspan>
+                </text>
+
+                <rect class="mat-map-box" x="210" y="30" width="160" height="74" rx="3" />
+                <text class="mat-map-label" x="290" y="62" text-anchor="middle">
+                  <tspan x="290" dy="0">Photonics &amp;</tspan><tspan x="290" dy="15">Optics</tspan>
+                </text>
+
+                <rect class="mat-map-box" x="390" y="30" width="160" height="74" rx="3" />
+                <text class="mat-map-label" x="470" y="62" text-anchor="middle">
+                  <tspan x="470" dy="0">Semiconductors</tspan><tspan x="470" dy="15">(WBG)</tspan>
+                </text>
+
+                <rect class="mat-map-box" x="570" y="30" width="160" height="74" rx="3" />
+                <text class="mat-map-label" x="650" y="62" text-anchor="middle">
+                  <tspan x="650" dy="0">Defense &amp;</tspan><tspan x="650" dy="15">Aerospace</tspan>
+                </text>
+
+                <rect class="mat-map-box" x="750" y="30" width="160" height="74" rx="3" />
+                <text class="mat-map-label" x="830" y="62" text-anchor="middle">
+                  <tspan x="830" dy="0">Energy &amp;</tspan><tspan x="830" dy="15">Power</tspan>
+                </text>
+
+                <rect class="mat-map-box" x="930" y="30" width="160" height="74" rx="3" />
+                <text class="mat-map-label" x="1010" y="62" text-anchor="middle">
+                  <tspan x="1010" dy="0">Medical</tspan><tspan x="1010" dy="15">Devices</tspan>
+                </text>
+
+                <rect class="mat-map-box" x="1110" y="30" width="160" height="74" rx="3" />
+                <text class="mat-map-label" x="1190" y="62" text-anchor="middle">
+                  <tspan x="1190" dy="0">Scientific</tspan><tspan x="1190" dy="15">Infrastructure</tspan>
+                </text>
+              </g>
+
+              <g class="mat-map-mid">
+                <rect class="mat-map-box" x="90" y="218" width="160" height="50" rx="3" filter="url(#mat-map-mid-glow)" />
+                <text class="mat-map-label" x="170" y="248" text-anchor="middle">
+                  <tspan x="170" dy="0">Diamond CVD</tspan><tspan x="170" dy="14">(poly / sc)</tspan>
+                </text>
+
+                <rect class="mat-map-box" x="350" y="218" width="160" height="50" rx="3" filter="url(#mat-map-mid-glow)" />
+                <text class="mat-map-label" x="430" y="248" text-anchor="middle">Silicon Carbide</text>
+
+                <rect class="mat-map-box" x="620" y="218" width="160" height="50" rx="3" filter="url(#mat-map-mid-glow)" />
+                <text class="mat-map-label" x="700" y="248" text-anchor="middle">Sapphire</text>
+
+                <rect class="mat-map-box" x="890" y="218" width="160" height="50" rx="3" filter="url(#mat-map-mid-glow)" />
+                <text class="mat-map-label" x="970" y="245" text-anchor="middle">
+                  <tspan x="970" dy="0">Technical Ceramics</tspan><tspan x="970" dy="14">(Alumina, AlN, B₄C)</tspan>
+                </text>
+
+                <rect class="mat-map-box" x="1150" y="218" width="160" height="50" rx="3" filter="url(#mat-map-mid-glow)" />
+                <text class="mat-map-label" x="1230" y="248" text-anchor="middle">
+                  <tspan x="1230" dy="0">Carbon-Metal</tspan><tspan x="1230" dy="14">Composites</tspan>
+                </text>
+              </g>
+
+              <g class="mat-map-bottom">
+                <rect class="mat-map-box" x="60" y="380" width="160" height="70" rx="3" />
+                <text class="mat-map-label" x="140" y="410" text-anchor="middle">
+                  <tspan x="140" dy="0">Crystal Growth</tspan><tspan x="140" dy="15">(CVD / PVT / HME)</tspan>
+                </text>
+
+                <rect class="mat-map-box" x="280" y="380" width="160" height="70" rx="3" />
+                <text class="mat-map-label" x="360" y="416" text-anchor="middle">SPS / HIP</text>
+
+                <rect class="mat-map-box" x="500" y="380" width="160" height="70" rx="3" />
+                <text class="mat-map-label" x="580" y="416" text-anchor="middle">
+                  <tspan x="580" dy="0">Precision</tspan><tspan x="580" dy="15">Machining</tspan>
+                </text>
+
+                <rect class="mat-map-box" x="720" y="380" width="160" height="70" rx="3" />
+                <text class="mat-map-label" x="800" y="416" text-anchor="middle">
+                  <tspan x="800" dy="0">CMP &amp; Surface</tspan><tspan x="800" dy="15">Engineering</tspan>
+                </text>
+
+                <rect class="mat-map-box" x="940" y="380" width="160" height="70" rx="3" />
+                <text class="mat-map-label" x="1020" y="416" text-anchor="middle">
+                  <tspan x="1020" dy="0">QA/QC &amp;</tspan><tspan x="1020" dy="15">Traceability</tspan>
+                </text>
+
+                <rect class="mat-map-box" x="1160" y="380" width="160" height="70" rx="3" />
+                <text class="mat-map-label" x="1240" y="416" text-anchor="middle">
+                  <tspan x="1240" dy="0">Industrial</tspan><tspan x="1240" dy="15">Scale-Up</tspan>
+                </text>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <section class="mat-section" data-reveal>
+        <div class="mat-container">
+          <h2 class="mat-heading">DeepTech Materials for Europe</h2>
+          <p class="mat-text">Los materiales estratégicos no son intercambiables. Son infraestructura tecnológica.</p>
+          <p class="mat-text">Controlar diamante, SiC, zafiro y cerámicas avanzadas en Europa significa:</p>
+          <ul class="mat-list">
+            <li>Reducir dependencia externa</li>
+            <li>Asegurar continuidad industrial</li>
+            <li>Fortalecer soberanía tecnológica</li>
+          </ul>
+          <p class="mat-text" style="margin-top: 16px; margin-bottom: 10px;">
+            <span style="font-size: 1.08em; font-weight: 600; color: rgba(219, 234, 254, 0.96); text-shadow: 0 0 8px rgba(80,160,255,0.35);">
+              Nanoker construye esa base material.
+            </span>
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer" id="contact">
+      <div class="footer-grid">
+        <div class="f-brand">
+          <h3 data-i18n="footer.brandTitle">nanoker</h3>
+          <p data-i18n-html="footer.brandTextHtml">
+            Plataforma industrial europea para tecnologías críticas.<br />
+            Materiales avanzados con especificación garantizada, trazabilidad completa y escalabilidad industrial.
+          </p>
+          <p style="margin-top: 12px; opacity: 0.9" data-i18n-html="footer.noteHtml">
+            <b>Contacto técnico:</b> procesamos solicitudes en <b>3–5 días laborables</b>.
+          </p>
+        </div>
+        <div class="f-col">
+          <h4 data-i18n="footer.colSite.title">Site</h4>
+          <ul>
+            <li><a href="./index.html#top" data-i18n="footer.colSite.links.home">Home</a></li>
+            <li><a href="./index.html#sec-platform" data-i18n="footer.colSite.links.capabilities">Capacidades</a></li>
+            <li><a href="materiales.html" data-i18n="footer.colSite.links.materials">Materiales</a></li>
+            <li><a href="sectores.html" data-i18n="footer.colSite.links.sectors">Sectores</a></li>
+            <li><a href="./index.html#sec-rnd" data-i18n="footer.colSite.links.rnd">I+D</a></li>
+            <li><a href="./index.html#sec-sovereignty" data-i18n="footer.colSite.links.advantages">Ventajas</a></li>
+          </ul>
+        </div>
+        <div class="f-col">
+          <h4 data-i18n="footer.colHubs.title">Industrial Hubs</h4>
+          <ul>
+            <li><a href="#" data-i18n="footer.colHubs.links.oviedo">Oviedo — Desarrollo & Validación</a></li>
+            <li><a href="#" data-i18n="footer.colHubs.links.leon">León — Hub industrial</a></li>
+            <li><a href="#" data-i18n="footer.colHubs.links.supply">European Supply</a></li>
+          </ul>
+        </div>
+        <div class="f-col">
+          <h4 data-i18n="footer.colConnect.title">Connect</h4>
+          <ul>
+            <li><a href="mailto:info@nanoker.com" class="contact-data">info@nanoker.com</a></li>
+            <li><a href="tel:+34985000000" class="contact-data">+34 985 000 000</a></li>
+            <li>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Pol%C3%ADgono+de+Olloniego%2C+Parcela+22A%2C+Nave+6%2C+33660+Oviedo%2C+Asturias%2C+Spain"
+                class="contact-data"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Polígono de Olloniego, Parcela 22A, Nave 6, 33660 Oviedo, Asturias, Spain
+              </a>
+            </li>
+            <li style="margin-top: 20px">
+              <a href="https://www.linkedin.com/company/nanoker-research-sl/" data-i18n="footer.colConnect.links.linkedin">LinkedIn ↗</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="f-copy">
+        <div class="system-status">
+          <div class="status-dot"></div>
+          <span>
+            <span data-i18n="footer.system.label">SYSTEM STATUS:</span>
+            <span data-i18n="footer.system.value">OPERATIONAL</span>
+          </span>
+        </div>
+        <div>
+          <span data-i18n="footer.legal.copyright">© 2026 Nanoker Research S.L.</span>
+          <a href="#" data-i18n="footer.legal.privacy">Privacy Policy</a>
+          <a href="#" data-i18n="footer.legal.notice">Legal Notice</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        const nav = document.querySelector("[data-nav]");
+        const btn = document.querySelector(".nav-toggle");
+        const links = document.querySelectorAll(".nav-center .nav-link");
+        if (nav && btn) {
+          btn.addEventListener("click", () => {
+            const open = !nav.classList.contains("is-open");
+            nav.classList.toggle("is-open", open);
+            btn.setAttribute("aria-expanded", open ? "true" : "false");
+          });
+        }
+        links.forEach((a) => {
+          a.addEventListener("click", () => {
+            nav?.classList.remove("is-open");
+            btn?.setAttribute("aria-expanded", "false");
+          });
+        });
+
+        const revealEls = document.querySelectorAll("[data-reveal]");
+        if (!("IntersectionObserver" in window)) {
+          revealEls.forEach((el) => el.classList.add("is-visible"));
+          return;
+        }
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) entry.target.classList.add("is-visible");
+            });
+          },
+          { threshold: 0.14, rootMargin: "0px 0px -8% 0px" }
+        );
+        revealEls.forEach((el) => io.observe(el));
+      })();
+    </script>
+
+    <script type="module">
+      import { initLanguageSwitcher } from "./js/lang.js";
+      initLanguageSwitcher({ observeDOM: true });
+    </script>
+  </body>
+</html>
