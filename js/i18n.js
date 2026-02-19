@@ -14,6 +14,7 @@ export const I18N = deepFreeze({
     nav: {
       // ✅ NAV MENU (matches index.html data-i18n)
       home: "Home",
+      company: "Company",
       capabilities: "Capabilities",
       materials: "Materials",
       sectors: "Sectors",
@@ -45,6 +46,88 @@ export const I18N = deepFreeze({
       tagline:
         "Architecting the invisible layer of innovation.<br/>European Sovereignty in Advanced Materials.",
       scroll: "Scroll to Explore",
+    },
+
+    pages: {
+      company: {
+        metaTitle: "Nanoker | Company",
+        hero: {
+          eyebrow: "Company",
+          titleHtml:
+            "Industrial infrastructure for <span class=\"empresa-accent\">strategic technologies.</span>",
+          text:
+            "Nanoker is an industrial platform specialized in advanced materials for DeepTech sectors where reliability, certified specification, and supply continuity are mission-critical.",
+        },
+        mission: {
+          title: "Our Mission",
+          priorities: {
+            title: "Industrial priorities",
+            item1: "Purity and stability from batch to batch",
+            item2: "Reduced supply-chain risk",
+            item3: "End-to-end traceability",
+            item4: "European industrial scale-up",
+          },
+          who: {
+            title: "Who we are",
+            item1: "Manufacturer of ceramic components",
+            item2: "Developer of advanced formulations",
+            item3: "Integrator of advanced technologies",
+            item4: "Strategic partner to critical European OEMs",
+          },
+        },
+        platform: {
+          titleHtml: "Integrated <span class=\"empresa-accent\">Platform</span>",
+          subtitle: "Complete vertical integration",
+          card1: "Synthesis & Growth",
+          card2: "Precision Machining",
+          card3: "Finishing & Metrology",
+          card4: "QA & Control",
+        },
+        alliance: {
+          title: "Strategic Technology Alliance",
+          text:
+            "Nanoker integrates advanced capabilities in single-crystal diamond growth and atomic-scale doping control, expanding the portfolio toward next-generation quantum, thermal, and semiconductor applications.",
+          item1: "CVD Diamond",
+          item2: "Silicon Carbide",
+          item3: "Sapphire",
+          item4: "Extreme Ceramics",
+        },
+        infrastructure: {
+          title: "Industrial Infrastructure",
+          item1: "Progressive technical qualification (6-24 months by sector)",
+          item2: "Wave-based scale-up",
+          item3: "24/7 operation",
+          item4: "Availability >95%",
+        },
+        advantage: {
+          title: "European structural advantage",
+          subtitle: "Energy, sustainability, and sovereignty",
+          text:
+            "Advanced-material manufacturing is energy-intensive. Operating in a competitive renewable-energy environment with low carbon intensity provides:",
+          item1: "Structural cost advantage",
+          item2: "CBAM compliance",
+          item3: "Access to demanding markets (defense, aerospace, premium automotive)",
+          item4: "European legal certainty and IP protection",
+          closingHtml:
+            "It is not only an environmental matter.<br />It is a durable competitive advantage.",
+        },
+        approach: {
+          title: "Our approach",
+          subtitle: "How we work with our customers",
+          item1: "We define the critical material specification",
+          item2: "We validate technically and metrologically",
+          item3: "We qualify under sector standards",
+          item4: "We scale production with industrial repeatability",
+          text: "We integrate into each customer's technology roadmap.",
+        },
+        vision: {
+          title: "Vision",
+          subtitle: "Strategic infrastructure for European DeepTech",
+          textHtml:
+            "Europe cannot lead in advanced semiconductors, quantum technologies, or defense systems without controlling the materials that enable them.<br />Nanoker is building that industrial foundation.",
+        },
+        quote: "Whoever controls the material controls the technology.",
+      },
     },
 
     ui: {
@@ -227,6 +310,9 @@ export const I18N = deepFreeze({
 
       colConnect: {
         title: "Connect",
+        email: "info@nanoker.com",
+        phone: "+34 985 000 000",
+        address: "Polígono de Olloniego, Parcela 22A, Nave 6, 33660 Oviedo, Asturias, Spain",
         links: {
           linkedin: "LinkedIn ↗",
         },
@@ -329,6 +415,7 @@ export const I18N = deepFreeze({
     nav: {
       // ✅ NAV MENU (matches index.html data-i18n)
       home: "Home",
+      company: "Empresa",
       capabilities: "Capacidades",
       materials: "Materiales",
       sectors: "Sectores",
@@ -360,6 +447,88 @@ export const I18N = deepFreeze({
       tagline:
         "Arquitectura de la capa invisible de la innovación.<br/>Soberanía europea en materiales avanzados.",
       scroll: "Desplázate para explorar",
+    },
+
+    pages: {
+      company: {
+        metaTitle: "Nanoker | Empresa",
+        hero: {
+          eyebrow: "EMPRESA",
+          titleHtml:
+            "Infraestructura industrial para <span class=\"empresa-accent\">tecnologías estratégicas.</span>",
+          text:
+            "Nanoker es una plataforma industrial especializada en materiales avanzados para sectores DeepTech donde la fiabilidad, la especificación certificada y la continuidad de suministro son críticas.",
+        },
+        mission: {
+          title: "Nuestra Misión",
+          priorities: {
+            title: "Prioridades industriales",
+            item1: "Pureza y estabilidad lote a lote",
+            item2: "Reducción de riesgo de suministro",
+            item3: "Trazabilidad completa",
+            item4: "Escalado industrial europeo",
+          },
+          who: {
+            title: "Quiénes somos",
+            item1: "Fabricante de componentes cerámicos",
+            item2: "Desarrollador de formulaciones avanzadas",
+            item3: "Integrador de tecnologías avanzadas",
+            item4: "Socio de OEMs europeos críticos",
+          },
+        },
+        platform: {
+          titleHtml: "Plataforma <span class=\"empresa-accent\">Integrada</span>",
+          subtitle: "Integración vertical completa",
+          card1: "Síntesis & Crecimiento",
+          card2: "Mecanizado de Precisión",
+          card3: "Acabado & Metrología",
+          card4: "QA & Control",
+        },
+        alliance: {
+          title: "Alianza Tecnológica Estratégica",
+          text:
+            "Nanoker integra capacidades tecnológicas avanzadas en crecimiento de diamante monocristalino y control de dopaje a escala atómica, ampliando el portfolio hacia aplicaciones cuánticas, térmicas y semiconductoras de próxima generación.",
+          item1: "Diamante CVD",
+          item2: "Silicon Carbide",
+          item3: "Zafiro",
+          item4: "Cerámicas extremas",
+        },
+        infrastructure: {
+          title: "Infraestructura Industrial",
+          item1: "Cualificación técnica progresiva (6–24 meses según sector)",
+          item2: "Escalado en oleadas",
+          item3: "Operación 24/7",
+          item4: "Disponibilidad >95%",
+        },
+        advantage: {
+          title: "Ventaja estructural europea",
+          subtitle: "Energía, sostenibilidad y soberanía",
+          text:
+            "La fabricación de materiales avanzados es intensiva en energía. Operar en un entorno con energía renovable competitiva y baja intensidad de carbono proporciona:",
+          item1: "Ventaja estructural de coste",
+          item2: "Cumplimiento CBAM",
+          item3: "Acceso a mercados exigentes (defensa, aeroespacial, automoción premium)",
+          item4: "Seguridad jurídica e IP europea",
+          closingHtml:
+            "No es solo una cuestión medioambiental.<br />Es una ventaja competitiva permanente.",
+        },
+        approach: {
+          title: "Nuestro enfoque",
+          subtitle: "Cómo trabajamos con nuestros clientes",
+          item1: "Definimos la especificación crítica del material",
+          item2: "Validamos técnica y metrológicamente",
+          item3: "Cualificamos bajo estándares sectoriales",
+          item4: "Escalamos producción con repetibilidad industrial",
+          text: "Nos integramos en los roadmaps tecnológicos del cliente.",
+        },
+        vision: {
+          title: "Visión",
+          subtitle: "Infraestructura estratégica para la DeepTech europea",
+          textHtml:
+            "Europa no puede liderar en semiconductores avanzados, tecnologías cuánticas o sistemas de defensa sin controlar los materiales que los hacen posibles.<br />Nanoker trabaja para construir esa base industrial.",
+        },
+        quote: "Quien controla el material controla la tecnología.",
+      },
     },
 
     ui: {
@@ -530,6 +699,9 @@ export const I18N = deepFreeze({
 
       colConnect: {
         title: "Contacto",
+        email: "info@nanoker.com",
+        phone: "+34 985 000 000",
+        address: "Polígono de Olloniego, Parcela 22A, Nave 6, 33660 Oviedo, Asturias, Spain",
         links: {
           linkedin: "LinkedIn ↗",
         },
