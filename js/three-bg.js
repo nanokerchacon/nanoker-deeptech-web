@@ -59,6 +59,19 @@ export function initThreeBackground() {
       noGrid: 0.0,
       showValueBackdrop: 0.0,
     },
+    materials: {
+      color: new THREE.Color(0x2a1600),
+      emissive: new THREE.Color(0xffc400),
+      roughness: 0.2,
+      metalness: 0.9,
+      waveType: 2,
+      freq: 0.8,
+      amp: 0.4,
+      bloom: 0.62,
+      particles: 0.22,
+      noGrid: 0.0,
+      showValueBackdrop: 0.0,
+    },
     extreme: {
       color: new THREE.Color(0x221100),
       emissive: new THREE.Color(0xffaa00),
@@ -170,6 +183,11 @@ export function initThreeBackground() {
 
   const MEDICAL_EMISSIVE = new THREE.Color(0x35ff6a);
   const IMPLANTES_EMISSIVE = new THREE.Color(0xf5f5f2);
+  const isIOS =
+    /iP(ad|hone|od)/.test(navigator.userAgent) ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  const isLowPower = isIOS || /Android/i.test(navigator.userAgent);
+  const useComposer = !isLowPower;
 
   function colorDist(a, b) {
     const dr = a.r - b.r;
@@ -200,7 +218,7 @@ export function initThreeBackground() {
 
   renderer.setClearColor(0x000000, 0);
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.25));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isLowPower ? 1 : 1.25));
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
 
   // ✅ evita duplicados si se inicializa 2 veces
@@ -216,7 +234,38 @@ export function initThreeBackground() {
   canvas.style.height = "100%";
   canvas.style.pointerEvents = "none";
   canvas.style.display = "block";
+  canvas.style.zIndex = "0";
+  canvas.style.transform = "translate3d(0,0,0)";
+  canvas.style.webkitTransform = "translate3d(0,0,0)";
+  canvas.style.backfaceVisibility = "hidden";
+  canvas.style.webkitBackfaceVisibility = "hidden";
+  canvas.style.willChange = "transform";
   document.body.appendChild(canvas);
+  document.body.classList.remove("no-three");
+
+  let onIOSScroll = null;
+  if (isIOS) {
+    canvas.style.position = "absolute";
+    canvas.style.left = "0";
+    canvas.style.top = window.scrollY + "px";
+    canvas.style.right = "0";
+    canvas.style.bottom = "auto";
+
+    let ticking = false;
+    const syncCanvasTop = () => {
+      ticking = false;
+      canvas.style.top = window.scrollY + "px";
+    };
+
+    onIOSScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(syncCanvasTop);
+      }
+    };
+
+    window.addEventListener("scroll", onIOSScroll, { passive: true });
+  }
 
   // --- LUCES ---
   scene.add(new THREE.AmbientLight(0xffffff, 2.0));
@@ -239,8 +288,8 @@ export function initThreeBackground() {
     opacity: 1.0,
   });
 
-  const ROWS = 100;
-  const COLS = 100;
+  const ROWS = isLowPower ? 68 : 100;
+  const COLS = isLowPower ? 68 : 100;
 
   const gridMesh = new THREE.InstancedMesh(geometry, material, ROWS * COLS);
   gridMesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
@@ -259,7 +308,7 @@ export function initThreeBackground() {
   }
 
   // PARTÍCULAS
-  const PCOUNT = 1800;
+  const PCOUNT = isLowPower ? 920 : 1800;
   const pGeo = new THREE.BufferGeometry();
   const pPos = new Float32Array(PCOUNT * 3);
   const pVel = new Float32Array(PCOUNT);
@@ -298,7 +347,7 @@ export function initThreeBackground() {
   valueBackdrop.visible = false;
   scene.add(valueBackdrop);
 
-  const VALUE_NODES = 170;
+  const VALUE_NODES = isLowPower ? 110 : 170;
   const valueGeo = new THREE.BufferGeometry();
   const valueBasePos = new Float32Array(VALUE_NODES * 3);
   const valuePos = new Float32Array(VALUE_NODES * 3);
@@ -382,19 +431,23 @@ export function initThreeBackground() {
   valueBackdrop.add(valueLines);
 
   // POST-PROCESSING
-  const composer = new EffectComposer(renderer);
-  composer.addPass(new RenderPass(scene, camera));
+  let composer = null;
+  let bloomPass = null;
+  if (useComposer) {
+    composer = new EffectComposer(renderer);
+    composer.addPass(new RenderPass(scene, camera));
 
-  const bloomPass = new UnrealBloomPass(
-    new THREE.Vector2(window.innerWidth, window.innerHeight),
-    1.5,
-    0.4,
-    0.85
-  );
-  bloomPass.threshold = 0.1;
-  bloomPass.strength = 0.6;
-  bloomPass.radius = 0.8;
-  composer.addPass(bloomPass);
+    bloomPass = new UnrealBloomPass(
+      new THREE.Vector2(window.innerWidth, window.innerHeight),
+      1.5,
+      0.4,
+      0.85
+    );
+    bloomPass.threshold = 0.1;
+    bloomPass.strength = 0.6;
+    bloomPass.radius = 0.8;
+    composer.addPass(bloomPass);
+  }
 
   // INPUT
   const clock = new THREE.Clock();
@@ -440,10 +493,14 @@ export function initThreeBackground() {
     camera.updateProjectionMatrix();
 
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.25));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isLowPower ? 1 : 1.25));
 
-    composer.setSize(window.innerWidth, window.innerHeight);
-    bloomPass.setSize(window.innerWidth, window.innerHeight);
+    if (useComposer) {
+      composer.setSize(window.innerWidth, window.innerHeight);
+      bloomPass.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    if (isIOS) canvas.style.top = window.scrollY + "px";
   }
 
   function resetAfterSleep() {
@@ -452,6 +509,7 @@ export function initThreeBackground() {
     lastT = 0;
     targetPos.set(0, -100, 0);
     forceResize();
+    if (isIOS) canvas.style.top = window.scrollY + "px";
   }
 
   function stopLoop() {
@@ -463,11 +521,17 @@ export function initThreeBackground() {
   const onContextLost = (e) => {
     e.preventDefault();
     contextLost = true;
+    console.warn("[three] context lost");
+    canvas.style.opacity = "0";
+    document.body.classList.add("no-three");
     stopLoop();
   };
 
   const onContextRestored = () => {
     contextLost = false;
+    console.warn("[three] context restored");
+    canvas.style.opacity = "1";
+    document.body.classList.remove("no-three");
     forceResize();
     resetAfterSleep();
     running = true;
@@ -545,9 +609,11 @@ export function initThreeBackground() {
 
     const sectionDim = Math.min(medicalDim, implantesDim);
 
-    bloomPass.strength = Math.min(0.75, current.bloom * pulseBloom * sectionDim);
-    bloomPass.radius = 0.75 + pulse * 0.12;
-    bloomPass.threshold = 0.12;
+    if (useComposer) {
+      bloomPass.strength = Math.min(0.75, current.bloom * pulseBloom * sectionDim);
+      bloomPass.radius = 0.75 + pulse * 0.12;
+      bloomPass.threshold = 0.12;
+    }
 
     pMat.color.copy(current.emissive);
     pMat.opacity = (0.05 + current.particles * 0.20) * pulseParticles * sectionDim;
@@ -658,7 +724,8 @@ export function initThreeBackground() {
       valueLineGeo.attributes.position.needsUpdate = true;
     }
 
-    composer.render();
+    if (useComposer) composer.render();
+    else renderer.render(scene, camera);
   }
 
   const onResize = () => forceResize();
@@ -674,6 +741,7 @@ export function initThreeBackground() {
     window.removeEventListener("focus", onFocus);
     window.removeEventListener("resize", onResize);
     window.removeEventListener("mousemove", onMouseMove);
+    if (onIOSScroll) window.removeEventListener("scroll", onIOSScroll);
 
     window.removeEventListener("funding:open", onFundingOpen);
     window.removeEventListener("funding:close", onFundingClose);

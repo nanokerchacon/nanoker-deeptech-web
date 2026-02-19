@@ -51,6 +51,8 @@
         --id-border: rgba(255, 255, 255, 0.11);
         --id-dim: rgba(255, 255, 255, 0.74);
         --id-surface: rgba(255, 255, 255, 0.02);
+        --page-accent: #8B5CF6;
+        --page-accent-soft: rgba(139, 92, 246, 0.16);
       }
 
       .page-id .id-accent { color: var(--id-accent); }
@@ -138,6 +140,10 @@
         border: 1px solid var(--id-border);
         background: var(--id-surface);
         padding: 18px 20px;
+        position: relative;
+        transform: translateZ(0);
+        will-change: transform;
+        transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
       }
       .id-card h3 {
         margin: 0 0 8px;
@@ -152,6 +158,45 @@
         letter-spacing: 0.15em;
         text-transform: uppercase;
         color: var(--id-accent);
+      }
+
+      .id-card:focus-within {
+        border-color: rgba(139, 92, 246, 0.45);
+      }
+
+      .id-card :focus-visible {
+        outline: 2px solid rgba(139, 92, 246, 0.34);
+        outline-offset: 4px;
+        border-radius: 14px;
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        .id-card:hover {
+          transform: translateY(-4px);
+          border-color: rgba(139, 92, 246, 0.45);
+          box-shadow: 0 18px 70px rgba(0, 0, 0, 0.38), 0 0 0 1px var(--page-accent-soft);
+          background: rgba(0, 0, 0, 0.46);
+        }
+
+        .id-card:active {
+          transform: translateY(-1px);
+        }
+
+        .id-card::after {
+          content: "";
+          position: absolute;
+          inset: -30%;
+          background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.1), transparent);
+          transform: translateX(-60%);
+          opacity: 0;
+          pointer-events: none;
+        }
+
+        .id-card:hover::after {
+          opacity: 1;
+          transform: translateX(60%);
+          transition: transform 520ms ease, opacity 320ms ease;
+        }
       }
 
       .id-rail {
@@ -184,7 +229,8 @@
         .id-grid { grid-template-columns: 1fr; }
       }
       @media (prefers-reduced-motion: reduce) {
-        [data-reveal] { opacity: 1; transform: none; transition: none; }
+        [data-reveal],
+        .id-card { opacity: 1; transform: none; transition: none; }
       }
     </style>
   </head>
@@ -201,7 +247,7 @@
         <a href="materiales.html" class="nav-link" data-i18n="nav.materials">Materiales</a>
         <a href="capacidades.html" class="nav-link" data-i18n="nav.capabilities">Capacidades</a>
         <a href="id.html" class="nav-link is-active" data-i18n="nav.rnd">I+D</a>
-        <a href="#contact" class="nav-link" data-i18n="nav.contact">Contacto</a>
+        <a href="contacto.html" class="nav-link" data-i18n="nav.contact">Contacto</a>
       </div>
       <div class="nav-actions">
         <button class="nav-lang" type="button" data-lang-toggle aria-label="Language">

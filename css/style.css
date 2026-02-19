@@ -306,6 +306,14 @@ body{
   overflow-x:hidden;
 }
 
+body,
+header,
+main,
+.section{
+  position: relative;
+  z-index: 1;
+}
+
 /* Overlay sutil */
 body::before{
   content:"";
@@ -323,6 +331,12 @@ body::before{
   mix-blend-mode: overlay;
 }
 
+@media (max-width: 768px){
+  body::before{
+    opacity: .1;
+  }
+}
+
 /* Canvas index (three-bg.js) */
 .three-bg-canvas{
   position: fixed;
@@ -331,7 +345,12 @@ body::before{
   height: 100%;
   display: block;
   pointer-events: none;
-  z-index: -1;
+  z-index: 0;
+  transform: translate3d(0,0,0);
+  -webkit-transform: translate3d(0,0,0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform;
 }
 
 /* Canvas access (three-particles.js) */
@@ -722,12 +741,57 @@ body::before{
   padding: 0 10vw;
 }
 
-/* Mantener visible el estado de fondo "extreme" en el bloque 03 */
-#sec-materials,
-#sec-materials::before,
-#sec-materials::after{
-  background: transparent !important;
-  background-color: transparent !important;
+body.no-three .nk-hero,
+body.no-three .hero-bridge,
+body.no-three .section[data-bg]{
+  background-color: #05070a;
+  background-image:
+    radial-gradient(120% 90% at 50% 8%, rgba(120,200,255,.10), rgba(0,0,0,0) 56%),
+    linear-gradient(180deg, rgba(3,6,10,.94), rgba(0,0,0,.98));
+}
+
+body.no-three .section[data-bg="quantum"]{
+  background-image:
+    radial-gradient(120% 90% at 50% 8%, rgba(255,0,85,.20), rgba(0,0,0,0) 58%),
+    linear-gradient(180deg, rgba(12,4,10,.95), rgba(0,0,0,.98));
+}
+
+body.no-three .section[data-bg="semi"]{
+  background-image:
+    radial-gradient(120% 90% at 50% 8%, rgba(0,255,255,.19), rgba(0,0,0,0) 58%),
+    linear-gradient(180deg, rgba(3,8,14,.95), rgba(0,0,0,.98));
+}
+
+body.no-three .section[data-bg="materials"]{
+  background-image:
+    radial-gradient(120% 90% at 50% 8%, rgba(255,196,0,.22), rgba(0,0,0,0) 58%),
+    linear-gradient(180deg, rgba(14,10,3,.95), rgba(0,0,0,.98));
+}
+
+body.no-three .section[data-bg="medical"]{
+  background-image:
+    radial-gradient(120% 90% at 50% 8%, rgba(53,255,106,.20), rgba(0,0,0,0) 58%),
+    linear-gradient(180deg, rgba(3,12,7,.95), rgba(0,0,0,.98));
+}
+
+body.no-three .section[data-bg="competitive"]{
+  background-image:
+    radial-gradient(120% 90% at 50% 8%, rgba(59,130,246,.20), rgba(0,0,0,0) 58%),
+    linear-gradient(180deg, rgba(4,8,16,.95), rgba(0,0,0,.98));
+}
+
+body.no-three .section[data-bg="implantes"],
+body.no-three .section[data-bg="value"],
+body.no-three .section[data-bg="rnd"]{
+  background-image:
+    radial-gradient(120% 90% at 50% 8%, rgba(139,92,246,.20), rgba(0,0,0,0) 58%),
+    linear-gradient(180deg, rgba(7,5,14,.95), rgba(0,0,0,.98));
+}
+
+body.no-three .section[data-bg="sovereignty"]{
+  background-image:
+    radial-gradient(120% 90% at 50% 8%, rgba(223,109,15,.22), rgba(0,0,0,0) 58%),
+    linear-gradient(180deg, rgba(16,8,4,.95), rgba(0,0,0,.98));
 }
 
 .layout-left{ justify-content: flex-start; }

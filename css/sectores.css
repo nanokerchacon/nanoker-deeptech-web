@@ -1,0 +1,141 @@
+:root {
+  --sectors-accent: #18c2e6;
+  --sectors-accent-soft: rgba(24, 194, 230, 0.12);
+  --sectors-accent-line: rgba(24, 194, 230, 0.22);
+  --sectors-accent-glow: rgba(24, 194, 230, 0.28);
+}
+
+body.sectores-page .page-hero--sectors .page-hero__title,
+body.sectores-page .page-hero--sectors .accent,
+body.sectores-page .sect-hero h1,
+body.sectores-page .sect-hero h1 .accent {
+  color: #ffffff;
+  text-shadow: none;
+}
+
+body.sectores-page {
+  background: #050505;
+}
+
+body.sectores-page .sect-main {
+  background:
+    radial-gradient(80% 220px at 88% 15%, rgba(255, 255, 255, 0.04), transparent 70%),
+    linear-gradient(180deg, #050505 0%, #040404 48%, #030303 100%);
+}
+
+body.sectores-page .sect-divider {
+  height: 1px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+}
+
+body.sectores-page .page-hero--sectors .page-hero__rule::after,
+body.sectores-page .sect-divider::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 1px;
+  width: 140px;
+  background: var(--sectors-accent-line);
+}
+
+body.sectores-page .page-hero--sectors .page-hero__rule {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.06),
+    rgba(255, 255, 255, 0.03)
+  );
+  position: relative;
+}
+
+body.sectores-page .sector-card,
+body.sectores-page .sect-box {
+  position: relative;
+  overflow: hidden;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+body.sectores-page .sect-box h3 {
+  color: var(--sectors-accent);
+}
+
+body.sectores-page .sector-card:hover,
+body.sectores-page .sect-box:hover {
+  transform: translateY(-4px);
+  border-color: var(--sectors-accent-line);
+  background: var(--sectors-accent-soft);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.35), 0 0 0 1px var(--sectors-accent-soft);
+}
+
+body.sectores-page .sector-card:active,
+body.sectores-page .sect-box:active {
+  transform: translateY(-1px);
+}
+
+body.sectores-page .sect-box:focus-within {
+  border-color: var(--sectors-accent);
+  box-shadow: 0 0 0 1px var(--sectors-accent-line), 0 0 18px rgba(24, 194, 230, 0.1);
+}
+
+body.sectores-page .sector-card:focus-visible,
+body.sectores-page .sect-box:focus-visible {
+  outline: 2px solid rgba(24, 194, 230, 0.35);
+  outline-offset: 4px;
+}
+
+body.sectores-page .sector-card::after,
+body.sectores-page .sect-box::after {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  background: linear-gradient(90deg, transparent, rgba(24, 194, 230, 0.1), transparent);
+  transform: translateX(-60%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+body.sectores-page .sector-card:hover::after,
+body.sectores-page .sect-box:hover::after {
+  opacity: 1;
+  transform: translateX(60%);
+  transition: transform 520ms ease, opacity 320ms ease;
+}
+
+body.sectores-page .is-active-sector {
+  border-color: var(--sectors-accent);
+  background: var(--sectors-accent-soft);
+  box-shadow: 0 0 18px rgba(24, 194, 230, 0.1);
+}
+
+body.sectores-page .sect-list li::before {
+  border: 1px solid var(--sectors-accent-line);
+  background: radial-gradient(circle at 50% 50%, rgba(24, 194, 230, 0.72) 0 2px, transparent 3px);
+}
+
+body.sectores-page .nav-link.is-active {
+  border-color: var(--sectors-accent-line);
+}
+
+body.sectores-page a:hover,
+body.sectores-page a:focus-visible {
+  color: var(--sectors-accent);
+}
+
+@media (hover: none) {
+  body.sectores-page .sector-card:hover,
+  body.sectores-page .sect-box:hover {
+    transform: none;
+    box-shadow: 0 0 0 1px var(--sectors-accent-soft);
+  }
+
+  body.sectores-page .sector-card:hover::after,
+  body.sectores-page .sect-box:hover::after {
+    opacity: 0;
+    transform: translateX(-60%);
+  }
+}

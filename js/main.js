@@ -3,6 +3,18 @@ import { initThreeBackground } from "./three-bg.js";
 import { initLanguageSwitcher } from "./lang.js";
 
 let three = null;
+const DEV_BG_DEBUG =
+  /localhost|127\.0\.0\.1/.test(window.location.hostname) ||
+  window.location.search.includes("bgdebug=1");
+const MOBILE_BG_DEBUG = window.matchMedia("(max-width: 820px)").matches;
+
+function logMaterialsCanvasState(state) {
+  if (!DEV_BG_DEBUG || !MOBILE_BG_DEBUG || state !== "materials") return;
+  const canvas = document.querySelector("canvas.three-bg-canvas");
+  const opacity = canvas ? getComputedStyle(canvas).opacity : "missing";
+  console.warn("[three][materials] no-three:", document.body.classList.contains("no-three"));
+  console.warn("[three][materials] canvas opacity:", opacity);
+}
 
 /* ==========================
    HELPERS
@@ -50,6 +62,24 @@ function resolveBgState(el) {
   return "base";
 }
 
+function getClosestSectionToViewportMid(elements) {
+  const mid = window.innerHeight * 0.55;
+  let best = null;
+  let bestDist = Infinity;
+
+  elements.forEach((el) => {
+    const r = el.getBoundingClientRect();
+    const center = r.top + r.height / 2;
+    const dist = Math.abs(center - mid);
+    if (dist < bestDist) {
+      bestDist = dist;
+      best = el;
+    }
+  });
+
+  return best;
+}
+
 function setThreeState(state) {
   if (!three) return;
   three.setTargetState(state || "hero");
@@ -72,6 +102,15 @@ window.addEventListener("scroll", updateNavScrolled, { passive: true });
    INIT
 ========================== */
 window.addEventListener("DOMContentLoaded", () => {
+  const currentPage = window.location.pathname.split("/").pop();
+
+  document.querySelectorAll(".nav-link").forEach((link) => {
+    const href = link.getAttribute("href");
+    if (href === currentPage) {
+      link.classList.add("is-active");
+    }
+  });
+
   // 1) Idioma
   initLanguageSwitcher({ observeDOM: true });
 
@@ -119,23 +158,10 @@ window.addEventListener("DOMContentLoaded", () => {
     window.addEventListener(
       "scroll",
       () => {
-        // elegimos la sección más cercana al centro
-        const mid = window.innerHeight * 0.55;
-        let best = null;
-        let bestDist = Infinity;
-
-        bgSections.forEach((el) => {
-          const r = el.getBoundingClientRect();
-          const center = r.top + r.height / 2;
-          const dist = Math.abs(center - mid);
-          if (dist < bestDist) {
-            bestDist = dist;
-            best = el;
-          }
-        });
-
+        const best = getClosestSectionToViewportMid(bgSections);
         const state = resolveBgState(best);
         setThreeState(state);
+        logMaterialsCanvasState(state);
       },
       { passive: true }
     );
@@ -166,6 +192,10 @@ window.addEventListener("DOMContentLoaded", () => {
         }
       });
 
+      if (!bestEl || bestRatio <= 0) {
+        bestEl = getClosestSectionToViewportMid(bgSections);
+      }
+
       const state = resolveBgState(bestEl);
       if (!state) return;
 
@@ -191,6 +221,7 @@ window.addEventListener("DOMContentLoaded", () => {
           if (lastState !== currentBg) {
             currentBg = lastState;
             setThreeState(lastState);
+            logMaterialsCanvasState(lastState);
           }
           bgStateTimer = null;
         }, 200 - elapsed);
@@ -199,6 +230,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
       currentBg = state;
       setThreeState(state);
+      logMaterialsCanvasState(state);
     },
     {
       // Punto de lectura: el centro de pantalla aproximadamente

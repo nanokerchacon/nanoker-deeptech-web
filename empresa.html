@@ -31,6 +31,8 @@
         --empresa-dim: rgba(255, 255, 255, 0.72);
         --empresa-red: #c93b3b;
         --empresa-red-soft: rgba(201, 59, 59, 0.32);
+        --page-accent: #c93b3b;
+        --page-accent-soft: rgba(201, 59, 59, 0.18);
       }
 
       body.empresa-page {
@@ -197,13 +199,65 @@
         display: flex;
         flex-direction: column;
         gap: 18px;
-        transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+        transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
       }
 
       .platform-card:hover {
         transform: translateY(-2px);
         border-color: rgba(201, 59, 59, 0.45);
         box-shadow: 0 0 18px rgba(201, 59, 59, 0.1);
+      }
+
+      .mission-card,
+      .platform-card {
+        position: relative;
+        transform: translateZ(0);
+        will-change: transform;
+      }
+
+      .mission-card:focus-within,
+      .platform-card:focus-within {
+        border-color: rgba(201, 59, 59, 0.45);
+      }
+
+      .mission-card :focus-visible,
+      .platform-card :focus-visible {
+        outline: 2px solid rgba(201, 59, 59, 0.34);
+        outline-offset: 4px;
+        border-radius: 14px;
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        .mission-card:hover,
+        .platform-card:hover {
+          transform: translateY(-4px);
+          border-color: rgba(201, 59, 59, 0.45);
+          box-shadow: 0 18px 70px rgba(0, 0, 0, 0.38), 0 0 0 1px var(--page-accent-soft);
+          background: rgba(0, 0, 0, 0.46);
+        }
+
+        .mission-card:active,
+        .platform-card:active {
+          transform: translateY(-1px);
+        }
+
+        .mission-card::after,
+        .platform-card::after {
+          content: "";
+          position: absolute;
+          inset: -30%;
+          background: linear-gradient(90deg, transparent, rgba(201, 59, 59, 0.1), transparent);
+          transform: translateX(-60%);
+          opacity: 0;
+          pointer-events: none;
+        }
+
+        .mission-card:hover::after,
+        .platform-card:hover::after {
+          opacity: 1;
+          transform: translateX(60%);
+          transition: transform 520ms ease, opacity 320ms ease;
+        }
       }
 
       .platform-card svg {
@@ -305,7 +359,8 @@
 
       @media (prefers-reduced-motion: reduce) {
         [data-reveal],
-        .platform-card {
+        .platform-card,
+        .mission-card {
           transition: none;
           transform: none;
           opacity: 1;
@@ -327,7 +382,7 @@
         <a href="materiales.html" class="nav-link" data-i18n="nav.materials">Materiales</a>
         <a href="capacidades.html" class="nav-link" data-i18n="nav.capabilities">Capacidades</a>
         <a href="id.html" class="nav-link" data-i18n="nav.rnd">I+D</a>
-        <a href="#contact" class="nav-link" data-i18n="nav.contact">Contacto</a>
+        <a href="contacto.html" class="nav-link" data-i18n="nav.contact">Contacto</a>
       </div>
 
       <div class="nav-actions">

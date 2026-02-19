@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contacto técnico | Nanoker</title>
+
+    <link rel="icon" href="./favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-pack/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-pack/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon-pack/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="./favicon-pack/android-chrome-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="./favicon-pack/android-chrome-512x512.png" />
+    <meta name="theme-color" content="#020202" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/style.css?v=11" />
+    <link rel="stylesheet" href="css/contacto.css?v=2" />
+  </head>
+
+  <body class="contact-body">
+    <nav class="nav" data-nav>
+      <a href="./index.html" class="nav-logo" aria-label="Nanoker Home">
+        <img src="./img/brand/logo-nanoker-26-hd.png" alt="Nanoker" />
+      </a>
+
+      <div class="nav-center">
+        <a href="./index.html#top" class="nav-link">Home</a>
+        <a href="empresa.html" class="nav-link">Empresa</a>
+        <a href="sectores.html" class="nav-link">Sectores</a>
+        <a href="materiales.html" class="nav-link">Materiales</a>
+        <a href="capacidades.html" class="nav-link">Capacidades</a>
+        <a href="id.html" class="nav-link">I+D</a>
+        <a href="contacto.html" class="nav-link is-active" aria-current="page">Contacto</a>
+      </div>
+
+      <div class="nav-actions">
+        <button class="nav-lang" type="button" aria-label="Language">
+          <span class="is-active">ES</span> / <span>EN</span>
+        </button>
+      </div>
+
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+        ☰ <span class="sr-only">Open menu</span>
+      </button>
+    </nav>
+
+    <main class="page contact-main" id="top">
+      <header class="page-hero page-hero--contact" aria-labelledby="contact-title">
+        <div class="page-hero__inner">
+          <div class="page-hero__kicker">CONTACTO</div>
+
+          <h1 class="page-hero__title" id="contact-title">
+            Contacto <span class="page-hero__accent">técnico</span>
+          </h1>
+
+          <p class="page-hero__lead">
+            Las tecnologías críticas requieren conversaciones técnicas.
+          </p>
+
+          <p class="page-hero__text">
+            Si estás desarrollando un sistema donde el material es determinante para el rendimiento,
+            estaremos encantados de analizar tu aplicación.
+          </p>
+
+          <div class="page-hero__rule" aria-hidden="true"></div>
+        </div>
+      </header>
+
+      <section class="contact-section contact-layout" aria-label="Formulario técnico">
+        <aside class="contact-panel contact-panel--focus" aria-labelledby="work-title">
+          <h2 id="work-title">Cómo trabajamos</h2>
+          <p>Antes de enviar una solicitud, es útil disponer de:</p>
+          <ul class="contact-list">
+            <li>Descripción de la aplicación</li>
+            <li>Especificación técnica (si existe)</li>
+            <li>Requisitos críticos (temperatura, presión, tolerancias, etc.)</li>
+            <li>Volumen estimado o fase del proyecto</li>
+          </ul>
+          <p>Esto nos permite ofrecer una evaluación técnica rigurosa.</p>
+        </aside>
+
+        <div class="contact-form-stack">
+          <section class="contact-panel contact-panel--wizard" id="wizard-form" aria-labelledby="wizard-title">
+            <div class="wizard-head">
+              <p class="wizard-kicker">INTERFAZ DE INGENIERÍA</p>
+              <h2 id="wizard-title">Formulario inteligente</h2>
+            </div>
+
+            <div class="wizard-progress" aria-hidden="true">
+              <div class="wizard-progress__bar"><span id="wizard-progress-fill"></span></div>
+              <p id="wizard-progress-text">Paso 1 de 6</p>
+            </div>
+
+            <div class="wizard-steps" role="tablist" aria-label="Pasos del formulario">
+              <button type="button" class="wizard-stepBtn is-current" data-step-jump="1" role="tab" aria-selected="true">Step 1</button>
+              <button type="button" class="wizard-stepBtn" data-step-jump="2" role="tab" aria-selected="false">Step 2</button>
+              <button type="button" class="wizard-stepBtn" data-step-jump="3" role="tab" aria-selected="false">Step 3</button>
+              <button type="button" class="wizard-stepBtn" data-step-jump="4" role="tab" aria-selected="false">Step 4</button>
+              <button type="button" class="wizard-stepBtn" data-step-jump="5" role="tab" aria-selected="false">Step 5</button>
+              <button type="button" class="wizard-stepBtn" data-step-jump="6" role="tab" aria-selected="false">Step 6</button>
+            </div>
+
+            <form id="contact-tech-form" novalidate>
+              <section class="wizard-step is-active" data-step="1" aria-hidden="false">
+                <h3>Tipo de consulta</h3>
+                <div class="chip-grid">
+                  <input class="chip-input" type="checkbox" id="tipo-eval" name="tipo_consulta" value="Evaluación técnica de material" />
+                  <label class="chip" for="tipo-eval">Evaluación técnica de material</label>
+
+                  <input class="chip-input" type="checkbox" id="tipo-coeng" name="tipo_consulta" value="Desarrollo conjunto/ co-engineering" />
+                  <label class="chip" for="tipo-coeng">Desarrollo conjunto/ co-engineering</label>
+
+                  <input class="chip-input" type="checkbox" id="tipo-muestra" name="tipo_consulta" value="Solicitud de muestra" />
+                  <label class="chip" for="tipo-muestra">Solicitud de muestra</label>
+
+                  <input class="chip-input" type="checkbox" id="tipo-rfq" name="tipo_consulta" value="Solicitud de presupuesto (RFQ)" />
+                  <label class="chip" for="tipo-rfq">Solicitud de presupuesto (RFQ)</label>
+
+                  <input class="chip-input" type="checkbox" id="tipo-id" name="tipo_consulta" value="Colaboración I+D" />
+                  <label class="chip" for="tipo-id">Colaboración I+D</label>
+
+                  <input class="chip-input" type="checkbox" id="tipo-inv" name="tipo_consulta" value="Inversión/ institucional" />
+                  <label class="chip" for="tipo-inv">Inversión/ institucional</label>
+
+                  <input class="chip-input" type="checkbox" id="tipo-otro" name="tipo_consulta" value="Otro" />
+                  <label class="chip" for="tipo-otro">Otro</label>
+                </div>
+              </section>
+
+              <section class="wizard-step" data-step="2" aria-hidden="true">
+                <h3>Sector</h3>
+                <div class="chip-grid">
+                  <input class="chip-input" type="checkbox" id="sector-industria" name="sector" value="Industria" />
+                  <label class="chip" for="sector-industria">Industria</label>
+
+                  <input class="chip-input" type="checkbox" id="sector-energia" name="sector" value="Energía" />
+                  <label class="chip" for="sector-energia">Energía</label>
+
+                  <input class="chip-input" type="checkbox" id="sector-salud" name="sector" value="Salud" />
+                  <label class="chip" for="sector-salud">Salud</label>
+
+                  <input class="chip-input" type="checkbox" id="sector-semi" name="sector" value="Semiconductores" />
+                  <label class="chip" for="sector-semi">Semiconductores</label>
+
+                  <input class="chip-input" type="checkbox" id="sector-fotonica" name="sector" value="Fotónica" />
+                  <label class="chip" for="sector-fotonica">Fotónica</label>
+
+                  <input class="chip-input" type="checkbox" id="sector-cuantica" name="sector" value="Cuántica" />
+                  <label class="chip" for="sector-cuantica">Cuántica</label>
+
+                  <input class="chip-input" type="checkbox" id="sector-defensa" name="sector" value="Defensa / Espacio" />
+                  <label class="chip" for="sector-defensa">Defensa / Espacio</label>
+
+                  <input class="chip-input" type="checkbox" id="sector-ciencia" name="sector" value="Ciencia e Infraestructuras" />
+                  <label class="chip" for="sector-ciencia">Ciencia e Infraestructuras</label>
+                </div>
+              </section>
+
+              <section class="wizard-step" data-step="3" aria-hidden="true">
+                <h3>Material de interés (opcional)</h3>
+                <div class="chip-grid">
+                  <input class="chip-input" type="checkbox" id="material-diamante" name="material" value="Diamante evo" />
+                  <label class="chip" for="material-diamante">Diamante evo</label>
+
+                  <input class="chip-input" type="checkbox" id="material-sic" name="material" value="SiC" />
+                  <label class="chip" for="material-sic">SiC</label>
+
+                  <input class="chip-input" type="checkbox" id="material-zafiro" name="material" value="Zafiro" />
+                  <label class="chip" for="material-zafiro">Zafiro</label>
+
+                  <input class="chip-input" type="checkbox" id="material-ceramicas" name="material" value="Cerámicas técnicas" />
+                  <label class="chip" for="material-ceramicas">Cerámicas técnicas</label>
+
+                  <input class="chip-input" type="checkbox" id="material-composites" name="material" value="Composites térmicos" />
+                  <label class="chip" for="material-composites">Composites térmicos</label>
+
+                  <input class="chip-input" type="checkbox" id="material-nodef" name="material" value="No definido" />
+                  <label class="chip" for="material-nodef">No definido</label>
+                </div>
+                <button type="button" class="step-next-btn" id="step3-next-btn">Continuar</button>
+              </section>
+
+              <section class="wizard-step" data-step="4" aria-hidden="true">
+                <h3>Información técnica</h3>
+                <label for="tech-info" class="sr-only">Información técnica</label>
+                <textarea
+                  id="tech-info"
+                  name="informacion_tecnica"
+                  rows="8"
+                  placeholder="Describe tu aplicación, entorno operativo y requisitos clave."
+                ></textarea>
+                <button type="button" class="step-next-btn" id="step4-next-btn">Continuar</button>
+              </section>
+
+              <section class="wizard-step" data-step="5" aria-hidden="true">
+                <h3>Datos de contacto</h3>
+                <div class="input-grid">
+                  <div>
+                    <label for="nombre">Nombre *</label>
+                    <input id="nombre" name="nombre" type="text" required />
+                  </div>
+
+                  <div>
+                    <label for="empresa">Empresa *</label>
+                    <input id="empresa" name="empresa" type="text" required />
+                  </div>
+
+                  <div>
+                    <label for="cargo">Cargo</label>
+                    <input id="cargo" name="cargo" type="text" />
+                  </div>
+
+                  <div>
+                    <label for="email">Email corporativo *</label>
+                    <input id="email" name="email" type="email" required />
+                  </div>
+
+                  <div>
+                    <label for="pais">País *</label>
+                    <input id="pais" name="pais" type="text" required />
+                  </div>
+
+                  <div>
+                    <label for="telefono">Teléfono (opcional)</label>
+                    <input id="telefono" name="telefono" type="tel" />
+                  </div>
+                </div>
+                <button type="button" class="step-next-btn" id="step5-next-btn">Continuar</button>
+              </section>
+
+              <section class="wizard-step" data-step="6" aria-hidden="true">
+                <h3>Enviar solicitud</h3>
+                <button type="submit" class="submit-btn" id="submit-btn">Enviar solicitud técnica</button>
+                <p class="form-note">Procesamos solicitudes técnicas en un plazo de 3-5 días laborables.</p>
+                <p id="form-status" class="form-status" aria-live="polite"></p>
+              </section>
+            </form>
+          </section>
+          <p class="contact-processing-note">
+            PROCESAMOS SOLICITUDES TÉCNICAS EN UN PLAZO DE 3–5 DÍAS LABORABLES
+          </p>
+        </div>
+      </section>
+
+      <section class="contact-section contact-section--duo">
+        <article class="contact-panel">
+          <h2>Relaciones estratégicas</h2>
+          <p>
+            Para alianzas industriales, colaboraciones institucionales o información corporativa, puedes escribir
+            directamente a:
+          </p>
+          <p><a href="mailto:info@nanoker.com">info@nanoker.com</a></p>
+        </article>
+
+        <article class="contact-panel">
+          <h2>Presencia industrial</h2>
+          <ul class="contact-list">
+            <li>Oviedo - Desarrollo y validación</li>
+            <li>León - Hub industrial estratégico</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="contact-section contact-section--close">
+        <article class="contact-panel contact-panel--close">
+          <h2>Ingeniería de materiales con propósito industrial</h2>
+          <p>
+            En DeepTech, cada proyecto comienza con una conversación técnica rigurosa.
+            Estamos preparados para acompañarte desde la especificación hasta la cualificación industrial.
+          </p>
+        </article>
+      </section>
+    </main>
+
+    <footer class="footer" id="contact">
+      <div class="footer-grid">
+        <div class="f-brand">
+          <h3>nanoker</h3>
+          <p>
+            Plataforma industrial europea para tecnologías críticas.<br />
+            Materiales avanzados con especificación garantizada, trazabilidad completa y escalabilidad industrial.
+          </p>
+          <p style="margin-top:12px; opacity:.9;"><b>Contacto técnico:</b> procesamos solicitudes en <b>3–5 días laborables</b>.</p>
+        </div>
+
+        <div class="f-col">
+          <h4>Site</h4>
+          <ul>
+            <li><a href="./index.html#top">Home</a></li>
+            <li><a href="./index.html#sec-platform">Capacidades</a></li>
+            <li><a href="./index.html#sec-materials">Materiales</a></li>
+            <li><a href="./index.html#sec-sectors">Sectores</a></li>
+            <li><a href="./index.html#sec-rnd">I+D</a></li>
+            <li><a href="./index.html#sec-sovereignty">Ventajas</a></li>
+          </ul>
+        </div>
+
+        <div class="f-col">
+          <h4>Industrial Hubs</h4>
+          <ul>
+            <li><a href="#">Oviedo — Desarrollo &amp; Validación</a></li>
+            <li><a href="#">León — Hub industrial</a></li>
+            <li><a href="#">European Supply</a></li>
+          </ul>
+        </div>
+
+        <div class="f-col">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="mailto:info@nanoker.com" class="contact-data">info@nanoker.com</a></li>
+            <li><a href="tel:+34985000000" class="contact-data">+34 985 000 000</a></li>
+            <li>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Pol%C3%ADgono+de+Olloniego%2C+Parcela+22A%2C+Nave+6%2C+33660+Oviedo%2C+Asturias%2C+Spain"
+                class="contact-data"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Polígono de Olloniego, Parcela 22A, Nave 6, 33660 Oviedo, Asturias, Spain
+              </a>
+            </li>
+            <li style="margin-top: 20px;">
+              <a href="https://www.linkedin.com/company/nanoker-research-sl/">LinkedIn ↗</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="f-copy">
+        <div class="system-status">
+          <div class="status-dot"></div>
+          <span>SYSTEM STATUS: OPERATIONAL</span>
+        </div>
+
+        <div>
+          <span>© 2026 Nanoker Research S.L.</span>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Legal Notice</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./js/contacto.js?v=2" defer></script>
+  </body>
+</html>

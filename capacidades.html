@@ -30,6 +30,8 @@
         --mat-red: #2FAE7A;
         --mat-red-soft: rgba(47, 174, 122, 0.3);
         --mat-surface: rgba(255, 255, 255, 0.02);
+        --page-accent: #2FAE7A;
+        --page-accent-soft: rgba(47, 174, 122, 0.16);
       }
 
       body.materiales-page { background: var(--mat-bg); }
@@ -149,6 +151,10 @@
         border: 1px solid var(--mat-border);
         background: var(--mat-surface);
         padding: 18px 20px;
+        position: relative;
+        transform: translateZ(0);
+        will-change: transform;
+        transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
       }
       .mat-card h3 {
         margin: 0 0 8px;
@@ -170,6 +176,10 @@
         border: 1px solid rgba(255, 255, 255, 0.08);
         background: rgba(255, 255, 255, 0.01);
         padding: 12px;
+        position: relative;
+        transform: translateZ(0);
+        will-change: transform;
+        transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
       }
       .mat-block h4 {
         margin: 0 0 8px;
@@ -178,6 +188,51 @@
         letter-spacing: 0.14em;
         text-transform: uppercase;
         color: rgba(255, 255, 255, 0.7);
+      }
+
+      .mat-card:focus-within,
+      .mat-block:focus-within {
+        border-color: rgba(47, 174, 122, 0.46);
+      }
+
+      .mat-card :focus-visible,
+      .mat-block :focus-visible {
+        outline: 2px solid rgba(47, 174, 122, 0.34);
+        outline-offset: 4px;
+        border-radius: 14px;
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        .mat-card:hover,
+        .mat-block:hover {
+          transform: translateY(-4px);
+          border-color: rgba(47, 174, 122, 0.46);
+          box-shadow: 0 18px 70px rgba(0, 0, 0, 0.38), 0 0 0 1px var(--page-accent-soft);
+          background: rgba(0, 0, 0, 0.46);
+        }
+
+        .mat-card:active,
+        .mat-block:active {
+          transform: translateY(-1px);
+        }
+
+        .mat-card::after,
+        .mat-block::after {
+          content: "";
+          position: absolute;
+          inset: -30%;
+          background: linear-gradient(90deg, transparent, rgba(47, 174, 122, 0.1), transparent);
+          transform: translateX(-60%);
+          opacity: 0;
+          pointer-events: none;
+        }
+
+        .mat-card:hover::after,
+        .mat-block:hover::after {
+          opacity: 1;
+          transform: translateX(60%);
+          transition: transform 520ms ease, opacity 320ms ease;
+        }
       }
 
       .mat-cols { columns: 2; column-gap: 18px; }
@@ -319,7 +374,9 @@
         .mat-material-strip { text-align: left; line-height: 1.5; }
       }
       @media (prefers-reduced-motion: reduce) {
-        [data-reveal] { opacity: 1; transform: none; transition: none; }
+        [data-reveal],
+        .mat-card,
+        .mat-block { opacity: 1; transform: none; transition: none; }
       }
     </style>
   </head>
@@ -336,7 +393,7 @@
         <a href="materiales.html" class="nav-link" data-i18n="nav.materials">Materiales</a>
         <a href="capacidades.html" class="nav-link is-active" data-i18n="nav.capabilities">Capacidades</a>
         <a href="id.html" class="nav-link" data-i18n="nav.rnd">I+D</a>
-        <a href="#contact" class="nav-link" data-i18n="nav.contact">Contacto</a>
+        <a href="contacto.html" class="nav-link" data-i18n="nav.contact">Contacto</a>
       </div>
       <div class="nav-actions">
         <button class="nav-lang" type="button" data-lang-toggle aria-label="Language">
