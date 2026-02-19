@@ -59,7 +59,7 @@ export function applyTranslations(root = document) {
     const key = el.dataset.i18n;
     const fallback = el.textContent;
     const val = t(key, fallback);
-    if (typeof val === "string") el.textContent = val;
+    if (typeof val === "string" && val.trim() !== "") el.textContent = val;
   });
 
   // data-i18n-html => innerHTML
@@ -67,7 +67,7 @@ export function applyTranslations(root = document) {
     const key = el.dataset.i18nHtml;
     const fallback = el.innerHTML;
     const val = t(key, fallback);
-    if (typeof val === "string") el.innerHTML = val;
+    if (typeof val === "string" && val.trim() !== "") el.innerHTML = val;
   });
 
   // data-i18n-placeholder => placeholder
@@ -75,7 +75,7 @@ export function applyTranslations(root = document) {
     const key = el.dataset.i18nPlaceholder;
     const fallback = el.getAttribute("placeholder") || "";
     const val = t(key, fallback);
-    if (typeof val === "string") el.setAttribute("placeholder", val);
+    if (typeof val === "string" && val.trim() !== "") el.setAttribute("placeholder", val);
   });
 
   // ✅ refresca labels del toggle en este root
