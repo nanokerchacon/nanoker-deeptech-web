@@ -48,6 +48,121 @@ export const I18N = deepFreeze({
       scroll: "Scroll to Explore",
     },
 
+    contact: {
+      metaTitle: "Technical Contact | Nanoker",
+      hero: {
+        kicker: "CONTACT",
+        titleHtml: "Technical <span class=\"page-hero__accent\">contact</span>",
+        lead: "Critical technologies require technical conversations.",
+        text:
+          "If you are developing a system where materials determine performance, we will be glad to review your application.",
+      },
+      work: {
+        title: "How we work",
+        intro: "Before sending a request, it is useful to have:",
+        items: {
+          application: "Application description",
+          specification: "Technical specification (if available)",
+          requirements: "Critical requirements (temperature, pressure, tolerances, etc.)",
+          volume: "Estimated volume or project stage",
+        },
+        outro: "This allows us to provide a rigorous technical evaluation.",
+      },
+      wizard: {
+        kicker: "ENGINEERING INTERFACE",
+        title: "Smart form",
+        progress: "Step 1 of 6",
+        steps: {
+          step1: "Step 1",
+          step2: "Step 2",
+          step3: "Step 3",
+          step4: "Step 4",
+          step5: "Step 5",
+          step6: "Step 6",
+        },
+      },
+      form: {
+        actions: {
+          continue: "Continue",
+        },
+        step1: {
+          title: "Inquiry type",
+          options: {
+            eval: "Material technical assessment",
+            coengineering: "Joint development / co-engineering",
+            sample: "Sample request",
+            rfq: "Quotation request (RFQ)",
+            rnd: "R&D collaboration",
+            institutional: "Investment / institutional",
+            other: "Other",
+          },
+        },
+        step2: {
+          title: "Sector",
+          options: {
+            industry: "Industry",
+            energy: "Energy",
+            health: "Health",
+            semiconductors: "Semiconductors",
+            photonics: "Photonics",
+            quantum: "Quantum",
+            defense: "Defense / Space",
+            science: "Science and infrastructures",
+          },
+        },
+        step3: {
+          title: "Material of interest (optional)",
+          options: {
+            diamond: "Diamond evo",
+            sic: "SiC",
+            sapphire: "Sapphire",
+            ceramics: "Technical ceramics",
+            composites: "Thermal composites",
+            undefined: "Not defined",
+          },
+        },
+        step4: {
+          title: "Technical information",
+          label: "Technical information",
+          placeholder: "Describe your application, operating environment, and key requirements.",
+        },
+        step5: {
+          title: "Contact details",
+          fields: {
+            name: "Name *",
+            company: "Company *",
+            role: "Role",
+            email: "Corporate email *",
+            country: "Country *",
+            phone: "Phone (optional)",
+          },
+        },
+        step6: {
+          title: "Submit request",
+          submit: "Send technical request",
+          note: "We process technical requests within 3-5 business days.",
+        },
+      },
+      processingNote: "WE PROCESS TECHNICAL REQUESTS WITHIN 3–5 BUSINESS DAYS",
+      duo: {
+        strategic: {
+          title: "Strategic relations",
+          text:
+            "For industrial alliances, institutional collaborations, or corporate information, you can write directly to:",
+        },
+        presence: {
+          title: "Industrial presence",
+          oviedo: "Oviedo - Development and validation",
+          leon: "León - Strategic industrial hub",
+        },
+      },
+      close: {
+        title: "Materials engineering with industrial purpose",
+        text:
+          "In DeepTech, every project starts with a rigorous technical conversation. We are ready to support you from specification to industrial qualification.",
+      },
+    },
+
     pages: {
       company: {
         metaTitle: "Nanoker | Company",
@@ -1121,6 +1236,121 @@ export const I18N = deepFreeze({
       tagline:
         "Arquitectura de la capa invisible de la innovación.<br/>Soberanía europea en materiales avanzados.",
       scroll: "Desplázate para explorar",
+    },
+
+    contact: {
+      metaTitle: "Contacto técnico | Nanoker",
+      hero: {
+        kicker: "CONTACTO",
+        titleHtml: "Contacto <span class=\"page-hero__accent\">técnico</span>",
+        lead: "Las tecnologías críticas requieren conversaciones técnicas.",
+        text:
+          "Si estás desarrollando un sistema donde el material es determinante para el rendimiento, estaremos encantados de analizar tu aplicación.",
+      },
+      work: {
+        title: "Cómo trabajamos",
+        intro: "Antes de enviar una solicitud, es útil disponer de:",
+        items: {
+          application: "Descripción de la aplicación",
+          specification: "Especificación técnica (si existe)",
+          requirements: "Requisitos críticos (temperatura, presión, tolerancias, etc.)",
+          volume: "Volumen estimado o fase del proyecto",
+        },
+        outro: "Esto nos permite ofrecer una evaluación técnica rigurosa.",
+      },
+      wizard: {
+        kicker: "INTERFAZ DE INGENIERÍA",
+        title: "Formulario inteligente",
+        progress: "Paso 1 de 6",
+        steps: {
+          step1: "Step 1",
+          step2: "Step 2",
+          step3: "Step 3",
+          step4: "Step 4",
+          step5: "Step 5",
+          step6: "Step 6",
+        },
+      },
+      form: {
+        actions: {
+          continue: "Continuar",
+        },
+        step1: {
+          title: "Tipo de consulta",
+          options: {
+            eval: "Evaluación técnica de material",
+            coengineering: "Desarrollo conjunto/ co-engineering",
+            sample: "Solicitud de muestra",
+            rfq: "Solicitud de presupuesto (RFQ)",
+            rnd: "Colaboración I+D",
+            institutional: "Inversión/ institucional",
+            other: "Otro",
+          },
+        },
+        step2: {
+          title: "Sector",
+          options: {
+            industry: "Industria",
+            energy: "Energía",
+            health: "Salud",
+            semiconductors: "Semiconductores",
+            photonics: "Fotónica",
+            quantum: "Cuántica",
+            defense: "Defensa / Espacio",
+            science: "Ciencia e Infraestructuras",
+          },
+        },
+        step3: {
+          title: "Material de interés (opcional)",
+          options: {
+            diamond: "Diamante evo",
+            sic: "SiC",
+            sapphire: "Zafiro",
+            ceramics: "Cerámicas técnicas",
+            composites: "Composites térmicos",
+            undefined: "No definido",
+          },
+        },
+        step4: {
+          title: "Información técnica",
+          label: "Información técnica",
+          placeholder: "Describe tu aplicación, entorno operativo y requisitos clave.",
+        },
+        step5: {
+          title: "Datos de contacto",
+          fields: {
+            name: "Nombre *",
+            company: "Empresa *",
+            role: "Cargo",
+            email: "Email corporativo *",
+            country: "País *",
+            phone: "Teléfono (opcional)",
+          },
+        },
+        step6: {
+          title: "Enviar solicitud",
+          submit: "Enviar solicitud técnica",
+          note: "Procesamos solicitudes técnicas en un plazo de 3-5 días laborables.",
+        },
+      },
+      processingNote: "PROCESAMOS SOLICITUDES TÉCNICAS EN UN PLAZO DE 3–5 DÍAS LABORABLES",
+      duo: {
+        strategic: {
+          title: "Relaciones estratégicas",
+          text:
+            "Para alianzas industriales, colaboraciones institucionales o información corporativa, puedes escribir directamente a:",
+        },
+        presence: {
+          title: "Presencia industrial",
+          oviedo: "Oviedo - Desarrollo y validación",
+          leon: "León - Hub industrial estratégico",
+        },
+      },
+      close: {
+        title: "Ingeniería de materiales con propósito industrial",
+        text:
+          "En DeepTech, cada proyecto comienza con una conversación técnica rigurosa. Estamos preparados para acompañarte desde la especificación hasta la cualificación industrial.",
+      },
     },
 
     pages: {

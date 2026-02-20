@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contacto técnico | Nanoker</title>
+    <title data-i18n="contact.metaTitle">Technical Contact | Nanoker</title>
 
     <link rel="icon" href="./favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon-pack/favicon-32x32.png" />
@@ -22,6 +22,15 @@
 
     <link rel="stylesheet" href="css/style.css?v=11" />
     <link rel="stylesheet" href="css/contacto.css?v=2" />
+
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+      }
+    </script>
   </head>
 
   <body class="contact-body">
@@ -31,249 +40,247 @@
       </a>
 
       <div class="nav-center">
-        <a href="./index.html#top" class="nav-link">Home</a>
-        <a href="empresa.html" class="nav-link">Empresa</a>
-        <a href="sectores.html" class="nav-link">Sectores</a>
-        <a href="materiales.html" class="nav-link">Materiales</a>
-        <a href="capacidades.html" class="nav-link">Capacidades</a>
-        <a href="id.html" class="nav-link">I+D</a>
-        <a href="contacto.html" class="nav-link is-active" aria-current="page">Contacto</a>
+        <a href="./index.html#top" class="nav-link" data-i18n="nav.home">Home</a>
+        <a href="empresa.html" class="nav-link" data-i18n="nav.company">Company</a>
+        <a href="sectores.html" class="nav-link" data-i18n="nav.sectors">Sectors</a>
+        <a href="materiales.html" class="nav-link" data-i18n="nav.materials">Materials</a>
+        <a href="capacidades.html" class="nav-link" data-i18n="nav.capabilities">Capabilities</a>
+        <a href="id.html" class="nav-link" data-i18n="nav.rnd">I+D</a>
+        <a href="contacto.html" class="nav-link is-active" aria-current="page" data-i18n="nav.contact">Contact</a>
       </div>
 
       <div class="nav-actions">
-        <button class="nav-lang" type="button" aria-label="Language">
+        <button class="nav-lang" type="button" data-lang-toggle aria-label="Language">
           <span class="is-active">ES</span> / <span>EN</span>
         </button>
       </div>
 
       <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
-        ☰ <span class="sr-only">Open menu</span>
+        ☰ <span class="sr-only" data-i18n="nav.menu">Open menu</span>
       </button>
     </nav>
 
     <main class="page contact-main" id="top">
       <header class="page-hero page-hero--contact" aria-labelledby="contact-title">
         <div class="page-hero__inner">
-          <div class="page-hero__kicker">CONTACTO</div>
+          <div class="page-hero__kicker" data-i18n="contact.hero.kicker">CONTACT</div>
 
-          <h1 class="page-hero__title" id="contact-title">
-            Contacto <span class="page-hero__accent">técnico</span>
+          <h1 class="page-hero__title" id="contact-title" data-i18n-html="contact.hero.titleHtml">
+            Technical <span class="page-hero__accent">contact</span>
           </h1>
 
-          <p class="page-hero__lead">
-            Las tecnologías críticas requieren conversaciones técnicas.
+          <p class="page-hero__lead" data-i18n="contact.hero.lead">
+            Critical technologies require technical conversations.
           </p>
 
-          <p class="page-hero__text">
-            Si estás desarrollando un sistema donde el material es determinante para el rendimiento,
-            estaremos encantados de analizar tu aplicación.
+          <p class="page-hero__text" data-i18n="contact.hero.text">
+            If you are developing a system where materials determine performance, we will be glad to review your application.
           </p>
 
           <div class="page-hero__rule" aria-hidden="true"></div>
         </div>
       </header>
 
-      <section class="contact-section contact-layout" aria-label="Formulario técnico">
+      <section class="contact-section contact-layout" aria-label="Technical form">
         <aside class="contact-panel contact-panel--focus" aria-labelledby="work-title">
-          <h2 id="work-title">Cómo trabajamos</h2>
-          <p>Antes de enviar una solicitud, es útil disponer de:</p>
+          <h2 id="work-title" data-i18n="contact.work.title">How we work</h2>
+          <p data-i18n="contact.work.intro">Before sending a request, it is useful to have:</p>
           <ul class="contact-list">
-            <li>Descripción de la aplicación</li>
-            <li>Especificación técnica (si existe)</li>
-            <li>Requisitos críticos (temperatura, presión, tolerancias, etc.)</li>
-            <li>Volumen estimado o fase del proyecto</li>
+            <li data-i18n="contact.work.items.application">Application description</li>
+            <li data-i18n="contact.work.items.specification">Technical specification (if available)</li>
+            <li data-i18n="contact.work.items.requirements">Critical requirements (temperature, pressure, tolerances, etc.)</li>
+            <li data-i18n="contact.work.items.volume">Estimated volume or project stage</li>
           </ul>
-          <p>Esto nos permite ofrecer una evaluación técnica rigurosa.</p>
+          <p data-i18n="contact.work.outro">This allows us to provide a rigorous technical evaluation.</p>
         </aside>
 
         <div class="contact-form-stack">
           <section class="contact-panel contact-panel--wizard" id="wizard-form" aria-labelledby="wizard-title">
             <div class="wizard-head">
-              <p class="wizard-kicker">INTERFAZ DE INGENIERÍA</p>
-              <h2 id="wizard-title">Formulario inteligente</h2>
+              <p class="wizard-kicker" data-i18n="contact.wizard.kicker">ENGINEERING INTERFACE</p>
+              <h2 id="wizard-title" data-i18n="contact.wizard.title">Smart form</h2>
             </div>
 
             <div class="wizard-progress" aria-hidden="true">
               <div class="wizard-progress__bar"><span id="wizard-progress-fill"></span></div>
-              <p id="wizard-progress-text">Paso 1 de 6</p>
+              <p id="wizard-progress-text" data-i18n="contact.wizard.progress">Step 1 of 6</p>
             </div>
 
-            <div class="wizard-steps" role="tablist" aria-label="Pasos del formulario">
-              <button type="button" class="wizard-stepBtn is-current" data-step-jump="1" role="tab" aria-selected="true">Step 1</button>
-              <button type="button" class="wizard-stepBtn" data-step-jump="2" role="tab" aria-selected="false">Step 2</button>
-              <button type="button" class="wizard-stepBtn" data-step-jump="3" role="tab" aria-selected="false">Step 3</button>
-              <button type="button" class="wizard-stepBtn" data-step-jump="4" role="tab" aria-selected="false">Step 4</button>
-              <button type="button" class="wizard-stepBtn" data-step-jump="5" role="tab" aria-selected="false">Step 5</button>
-              <button type="button" class="wizard-stepBtn" data-step-jump="6" role="tab" aria-selected="false">Step 6</button>
+            <div class="wizard-steps" role="tablist" aria-label="Form steps">
+              <button type="button" class="wizard-stepBtn is-current" data-step-jump="1" role="tab" aria-selected="true" data-i18n="contact.wizard.steps.step1">Step 1</button>
+              <button type="button" class="wizard-stepBtn" data-step-jump="2" role="tab" aria-selected="false" data-i18n="contact.wizard.steps.step2">Step 2</button>
+              <button type="button" class="wizard-stepBtn" data-step-jump="3" role="tab" aria-selected="false" data-i18n="contact.wizard.steps.step3">Step 3</button>
+              <button type="button" class="wizard-stepBtn" data-step-jump="4" role="tab" aria-selected="false" data-i18n="contact.wizard.steps.step4">Step 4</button>
+              <button type="button" class="wizard-stepBtn" data-step-jump="5" role="tab" aria-selected="false" data-i18n="contact.wizard.steps.step5">Step 5</button>
+              <button type="button" class="wizard-stepBtn" data-step-jump="6" role="tab" aria-selected="false" data-i18n="contact.wizard.steps.step6">Step 6</button>
             </div>
 
             <form id="contact-tech-form" novalidate>
               <section class="wizard-step is-active" data-step="1" aria-hidden="false">
-                <h3>Tipo de consulta</h3>
+                <h3 data-i18n="contact.form.step1.title">Inquiry type</h3>
                 <div class="chip-grid">
                   <input class="chip-input" type="checkbox" id="tipo-eval" name="tipo_consulta" value="Evaluación técnica de material" />
-                  <label class="chip" for="tipo-eval">Evaluación técnica de material</label>
+                  <label class="chip" for="tipo-eval" data-i18n="contact.form.step1.options.eval">Material technical assessment</label>
 
                   <input class="chip-input" type="checkbox" id="tipo-coeng" name="tipo_consulta" value="Desarrollo conjunto/ co-engineering" />
-                  <label class="chip" for="tipo-coeng">Desarrollo conjunto/ co-engineering</label>
+                  <label class="chip" for="tipo-coeng" data-i18n="contact.form.step1.options.coengineering">Joint development / co-engineering</label>
 
                   <input class="chip-input" type="checkbox" id="tipo-muestra" name="tipo_consulta" value="Solicitud de muestra" />
-                  <label class="chip" for="tipo-muestra">Solicitud de muestra</label>
+                  <label class="chip" for="tipo-muestra" data-i18n="contact.form.step1.options.sample">Sample request</label>
 
                   <input class="chip-input" type="checkbox" id="tipo-rfq" name="tipo_consulta" value="Solicitud de presupuesto (RFQ)" />
-                  <label class="chip" for="tipo-rfq">Solicitud de presupuesto (RFQ)</label>
+                  <label class="chip" for="tipo-rfq" data-i18n="contact.form.step1.options.rfq">Quotation request (RFQ)</label>
 
                   <input class="chip-input" type="checkbox" id="tipo-id" name="tipo_consulta" value="Colaboración I+D" />
-                  <label class="chip" for="tipo-id">Colaboración I+D</label>
+                  <label class="chip" for="tipo-id" data-i18n="contact.form.step1.options.rnd">R&D collaboration</label>
 
                   <input class="chip-input" type="checkbox" id="tipo-inv" name="tipo_consulta" value="Inversión/ institucional" />
-                  <label class="chip" for="tipo-inv">Inversión/ institucional</label>
+                  <label class="chip" for="tipo-inv" data-i18n="contact.form.step1.options.institutional">Investment / institutional</label>
 
                   <input class="chip-input" type="checkbox" id="tipo-otro" name="tipo_consulta" value="Otro" />
-                  <label class="chip" for="tipo-otro">Otro</label>
+                  <label class="chip" for="tipo-otro" data-i18n="contact.form.step1.options.other">Other</label>
                 </div>
               </section>
 
               <section class="wizard-step" data-step="2" aria-hidden="true">
-                <h3>Sector</h3>
+                <h3 data-i18n="contact.form.step2.title">Sector</h3>
                 <div class="chip-grid">
                   <input class="chip-input" type="checkbox" id="sector-industria" name="sector" value="Industria" />
-                  <label class="chip" for="sector-industria">Industria</label>
+                  <label class="chip" for="sector-industria" data-i18n="contact.form.step2.options.industry">Industry</label>
 
                   <input class="chip-input" type="checkbox" id="sector-energia" name="sector" value="Energía" />
-                  <label class="chip" for="sector-energia">Energía</label>
+                  <label class="chip" for="sector-energia" data-i18n="contact.form.step2.options.energy">Energy</label>
 
                   <input class="chip-input" type="checkbox" id="sector-salud" name="sector" value="Salud" />
-                  <label class="chip" for="sector-salud">Salud</label>
+                  <label class="chip" for="sector-salud" data-i18n="contact.form.step2.options.health">Health</label>
 
                   <input class="chip-input" type="checkbox" id="sector-semi" name="sector" value="Semiconductores" />
-                  <label class="chip" for="sector-semi">Semiconductores</label>
+                  <label class="chip" for="sector-semi" data-i18n="contact.form.step2.options.semiconductors">Semiconductors</label>
 
                   <input class="chip-input" type="checkbox" id="sector-fotonica" name="sector" value="Fotónica" />
-                  <label class="chip" for="sector-fotonica">Fotónica</label>
+                  <label class="chip" for="sector-fotonica" data-i18n="contact.form.step2.options.photonics">Photonics</label>
 
                   <input class="chip-input" type="checkbox" id="sector-cuantica" name="sector" value="Cuántica" />
-                  <label class="chip" for="sector-cuantica">Cuántica</label>
+                  <label class="chip" for="sector-cuantica" data-i18n="contact.form.step2.options.quantum">Quantum</label>
 
                   <input class="chip-input" type="checkbox" id="sector-defensa" name="sector" value="Defensa / Espacio" />
-                  <label class="chip" for="sector-defensa">Defensa / Espacio</label>
+                  <label class="chip" for="sector-defensa" data-i18n="contact.form.step2.options.defense">Defense / Space</label>
 
                   <input class="chip-input" type="checkbox" id="sector-ciencia" name="sector" value="Ciencia e Infraestructuras" />
-                  <label class="chip" for="sector-ciencia">Ciencia e Infraestructuras</label>
+                  <label class="chip" for="sector-ciencia" data-i18n="contact.form.step2.options.science">Science and infrastructures</label>
                 </div>
               </section>
 
               <section class="wizard-step" data-step="3" aria-hidden="true">
-                <h3>Material de interés (opcional)</h3>
+                <h3 data-i18n="contact.form.step3.title">Material of interest (optional)</h3>
                 <div class="chip-grid">
                   <input class="chip-input" type="checkbox" id="material-diamante" name="material" value="Diamante evo" />
-                  <label class="chip" for="material-diamante">Diamante evo</label>
+                  <label class="chip" for="material-diamante" data-i18n="contact.form.step3.options.diamond">Diamond evo</label>
 
                   <input class="chip-input" type="checkbox" id="material-sic" name="material" value="SiC" />
-                  <label class="chip" for="material-sic">SiC</label>
+                  <label class="chip" for="material-sic" data-i18n="contact.form.step3.options.sic">SiC</label>
 
                   <input class="chip-input" type="checkbox" id="material-zafiro" name="material" value="Zafiro" />
-                  <label class="chip" for="material-zafiro">Zafiro</label>
+                  <label class="chip" for="material-zafiro" data-i18n="contact.form.step3.options.sapphire">Sapphire</label>
 
                   <input class="chip-input" type="checkbox" id="material-ceramicas" name="material" value="Cerámicas técnicas" />
-                  <label class="chip" for="material-ceramicas">Cerámicas técnicas</label>
+                  <label class="chip" for="material-ceramicas" data-i18n="contact.form.step3.options.ceramics">Technical ceramics</label>
 
                   <input class="chip-input" type="checkbox" id="material-composites" name="material" value="Composites térmicos" />
-                  <label class="chip" for="material-composites">Composites térmicos</label>
+                  <label class="chip" for="material-composites" data-i18n="contact.form.step3.options.composites">Thermal composites</label>
 
                   <input class="chip-input" type="checkbox" id="material-nodef" name="material" value="No definido" />
-                  <label class="chip" for="material-nodef">No definido</label>
+                  <label class="chip" for="material-nodef" data-i18n="contact.form.step3.options.undefined">Not defined</label>
                 </div>
-                <button type="button" class="step-next-btn" id="step3-next-btn">Continuar</button>
+                <button type="button" class="step-next-btn" id="step3-next-btn" data-i18n="contact.form.actions.continue">Continue</button>
               </section>
 
               <section class="wizard-step" data-step="4" aria-hidden="true">
-                <h3>Información técnica</h3>
-                <label for="tech-info" class="sr-only">Información técnica</label>
+                <h3 data-i18n="contact.form.step4.title">Technical information</h3>
+                <label for="tech-info" class="sr-only" data-i18n="contact.form.step4.label">Technical information</label>
                 <textarea
                   id="tech-info"
                   name="informacion_tecnica"
                   rows="8"
-                  placeholder="Describe tu aplicación, entorno operativo y requisitos clave."
+                  data-i18n-placeholder="contact.form.step4.placeholder"
+                  placeholder="Describe your application, operating environment, and key requirements."
                 ></textarea>
-                <button type="button" class="step-next-btn" id="step4-next-btn">Continuar</button>
+                <button type="button" class="step-next-btn" id="step4-next-btn" data-i18n="contact.form.actions.continue">Continue</button>
               </section>
 
               <section class="wizard-step" data-step="5" aria-hidden="true">
-                <h3>Datos de contacto</h3>
+                <h3 data-i18n="contact.form.step5.title">Contact details</h3>
                 <div class="input-grid">
                   <div>
-                    <label for="nombre">Nombre *</label>
+                    <label for="nombre" data-i18n="contact.form.step5.fields.name">Name *</label>
                     <input id="nombre" name="nombre" type="text" required />
                   </div>
 
                   <div>
-                    <label for="empresa">Empresa *</label>
+                    <label for="empresa" data-i18n="contact.form.step5.fields.company">Company *</label>
                     <input id="empresa" name="empresa" type="text" required />
                   </div>
 
                   <div>
-                    <label for="cargo">Cargo</label>
+                    <label for="cargo" data-i18n="contact.form.step5.fields.role">Role</label>
                     <input id="cargo" name="cargo" type="text" />
                   </div>
 
                   <div>
-                    <label for="email">Email corporativo *</label>
+                    <label for="email" data-i18n="contact.form.step5.fields.email">Corporate email *</label>
                     <input id="email" name="email" type="email" required />
                   </div>
 
                   <div>
-                    <label for="pais">País *</label>
+                    <label for="pais" data-i18n="contact.form.step5.fields.country">Country *</label>
                     <input id="pais" name="pais" type="text" required />
                   </div>
 
                   <div>
-                    <label for="telefono">Teléfono (opcional)</label>
+                    <label for="telefono" data-i18n="contact.form.step5.fields.phone">Phone (optional)</label>
                     <input id="telefono" name="telefono" type="tel" />
                   </div>
                 </div>
-                <button type="button" class="step-next-btn" id="step5-next-btn">Continuar</button>
+                <button type="button" class="step-next-btn" id="step5-next-btn" data-i18n="contact.form.actions.continue">Continue</button>
               </section>
 
               <section class="wizard-step" data-step="6" aria-hidden="true">
-                <h3>Enviar solicitud</h3>
-                <button type="submit" class="submit-btn" id="submit-btn">Enviar solicitud técnica</button>
-                <p class="form-note">Procesamos solicitudes técnicas en un plazo de 3-5 días laborables.</p>
+                <h3 data-i18n="contact.form.step6.title">Submit request</h3>
+                <button type="submit" class="submit-btn" id="submit-btn" data-i18n="contact.form.step6.submit">Send technical request</button>
+                <p class="form-note" data-i18n="contact.form.step6.note">We process technical requests within 3-5 business days.</p>
                 <p id="form-status" class="form-status" aria-live="polite"></p>
               </section>
             </form>
           </section>
-          <p class="contact-processing-note">
-            PROCESAMOS SOLICITUDES TÉCNICAS EN UN PLAZO DE 3–5 DÍAS LABORABLES
+          <p class="contact-processing-note" data-i18n="contact.processingNote">
+            WE PROCESS TECHNICAL REQUESTS WITHIN 3-5 BUSINESS DAYS
           </p>
         </div>
       </section>
 
       <section class="contact-section contact-section--duo">
         <article class="contact-panel">
-          <h2>Relaciones estratégicas</h2>
-          <p>
-            Para alianzas industriales, colaboraciones institucionales o información corporativa, puedes escribir
-            directamente a:
+          <h2 data-i18n="contact.duo.strategic.title">Strategic relations</h2>
+          <p data-i18n="contact.duo.strategic.text">
+            For industrial alliances, institutional collaborations, or corporate information, you can write directly to:
           </p>
           <p><a href="mailto:info@nanoker.com">info@nanoker.com</a></p>
         </article>
 
         <article class="contact-panel">
-          <h2>Presencia industrial</h2>
+          <h2 data-i18n="contact.duo.presence.title">Industrial presence</h2>
           <ul class="contact-list">
-            <li>Oviedo - Desarrollo y validación</li>
-            <li>León - Hub industrial estratégico</li>
+            <li data-i18n="contact.duo.presence.oviedo">Oviedo - Development and validation</li>
+            <li data-i18n="contact.duo.presence.leon">Leon - Strategic industrial hub</li>
           </ul>
         </article>
       </section>
 
       <section class="contact-section contact-section--close">
         <article class="contact-panel contact-panel--close">
-          <h2>Ingeniería de materiales con propósito industrial</h2>
-          <p>
-            En DeepTech, cada proyecto comienza con una conversación técnica rigurosa.
-            Estamos preparados para acompañarte desde la especificación hasta la cualificación industrial.
+          <h2 data-i18n="contact.close.title">Materials engineering with industrial purpose</h2>
+          <p data-i18n="contact.close.text">
+            In DeepTech, every project starts with a rigorous technical conversation. We are ready to support you from specification to industrial qualification.
           </p>
         </article>
       </section>
@@ -282,37 +289,37 @@
     <footer class="footer" id="contact">
       <div class="footer-grid">
         <div class="f-brand">
-          <h3>nanoker</h3>
-          <p>
-            Plataforma industrial europea para tecnologías críticas.<br />
-            Materiales avanzados con especificación garantizada, trazabilidad completa y escalabilidad industrial.
+          <h3 data-i18n="footer.brandTitle">nanoker</h3>
+          <p data-i18n-html="footer.brandTextHtml">
+            European industrial platform for critical technologies.<br />
+            Advanced materials with guaranteed specifications, full traceability, and industrial scalability.
           </p>
-          <p style="margin-top:12px; opacity:.9;"><b>Contacto técnico:</b> procesamos solicitudes en <b>3–5 días laborables</b>.</p>
+          <p style="margin-top:12px; opacity:.9;" data-i18n-html="footer.noteHtml"><b>Technical contact:</b> we process requests within <b>3-5 business days</b>.</p>
         </div>
 
         <div class="f-col">
-          <h4>Site</h4>
+          <h4 data-i18n="footer.colSite.title">Site</h4>
           <ul>
-            <li><a href="./index.html#top">Home</a></li>
-            <li><a href="./index.html#sec-platform">Capacidades</a></li>
-            <li><a href="./index.html#sec-materials">Materiales</a></li>
-            <li><a href="./index.html#sec-sectors">Sectores</a></li>
-            <li><a href="./index.html#sec-rnd">I+D</a></li>
-            <li><a href="./index.html#sec-sovereignty">Ventajas</a></li>
+            <li><a href="./index.html#top" data-i18n="footer.colSite.links.home">Home</a></li>
+            <li><a href="./index.html#sec-platform" data-i18n="footer.colSite.links.capabilities">Capabilities</a></li>
+            <li><a href="./index.html#sec-materials" data-i18n="footer.colSite.links.materials">Materials</a></li>
+            <li><a href="./index.html#sec-sectors" data-i18n="footer.colSite.links.sectors">Sectors</a></li>
+            <li><a href="./index.html#sec-rnd" data-i18n="footer.colSite.links.rnd">I+D</a></li>
+            <li><a href="./index.html#sec-sovereignty" data-i18n="footer.colSite.links.advantages">Advantages</a></li>
           </ul>
         </div>
 
         <div class="f-col">
-          <h4>Industrial Hubs</h4>
+          <h4 data-i18n="footer.colHubs.title">Industrial Hubs</h4>
           <ul>
-            <li><a href="#">Oviedo — Desarrollo &amp; Validación</a></li>
-            <li><a href="#">León — Hub industrial</a></li>
-            <li><a href="#">European Supply</a></li>
+            <li><a href="#" data-i18n="footer.colHubs.links.oviedo">Oviedo — Development &amp; Validation</a></li>
+            <li><a href="#" data-i18n="footer.colHubs.links.leon">Leon — Industrial hub</a></li>
+            <li><a href="#" data-i18n="footer.colHubs.links.supply">European Supply</a></li>
           </ul>
         </div>
 
         <div class="f-col">
-          <h4>Connect</h4>
+          <h4 data-i18n="footer.colConnect.title">Connect</h4>
           <ul>
             <li><a href="mailto:info@nanoker.com" class="contact-data">info@nanoker.com</a></li>
             <li><a href="tel:+34985000000" class="contact-data">+34 985 000 000</a></li>
@@ -327,7 +334,7 @@
               </a>
             </li>
             <li style="margin-top: 20px;">
-              <a href="https://www.linkedin.com/company/nanoker-research-sl/">LinkedIn ↗</a>
+              <a href="https://www.linkedin.com/company/nanoker-research-sl/" data-i18n="footer.colConnect.links.linkedin">LinkedIn ↗</a>
             </li>
           </ul>
         </div>
@@ -336,17 +343,21 @@
       <div class="f-copy">
         <div class="system-status">
           <div class="status-dot"></div>
-          <span>SYSTEM STATUS: OPERATIONAL</span>
+          <span>
+            <span data-i18n="footer.system.label">SYSTEM STATUS:</span>
+            <span data-i18n="footer.system.value">OPERATIONAL</span>
+          </span>
         </div>
 
         <div>
-          <span>© 2026 Nanoker Research S.L.</span>
-          <a href="#">Privacy Policy</a>
-          <a href="#">Legal Notice</a>
+          <span data-i18n="footer.legal.copyright">© 2026 Nanoker Research S.L.</span>
+          <a href="#" data-i18n="footer.legal.privacy">Privacy Policy</a>
+          <a href="#" data-i18n="footer.legal.notice">Legal Notice</a>
         </div>
       </div>
     </footer>
 
     <script src="./js/contacto.js?v=2" defer></script>
+    <script type="module" src="./js/main.js?v=10"></script>
   </body>
 </html>

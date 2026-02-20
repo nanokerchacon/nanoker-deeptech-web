@@ -2,6 +2,22 @@
   const STORAGE_KEY = "nanoker_contact_wizard_v1";
   const TOTAL_STEPS = 6;
 
+  let translate = (_key, fallback) => fallback;
+
+  function formatTemplate(value, params) {
+    if (typeof value !== "string" || !params) return value;
+    return value.replace(/\{(\w+)\}/g, (match, key) => {
+      if (Object.prototype.hasOwnProperty.call(params, key)) {
+        return String(params[key]);
+      }
+      return match;
+    });
+  }
+
+  function tr(key, fallback, params) {
+    return formatTemplate(translate(key, fallback), params);
+  }
+
   const nav = document.querySelector("[data-nav]");
   const navToggle = document.querySelector(".nav-toggle");
   const navLinks = document.querySelectorAll(".nav-center .nav-link");
@@ -41,12 +57,37 @@
   let advanceTimer = null;
   let step3Confirmed = false;
   let step4Confirmed = false;
+  let statusState = "idle";
+  let isSubmitting = false;
 
   const stepGroups = {
     1: () => Array.from(form.querySelectorAll('input[name="tipo_consulta"]')),
     2: () => Array.from(form.querySelectorAll('input[name="sector"]')),
     3: () => Array.from(form.querySelectorAll('input[name="material"]')),
     5: () => Array.from(form.querySelectorAll("#nombre, #empresa, #email, #pais")),
+  };
+
+  const STATUS_COPY = {
+    requiredFields: {
+      key: "contact.form.status.requiredFields",
+      fallback: "Complete required fields to continue.",
+    },
+    completePrevious: {
+      key: "contact.form.status.completePrevious",
+      fallback: "Complete previous steps before submitting.",
+    },
+    reviewRequired: {
+      key: "contact.form.status.reviewRequired",
+      fallback: "Review required fields before submitting.",
+    },
+    sending: {
+      key: "contact.form.status.sending",
+      fallback: "Sending...",
+    },
+    received: {
+      key: "contact.form.status.received",
+      fallback: "Received. We will reply within 3-5 business days.",
+    },
   };
 
   function hasChecked(inputs) {
@@ -76,7 +117,35 @@
   function updateProgress() {
     const percent = Math.round(((activeStep - 1) / (TOTAL_STEPS - 1)) * 100);
     progressFill.style.width = `${percent}%`;
-    progressText.textContent = `Paso ${activeStep} de ${TOTAL_STEPS}`;
+    progressText.textContent = tr("contact.wizard.progressTemplate", "Step {current} of {total}", {
+      current: activeStep,
+      total: TOTAL_STEPS,
+    });
+  }
+
+  function setStatus(state) {
+    statusState = state;
+    if (state === "idle") {
+      statusEl.textContent = "";
+      return;
+    }
+    const copy = STATUS_COPY[state];
+    if (!copy) return;
+    statusEl.textContent = tr(copy.key, copy.fallback);
+  }
+
+  function updateSubmitText() {
+    if (isSubmitting) {
+      submitBtn.textContent = tr("contact.form.step6.sending", "Sending...");
+      return;
+    }
+    submitBtn.textContent = tr("contact.form.step6.submit", "Send technical request");
+  }
+
+  function syncI18nRuntimeText() {
+    updateProgress();
+    updateSubmitText();
+    if (statusState !== "idle") setStatus(statusState);
   }
 
   function renderWizard() {
@@ -256,14 +325,14 @@
     });
 
     if (firstInvalid) {
-      statusEl.textContent = "Completa los campos obligatorios para continuar.";
+      setStatus("requiredFields");
       statusEl.classList.add("is-error");
       firstInvalid.focus({ preventScroll: true });
       return false;
     }
 
     statusEl.classList.remove("is-error");
-    if (activeStep === 5) statusEl.textContent = "";
+    if (activeStep === 5) setStatus("idle");
     return true;
   }
 
@@ -294,27 +363,29 @@
     if (unlockedStep < 6) {
       const firstPending = Math.min(unlockedStep, 5);
       goToStep(firstPending);
-      statusEl.textContent = "Completa los pasos anteriores antes de enviar.";
+      setStatus("completePrevious");
       statusEl.classList.add("is-error");
       return;
     }
 
     if (!form.checkValidity()) {
       form.reportValidity();
-      statusEl.textContent = "Revisa los campos obligatorios antes de enviar.";
+      setStatus("reviewRequired");
       statusEl.classList.add("is-error");
       return;
     }
 
+    isSubmitting = true;
     submitBtn.disabled = true;
-    submitBtn.textContent = "Enviando…";
-    statusEl.textContent = "Enviando…";
+    updateSubmitText();
+    setStatus("sending");
 
     // TODO: Reemplazar este timeout por una petición POST al endpoint real de contacto técnico.
     window.setTimeout(() => {
-      statusEl.textContent = "Recibido. Te responderemos en 3–5 días laborables.";
+      setStatus("received");
+      isSubmitting = false;
       submitBtn.disabled = false;
-      submitBtn.textContent = "Enviar solicitud técnica";
+      updateSubmitText();
 
       form.reset();
       stepGroups[5]().forEach((input) => input.classList.remove("is-invalid-field"));
@@ -339,5 +410,21 @@
   unlockedStep = getSequentialUnlockedStep();
   if (activeStep > unlockedStep) activeStep = unlockedStep;
   renderWizard();
+  updateSubmitText();
   persistState();
+
+  window.addEventListener("lang:change", () => {
+    syncI18nRuntimeText();
+  });
+
+  import("./lang.js")
+    .then((mod) => {
+      if (typeof mod.t === "function") {
+        translate = mod.t;
+        syncI18nRuntimeText();
+      }
+    })
+    .catch(() => {
+      // Keep fallbacks if lang module is unavailable.
+    });
 })();
