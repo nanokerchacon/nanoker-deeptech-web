@@ -3,6 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function () {
+        var doc = document.documentElement;
+        var lang = 'en';
+        try {
+          var raw = localStorage.getItem('nanoker-lang') || navigator.language || 'en';
+          lang = String(raw).toLowerCase().split('-')[0] === 'es' ? 'es' : 'en';
+        } catch (_error) {
+          var fallback = navigator.language || 'en';
+          lang = String(fallback).toLowerCase().split('-')[0] === 'es' ? 'es' : 'en';
+        }
+        doc.lang = lang;
+        doc.setAttribute('data-lang', lang);
+      })();
+    </script>
     <title data-i18n="contact.metaTitle">Technical Contact | Nanoker</title>
 
     <link rel="icon" href="./favicon.ico" />
@@ -50,9 +65,7 @@
       </div>
 
       <div class="nav-actions">
-        <button class="nav-lang" type="button" data-lang-toggle aria-label="Language">
-          <span class="is-active">ES</span> / <span>EN</span>
-        </button>
+        <button class="nav-lang" type="button" data-lang-toggle aria-label="Language"><span class="nav-lang__token nav-lang__token--es">ES</span><span class="nav-lang__sep" aria-hidden="true">/</span><span class="nav-lang__token nav-lang__token--en">EN</span></button>
       </div>
 
       <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
@@ -312,9 +325,9 @@
         <div class="f-col">
           <h4 data-i18n="footer.colHubs.title">Industrial Hubs</h4>
           <ul>
-            <li><a href="#" data-i18n="footer.colHubs.links.oviedo">Oviedo — Development &amp; Validation</a></li>
-            <li><a href="#" data-i18n="footer.colHubs.links.leon">Leon — Industrial hub</a></li>
-            <li><a href="#" data-i18n="footer.colHubs.links.supply">European Supply</a></li>
+            <li><button class="footer-action" type="button" data-i18n="footer.colHubs.links.oviedo">Oviedo — Development &amp; Validation</button></li>
+            <li><button class="footer-action" type="button" data-i18n="footer.colHubs.links.leon">Leon — Industrial hub</button></li>
+            <li><button class="footer-action" type="button" data-i18n="footer.colHubs.links.supply">European Supply</button></li>
           </ul>
         </div>
 
@@ -351,8 +364,8 @@
 
         <div>
           <span data-i18n="footer.legal.copyright">© 2026 Nanoker Research S.L.</span>
-          <a href="#" data-i18n="footer.legal.privacy">Privacy Policy</a>
-          <a href="#" data-i18n="footer.legal.notice">Legal Notice</a>
+          <button class="footer-action footer-action--legal" type="button" data-i18n="footer.legal.privacy">Privacy Policy</button>
+          <button class="footer-action footer-action--legal" type="button" data-i18n="footer.legal.notice">Legal Notice</button>
         </div>
       </div>
     </footer>

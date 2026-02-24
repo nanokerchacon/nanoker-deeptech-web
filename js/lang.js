@@ -9,10 +9,31 @@ function normalizeLang(raw) {
   return base === "es" ? "es" : "en";
 }
 
-let current = normalizeLang(localStorage.getItem(KEY) || navigator.language);
+function safeGetStoredLang() {
+  try {
+    return localStorage.getItem(KEY);
+  } catch (_error) {
+    return null;
+  }
+}
+
+function safeSetStoredLang(lang) {
+  try {
+    localStorage.setItem(KEY, lang);
+  } catch (_error) {
+    // Ignore storage write errors (private mode / disabled storage).
+  }
+}
+
+const initialDocLang =
+  document.documentElement.getAttribute("data-lang") ||
+  document.documentElement.lang;
+
+let current = normalizeLang(safeGetStoredLang() || initialDocLang || navigator.language);
 if (!I18N[current]) current = "en";
 
 let domObserver = null;
+let hasBoundNoopHashGuard = false;
 
 export function getLang() {
   return current;
@@ -31,26 +52,55 @@ export function t(path, fallback) {
 
 function setHtmlLang(lang) {
   document.documentElement.lang = lang;
+  document.documentElement.setAttribute("data-lang", lang);
 }
 
 function updateToggleLabels(root = document) {
-  // ✅ Nuevo: toggle(s) por data-attr (sin ids)
   const toggles = root.querySelectorAll?.("[data-lang-toggle]") || [];
 
-  // ✅ Compat legacy: el id solo puede existir a nivel document
   const legacy = document.getElementById("langToggle");
 
-  const label = I18N[current]?.nav?.lang || current.toUpperCase();
+  const render = (btn) => {
+    const isES = current === "es";
+    btn.setAttribute(
+      "aria-label",
+      isES ? "Cambiar idioma a inglés" : "Switch language to Spanish"
+    );
+    btn.setAttribute("aria-pressed", isES ? "true" : "false");
+  };
 
   toggles.forEach((btn) => {
-    btn.textContent = label;
-    if (!btn.getAttribute("aria-label")) btn.setAttribute("aria-label", "Language");
+    render(btn);
   });
 
   if (legacy && !legacy.hasAttribute("data-lang-toggle")) {
-    legacy.textContent = label;
-    if (!legacy.getAttribute("aria-label")) legacy.setAttribute("aria-label", "Language");
+    render(legacy);
   }
+}
+
+function bindNoopHashGuard() {
+  if (hasBoundNoopHashGuard) return;
+  hasBoundNoopHashGuard = true;
+
+  document.addEventListener(
+    "click",
+    (event) => {
+      const anchor = event.target?.closest?.("a[href]");
+      if (!anchor || anchor.hasAttribute("data-allow-empty-hash")) return;
+
+      const href = anchor.getAttribute("href");
+      const normalized = String(href || "").trim();
+      const isNoopHref =
+        normalized === "#" ||
+        normalized === "" ||
+        normalized === "." ||
+        normalized === "./";
+
+      if (!isNoopHref) return;
+      event.preventDefault();
+    },
+    true
+  );
 }
 
 export function applyTranslations(root = document) {
@@ -84,10 +134,10 @@ export function applyTranslations(root = document) {
 
 export function setLang(lang) {
   const next = normalizeLang(lang);
-  if (!I18N[next]) return;
+  if (!I18N[next] || next === current) return;
 
   current = next;
-  localStorage.setItem(KEY, next);
+  safeSetStoredLang(next);
   setHtmlLang(next);
 
   applyTranslations();
@@ -96,28 +146,26 @@ export function setLang(lang) {
 }
 
 export function initLanguageSwitcher(options = {}) {
-  // idioma inicial en <html>
   setHtmlLang(current);
-
-  // traducción inicial
   applyTranslations();
-
-  // ✅ Nuevo: binds por data-lang-toggle
   document.querySelectorAll("[data-lang-toggle]").forEach((btn) => {
+    if (btn.dataset.langBound === "1") return;
+    btn.dataset.langBound = "1";
     btn.addEventListener("click", () => {
       setLang(current === "en" ? "es" : "en");
     });
   });
 
-  // ✅ Compat legacy id="langToggle"
   const legacy = document.getElementById("langToggle");
   if (legacy && !legacy.hasAttribute("data-lang-toggle")) {
-    legacy.addEventListener("click", () => {
-      setLang(current === "en" ? "es" : "en");
-    });
+    if (legacy.dataset.langBound !== "1") {
+      legacy.dataset.langBound = "1";
+      legacy.addEventListener("click", () => {
+        setLang(current === "en" ? "es" : "en");
+      });
+    }
   }
 
-  // ✅ Opcional: observar DOM inyectado
   if (options.observeDOM) {
     if (domObserver) domObserver.disconnect();
 
@@ -131,4 +179,7 @@ export function initLanguageSwitcher(options = {}) {
 
     domObserver.observe(document.body, { childList: true, subtree: true });
   }
+
+  bindNoopHashGuard();
+  document.documentElement.setAttribute("data-i18n-ready", "true");
 }

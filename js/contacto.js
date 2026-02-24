@@ -2,6 +2,18 @@
   const STORAGE_KEY = "nanoker_contact_wizard_v1";
   const TOTAL_STEPS = 6;
 
+  function normalizeLang(raw) {
+    const base = String(raw || "").toLowerCase().split("-")[0];
+    return base === "es" ? "es" : "en";
+  }
+
+  const initialLang = normalizeLang(
+    document.documentElement.getAttribute("data-lang") ||
+      document.documentElement.lang ||
+      "en"
+  );
+
+  let runtimeLang = initialLang;
   let translate = (_key, fallback) => fallback;
 
   function formatTemplate(value, params) {
@@ -16,6 +28,10 @@
 
   function tr(key, fallback, params) {
     return formatTemplate(translate(key, fallback), params);
+  }
+
+  function trFallback(enText, esText) {
+    return runtimeLang === "es" ? esText : enText;
   }
 
   const nav = document.querySelector("[data-nav]");
@@ -70,23 +86,39 @@
   const STATUS_COPY = {
     requiredFields: {
       key: "contact.form.status.requiredFields",
-      fallback: "Complete required fields to continue.",
+      fallback: () =>
+        trFallback(
+          "Complete required fields to continue.",
+          "Completa los campos obligatorios para continuar."
+        ),
     },
     completePrevious: {
       key: "contact.form.status.completePrevious",
-      fallback: "Complete previous steps before submitting.",
+      fallback: () =>
+        trFallback(
+          "Complete previous steps before submitting.",
+          "Completa los pasos previos antes de enviar."
+        ),
     },
     reviewRequired: {
       key: "contact.form.status.reviewRequired",
-      fallback: "Review required fields before submitting.",
+      fallback: () =>
+        trFallback(
+          "Review required fields before submitting.",
+          "Revisa los campos obligatorios antes de enviar."
+        ),
     },
     sending: {
       key: "contact.form.status.sending",
-      fallback: "Sending...",
+      fallback: () => trFallback("Sending...", "Enviando..."),
     },
     received: {
       key: "contact.form.status.received",
-      fallback: "Received. We will reply within 3-5 business days.",
+      fallback: () =>
+        trFallback(
+          "Received. We will reply within 3-5 business days.",
+          "Recibido. Te responderemos en 3-5 dias laborables."
+        ),
     },
   };
 
@@ -117,10 +149,14 @@
   function updateProgress() {
     const percent = Math.round(((activeStep - 1) / (TOTAL_STEPS - 1)) * 100);
     progressFill.style.width = `${percent}%`;
-    progressText.textContent = tr("contact.wizard.progressTemplate", "Step {current} of {total}", {
-      current: activeStep,
-      total: TOTAL_STEPS,
-    });
+    progressText.textContent = tr(
+      "contact.wizard.progressTemplate",
+      trFallback("Step {current} of {total}", "Paso {current} de {total}"),
+      {
+        current: activeStep,
+        total: TOTAL_STEPS,
+      }
+    );
   }
 
   function setStatus(state) {
@@ -131,15 +167,21 @@
     }
     const copy = STATUS_COPY[state];
     if (!copy) return;
-    statusEl.textContent = tr(copy.key, copy.fallback);
+    statusEl.textContent = tr(copy.key, copy.fallback());
   }
 
   function updateSubmitText() {
     if (isSubmitting) {
-      submitBtn.textContent = tr("contact.form.step6.sending", "Sending...");
+      submitBtn.textContent = tr(
+        "contact.form.step6.sending",
+        trFallback("Sending...", "Enviando...")
+      );
       return;
     }
-    submitBtn.textContent = tr("contact.form.step6.submit", "Send technical request");
+    submitBtn.textContent = tr(
+      "contact.form.step6.submit",
+      trFallback("Send technical request", "Enviar solicitud tecnica")
+    );
   }
 
   function syncI18nRuntimeText() {
@@ -413,7 +455,8 @@
   updateSubmitText();
   persistState();
 
-  window.addEventListener("lang:change", () => {
+  window.addEventListener("lang:change", (event) => {
+    runtimeLang = normalizeLang(event.detail?.lang || runtimeLang);
     syncI18nRuntimeText();
   });
 
@@ -421,6 +464,9 @@
     .then((mod) => {
       if (typeof mod.t === "function") {
         translate = mod.t;
+        if (typeof mod.getLang === "function") {
+          runtimeLang = normalizeLang(mod.getLang());
+        }
         syncI18nRuntimeText();
       }
     })
