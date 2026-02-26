@@ -457,7 +457,16 @@
 
   window.addEventListener("lang:change", (event) => {
     runtimeLang = normalizeLang(event.detail?.lang || runtimeLang);
-    syncI18nRuntimeText();
+    import("./lang.js")
+      .then((mod) => {
+        if (typeof mod.applyTranslations === "function") {
+          mod.applyTranslations(document.getElementById("wizard-form") || document);
+        }
+        syncI18nRuntimeText();
+      })
+      .catch(() => {
+        syncI18nRuntimeText();
+      });
   });
 
   import("./lang.js")
