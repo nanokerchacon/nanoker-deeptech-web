@@ -188,6 +188,7 @@ export function initThreeBackground() {
     (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
   const isLowPower = isIOS || /Android/i.test(navigator.userAgent);
   const useComposer = !isLowPower;
+  const SPEED = 0.25;
 
   function colorDist(a, b) {
     const dr = a.r - b.r;
@@ -562,6 +563,7 @@ export function initThreeBackground() {
     rafId = requestAnimationFrame(animate);
 
     const t = clock.getElapsedTime();
+    const ts = t * SPEED;
 
     let dt = t - lastT;
     lastT = t;
@@ -629,7 +631,7 @@ export function initThreeBackground() {
     // grid update
     if (gridMesh.visible) {
       let idx = 0;
-      const animTime = t * current.freq;
+      const animTime = ts * current.freq;
 
       for (let i = 0; i < COLS; i++) {
         for (let j = 0; j < ROWS; j++) {
@@ -640,7 +642,7 @@ export function initThreeBackground() {
             Math.cos(p.z * 0.15 + animTime * 0.8);
 
           const valJitter =
-            Math.sin(p.x * 10 + t * 10) * Math.cos(p.z * 10 + t * 10);
+            Math.sin(p.x * 6 + ts * 2.2) * Math.cos(p.z * 6 + ts * 2.2);
 
           const rawGrid =
             Math.sin(p.x * 0.3 + animTime) * Math.cos(p.z * 0.3 + animTime);
@@ -661,8 +663,8 @@ export function initThreeBackground() {
           const smoothInf = influence * influence * (3 - 2 * influence);
           y = y * (1 - smoothInf);
 
-          const rotX = Math.cos(p.x * 0.2 + t) * 0.5 * (1 - smoothInf) * current.amp;
-          const rotZ = Math.sin(p.z * 0.2 + t) * 0.5 * (1 - smoothInf) * current.amp;
+          const rotX = Math.cos(p.x * 0.2 + ts) * 0.5 * (1 - smoothInf) * current.amp;
+          const rotZ = Math.sin(p.z * 0.2 + ts) * 0.5 * (1 - smoothInf) * current.amp;
 
           dummy.position.set(p.x, y, p.z);
           dummy.rotation.set(rotX, 0, rotZ);
@@ -684,7 +686,7 @@ export function initThreeBackground() {
       const ix = i * 3;
 
       arrP[ix + 0] *= 0.9996;
-      arrP[ix + 1] += Math.sin(t * 0.6 + i) * 0.0006;
+      arrP[ix + 1] += Math.sin(ts * 0.6 + i) * 0.00035;
 
       arrP[ix + 2] += pVel[i] * dt * (0.45 + current.particles * 0.9);
 
@@ -702,9 +704,9 @@ export function initThreeBackground() {
       for (let i = 0; i < VALUE_NODES; i++) {
         const ix = i * 3;
         const seed = valueSeeds[i];
-        vArr[ix + 0] = valueBasePos[ix + 0] + Math.sin(t * 0.08 + seed) * 0.6;
-        vArr[ix + 1] = valueBasePos[ix + 1] + Math.cos(t * 0.07 + seed) * 0.4;
-        vArr[ix + 2] = valueBasePos[ix + 2] + Math.sin(t * 0.06 + seed * 1.3) * 0.5;
+        vArr[ix + 0] = valueBasePos[ix + 0] + Math.sin(ts * 0.08 + seed) * 0.6;
+        vArr[ix + 1] = valueBasePos[ix + 1] + Math.cos(ts * 0.07 + seed) * 0.4;
+        vArr[ix + 2] = valueBasePos[ix + 2] + Math.sin(ts * 0.06 + seed * 1.3) * 0.5;
       }
       valueGeo.attributes.position.needsUpdate = true;
 
