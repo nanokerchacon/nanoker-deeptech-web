@@ -50,6 +50,22 @@ export function t(path, fallback) {
   return fallback;
 }
 
+function formatWithArgs(template, args) {
+  if (typeof template !== "string" || !Array.isArray(args) || !args.length) return template;
+  return template.replace(/\{(\d+)\}/g, (match, idx) => {
+    const i = Number(idx);
+    return Number.isInteger(i) && i >= 0 && i < args.length ? args[i] : match;
+  });
+}
+
+function parseArgs(rawArgs) {
+  if (typeof rawArgs !== "string") return [];
+  return rawArgs
+    .split(",")
+    .map((v) => v.trim())
+    .filter((v) => v !== "");
+}
+
 function setHtmlLang(lang) {
   document.documentElement.lang = lang;
   document.documentElement.setAttribute("data-lang", lang);
@@ -108,7 +124,8 @@ export function applyTranslations(root = document) {
   root.querySelectorAll?.("[data-i18n]")?.forEach((el) => {
     const key = el.dataset.i18n;
     const fallback = el.textContent;
-    const val = t(key, fallback);
+    const args = parseArgs(el.dataset.i18nArgs);
+    const val = formatWithArgs(t(key, fallback), args);
     if (typeof val === "string" && val.trim() !== "") el.textContent = val;
   });
 
@@ -181,5 +198,5 @@ export function initLanguageSwitcher(options = {}) {
   }
 
   bindNoopHashGuard();
-  document.documentElement.setAttribute("data-i18n-ready", "true");
+  document.documentElement.setAttribute("data-i18n-ready", "1");
 }
