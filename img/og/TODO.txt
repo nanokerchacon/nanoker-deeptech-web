@@ -1,0 +1,1 @@
+TODO: Add social preview image at `img/og/og-default.png` (recommended 1200x630).
