@@ -185,6 +185,11 @@
   }
 
   function syncI18nRuntimeText() {
+    stepButtons.forEach((btn) => {
+      const step = Number(btn.dataset.stepJump);
+      if (!Number.isInteger(step) || step < 1 || step > TOTAL_STEPS) return;
+      btn.textContent = tr(`contact.wizard.steps.step${step}`, btn.textContent);
+    });
     updateProgress();
     updateSubmitText();
     if (statusState !== "idle") setStatus(statusState);
@@ -457,7 +462,7 @@
 
   window.addEventListener("lang:change", (event) => {
     runtimeLang = normalizeLang(event.detail?.lang || runtimeLang);
-    import("./lang.js")
+    import("./lang.js?v=11")
       .then((mod) => {
         if (typeof mod.applyTranslations === "function") {
           mod.applyTranslations(document.getElementById("wizard-form") || document);
@@ -469,7 +474,7 @@
       });
   });
 
-  import("./lang.js")
+  import("./lang.js?v=11")
     .then((mod) => {
       if (typeof mod.t === "function") {
         translate = mod.t;

@@ -1,6 +1,6 @@
 // js/main.js
 import { initThreeBackground } from "./three-bg.js";
-import { initLanguageSwitcher } from "./lang.js";
+import { initLanguageSwitcher, t } from "./lang.js?v=11";
 
 let three = null;
 const DEV_BG_DEBUG =
@@ -85,6 +85,23 @@ function setThreeState(state) {
   three.setTargetState(state || "hero");
 }
 
+function syncHeroI18nCopy() {
+  const tagline = document.querySelector(".nk-hero__tagline[data-i18n='hero.headline']");
+  if (tagline) {
+    tagline.textContent = t("hero.headline", tagline.textContent);
+  }
+
+  const lead = document.querySelector(".nk-hero__lead[data-i18n='hero.lead']");
+  if (lead) {
+    lead.textContent = t("hero.lead", lead.textContent);
+  }
+
+  const scrollText = document.querySelector(".nk-hero__scrollText[data-i18n='hero.scroll']");
+  if (scrollText) {
+    scrollText.textContent = t("hero.scroll", scrollText.textContent);
+  }
+}
+
 /* ==========================
    NAV SCROLLED STATE
 ========================== */
@@ -113,6 +130,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
   // 1) Idioma
   initLanguageSwitcher({ observeDOM: true });
+  syncHeroI18nCopy();
+  window.addEventListener("lang:change", syncHeroI18nCopy);
 
   // 2) Three background
   try {
