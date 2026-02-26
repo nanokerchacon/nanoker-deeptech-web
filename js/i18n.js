@@ -37,6 +37,8 @@ export const I18N = deepFreeze({
     },
 
     hero: {
+      headline: "DeepTech Materials for Critical Industries.",
+      lead: "Advanced materials with guaranteed specification, full traceability and industrial scalability. From precursor to finished component.",
       bridgeHtml: "Europe’s DeepTech transition from prototype to industrial production depends on a critical factor: mastery of advanced materials.<br /><br />Nanoker integrates capabilities in technical ceramics, CVD diamond, SiC and sapphire to deliver solutions with guaranteed specifications, full traceability and industrial scalability.",
       bridgeCtaSectors: "Explore sectors",
       bridgeCtaContact: "Contact engineering",
@@ -1227,6 +1229,8 @@ export const I18N = deepFreeze({
     },
 
     hero: {
+      headline: "Materiales DeepTech para industrias críticas.",
+      lead: "Materiales avanzados con especificación garantizada, trazabilidad completa y escalabilidad industrial. De precursor a componente terminado.",
       bridgeHtml: "La transición de la DeepTech europea desde prototipo a producción industrial depende de un factor crítico: el dominio de los materiales avanzados.<br /><br />Nanoker integra capacidades en cerámicas técnicas, diamante CVD, SiC y zafiro para ofrecer soluciones con especificación garantizada, trazabilidad completa y escalabilidad industrial.",
       bridgeCtaSectors: "Explorar sectores",
       bridgeCtaContact: "Contactar con ingeniería",
