@@ -85,6 +85,23 @@
 
   display: inline-block;
 }
+.nk-hero__brand-o{
+  --o-height: 0.98em;
+
+  --o-va: -0.230em;   /* un poco más bajo */
+  --o-ml: -0.08em;    /* más pegado a "nan" */
+  --o-mr: -0.10em;    /* más pegado a "ker" */
+
+  height: var(--o-height);
+  width: auto;
+  display: inline-block;
+
+  vertical-align: var(--o-va);
+  transform: none;
+
+  margin-left: var(--o-ml);
+  margin-right: var(--o-mr);
+}
 
 .nk-hero__tagline{
   margin: 0;
