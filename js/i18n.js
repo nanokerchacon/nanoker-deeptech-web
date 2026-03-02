@@ -166,6 +166,65 @@ export const I18N = deepFreeze({
       },
     },
 
+    certifications: {
+      metaTitle: "Nanoker | Quality & Certifications",
+      kicker: "QUALITY FRAMEWORK",
+      titleHtml: "Quality & <span class=\"cert-accent\">Certifications</span>",
+      intro:
+        "Nanoker operates under internationally recognized standards to ensure product reliability, regulatory compliance and full industrial traceability.",
+      labels: {
+        standard: "Standard",
+        scope: "Scope",
+        body: "Certification body",
+        number: "Certificate number",
+        valid: "Valid until",
+      },
+      cards: {
+        iso9001: {
+          title: "ISO 9001",
+          desc:
+            "Certified Quality Management System ensuring consistent processes, continuous improvement and customer-focused performance across all operations.",
+          fields: {
+            standard: "ISO 9001:2015",
+            scope: "Design, development and industrial manufacturing of advanced technical materials.",
+            body: "TUV Rheinland",
+            number: "QMS-9001-NAK-2026-001",
+            valid: "December 31, 2028",
+          },
+          download: "Download certificate",
+          file: "[PDF] Nanoker_ISO9001_Certificate.pdf",
+        },
+        iso14001: {
+          title: "ISO 14001",
+          desc:
+            "Environmental Management System ensuring responsible resource use, emissions control and sustainable industrial practices.",
+          fields: {
+            standard: "ISO 14001:2015",
+            scope: "Environmental management of advanced materials manufacturing and associated industrial services.",
+            body: "Bureau Veritas",
+            number: "EMS-14001-NAK-2026-014",
+            valid: "September 30, 2028",
+          },
+          download: "Download certificate",
+          file: "[PDF] Nanoker_ISO14001_Certificate.pdf",
+        },
+        iso13485: {
+          title: "ISO 13485",
+          desc:
+            "Quality Management System for regulated environments, supporting medical-grade requirements and robust documentation.",
+          fields: {
+            standard: "ISO 13485:2016",
+            scope: "Development and manufacturing controls for advanced materials in regulated medical environments.",
+            body: "SGS",
+            number: "MDQ-13485-NAK-2026-008",
+            valid: "June 30, 2028",
+          },
+          download: "Download certificate",
+          file: "[PDF] Nanoker_ISO13485_Certificate.pdf",
+        },
+      },
+    },
+
     pages: {
       company: {
         metaTitle: "Nanoker | Company",
@@ -1083,11 +1142,12 @@ export const I18N = deepFreeze({
         title: "Site",
         links: {
           home: "Home",
-          capabilities: "Capabilities",
-          materials: "Materials",
+          company: "Company",
           sectors: "Sectors",
+          materials: "Materials",
+          capabilities: "Capabilities",
           rnd: "R&D",
-          advantages: "Advantages",
+          contact: "Contact",
         },
       },
 
@@ -1097,6 +1157,16 @@ export const I18N = deepFreeze({
           oviedo: "Oviedo — Development & Validation",
           leon: "León — Industrial Hub",
           supply: "European Supply",
+        },
+      },
+
+      colCompliance: {
+        title: "Compliance",
+        links: {
+          iso9001: "ISO 9001",
+          iso14001: "ISO 14001",
+          iso13485: "ISO 13485",
+          certifications: "Certifications →",
         },
       },
 
@@ -1356,6 +1426,65 @@ export const I18N = deepFreeze({
         title: "Ingeniería de materiales con propósito industrial",
         text:
           "En DeepTech, cada proyecto comienza con una conversación técnica rigurosa. Estamos preparados para acompañarte desde la especificación hasta la cualificación industrial.",
+      },
+    },
+
+    certifications: {
+      metaTitle: "Nanoker | Calidad y Certificaciones",
+      kicker: "MARCO DE CALIDAD",
+      titleHtml: "Calidad y <span class=\"cert-accent\">Certificaciones</span>",
+      intro:
+        "Nanoker opera bajo estándares internacionales reconocidos que garantizan fiabilidad del producto, cumplimiento normativo y trazabilidad industrial completa.",
+      labels: {
+        standard: "Norma",
+        scope: "Alcance",
+        body: "Entidad",
+        number: "Nº",
+        valid: "Vigencia",
+      },
+      cards: {
+        iso9001: {
+          title: "ISO 9001",
+          desc:
+            "Sistema de gestión de calidad certificado que asegura procesos consistentes, mejora continua y orientación al cliente.",
+          fields: {
+            standard: "ISO 9001:2015",
+            scope: "Diseño, desarrollo y fabricación industrial de materiales técnicos avanzados.",
+            body: "TUV Rheinland",
+            number: "QMS-9001-NAK-2026-001",
+            valid: "31 de diciembre de 2028",
+          },
+          download: "Descargar certificado",
+          file: "[PDF] Nanoker_ISO9001_Certificado.pdf",
+        },
+        iso14001: {
+          title: "ISO 14001",
+          desc:
+            "Sistema de gestión ambiental que garantiza el uso responsable de recursos, control de emisiones y prácticas industriales sostenibles.",
+          fields: {
+            standard: "ISO 14001:2015",
+            scope: "Gestión ambiental de fabricación de materiales avanzados y servicios industriales asociados.",
+            body: "Bureau Veritas",
+            number: "EMS-14001-NAK-2026-014",
+            valid: "30 de septiembre de 2028",
+          },
+          download: "Descargar certificado",
+          file: "[PDF] Nanoker_ISO14001_Certificado.pdf",
+        },
+        iso13485: {
+          title: "ISO 13485",
+          desc:
+            "Sistema de gestión de calidad para entornos regulados, orientado a requisitos de grado médico y documentación robusta.",
+          fields: {
+            standard: "ISO 13485:2016",
+            scope: "Controles de desarrollo y fabricación para materiales avanzados en entornos médicos regulados.",
+            body: "SGS",
+            number: "MDQ-13485-NAK-2026-008",
+            valid: "30 de junio de 2028",
+          },
+          download: "Descargar certificado",
+          file: "[PDF] Nanoker_ISO13485_Certificado.pdf",
+        },
       },
     },
 
@@ -2260,11 +2389,12 @@ export const I18N = deepFreeze({
         title: "Site",
         links: {
           home: "Home",
-          capabilities: "Capacidades",
-          materials: "Materiales",
+          company: "Empresa",
           sectors: "Sectores",
+          materials: "Materiales",
+          capabilities: "Capacidades",
           rnd: "I+D",
-          advantages: "Ventajas",
+          contact: "Contacto",
         },
       },
 
@@ -2274,6 +2404,16 @@ export const I18N = deepFreeze({
           oviedo: "Oviedo — Desarrollo & Validación",
           leon: "León — Hub industrial",
           supply: "European Supply",
+        },
+      },
+
+      colCompliance: {
+        title: "Cumplimiento",
+        links: {
+          iso9001: "ISO 9001",
+          iso14001: "ISO 14001",
+          iso13485: "ISO 13485",
+          certifications: "Certificaciones →",
         },
       },
 

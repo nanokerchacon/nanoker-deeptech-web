@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function () {
+        var doc = document.documentElement;
+        var lang = 'en';
+        try {
+          var raw = localStorage.getItem('nanoker-lang') || navigator.language || 'en';
+          lang = String(raw).toLowerCase().split('-')[0] === 'es' ? 'es' : 'en';
+        } catch (_error) {
+          var fallback = navigator.language || 'en';
+          lang = String(fallback).toLowerCase().split('-')[0] === 'es' ? 'es' : 'en';
+        }
+        doc.lang = lang;
+        doc.setAttribute('data-lang', lang);
+      })();
+    </script>
+    <title data-i18n="certifications.metaTitle">Nanoker | Quality & Certifications</title>
+    <meta
+      name="description"
+      content="Nanoker quality and certifications overview: ISO 9001, ISO 14001 and ISO 13485 frameworks supporting traceability, compliance and industrial reliability."
+    />
+    <link rel="canonical" href="https://nanoker.com/certifications.html" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nanoker" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Nanoker | Quality & Certifications" />
+    <meta
+      property="og:description"
+      content="Nanoker quality and certifications overview: ISO 9001, ISO 14001 and ISO 13485 frameworks supporting traceability, compliance and industrial reliability."
+    />
+    <meta property="og:url" content="https://nanoker.com/certifications.html" />
+    <meta property="og:image" content="https://nanoker.com/img/og/og-default.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Nanoker | Quality & Certifications" />
+    <meta
+      name="twitter:description"
+      content="Nanoker quality and certifications overview: ISO 9001, ISO 14001 and ISO 13485 frameworks supporting traceability, compliance and industrial reliability."
+    />
+    <meta name="twitter:image" content="https://nanoker.com/img/og/og-default.png" />
+
+    <link rel="icon" href="./favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-pack/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-pack/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon-pack/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="./favicon-pack/android-chrome-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="./favicon-pack/android-chrome-512x512.png" />
+    <meta name="theme-color" content="#020202" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/style.css?v=11" />
+
+    <style>
+      :root {
+        --cert-accent: #c93b3b;
+        --cert-accent-soft: rgba(201, 59, 59, 0.2);
+      }
+
+      body.cert-page {
+        background: #050505;
+      }
+
+      .cert-main {
+        position: relative;
+        padding-top: var(--nav-h);
+        background:
+          radial-gradient(80% 240px at 84% 14%, rgba(255, 255, 255, 0.05), transparent 70%),
+          linear-gradient(180deg, #050505 0%, #040404 45%, #030303 100%);
+      }
+
+      .cert-main::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        background-image: radial-gradient(rgba(255, 255, 255, 0.08) 0.35px, transparent 0.35px);
+        background-size: 3px 3px;
+        opacity: 0.035;
+      }
+
+      .cert-main > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .cert-container {
+        width: min(1120px, calc(100% - 40px));
+        margin: 0 auto;
+      }
+
+      .cert-hero {
+        padding: 92px 0 48px;
+      }
+
+      .cert-kicker {
+        margin: 0 0 14px;
+        font-family: var(--font-tech);
+        font-size: 0.7rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.55);
+      }
+
+      .cert-title {
+        margin: 0;
+        font-size: clamp(2.05rem, 4.4vw, 3.25rem);
+        line-height: 1.08;
+        letter-spacing: -0.025em;
+      }
+
+      .cert-title .cert-accent {
+        color: var(--cert-accent);
+      }
+
+      .cert-intro {
+        margin: 22px 0 0;
+        max-width: 780px;
+        font-size: 1.05rem;
+        color: rgba(255, 255, 255, 0.86);
+        line-height: 1.7;
+      }
+
+      .cert-grid {
+        padding: 10px 0 100px;
+        display: grid;
+        gap: 22px;
+      }
+
+      .cert-card {
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.028), rgba(255, 255, 255, 0.012));
+        border: 1px solid rgba(255, 255, 255, 0.11);
+        border-radius: 18px;
+        padding: 30px;
+      }
+
+      .cert-card h2 {
+        margin: 0;
+        font-size: clamp(1.35rem, 2.2vw, 1.7rem);
+        letter-spacing: -0.01em;
+      }
+
+      .cert-card p {
+        margin: 12px 0 0;
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.65;
+      }
+
+      .cert-fields {
+        margin: 20px 0 0;
+        display: grid;
+        gap: 9px;
+      }
+
+      .cert-field {
+        display: grid;
+        grid-template-columns: minmax(170px, 210px) 1fr;
+        gap: 14px;
+        align-items: baseline;
+      }
+
+      .cert-field-label {
+        font-family: var(--font-tech);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.56);
+      }
+
+      .cert-field-value {
+        font-size: 0.96rem;
+        color: rgba(255, 255, 255, 0.92);
+      }
+
+      .cert-download {
+        margin-top: 20px;
+      }
+
+      .cert-file {
+        margin: 8px 0 0;
+        display: inline-block;
+        font-family: var(--font-tech);
+        font-size: 0.82rem;
+        color: rgba(255, 255, 255, 0.9);
+        border: 1px dashed rgba(255, 255, 255, 0.25);
+        border-radius: 999px;
+        padding: 7px 14px;
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      @media (max-width: 900px) {
+        .cert-hero {
+          padding-top: 76px;
+        }
+
+        .cert-card {
+          padding: 24px;
+        }
+
+        .cert-field {
+          grid-template-columns: 1fr;
+          gap: 4px;
+        }
+      }
+    </style>
+  </head>
+
+  <body class="cert-page">
+    <nav class="nav" data-nav>
+      <a href="./index.html" class="nav-logo" aria-label="Inicio Nanoker">
+        <img src="./img/brand/logo-nanoker-26-hd.png" alt="Nanoker" />
+      </a>
+
+      <div class="nav-center">
+        <a href="./index.html#top" class="nav-link" data-i18n="nav.home">Home</a>
+        <a href="empresa.html" class="nav-link" data-i18n="nav.company">Empresa</a>
+        <a href="sectores.html" class="nav-link" data-i18n="nav.sectors">Sectores</a>
+        <a href="materiales.html" class="nav-link" data-i18n="nav.materials">Materiales</a>
+        <a href="capacidades.html" class="nav-link" data-i18n="nav.capabilities">Capacidades</a>
+        <a href="id.html" class="nav-link" data-i18n="nav.rnd">I+D</a>
+        <a href="contacto.html" class="nav-link" data-i18n="nav.contact">Contacto</a>
+      </div>
+
+      <div class="nav-actions">
+        <button class="nav-lang" type="button" data-lang-toggle aria-label="Language"><span class="nav-lang__token nav-lang__token--es">ES</span><span class="nav-lang__sep" aria-hidden="true">/</span><span class="nav-lang__token nav-lang__token--en">EN</span></button>
+      </div>
+
+      <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false">
+        ☰ <span class="sr-only" data-i18n="nav.menu">Open menu</span>
+      </button>
+    </nav>
+
+    <main class="cert-main" id="top">
+      <header class="cert-hero" data-reveal>
+        <div class="cert-container">
+          <p class="cert-kicker" data-i18n="certifications.kicker">QUALITY FRAMEWORK</p>
+          <h1 class="cert-title" data-i18n-html="certifications.titleHtml">Quality &amp; <span class="cert-accent">Certifications</span></h1>
+          <p class="cert-intro" data-i18n="certifications.intro">
+            Nanoker operates under internationally recognized standards to ensure product reliability, regulatory compliance and full industrial traceability.
+          </p>
+        </div>
+      </header>
+
+      <section class="cert-grid cert-container" aria-label="Certification details">
+        <article class="cert-card" id="iso9001" data-reveal>
+          <h2 data-i18n="certifications.cards.iso9001.title">ISO 9001</h2>
+          <p data-i18n="certifications.cards.iso9001.desc">
+            Certified Quality Management System ensuring consistent processes, continuous improvement and customer-focused performance across all operations.
+          </p>
+          <div class="cert-fields">
+            <div class="cert-field"><span class="cert-field-label" data-i18n="certifications.labels.standard">Standard</span><span class="cert-field-value" data-i18n="certifications.cards.iso9001.fields.standard">ISO 9001:2015</span></div>
+            <div class="cert-field"><span class="cert-field-label" data-i18n="certifications.labels.scope">Scope</span><span class="cert-field-value" data-i18n="certifications.cards.iso9001.fields.scope">Design, development and industrial manufacturing of advanced technical materials.</span></div>
+            <div class="cert-field"><span class="cert-field-label" data-i18n="certifications.labels.body">Certification body</span><span class="cert-field-value" data-i18n="certifications.cards.iso9001.fields.body">TUV Rheinland</span></div>
+            <div class="cert-field"><span class="cert-field-label" data-i18n="certifications.labels.number">Certificate number</span><span class="cert-field-value" data-i18n="certifications.cards.iso9001.fields.number">QMS-9001-NAK-2026-001</span></div>
+            <div class="cert-field"><span class="cert-field-label" data-i18n="certifications.labels.valid">Valid until</span><span class="cert-field-value" data-i18n="certifications.cards.iso9001.fields.valid">December 31, 2028</span></div>
+          </div>
+          <button type="button" class="footer-action cert-download" aria-disabled="true" data-i18n="certifications.cards.iso9001.download">Download certificate</button>
+          <p class="cert-file" data-i18n="certifications.cards.iso9001.file">[PDF] Nanoker_ISO9001_Certificate.pdf</p>
+        </article>
+
+        <article class="cert-card" id="iso14001" data-reveal>
+          <h2 data-i18n="certifications.cards.iso14001.title">ISO 14001</h2>
+          <p data-i18n="certifications.cards.iso14001.desc">
+            Environmental Management System ensuring responsible resource use, emissions control and sustainable industrial practices.
+          </p>
+          <div class="cert-fields">
+            <div class="cert-field"><span class="cert-field-label" data-i18n="certifications.labels.standard">Standard</span><span class="cert-field-value" data-i18n="certifications.cards.iso14001.fields.standard">ISO 14001:2015</span></div>
+            <div class="cert-field"><span class="cert-field-label" data-i18n="certifications.labels.scope">Scope</span><span class="cert-field-value" data-i18n="certifications.cards.iso14001.fields.scope">Environmental management of advanced materials manufacturing and associated industrial services.</span></div>
+            <div class="cert-field"><span class="cert-field-label" data-i18n="certifications.labels.body">Certification body</span><span class="cert-field-value" data-i18n="certifications.cards.iso14001.fields.body">Bureau Veritas</span></div>
+            <div class="cert-field"><span class="cert-field-label" data-i18n="certifications.labels.number">Certificate number</span><span class="cert-field-value" data-i18n="certifications.cards.iso14001.fields.number">EMS-14001-NAK-2026-014</span></div>
+            <div class="cert-field"><span class="cert-field-label" data-i18n="certifications.labels.valid">Valid until</span><span class="cert-field-value" data-i18n="certifications.cards.iso14001.fields.valid">September 30, 2028</span></div>
+          </div>
+          <button type="button" class="footer-action cert-download" aria-disabled="true" data-i18n="certifications.cards.iso14001.download">Download certificate</button>
+          <p class="cert-file" data-i18n="certifications.cards.iso14001.file">[PDF] Nanoker_ISO14001_Certificate.pdf</p>
+        </article>
+
+        <article class="cert-card" id="iso13485" data-reveal>
+          <h2 data-i18n="certifications.cards.iso13485.title">ISO 13485</h2>
+          <p data-i18n="certifications.cards.iso13485.desc">
+            Quality Management System for regulated environments, supporting medical-grade requirements and robust documentation.
+          </p>
+          <div class="cert-fields">
+            <div class="cert-field"><span class="cert-field-label" data-i18n="certifications.labels.standard">Standard</span><span class="cert-field-value" data-i18n="certifications.cards.iso13485.fields.standard">ISO 13485:2016</span></div>
+            <div class="cert-field"><span class="cert-field-label" data-i18n="certifications.labels.scope">Scope</span><span class="cert-field-value" data-i18n="certifications.cards.iso13485.fields.scope">Development and manufacturing controls for advanced materials in regulated medical environments.</span></div>
+            <div class="cert-field"><span class="cert-field-label" data-i18n="certifications.labels.body">Certification body</span><span class="cert-field-value" data-i18n="certifications.cards.iso13485.fields.body">SGS</span></div>
+            <div class="cert-field"><span class="cert-field-label" data-i18n="certifications.labels.number">Certificate number</span><span class="cert-field-value" data-i18n="certifications.cards.iso13485.fields.number">MDQ-13485-NAK-2026-008</span></div>
+            <div class="cert-field"><span class="cert-field-label" data-i18n="certifications.labels.valid">Valid until</span><span class="cert-field-value" data-i18n="certifications.cards.iso13485.fields.valid">June 30, 2028</span></div>
+          </div>
+          <button type="button" class="footer-action cert-download" aria-disabled="true" data-i18n="certifications.cards.iso13485.download">Download certificate</button>
+          <p class="cert-file" data-i18n="certifications.cards.iso13485.file">[PDF] Nanoker_ISO13485_Certificate.pdf</p>
+        </article>
+      </section>
+    </main>
+
+    <footer class="footer" id="contact">
+      <div class="footer-grid">
+        <div class="f-brand">
+          <h3 data-i18n="footer.brandTitle">nanoker</h3>
+          <p data-i18n-html="footer.brandTextHtml">
+            Plataforma industrial europea para tecnologías críticas.<br />
+            Materiales avanzados con especificación garantizada, trazabilidad completa y escalabilidad industrial.
+          </p>
+          <p style="margin-top: 12px; opacity: 0.9" data-i18n-html="footer.noteHtml">
+            <b>Contacto técnico:</b> procesamos solicitudes en <b>3–5 días laborables</b>.
+          </p>
+        </div>
+
+        <div class="f-col">
+          <h4 class="footer-title" data-i18n="footer.colSite.title">Site</h4>
+          <ul>
+            <li><a href="./index.html" data-i18n="footer.colSite.links.home">Home</a></li>
+            <li><a href="empresa.html" data-i18n="footer.colSite.links.company">Empresa</a></li>
+            <li><a href="sectores.html" data-i18n="footer.colSite.links.sectors">Sectores</a></li>
+            <li><a href="materiales.html" data-i18n="footer.colSite.links.materials">Materiales</a></li>
+            <li><a href="capacidades.html" data-i18n="footer.colSite.links.capabilities">Capacidades</a></li>
+            <li><a href="id.html" data-i18n="footer.colSite.links.rnd">I+D</a></li>
+            <li><a href="contacto.html" data-i18n="footer.colSite.links.contact">Contacto</a></li>
+          </ul>
+        </div>
+
+        <div class="f-col">
+          <h4 class="footer-title" data-i18n="footer.colHubs.title">Industrial Hubs</h4>
+          <ul>
+            <li><button class="footer-action" type="button" data-i18n="footer.colHubs.links.oviedo">Oviedo — Desarrollo & Validación</button></li>
+            <li><button class="footer-action" type="button" data-i18n="footer.colHubs.links.leon">León — Hub industrial</button></li>
+            <li><button class="footer-action" type="button" data-i18n="footer.colHubs.links.supply">European Supply</button></li>
+          </ul>
+        </div>
+
+        <div class="f-col">
+          <h4 class="footer-title" data-i18n="footer.colCompliance.title">Compliance</h4>
+          <ul>
+            <li><a href="certifications.html#iso9001" data-i18n="footer.colCompliance.links.iso9001">ISO 9001</a></li>
+            <li><a href="certifications.html#iso14001" data-i18n="footer.colCompliance.links.iso14001">ISO 14001</a></li>
+            <li><a href="certifications.html#iso13485" data-i18n="footer.colCompliance.links.iso13485">ISO 13485</a></li>
+            <li><a href="certifications.html" data-i18n="footer.colCompliance.links.certifications">Certifications →</a></li>
+          </ul>
+        </div>
+
+        <div class="f-col">
+          <h4 class="footer-title" data-i18n="footer.colConnect.title">Connect</h4>
+          <ul>
+            <li><a href="mailto:info@nanoker.com" class="contact-data" data-i18n="footer.colConnect.email">info@nanoker.com</a></li>
+            <li><a href="tel:+34985000000" class="contact-data" data-i18n="footer.colConnect.phone">+34 985 000 000</a></li>
+            <li>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Pol%C3%ADgono+de+Olloniego%2C+Parcela+22A%2C+Nave+6%2C+33660+Oviedo%2C+Asturias%2C+Spain"
+                class="contact-data"
+                data-i18n="footer.colConnect.address"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Polígono de Olloniego, Parcela 22A, Nave 6, 33660 Oviedo, Asturias, Spain
+              </a>
+            </li>
+            <li style="margin-top: 20px">
+              <a href="https://www.linkedin.com/company/nanoker-research-sl/" data-i18n="footer.colConnect.links.linkedin">LinkedIn ↗</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="f-copy">
+        <div class="system-status">
+          <div class="status-dot"></div>
+          <span>
+            <span data-i18n="footer.system.label">SYSTEM STATUS:</span>
+            <span data-i18n="footer.system.value">OPERATIONAL</span>
+          </span>
+        </div>
+
+        <div>
+          <span data-i18n="footer.legal.copyright">© 2026 Nanoker Research S.L.</span>
+          <button class="footer-action footer-action--legal" type="button" data-i18n="footer.legal.privacy">Privacy Policy</button>
+          <button class="footer-action footer-action--legal" type="button" data-i18n="footer.legal.notice">Legal Notice</button>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        const nav = document.querySelector("[data-nav]");
+        const btn = document.querySelector(".nav-toggle");
+        const links = document.querySelectorAll(".nav-center .nav-link");
+        if (nav && btn) {
+          btn.addEventListener("click", () => {
+            const open = !nav.classList.contains("is-open");
+            nav.classList.toggle("is-open", open);
+            btn.setAttribute("aria-expanded", open ? "true" : "false");
+          });
+        }
+
+        links.forEach((a) => {
+          a.addEventListener("click", () => {
+            nav?.classList.remove("is-open");
+            btn?.setAttribute("aria-expanded", "false");
+          });
+        });
+
+        const revealEls = document.querySelectorAll("[data-reveal]");
+        if (!("IntersectionObserver" in window)) {
+          revealEls.forEach((el) => el.classList.add("is-visible"));
+          return;
+        }
+
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) entry.target.classList.add("is-visible");
+            });
+          },
+          { threshold: 0.14, rootMargin: "0px 0px -8% 0px" }
+        );
+        revealEls.forEach((el) => io.observe(el));
+      })();
+    </script>
+
+    <script type="module">
+      import { initLanguageSwitcher } from "./js/lang.js";
+
+      initLanguageSwitcher({ observeDOM: true });
+    </script>
+  </body>
+</html>
+
+
