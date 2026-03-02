@@ -1,0 +1,208 @@
+:root {
+  --portal-size: clamp(380px, 36vw, 600px);
+  --portal-ease: cubic-bezier(0.2, 0.75, 0.2, 1);
+}
+
+.section {
+  --portal-accent: rgba(255, 255, 255, 0.18);
+  position: relative;
+  overflow: visible;
+}
+
+.section:has(.card.q-theme) { --portal-accent: var(--c-q); }
+.section:has(.card.s-theme) { --portal-accent: var(--c-s); }
+.section:has(.card.e-theme) { --portal-accent: var(--c-e); }
+.section:has(.card.m-theme) { --portal-accent: var(--c-m); }
+.section:has(.card.i-theme) { --portal-accent: var(--c-i); }
+.section:has(.card.competitive-theme) { --portal-accent: var(--c-competitive); }
+.section:has(.card.sovereignty-theme) { --portal-accent: var(--c-sovereignty); }
+.section .card.q-theme ~ .material-portal { --portal-accent: var(--c-q); }
+.section .card.s-theme ~ .material-portal { --portal-accent: var(--c-s); }
+.section .card.e-theme ~ .material-portal { --portal-accent: var(--c-e); }
+.section .card.m-theme ~ .material-portal { --portal-accent: var(--c-m); }
+.section .card.i-theme ~ .material-portal { --portal-accent: var(--c-i); }
+.section .card.competitive-theme ~ .material-portal { --portal-accent: var(--c-competitive); }
+.section .card.sovereignty-theme ~ .material-portal { --portal-accent: var(--c-sovereignty); }
+
+.section .material-portal {
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+  width: var(--portal-size);
+  aspect-ratio: 1;
+  border-radius: 999px;
+  overflow: hidden;
+  z-index: 0;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  opacity: 0.9;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+    inset 0 -24px 44px rgba(0, 0, 0, 0.52),
+    0 0 42px rgba(0, 0, 0, 0.16);
+  pointer-events: none;
+  will-change: opacity, box-shadow;
+  transition: border-color .6s ease, box-shadow .6s ease;
+}
+
+.section.layout-left .material-portal {
+  right: 6vw;
+}
+
+.section.layout-right .material-portal {
+  left: 6vw;
+}
+
+.section .card {
+  position: relative;
+  z-index: 1;
+}
+
+.material-portal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(90% 90% at 22% 16%, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0) 42%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.material-portal__media,
+.material-portal__glass,
+.material-portal__hud,
+.material-portal__scan,
+.material-portal__lens,
+.material-portal__readout {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.material-portal__media {
+  transform: scale(1);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: saturate(0.92) contrast(1.03);
+}
+
+.material-portal__glass {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: inset -20px -20px 36px rgba(0, 0, 0, 0.24);
+}
+
+.material-portal__hud {
+  opacity: 0.2;
+  mix-blend-mode: screen;
+  background:
+    repeating-radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.08) 0 1px, transparent 1px 16px),
+    repeating-conic-gradient(from 0deg, rgba(255, 255, 255, 0.06) 0deg 1deg, transparent 1deg 12deg);
+}
+
+.material-portal__scan {
+  inset: 6%;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--portal-accent) 32%, transparent);
+  opacity: 0;
+  transform: rotate(-16deg) translateX(-95%);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 34%,
+    color-mix(in srgb, var(--portal-accent) 78%, transparent) 50%,
+    rgba(255, 255, 255, 0) 66%
+  );
+}
+
+.material-portal__lens {
+  opacity: 0;
+  background: radial-gradient(circle at 32% 34%, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0) 34%);
+}
+
+.material-portal__readout {
+  inset: auto 11% 12% 11%;
+  height: auto;
+  margin: 0;
+  font-family: var(--font-tech);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: rgba(255, 224, 224, 0.95);
+  text-shadow: 0 0 12px rgba(255, 90, 90, 0.44);
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.material-portal.is-active {
+  border-color: var(--portal-accent);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--portal-accent) 35%, transparent),
+    inset 0 -24px 44px rgba(0, 0, 0, 0.44),
+    0 0 80px color-mix(in srgb, var(--portal-accent) 22%, transparent);
+}
+
+.material-portal.is-active .material-portal__media {
+  animation: portalPulse 1900ms var(--portal-ease) forwards;
+}
+
+.material-portal.is-active .material-portal__scan {
+  animation: portalScan 1900ms var(--portal-ease) forwards;
+}
+
+.material-portal.is-active .material-portal__lens {
+  animation: portalLens 1900ms var(--portal-ease) forwards;
+}
+
+.material-portal.is-active .material-portal__readout {
+  animation: portalReadout 1900ms var(--portal-ease) forwards;
+}
+
+@keyframes portalPulse {
+  0% { transform: scale(1); }
+  36% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+@keyframes portalScan {
+  0% { opacity: 0; transform: rotate(-16deg) translateX(-95%); }
+  16% { opacity: 0.92; }
+  55% { opacity: 0.82; transform: rotate(-10deg) translateX(20%); }
+  100% { opacity: 0; transform: rotate(-2deg) translateX(122%); }
+}
+
+@keyframes portalLens {
+  0% { opacity: 0; transform: scale(0.98); }
+  28% { opacity: 0.34; }
+  68% { opacity: 0.22; transform: scale(1.03); }
+  100% { opacity: 0; transform: scale(1); }
+}
+
+@keyframes portalReadout {
+  0% { opacity: 0; transform: translateY(6px); }
+  24% { opacity: 0.96; transform: translateY(0); }
+  66% { opacity: 0.96; }
+  100% { opacity: 0; transform: translateY(-4px); }
+}
+
+@media (max-width: 980px) {
+  .section .material-portal {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .material-portal,
+  .material-portal__media,
+  .material-portal__scan,
+  .material-portal__lens,
+  .material-portal__readout {
+    transition: none;
+    animation: none !important;
+  }
+
+  .material-portal.is-active {
+    border-color: var(--portal-accent);
+    opacity: 1;
+    box-shadow:
+      inset 0 0 0 1px color-mix(in srgb, var(--portal-accent) 35%, transparent),
+      0 0 42px color-mix(in srgb, var(--portal-accent) 22%, transparent);
+  }
+}

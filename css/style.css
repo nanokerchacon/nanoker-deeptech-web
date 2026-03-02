@@ -845,13 +845,11 @@ body.no-three .section[data-bg="sovereignty"]{
   border-left: 4px solid #fff;
   padding: 60px;
   opacity: 0;
-  transform: translateY(50px);
-  transition: all .8s cubic-bezier(0.2,1,0.3,1);
+  transition: opacity .8s cubic-bezier(0.2,1,0.3,1), background-color .8s cubic-bezier(0.2,1,0.3,1);
 }
 
 .section.active .card{
   opacity: 1;
-  transform: translateY(0);
   background: rgba(0,0,0,0.6);
 }
 
