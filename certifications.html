@@ -221,21 +221,22 @@
         <img src="./img/brand/logo-nanoker-26-hd.png" alt="Nanoker" />
       </a>
 
-      <div class="nav-center">
-        <a href="./index.html#top" class="nav-link" data-i18n="nav.home">Home</a>
-        <a href="empresa.html" class="nav-link" data-i18n="nav.company">Empresa</a>
-        <a href="sectores.html" class="nav-link" data-i18n="nav.sectors">Sectores</a>
-        <a href="materiales.html" class="nav-link" data-i18n="nav.materials">Materiales</a>
-        <a href="capacidades.html" class="nav-link" data-i18n="nav.capabilities">Capacidades</a>
-        <a href="id.html" class="nav-link" data-i18n="nav.rnd">I+D</a>
-        <a href="contacto.html" class="nav-link" data-i18n="nav.contact">Contacto</a>
+      <div id="mobileMenu" class="nav-center mobile-menu" data-mobile-menu role="dialog" aria-modal="true" aria-label="Site navigation">
+        <a href="./index.html#top" class="nav-link mobile-menu-link" data-i18n="nav.home">Home</a>
+        <a href="empresa.html" class="nav-link mobile-menu-link" data-i18n="nav.company">Empresa</a>
+        <a href="sectores.html" class="nav-link mobile-menu-link" data-i18n="nav.sectors">Sectores</a>
+        <a href="materiales.html" class="nav-link mobile-menu-link" data-i18n="nav.materials">Materiales</a>
+        <a href="capacidades.html" class="nav-link mobile-menu-link" data-i18n="nav.capabilities">Capacidades</a>
+        <a href="id.html" class="nav-link mobile-menu-link" data-i18n="nav.rnd">I+D</a>
+        <a href="contacto.html" class="nav-link mobile-menu-link" data-i18n="nav.contact">Contacto</a>
       </div>
 
+      <div class="mobile-menu-backdrop" data-mobile-backdrop></div>
       <div class="nav-actions">
         <button class="nav-lang" type="button" data-lang-toggle aria-label="Language"><span class="nav-lang__token nav-lang__token--es">ES</span><span class="nav-lang__sep" aria-hidden="true">/</span><span class="nav-lang__token nav-lang__token--en">EN</span></button>
       </div>
 
-      <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false">
+      <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
         ☰ <span class="sr-only" data-i18n="nav.menu">Open menu</span>
       </button>
     </nav>
@@ -428,6 +429,7 @@
       })();
     </script>
 
+    <script src="./js/mobile-menu.js?v=1"></script>
     <script type="module">
       import { initLanguageSwitcher } from "./js/lang.js";
 
