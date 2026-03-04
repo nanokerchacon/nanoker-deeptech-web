@@ -315,7 +315,7 @@ export const I18N = deepFreeze({
             valid: "December 31, 2028",
           },
           download: "Download certificate",
-          file: "[PDF] Nanoker_ISO9001_Certificate.pdf",
+          file: "[PDF] iso-9001-nanoker.pdf",
         },
         iso14001: {
           title: "ISO 14001",
@@ -329,7 +329,7 @@ export const I18N = deepFreeze({
             valid: "September 30, 2028",
           },
           download: "Download certificate",
-          file: "[PDF] Nanoker_ISO14001_Certificate.pdf",
+          file: "[PDF] iso-14001-nanoker.pdf",
         },
         iso13485: {
           title: "ISO 13485",
@@ -343,7 +343,7 @@ export const I18N = deepFreeze({
             valid: "June 30, 2028",
           },
           download: "Download certificate",
-          file: "[PDF] Nanoker_ISO13485_Certificate.pdf",
+          file: "[PDF] iso-13485-nanoker.pdf",
         },
       },
     },
@@ -1283,12 +1283,15 @@ export const I18N = deepFreeze({
         },
       },
 
-      colCompliance: {
-        title: "Compliance",
+      colPolicies: {
+        title: "Policies",
         links: {
-          iso9001: "ISO 9001",
-          iso14001: "ISO 14001",
-          iso13485: "ISO 13485",
+          quality: "Quality",
+          sustainability: "Sustainability",
+          occupationalSafety: "Occupational safety",
+          infoSecurity: "Information security",
+          ethicsCompliance: "Ethics & compliance",
+          equalityDiversity: "Equality & diversity",
           certifications: "Certifications →",
         },
       },
@@ -1703,7 +1706,7 @@ export const I18N = deepFreeze({
             valid: "31 de diciembre de 2028",
           },
           download: "Descargar certificado",
-          file: "[PDF] Nanoker_ISO9001_Certificado.pdf",
+          file: "[PDF] iso-9001-nanoker.pdf",
         },
         iso14001: {
           title: "ISO 14001",
@@ -1717,7 +1720,7 @@ export const I18N = deepFreeze({
             valid: "30 de septiembre de 2028",
           },
           download: "Descargar certificado",
-          file: "[PDF] Nanoker_ISO14001_Certificado.pdf",
+          file: "[PDF] iso-14001-nanoker.pdf",
         },
         iso13485: {
           title: "ISO 13485",
@@ -1731,7 +1734,7 @@ export const I18N = deepFreeze({
             valid: "30 de junio de 2028",
           },
           download: "Descargar certificado",
-          file: "[PDF] Nanoker_ISO13485_Certificado.pdf",
+          file: "[PDF] iso-13485-nanoker.pdf",
         },
       },
     },
@@ -2655,12 +2658,15 @@ export const I18N = deepFreeze({
         },
       },
 
-      colCompliance: {
-        title: "Cumplimiento",
+      colPolicies: {
+        title: "Políticas",
         links: {
-          iso9001: "ISO 9001",
-          iso14001: "ISO 14001",
-          iso13485: "ISO 13485",
+          quality: "Calidad",
+          sustainability: "Sostenibilidad",
+          occupationalSafety: "Seguridad laboral",
+          infoSecurity: "Seguridad de la información",
+          ethicsCompliance: "Ética y cumplimiento",
+          equalityDiversity: "Igualdad y diversidad",
           certifications: "Certificaciones →",
         },
       },
@@ -2768,3 +2774,4 @@ export const I18N = deepFreeze({
     },
   },
 });
+

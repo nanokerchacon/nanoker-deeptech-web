@@ -2570,3 +2570,7 @@ a#sec-funding:empty{
   background: color-mix(in srgb, var(--c-m) 8%, transparent);
   color: rgba(255,255,255,.9);
 }
+
+.policy-highlight {
+  color: #78C8FF;
+}

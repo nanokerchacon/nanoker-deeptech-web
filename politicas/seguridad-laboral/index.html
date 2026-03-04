@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function () {
+        var doc = document.documentElement;
+        var lang = 'en';
+        try {
+          var raw = localStorage.getItem('nanoker-lang') || navigator.language || 'en';
+          lang = String(raw).toLowerCase().split('-')[0] === 'es' ? 'es' : 'en';
+        } catch (_error) {
+          var fallback = navigator.language || 'en';
+          lang = String(fallback).toLowerCase().split('-')[0] === 'es' ? 'es' : 'en';
+        }
+        doc.lang = lang;
+        doc.setAttribute('data-lang', lang);
+      })();
+    </script>
+    <title>Política de Seguridad y Salud Laboral | Nanoker</title>
+    <meta name="description" content="Política de Seguridad y Salud Laboral de NANOKER para prevención de riesgos y protección de las personas." />
+    <link rel="canonical" href="https://nanoker.com/politicas/seguridad-laboral/" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nanoker" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Política de Seguridad y Salud Laboral | Nanoker" />
+    <meta property="og:description" content="Política de Seguridad y Salud Laboral de NANOKER para prevención de riesgos y protección de las personas." />
+    <meta property="og:url" content="https://nanoker.com/politicas/seguridad-laboral/" />
+    <meta property="og:image" content="https://nanoker.com/img/og/og-default.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Política de Seguridad y Salud Laboral | Nanoker" />
+    <meta name="twitter:description" content="Política de Seguridad y Salud Laboral de NANOKER para prevención de riesgos y protección de las personas." />
+    <meta name="twitter:image" content="https://nanoker.com/img/og/og-default.png" />
+
+    <link rel="icon" href="../../favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-pack/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-pack/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon-pack/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="../../favicon-pack/android-chrome-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="../../favicon-pack/android-chrome-512x512.png" />
+    <meta name="theme-color" content="#020202" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../../css/style.css?v=11" />
+    <link rel="stylesheet" href="../../css/policies.css?v=1" />
+  </head>
+
+  <body class="policy-page">
+    <nav class="nav" data-nav>
+      <a href="../../index.html" class="nav-logo" aria-label="Inicio Nanoker">
+        <img src="../../img/brand/logo-nanoker-26-hd.png" alt="Nanoker" />
+      </a>
+
+      <div class="nav-center">
+        <a href="../../index.html#top" class="nav-link" data-i18n="nav.home">Home</a>
+        <a href="../../empresa.html" class="nav-link" data-i18n="nav.company">Empresa</a>
+        <a href="../../sectores.html" class="nav-link" data-i18n="nav.sectors">Sectores</a>
+        <a href="../../materiales.html" class="nav-link" data-i18n="nav.materials">Materiales</a>
+        <a href="../../capacidades.html" class="nav-link" data-i18n="nav.capabilities">Capacidades</a>
+        <a href="../../id.html" class="nav-link" data-i18n="nav.rnd">I+D</a>
+        <a href="../../contacto.html" class="nav-link" data-i18n="nav.contact">Contacto</a>
+      </div>
+
+      <div class="nav-actions">
+        <button class="nav-lang" type="button" data-lang-toggle aria-label="Language"><span class="nav-lang__token nav-lang__token--es">ES</span><span class="nav-lang__sep" aria-hidden="true">/</span><span class="nav-lang__token nav-lang__token--en">EN</span></button>
+      </div>
+
+      <button class="nav-toggle" type="button" aria-label="Abrir menu" aria-expanded="false">
+        ☰ <span class="sr-only" data-i18n="nav.menu">Open menu</span>
+      </button>
+    </nav>
+
+    <div data-policy-page></div>
+
+    <footer class="footer" id="contact">
+      <div class="footer-grid">
+        <div class="f-brand">
+          <h3 data-i18n="footer.brandTitle">nanoker</h3>
+          <p data-i18n-html="footer.brandTextHtml">
+            Plataforma industrial europea para tecnologias criticas.<br />
+            Materiales avanzados con especificacion garantizada, trazabilidad completa y escalabilidad industrial.
+          </p>
+          <p style="margin-top: 12px; opacity: 0.9" data-i18n-html="footer.noteHtml">
+            <b>Contacto tecnico:</b> procesamos solicitudes en <b>3-5 dias laborables</b>.
+          </p>
+        </div>
+
+        <div class="f-col">
+          <h4 class="footer-title" data-i18n="footer.colSite.title">Site</h4>
+          <ul>
+            <li><a href="../../index.html" data-i18n="footer.colSite.links.home">Home</a></li>
+            <li><a href="../../empresa.html" data-i18n="footer.colSite.links.company">Empresa</a></li>
+            <li><a href="../../sectores.html" data-i18n="footer.colSite.links.sectors">Sectores</a></li>
+            <li><a href="../../materiales.html" data-i18n="footer.colSite.links.materials">Materiales</a></li>
+            <li><a href="../../capacidades.html" data-i18n="footer.colSite.links.capabilities">Capacidades</a></li>
+            <li><a href="../../id.html" data-i18n="footer.colSite.links.rnd">I+D</a></li>
+            <li><a href="../../contacto.html" data-i18n="footer.colSite.links.contact">Contacto</a></li>
+          </ul>
+        </div>
+
+        <div class="f-col">
+          <h4 class="footer-title" data-i18n="footer.colHubs.title">Industrial Hubs</h4>
+          <ul>
+            <li><button class="footer-action" type="button" data-i18n="footer.colHubs.links.oviedo">Oviedo - Desarrollo y validacion</button></li>
+            <li><button class="footer-action" type="button" data-i18n="footer.colHubs.links.leon">Leon - Hub industrial</button></li>
+            <li><button class="footer-action" type="button" data-i18n="footer.colHubs.links.supply">Suministro europeo</button></li>
+          </ul>
+        </div>
+
+        <div class="f-col">
+          <h4 class="footer-title" data-i18n="footer.colPolicies.title">Políticas</h4>
+          <ul>
+            <li><a href="/politicas/calidad/" data-i18n="footer.colPolicies.links.quality">Calidad</a></li>
+            <li><a href="/politicas/sostenibilidad/" data-i18n="footer.colPolicies.links.sustainability">Sostenibilidad</a></li>
+            <li><a href="/politicas/seguridad-laboral/" data-i18n="footer.colPolicies.links.occupationalSafety">Seguridad laboral</a></li>
+            <li><a href="/politicas/seguridad-informacion/" data-i18n="footer.colPolicies.links.infoSecurity">Seguridad de la información</a></li>
+            <li><a href="/politicas/etica-y-cumplimiento/" data-i18n="footer.colPolicies.links.ethicsCompliance">Ética y cumplimiento</a></li>
+            <li><a href="/politicas/igualdad-y-diversidad/" data-i18n="footer.colPolicies.links.equalityDiversity">Igualdad y diversidad</a></li>
+            <li><a href="/politicas/certificaciones/" data-i18n="footer.colPolicies.links.certifications">Certificaciones →</a></li>
+          </ul>
+        </div>
+
+        <div class="f-col">
+          <h4 class="footer-title" data-i18n="footer.colConnect.title">Connect</h4>
+          <ul>
+            <li><a href="mailto:info@nanoker.com" class="contact-data" data-i18n="footer.colConnect.email">info@nanoker.com</a></li>
+            <li><a href="tel:+34985000000" class="contact-data" data-i18n="footer.colConnect.phone">+34 985 000 000</a></li>
+            <li>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Pol%C3%ADgono+de+Olloniego%2C+Parcela+22A%2C+Nave+6%2C+33660+Oviedo%2C+Asturias%2C+Spain"
+                class="contact-data"
+                data-i18n="footer.colConnect.address"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Poligono de Olloniego, Parcela 22A, Nave 6, 33660 Oviedo, Asturias, Spain
+              </a>
+            </li>
+            <li style="margin-top: 20px">
+              <a href="https://www.linkedin.com/company/nanoker-research-sl/" data-i18n="footer.colConnect.links.linkedin">LinkedIn ↗</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="f-copy">
+        <div class="system-status">
+          <div class="status-dot"></div>
+          <span>
+            <span data-i18n="footer.system.label">SYSTEM STATUS:</span>
+            <span data-i18n="footer.system.value">OPERATIONAL</span>
+          </span>
+        </div>
+
+        <div>
+          <span data-i18n="footer.legal.copyright">© 2026 Nanoker Research S.L.</span>
+          <button class="footer-action footer-action--legal" type="button" data-i18n="footer.legal.privacy">Privacy Policy</button>
+          <button class="footer-action footer-action--legal" type="button" data-i18n="footer.legal.notice">Legal Notice</button>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        const nav = document.querySelector("[data-nav]");
+        const btn = document.querySelector(".nav-toggle");
+        const links = document.querySelectorAll(".nav-center .nav-link");
+        if (nav && btn) {
+          btn.addEventListener("click", () => {
+            const open = !nav.classList.contains("is-open");
+            nav.classList.toggle("is-open", open);
+            btn.setAttribute("aria-expanded", open ? "true" : "false");
+          });
+        }
+
+        links.forEach((a) => {
+          a.addEventListener("click", () => {
+            nav?.classList.remove("is-open");
+            btn?.setAttribute("aria-expanded", "false");
+          });
+        });
+      })();
+    </script>
+
+    <script type="module">
+      import { initLanguageSwitcher } from "../../js/lang.js";
+      import { initPolicyPage } from "../../js/policy-page.js";
+
+      initLanguageSwitcher({ observeDOM: true });
+      initPolicyPage("seguridad-laboral");
+    </script>
+  </body>
+</html>
+
+
