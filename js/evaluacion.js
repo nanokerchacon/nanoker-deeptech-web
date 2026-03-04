@@ -1,38 +1,6 @@
 (function () {
-  const STORAGE_KEY = "NK_EVAL_WIZARD_V1";
-  const TOTAL_STEPS = 5;
-
-  function normalizeLang(raw) {
-    const base = String(raw || "").toLowerCase().split("-")[0];
-    return base === "es" ? "es" : "en";
-  }
-
-  const initialLang = normalizeLang(
-    document.documentElement.getAttribute("data-lang") ||
-      document.documentElement.lang ||
-      "en"
-  );
-
-  let runtimeLang = initialLang;
-  let translate = (_key, fallback) => fallback;
-
-  function formatTemplate(value, params) {
-    if (typeof value !== "string" || !params) return value;
-    return value.replace(/\{(\w+)\}/g, (match, key) => {
-      if (Object.prototype.hasOwnProperty.call(params, key)) {
-        return String(params[key]);
-      }
-      return match;
-    });
-  }
-
-  function tr(key, fallback, params) {
-    return formatTemplate(translate(key, fallback), params);
-  }
-
-  function trFallback(enText, esText) {
-    return runtimeLang === "es" ? esText : enText;
-  }
+  const STORAGE_KEY = "NK_EVAL_WIZARD_V2";
+  const TOTAL_STEPS = 11;
 
   const nav = document.querySelector("[data-nav]");
   const navToggle = document.querySelector(".nav-toggle");
@@ -61,209 +29,194 @@
   const statusEl = document.getElementById("eval-form-status");
   const submitBtn = document.getElementById("eval-submit-btn");
 
-  if (!form || !steps.length || !statusEl || !submitBtn) return;
+  if (!form || !steps.length || !progressFill || !progressText || !statusEl || !submitBtn) return;
+
+  const stepRules = {
+    1: { type: "radio", name: "requestType" },
+    2: { type: "radio", name: "currentInfo" },
+    3: { type: "radio", name: "projectPhase" },
+    4: { type: "radio", name: "estimatedVolume" },
+    5: { type: "radio", name: "dimensionsRange" },
+    6: { type: "radio", name: "applicationType", otherField: "eval-application-other" },
+    7: { type: "radio", name: "industrySector", otherField: "eval-sector-other" },
+    8: { type: "radio", name: "temperatureRange" },
+    9: { type: "checkbox", name: "functionMain", min: 1, otherField: "eval-function-other" },
+    10: { type: "radio", name: "materialConsidered", otherField: "eval-material-other" },
+    11: {
+      type: "contact",
+      requiredFields: ["eval-name", "eval-company", "eval-email", "eval-country", "eval-project-description"],
+      descriptionField: "eval-project-description",
+      minLength: 20,
+    },
+  };
+
+  const statusCopy = {
+    idle: "",
+    required: "Completa los campos obligatorios para continuar.",
+    completePrevious: "Completa los pasos previos antes de enviar.",
+    otherRequired: "Si seleccionas 'Otro', especifica el detalle.",
+    descriptionShort: "La descripción del proyecto debe tener al menos 20 caracteres.",
+    sending: "Enviando solicitud de evaluación técnica...",
+    success: "Gracias. Hemos recibido tu solicitud y te contactaremos en breve.",
+    error: "No pudimos procesar tu solicitud. Inténtalo de nuevo.",
+  };
 
   let activeStep = 1;
   let unlockedStep = 1;
-  let statusState = "idle";
   let isSubmitting = false;
 
-  const selectorsByStep = {
-    1: 'input[name="technology"]',
-    2: 'input[name="phase"]',
-    3: "#eval-challenge",
-    4: 'input[name="needs"]',
-    5: "#eval-name, #eval-email, #eval-company, #eval-role, #eval-start",
-  };
-
-  const STATUS_COPY = {
-    requiredFields: {
-      key: "evaluation.form.status.requiredFields",
-      fallback: () =>
-        trFallback(
-          "Complete required fields to continue.",
-          "Completa los campos obligatorios para continuar."
-        ),
-    },
-    completePrevious: {
-      key: "evaluation.form.status.completePrevious",
-      fallback: () =>
-        trFallback(
-          "Complete previous steps before submitting.",
-          "Completa los pasos previos antes de enviar."
-        ),
-    },
-    sending: {
-      key: "evaluation.form.status.sending",
-      fallback: () => trFallback("Sending evaluation request...", "Enviando solicitud de evaluacion..."),
-    },
-    success: {
-      key: "evaluation.form.status.success",
-      fallback: () =>
-        trFallback(
-          "Request received. Our engineering team will contact you shortly.",
-          "Solicitud recibida. Nuestro equipo de ingenieria te contactara en breve."
-        ),
-    },
-    error: {
-      key: "evaluation.form.status.error",
-      fallback: () =>
-        trFallback(
-          "We could not process your request. Please try again.",
-          "No pudimos procesar tu solicitud. Intentalo de nuevo."
-        ),
-    },
-    challengeTooShort: {
-      key: "evaluation.form.status.challengeTooShort",
-      fallback: () =>
-        trFallback(
-          "Please provide at least 30 characters in the technical challenge.",
-          "Describe el desafio tecnico con al menos 30 caracteres."
-        ),
-    },
-  };
-
-  function getStepInputs(step) {
-    const selector = selectorsByStep[step];
-    if (!selector) return [];
-    return Array.from(form.querySelectorAll(selector));
-  }
-
   function setStatus(state) {
-    statusState = state;
     statusEl.classList.remove("is-error", "is-success");
-
-    if (state === "idle") {
-      statusEl.textContent = "";
-      return;
-    }
-
-    const copy = STATUS_COPY[state];
-    if (!copy) return;
-
-    statusEl.textContent = tr(copy.key, copy.fallback());
-
-    if (state === "error" || state === "requiredFields" || state === "completePrevious") {
-      statusEl.classList.add("is-error");
-    }
+    statusEl.textContent = statusCopy[state] || "";
 
     if (state === "success") {
       statusEl.classList.add("is-success");
+    } else if (state !== "idle") {
+      statusEl.classList.add("is-error");
     }
   }
 
   function updateSubmitText() {
-    submitBtn.textContent = isSubmitting
-      ? tr(
-          "evaluation.form.step5.sending",
-          trFallback("Sending...", "Enviando...")
-        )
-      : tr(
-          "evaluation.form.step5.submit",
-          trFallback("Request technical evaluation", "Solicitar evaluacion tecnica")
-        );
+    submitBtn.textContent = isSubmitting ? "Enviando..." : "Enviar evaluación técnica";
   }
 
-  function updateProgress() {
-    const percent = Math.round(((activeStep - 1) / (TOTAL_STEPS - 1)) * 100);
-    progressFill.style.width = `${percent}%`;
-    progressText.textContent = tr(
-      "evaluation.wizard.progressTemplate",
-      trFallback("STEP {current} OF {total}", "PASO {current} DE {total}"),
-      { current: activeStep, total: TOTAL_STEPS }
-    );
+  function getInputs(name) {
+    return Array.from(form.querySelectorAll(`input[name="${name}"]`));
   }
 
-  function isGroupChecked(name) {
-    return getStepInputs(name).some((input) => input.checked);
+  function getChecked(name) {
+    const inputs = getInputs(name);
+    return inputs.filter((input) => input.checked);
+  }
+
+  function isOtherSelected(name) {
+    return getChecked(name).some((input) => input.value === "other");
   }
 
   function getStepElement(step) {
     return form.querySelector(`.wizard-step[data-step="${step}"]`);
   }
 
-  function clearStepInvalid(step) {
+  function clearInvalidStyles(step) {
     const stepEl = getStepElement(step);
     stepEl?.classList.remove("is-invalid-field");
+    stepEl?.querySelectorAll(".is-invalid-field").forEach((el) => el.classList.remove("is-invalid-field"));
+  }
 
-    if (step === 3) {
-      form.querySelector("#eval-challenge")?.classList.remove("is-invalid-field");
-      return;
-    }
+  function markInvalid(step) {
+    getStepElement(step)?.classList.add("is-invalid-field");
+  }
 
-    if (step === 5) {
-      getStepInputs(5).forEach((field) => field.classList.remove("is-invalid-field"));
+  function setConditionalVisibility(groupName, targetId) {
+    const wrapper = form.querySelector(`[data-conditional-wrapper="${targetId}"]`);
+    const field = document.getElementById(targetId);
+    if (!wrapper || !field) return;
+
+    const shouldShow = isOtherSelected(groupName);
+    wrapper.classList.toggle("is-hidden", !shouldShow);
+    field.required = shouldShow;
+
+    if (!shouldShow) {
+      field.value = "";
+      field.classList.remove("is-invalid-field");
     }
   }
 
-  function markStepInvalid(step) {
-    const stepEl = getStepElement(step);
-    stepEl?.classList.add("is-invalid-field");
+  function validateRadioStep(step, rule, applyErrors = false) {
+    const checked = getChecked(rule.name);
+    let valid = checked.length === 1;
+
+    if (valid && rule.otherField && isOtherSelected(rule.name)) {
+      const otherField = document.getElementById(rule.otherField);
+      valid = Boolean(otherField && otherField.value.trim());
+      if (!valid && applyErrors && otherField) {
+        otherField.classList.add("is-invalid-field");
+      }
+    }
+
+    if (!valid && applyErrors) {
+      markInvalid(step);
+      const first = getInputs(rule.name)[0];
+      first?.focus({ preventScroll: true });
+    }
+
+    return valid;
   }
 
-  function isStepComplete(step) {
-    if (step === 1) {
-      return isGroupChecked(1);
+  function validateCheckboxStep(step, rule, applyErrors = false) {
+    const checked = getChecked(rule.name);
+    let valid = checked.length >= (rule.min || 1);
+
+    if (valid && rule.otherField && isOtherSelected(rule.name)) {
+      const otherField = document.getElementById(rule.otherField);
+      valid = Boolean(otherField && otherField.value.trim());
+      if (!valid && applyErrors && otherField) {
+        otherField.classList.add("is-invalid-field");
+      }
     }
 
-    if (step === 2) {
-      return isGroupChecked(2);
+    if (!valid && applyErrors) {
+      markInvalid(step);
+      const first = getInputs(rule.name)[0];
+      first?.focus({ preventScroll: true });
     }
 
-    if (step === 3) {
-      const field = form.querySelector("#eval-challenge");
-      if (!field) return false;
-      return field.value.trim().length >= 30;
-    }
-
-    if (step === 4) {
-      return isGroupChecked(4);
-    }
-
-    if (step === 5) {
-      return getStepInputs(5).every((field) => field.value.trim() !== "" && field.checkValidity());
-    }
-
-    return true;
+    return valid;
   }
 
-  function validateStep(step, focusInvalid = false, applyErrors = false) {
-    const valid = isStepComplete(step);
-    if (!applyErrors) return valid;
+  function validateContactStep(step, rule, applyErrors = false) {
+    let valid = true;
+    let firstInvalid = null;
 
-    if (valid) {
-      clearStepInvalid(step);
-      return true;
-    }
+    rule.requiredFields.forEach((fieldId) => {
+      const field = document.getElementById(fieldId);
+      if (!field) {
+        valid = false;
+        return;
+      }
 
-    if (step === 1 || step === 2 || step === 4) {
-      markStepInvalid(step);
-      if (focusInvalid) getStepInputs(step)[0]?.focus({ preventScroll: true });
-      return false;
-    }
+      const value = field.value.trim();
+      const fieldValid = value !== "" && field.checkValidity();
 
-    if (step === 3) {
-      const field = form.querySelector("#eval-challenge");
-      markStepInvalid(step);
-      field?.classList.add("is-invalid-field");
-      if (focusInvalid) field?.focus({ preventScroll: true });
-      return false;
-    }
+      if (!fieldValid) {
+        valid = false;
+        if (!firstInvalid) firstInvalid = field;
+      }
 
-    if (step === 5) {
-      clearStepInvalid(5);
-      const fields = getStepInputs(5);
-      let firstInvalid = null;
-
-      fields.forEach((field) => {
-        const fieldValid = field.value.trim() !== "" && field.checkValidity();
+      if (applyErrors) {
         field.classList.toggle("is-invalid-field", !fieldValid);
-        if (!fieldValid && !firstInvalid) firstInvalid = field;
-      });
+      }
+    });
 
-      if (firstInvalid && focusInvalid) firstInvalid.focus({ preventScroll: true });
-      return !firstInvalid;
+    const descriptionField = document.getElementById(rule.descriptionField);
+    if (descriptionField) {
+      const lengthValid = descriptionField.value.trim().length >= (rule.minLength || 20);
+      if (!lengthValid) {
+        valid = false;
+        if (!firstInvalid) firstInvalid = descriptionField;
+      }
+      if (applyErrors) {
+        descriptionField.classList.toggle("is-invalid-field", !lengthValid);
+      }
     }
+
+    if (!valid && applyErrors) {
+      markInvalid(step);
+      firstInvalid?.focus({ preventScroll: true });
+    }
+
+    return valid;
+  }
+
+  function isStepComplete(step, applyErrors = false) {
+    const rule = stepRules[step];
+    if (!rule) return true;
+
+    if (!applyErrors) clearInvalidStyles(step);
+
+    if (rule.type === "radio") return validateRadioStep(step, rule, applyErrors);
+    if (rule.type === "checkbox") return validateCheckboxStep(step, rule, applyErrors);
+    if (rule.type === "contact") return validateContactStep(step, rule, applyErrors);
 
     return true;
   }
@@ -271,10 +224,16 @@
   function getSequentialUnlockedStep() {
     let unlocked = 1;
     for (let step = 1; step <= TOTAL_STEPS; step += 1) {
-      if (!isStepComplete(step)) break;
+      if (!isStepComplete(step, false)) break;
       unlocked = step + 1;
     }
     return Math.min(unlocked, TOTAL_STEPS);
+  }
+
+  function updateProgress() {
+    const percent = Math.round(((activeStep - 1) / (TOTAL_STEPS - 1)) * 100);
+    progressFill.style.width = `${percent}%`;
+    progressText.textContent = `PASO ${activeStep} DE ${TOTAL_STEPS}`;
   }
 
   function renderWizard() {
@@ -289,20 +248,28 @@
       const step = Number(btn.dataset.stepJump);
       const canOpen = step <= unlockedStep;
       const isCurrent = step === activeStep;
-      const isComplete = step < activeStep && isStepComplete(step);
+      const isComplete = step < activeStep && isStepComplete(step, false);
 
       btn.disabled = !canOpen;
       btn.classList.toggle("is-current", isCurrent);
       btn.classList.toggle("is-complete", isComplete);
       btn.setAttribute("aria-selected", isCurrent ? "true" : "false");
+      btn.textContent = `PASO ${step}`;
     });
 
     updateProgress();
   }
 
+  function focusStepFirstField(step) {
+    const stepEl = getStepElement(step);
+    if (!stepEl) return;
+    const first = stepEl.querySelector("input, textarea, select, button");
+    first?.focus?.({ preventScroll: true });
+  }
+
   function persistState() {
     const checks = {};
-    form.querySelectorAll('input[type="checkbox"]').forEach((input) => {
+    form.querySelectorAll('input[type="checkbox"], input[type="radio"]').forEach((input) => {
       checks[input.id] = input.checked;
     });
 
@@ -311,13 +278,7 @@
       values[field.id] = field.value;
     });
 
-    const payload = {
-      activeStep,
-      unlockedStep,
-      checks,
-      values,
-    };
-
+    const payload = { activeStep, unlockedStep, checks, values };
     sessionStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
   }
 
@@ -332,7 +293,9 @@
       if (payload.checks) {
         Object.entries(payload.checks).forEach(([id, checked]) => {
           const input = document.getElementById(id);
-          if (input && input.type === "checkbox") input.checked = Boolean(checked);
+          if (input && (input.type === "checkbox" || input.type === "radio")) {
+            input.checked = Boolean(checked);
+          }
         });
       }
 
@@ -342,6 +305,13 @@
           if (field) field.value = typeof value === "string" ? value : "";
         });
       }
+
+      [
+        ["applicationType", "eval-application-other"],
+        ["industrySector", "eval-sector-other"],
+        ["functionMain", "eval-function-other"],
+        ["materialConsidered", "eval-material-other"],
+      ].forEach(([name, target]) => setConditionalVisibility(name, target));
 
       unlockedStep = getSequentialUnlockedStep();
       const storedStep = Number(payload.activeStep || 1);
@@ -358,129 +328,135 @@
     persistState();
   }
 
-  function focusStepFirstField(step) {
-    const stepEl = steps.find((el) => Number(el.dataset.step) === step);
-    if (!stepEl) return;
-    const first = stepEl.querySelector("input, textarea, select, button");
-    first?.focus?.({ preventScroll: true });
-  }
-
   function handleNext(step) {
-    const valid = validateStep(step, true, true);
+    const rule = stepRules[step];
+    const valid = isStepComplete(step, true);
+
     if (!valid) {
-      setStatus(step === 3 ? "challengeTooShort" : "requiredFields");
+      if (rule?.otherField && isOtherSelected(rule.name)) {
+        setStatus("otherRequired");
+      } else if (step === 11) {
+        const description = document.getElementById("eval-project-description")?.value.trim() || "";
+        if (description.length > 0 && description.length < 20) {
+          setStatus("descriptionShort");
+        } else {
+          setStatus("required");
+        }
+      } else {
+        setStatus("required");
+      }
       return;
     }
 
-    if (statusState === "requiredFields" || statusState === "challengeTooShort") {
-      setStatus("idle");
-    }
-
+    setStatus("idle");
     unlockedStep = Math.max(unlockedStep, Math.min(step + 1, TOTAL_STEPS));
     goToStep(Math.min(step + 1, TOTAL_STEPS));
     focusStepFirstField(activeStep);
   }
 
-  function bindSinglePreferredPhase() {
-    const phaseInputs = getStepInputs(2);
-    phaseInputs.forEach((input) => {
-      input.addEventListener("change", () => {
-        if (input.checked) {
-          phaseInputs.forEach((other) => {
-            if (other !== input) other.checked = false;
-          });
+  function getFormPayload() {
+    const payload = {
+      timestamp: new Date().toISOString(),
+      requestType: getChecked("requestType")[0]?.value || "",
+      currentInfo: getChecked("currentInfo")[0]?.value || "",
+      projectPhase: getChecked("projectPhase")[0]?.value || "",
+      estimatedVolume: getChecked("estimatedVolume")[0]?.value || "",
+      dimensionsRange: getChecked("dimensionsRange")[0]?.value || "",
+      exactDimensions: (document.getElementById("eval-exact-dimensions")?.value || "").trim(),
+      applicationType: getChecked("applicationType")[0]?.value || "",
+      applicationOther: (document.getElementById("eval-application-other")?.value || "").trim(),
+      industrySector: getChecked("industrySector")[0]?.value || "",
+      industrySectorOther: (document.getElementById("eval-sector-other")?.value || "").trim(),
+      temperatureRange: getChecked("temperatureRange")[0]?.value || "",
+      functionMain: getChecked("functionMain").map((item) => item.value),
+      functionMainOther: (document.getElementById("eval-function-other")?.value || "").trim(),
+      materialConsidered: getChecked("materialConsidered")[0]?.value || "",
+      materialOther: (document.getElementById("eval-material-other")?.value || "").trim(),
+      contact: {
+        name: (document.getElementById("eval-name")?.value || "").trim(),
+        company: (document.getElementById("eval-company")?.value || "").trim(),
+        role: (document.getElementById("eval-role")?.value || "").trim(),
+        email: (document.getElementById("eval-email")?.value || "").trim(),
+        phone: (document.getElementById("eval-phone")?.value || "").trim(),
+        country: (document.getElementById("eval-country")?.value || "").trim(),
+      },
+      projectDescription: (document.getElementById("eval-project-description")?.value || "").trim(),
+      files: Array.from(document.getElementById("eval-files")?.files || []).map((file) => file.name),
+    };
+
+    return payload;
+  }
+
+  async function sendForm(payload) {
+    // Stub de envío hasta conectar endpoint real.
+    console.log("[Nanoker] Evaluation payload", payload);
+    await new Promise((resolve) => window.setTimeout(resolve, 900));
+    return { ok: true };
+  }
+
+  function bindStepEvents() {
+    stepButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const target = Number(btn.dataset.stepJump);
+        if (target <= unlockedStep) {
+          goToStep(target);
+          focusStepFirstField(target);
         }
-        clearStepInvalid(2);
+      });
+    });
+
+    form.querySelectorAll("[data-next-step]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const step = Number(btn.dataset.nextStep);
+        handleNext(step);
+      });
+    });
+
+    form.querySelectorAll("[data-prev-step]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const step = Number(btn.dataset.prevStep);
+        activeStep = Math.max(1, step);
+        renderWizard();
+        persistState();
+        focusStepFirstField(activeStep);
+      });
+    });
+
+    form.querySelectorAll('input[type="radio"], input[type="checkbox"], input[type="text"], input[type="email"], textarea, select').forEach((field) => {
+      const eventName = field.tagName === "SELECT" ? "change" : "input";
+      field.addEventListener(eventName, () => {
+        field.classList.remove("is-invalid-field");
+
+        setConditionalVisibility("applicationType", "eval-application-other");
+        setConditionalVisibility("industrySector", "eval-sector-other");
+        setConditionalVisibility("functionMain", "eval-function-other");
+        setConditionalVisibility("materialConsidered", "eval-material-other");
+
         unlockedStep = getSequentialUnlockedStep();
+        if (activeStep > unlockedStep) activeStep = unlockedStep;
+        renderWizard();
+        persistState();
+
+        if (statusEl.textContent) setStatus("idle");
+      });
+
+      field.addEventListener("change", () => {
+        field.classList.remove("is-invalid-field");
+
+        setConditionalVisibility("applicationType", "eval-application-other");
+        setConditionalVisibility("industrySector", "eval-sector-other");
+        setConditionalVisibility("functionMain", "eval-function-other");
+        setConditionalVisibility("materialConsidered", "eval-material-other");
+
+        unlockedStep = getSequentialUnlockedStep();
+        if (activeStep > unlockedStep) activeStep = unlockedStep;
         renderWizard();
         persistState();
       });
     });
   }
 
-  stepButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const target = Number(btn.dataset.stepJump);
-      if (target <= unlockedStep) {
-        goToStep(target);
-        focusStepFirstField(target);
-      }
-    });
-  });
-
-  form.querySelectorAll("[data-next-step]").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const step = Number(btn.dataset.nextStep);
-      handleNext(step);
-    });
-  });
-
-  form.querySelectorAll("[data-prev-step]").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const step = Number(btn.dataset.prevStep);
-      activeStep = Math.max(1, step);
-      renderWizard();
-      persistState();
-      focusStepFirstField(activeStep);
-    });
-  });
-
-  form.querySelectorAll('input[name="technology"]').forEach((input) => {
-    input.addEventListener("change", () => {
-      clearStepInvalid(1);
-      unlockedStep = getSequentialUnlockedStep();
-      renderWizard();
-      persistState();
-    });
-  });
-
-  form.querySelectorAll('input[name="needs"]').forEach((input) => {
-    input.addEventListener("change", () => {
-      clearStepInvalid(4);
-      unlockedStep = getSequentialUnlockedStep();
-      renderWizard();
-      persistState();
-    });
-  });
-
-  const challengeField = form.querySelector("#eval-challenge");
-  if (challengeField) {
-    challengeField.addEventListener("input", () => {
-      if (challengeField.classList.contains("is-invalid-field") && challengeField.value.trim().length >= 30) {
-        challengeField.classList.remove("is-invalid-field");
-        clearStepInvalid(3);
-      }
-      unlockedStep = getSequentialUnlockedStep();
-      renderWizard();
-      persistState();
-    });
-  }
-
-  getStepInputs(5).forEach((field) => {
-    field.addEventListener("input", () => {
-      if (field.classList.contains("is-invalid-field")) {
-        const fieldValid = field.value.trim() !== "" && field.checkValidity();
-        field.classList.toggle("is-invalid-field", !fieldValid);
-      }
-      if (isStepComplete(5)) clearStepInvalid(5);
-      unlockedStep = getSequentialUnlockedStep();
-      renderWizard();
-      persistState();
-    });
-
-    field.addEventListener("change", () => {
-      if (field.classList.contains("is-invalid-field")) {
-        const fieldValid = field.value.trim() !== "" && field.checkValidity();
-        field.classList.toggle("is-invalid-field", !fieldValid);
-      }
-      if (isStepComplete(5)) clearStepInvalid(5);
-      unlockedStep = getSequentialUnlockedStep();
-      renderWizard();
-      persistState();
-    });
-  });
-
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     const unlocked = getSequentialUnlockedStep();
@@ -493,9 +469,14 @@
       return;
     }
 
-    const valid = validateStep(5, true, true);
+    const valid = isStepComplete(11, true);
     if (!valid) {
-      setStatus("requiredFields");
+      const description = document.getElementById("eval-project-description")?.value.trim() || "";
+      if (description.length > 0 && description.length < 20) {
+        setStatus("descriptionShort");
+      } else {
+        setStatus("required");
+      }
       return;
     }
 
@@ -504,78 +485,38 @@
     updateSubmitText();
     setStatus("sending");
 
-    window.setTimeout(() => {
-      try {
-        form.reset();
-        form.querySelectorAll(".is-invalid-field").forEach((el) => el.classList.remove("is-invalid-field"));
-        activeStep = 1;
-        unlockedStep = 1;
-        sessionStorage.removeItem(STORAGE_KEY);
-        renderWizard();
-        setStatus("success");
-      } catch (_error) {
-        setStatus("error");
-      } finally {
-        isSubmitting = false;
-        submitBtn.disabled = false;
-        updateSubmitText();
-      }
-    }, 1100);
+    try {
+      const payload = getFormPayload();
+      await sendForm(payload);
+
+      form.reset();
+      form.querySelectorAll(".is-invalid-field").forEach((el) => el.classList.remove("is-invalid-field"));
+      [
+        ["applicationType", "eval-application-other"],
+        ["industrySector", "eval-sector-other"],
+        ["functionMain", "eval-function-other"],
+        ["materialConsidered", "eval-material-other"],
+      ].forEach(([name, target]) => setConditionalVisibility(name, target));
+
+      activeStep = 1;
+      unlockedStep = 1;
+      sessionStorage.removeItem(STORAGE_KEY);
+      renderWizard();
+      setStatus("success");
+    } catch (_error) {
+      setStatus("error");
+    } finally {
+      isSubmitting = false;
+      submitBtn.disabled = false;
+      updateSubmitText();
+    }
   });
 
-  function syncI18nRuntimeText() {
-    stepButtons.forEach((btn) => {
-      const step = Number(btn.dataset.stepJump);
-      if (!Number.isInteger(step) || step < 1 || step > TOTAL_STEPS) return;
-      btn.textContent = tr(`evaluation.wizard.steps.step${step}`, btn.textContent);
-    });
-
-    updateProgress();
-    updateSubmitText();
-
-    if (statusState !== "idle") {
-      setStatus(statusState);
-    }
-  }
-
   restoreState();
-  bindSinglePreferredPhase();
-  clearStepInvalid(1);
-  clearStepInvalid(2);
-  clearStepInvalid(3);
-  clearStepInvalid(4);
-  clearStepInvalid(5);
+  bindStepEvents();
   unlockedStep = getSequentialUnlockedStep();
   if (activeStep > unlockedStep) activeStep = unlockedStep;
   renderWizard();
   updateSubmitText();
   persistState();
-
-  window.addEventListener("lang:change", (event) => {
-    runtimeLang = normalizeLang(event.detail?.lang || runtimeLang);
-    import("./lang.js?v=11")
-      .then((mod) => {
-        if (typeof mod.applyTranslations === "function") {
-          mod.applyTranslations(document.getElementById("eval-wizard") || document);
-        }
-        syncI18nRuntimeText();
-      })
-      .catch(() => {
-        syncI18nRuntimeText();
-      });
-  });
-
-  import("./lang.js?v=11")
-    .then((mod) => {
-      if (typeof mod.t === "function") {
-        translate = mod.t;
-        if (typeof mod.getLang === "function") {
-          runtimeLang = normalizeLang(mod.getLang());
-        }
-        syncI18nRuntimeText();
-      }
-    })
-    .catch(() => {
-      // Keep local fallbacks.
-    });
 })();

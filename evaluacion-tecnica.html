@@ -143,169 +143,442 @@
 
             <div class="wizard-progress" aria-hidden="true">
               <div class="wizard-progress__bar"><span id="eval-progress-fill"></span></div>
-              <p id="eval-progress-text" data-i18n="evaluation.wizard.progress">STEP 1 OF 5</p>
+              <p id="eval-progress-text">PASO 1 DE 11</p>
             </div>
 
             <div class="wizard-steps" role="tablist" aria-label="Pasos de evaluación">
-              <button type="button" class="wizard-stepBtn is-current" data-step-jump="1" role="tab" aria-selected="true" data-i18n="evaluation.wizard.steps.step1">PASO 1</button>
-              <button type="button" class="wizard-stepBtn" data-step-jump="2" role="tab" aria-selected="false" data-i18n="evaluation.wizard.steps.step2">PASO 2</button>
-              <button type="button" class="wizard-stepBtn" data-step-jump="3" role="tab" aria-selected="false" data-i18n="evaluation.wizard.steps.step3">PASO 3</button>
-              <button type="button" class="wizard-stepBtn" data-step-jump="4" role="tab" aria-selected="false" data-i18n="evaluation.wizard.steps.step4">PASO 4</button>
-              <button type="button" class="wizard-stepBtn" data-step-jump="5" role="tab" aria-selected="false" data-i18n="evaluation.wizard.steps.step5">PASO 5</button>
+              <button type="button" class="wizard-stepBtn is-current" data-step-jump="1" role="tab" aria-selected="true">PASO 1</button>
+              <button type="button" class="wizard-stepBtn" data-step-jump="2" role="tab" aria-selected="false">PASO 2</button>
+              <button type="button" class="wizard-stepBtn" data-step-jump="3" role="tab" aria-selected="false">PASO 3</button>
+              <button type="button" class="wizard-stepBtn" data-step-jump="4" role="tab" aria-selected="false">PASO 4</button>
+              <button type="button" class="wizard-stepBtn" data-step-jump="5" role="tab" aria-selected="false">PASO 5</button>
+              <button type="button" class="wizard-stepBtn" data-step-jump="6" role="tab" aria-selected="false">PASO 6</button>
+              <button type="button" class="wizard-stepBtn" data-step-jump="7" role="tab" aria-selected="false">PASO 7</button>
+              <button type="button" class="wizard-stepBtn" data-step-jump="8" role="tab" aria-selected="false">PASO 8</button>
+              <button type="button" class="wizard-stepBtn" data-step-jump="9" role="tab" aria-selected="false">PASO 9</button>
+              <button type="button" class="wizard-stepBtn" data-step-jump="10" role="tab" aria-selected="false">PASO 10</button>
+              <button type="button" class="wizard-stepBtn" data-step-jump="11" role="tab" aria-selected="false">PASO 11</button>
             </div>
 
             <form id="evaluation-form" novalidate>
               <section class="wizard-step is-active" data-step="1" aria-hidden="false">
-                <h3 data-i18n="evaluation.form.step1.title">Tipo de tecnología</h3>
-                <p class="wizard-help" data-i18n="evaluation.form.step1.help">Selecciona una o varias categorías.</p>
-                <div class="chip-grid" data-validate-group="technology">
-                  <input class="chip-input" type="checkbox" id="tech-ai" name="technology" value="ai" />
-                  <label class="chip" for="tech-ai" data-i18n="evaluation.form.step1.options.ai">IA</label>
+                <h3>Tipo de solicitud</h3>
+                <p class="wizard-help">¿Qué tipo de ayuda necesita?</p>
+                <div class="chip-grid">
+                  <input class="chip-input" type="radio" id="request-manufacturing" name="requestType" value="fabricacion_pieza" />
+                  <label class="chip" for="request-manufacturing">Fabricación de una pieza en material cerámico o cristalino avanzado (incluye evaluación de viabilidad)</label>
 
-                  <input class="chip-input" type="checkbox" id="tech-robotics" name="technology" value="robotics" />
-                  <label class="chip" for="tech-robotics" data-i18n="evaluation.form.step1.options.robotics">Robótica</label>
+                  <input class="chip-input" type="radio" id="request-selection" name="requestType" value="seleccion_material" />
+                  <label class="chip" for="request-selection">Selección del material adecuado para una aplicación</label>
 
-                  <input class="chip-input" type="checkbox" id="tech-electronic" name="technology" value="electronic_hardware" />
-                  <label class="chip" for="tech-electronic" data-i18n="evaluation.form.step1.options.electronics">Hardware electrónico</label>
+                  <input class="chip-input" type="radio" id="request-rd" name="requestType" value="desarrollo_id" />
+                  <label class="chip" for="request-rd">Desarrollo tecnológico o proyecto de I+D</label>
 
-                  <input class="chip-input" type="checkbox" id="tech-embedded" name="technology" value="embedded_systems" />
-                  <label class="chip" for="tech-embedded" data-i18n="evaluation.form.step1.options.embedded">Sistemas embebidos</label>
-
-                  <input class="chip-input" type="checkbox" id="tech-iot" name="technology" value="iot" />
-                  <label class="chip" for="tech-iot" data-i18n="evaluation.form.step1.options.iot">IoT</label>
-
-                  <input class="chip-input" type="checkbox" id="tech-deeptech" name="technology" value="applied_science_deeptech" />
-                  <label class="chip" for="tech-deeptech" data-i18n="evaluation.form.step1.options.deeptech">Ciencia aplicada / DeepTech</label>
-
-                  <input class="chip-input" type="checkbox" id="tech-other" name="technology" value="other" />
-                  <label class="chip" for="tech-other" data-i18n="evaluation.form.step1.options.other">Otro</label>
+                  <input class="chip-input" type="radio" id="request-general" name="requestType" value="consulta_general" />
+                  <label class="chip" for="request-general">Solicitud de presupuesto o consulta general</label>
                 </div>
 
                 <div class="wizard-actions">
-                  <button type="button" class="step-next-btn" data-next-step="1" data-i18n="evaluation.form.actions.continue">Continuar</button>
+                  <button type="button" class="step-next-btn" data-next-step="1">Continuar</button>
                 </div>
               </section>
 
               <section class="wizard-step" data-step="2" aria-hidden="true">
-                <h3 data-i18n="evaluation.form.step2.title">Fase del proyecto</h3>
-                <p class="wizard-help" data-i18n="evaluation.form.step2.help">Selecciona la fase actual.</p>
-                <div class="chip-grid" data-validate-group="phase">
-                  <input class="chip-input" type="checkbox" id="phase-concept" name="phase" value="concept" />
-                  <label class="chip" for="phase-concept" data-i18n="evaluation.form.step2.options.concept">Concepto</label>
+                <h3>Situación actual</h3>
+                <p class="wizard-help">¿Qué información tiene actualmente sobre la pieza o aplicación?</p>
+                <div class="chip-grid">
+                  <input class="chip-input" type="radio" id="current-drawings" name="currentInfo" value="planos_tecnicos" />
+                  <label class="chip" for="current-drawings">Plano/s técnico/s</label>
 
-                  <input class="chip-input" type="checkbox" id="phase-prototype" name="phase" value="prototype" />
-                  <label class="chip" for="phase-prototype" data-i18n="evaluation.form.step2.options.prototype">Prototipo</label>
+                  <input class="chip-input" type="radio" id="current-cad" name="currentInfo" value="modelo_3d_cad" />
+                  <label class="chip" for="current-cad">Modelo 3D (CAD)</label>
 
-                  <input class="chip-input" type="checkbox" id="phase-mvp" name="phase" value="mvp" />
-                  <label class="chip" for="phase-mvp" data-i18n="evaluation.form.step2.options.mvp">MVP</label>
+                  <input class="chip-input" type="radio" id="current-existing-part" name="currentInfo" value="pieza_existente" />
+                  <label class="chip" for="current-existing-part">Una pieza existente</label>
 
-                  <input class="chip-input" type="checkbox" id="phase-product" name="phase" value="functional_product" />
-                  <label class="chip" for="phase-product" data-i18n="evaluation.form.step2.options.functional">Producto funcional</label>
+                  <input class="chip-input" type="radio" id="current-functional" name="currentInfo" value="requisitos_funcionales" />
+                  <label class="chip" for="current-functional">Requisitos funcionales definidos</label>
 
-                  <input class="chip-input" type="checkbox" id="phase-scale" name="phase" value="scale_industrialization" />
-                  <label class="chip" for="phase-scale" data-i18n="evaluation.form.step2.options.scale">Escalado/industrialización</label>
+                  <input class="chip-input" type="radio" id="current-idea" name="currentInfo" value="idea_inicial" />
+                  <label class="chip" for="current-idea">Solo una idea inicial</label>
                 </div>
 
                 <div class="wizard-actions wizard-actions--duo">
-                  <button type="button" class="wizard-back-btn" data-prev-step="1" data-i18n="evaluation.form.actions.back">Atrás</button>
-                  <button type="button" class="step-next-btn" data-next-step="2" data-i18n="evaluation.form.actions.continue">Continuar</button>
+                  <button type="button" class="wizard-back-btn" data-prev-step="1">Atrás</button>
+                  <button type="button" class="step-next-btn" data-next-step="2">Continuar</button>
                 </div>
               </section>
 
               <section class="wizard-step" data-step="3" aria-hidden="true">
-                <h3 data-i18n="evaluation.form.step3.title">Desafío técnico</h3>
-                <p class="wizard-help" data-i18n="evaluation.form.step3.help">Comparte el problema clave que necesitas resolver.</p>
-                <label for="eval-challenge" class="sr-only" data-i18n="evaluation.form.step3.label">Desafío técnico</label>
-                <textarea
-                  id="eval-challenge"
-                  name="challenge"
-                  rows="8"
-                  required
-                  minlength="30"
-                  data-i18n-placeholder="evaluation.form.step3.placeholder"
-                  placeholder="Describe arquitectura actual, cuellos de botella técnicos, condiciones de operación y métricas objetivo."
-                ></textarea>
+                <h3>Fase del proyecto</h3>
+                <p class="wizard-help">¿En qué fase se encuentra el proyecto?</p>
+                <div class="chip-grid">
+                  <input class="chip-input" type="radio" id="phase-concept" name="projectPhase" value="concepto_estudio" />
+                  <label class="chip" for="phase-concept">Concepto / estudio inicial</label>
+
+                  <input class="chip-input" type="radio" id="phase-design" name="projectPhase" value="desarrollo_diseno" />
+                  <label class="chip" for="phase-design">Desarrollo o diseño</label>
+
+                  <input class="chip-input" type="radio" id="phase-prototype" name="projectPhase" value="prototipo" />
+                  <label class="chip" for="phase-prototype">Prototipo</label>
+
+                  <input class="chip-input" type="radio" id="phase-series" name="projectPhase" value="produccion_serie" />
+                  <label class="chip" for="phase-series">Producción en serie</label>
+
+                  <input class="chip-input" type="radio" id="phase-improvement" name="projectPhase" value="producto_mejora" />
+                  <label class="chip" for="phase-improvement">Producto existente que necesita mejora</label>
+                </div>
 
                 <div class="wizard-actions wizard-actions--duo">
-                  <button type="button" class="wizard-back-btn" data-prev-step="2" data-i18n="evaluation.form.actions.back">Atrás</button>
-                  <button type="button" class="step-next-btn" data-next-step="3" data-i18n="evaluation.form.actions.continue">Continuar</button>
+                  <button type="button" class="wizard-back-btn" data-prev-step="2">Atrás</button>
+                  <button type="button" class="step-next-btn" data-next-step="3">Continuar</button>
                 </div>
               </section>
 
               <section class="wizard-step" data-step="4" aria-hidden="true">
-                <h3 data-i18n="evaluation.form.step4.title">Necesidades de ingeniería</h3>
-                <p class="wizard-help" data-i18n="evaluation.form.step4.help">Selecciona las áreas donde necesitas soporte.</p>
-                <div class="chip-grid" data-validate-group="needs">
-                  <input class="chip-input" type="checkbox" id="need-hw-arch" name="needs" value="hardware_architecture" />
-                  <label class="chip" for="need-hw-arch" data-i18n="evaluation.form.step4.options.hardwareArchitecture">Arquitectura hardware</label>
+                <h3>Cantidad estimada</h3>
+                <p class="wizard-help">¿Qué volumen aproximado necesitaría?</p>
+                <div class="chip-grid">
+                  <input class="chip-input" type="radio" id="qty-prototype" name="estimatedVolume" value="prototipo_1_10" />
+                  <label class="chip" for="qty-prototype">Prototipo (1-10 unidades)</label>
 
-                  <input class="chip-input" type="checkbox" id="need-materials" name="needs" value="materials_component_selection" />
-                  <label class="chip" for="need-materials" data-i18n="evaluation.form.step4.options.materialSelection">Selección de materiales/componentes</label>
+                  <input class="chip-input" type="radio" id="qty-small" name="estimatedVolume" value="serie_pequena_10_100" />
+                  <label class="chip" for="qty-small">Serie pequeña (10-100)</label>
 
-                  <input class="chip-input" type="checkbox" id="need-embedded" name="needs" value="embedded_systems" />
-                  <label class="chip" for="need-embedded" data-i18n="evaluation.form.step4.options.embedded">Sistemas embebidos</label>
+                  <input class="chip-input" type="radio" id="qty-medium" name="estimatedVolume" value="serie_media_100_1000" />
+                  <label class="chip" for="qty-medium">Serie media (100-1000)</label>
 
-                  <input class="chip-input" type="checkbox" id="need-edge-ai" name="needs" value="edge_ai" />
-                  <label class="chip" for="need-edge-ai" data-i18n="evaluation.form.step4.options.edgeAi">Edge AI</label>
+                  <input class="chip-input" type="radio" id="qty-industrial" name="estimatedVolume" value="produccion_industrial_1000" />
+                  <label class="chip" for="qty-industrial">Producción industrial (+1000)</label>
 
-                  <input class="chip-input" type="checkbox" id="need-performance" name="needs" value="performance_optimization" />
-                  <label class="chip" for="need-performance" data-i18n="evaluation.form.step4.options.performance">Optimización rendimiento</label>
-
-                  <input class="chip-input" type="checkbox" id="need-industrialization" name="needs" value="industrialization_manufacturing" />
-                  <label class="chip" for="need-industrialization" data-i18n="evaluation.form.step4.options.industrialization">Industrialización/fabricación</label>
-
-                  <input class="chip-input" type="checkbox" id="need-validation" name="needs" value="validation_testing" />
-                  <label class="chip" for="need-validation" data-i18n="evaluation.form.step4.options.validation">Validación/ensayos</label>
-
-                  <input class="chip-input" type="checkbox" id="need-other" name="needs" value="other" />
-                  <label class="chip" for="need-other" data-i18n="evaluation.form.step4.options.other">Otro</label>
+                  <input class="chip-input" type="radio" id="qty-undefined" name="estimatedVolume" value="no_definido" />
+                  <label class="chip" for="qty-undefined">Aún no definido</label>
                 </div>
 
                 <div class="wizard-actions wizard-actions--duo">
-                  <button type="button" class="wizard-back-btn" data-prev-step="3" data-i18n="evaluation.form.actions.back">Atrás</button>
-                  <button type="button" class="step-next-btn" data-next-step="4" data-i18n="evaluation.form.actions.continue">Continuar</button>
+                  <button type="button" class="wizard-back-btn" data-prev-step="3">Atrás</button>
+                  <button type="button" class="step-next-btn" data-next-step="4">Continuar</button>
                 </div>
               </section>
 
               <section class="wizard-step" data-step="5" aria-hidden="true">
-                <h3 data-i18n="evaluation.form.step5.title">Datos de contacto</h3>
-                <p class="wizard-help" data-i18n="evaluation.form.step5.help">Necesitamos estos datos para coordinar una sesión técnica.</p>
-                <div class="input-grid">
-                  <div>
-                    <label for="eval-name" data-i18n="evaluation.form.step5.fields.name">Nombre *</label>
-                    <input id="eval-name" name="name" type="text" required />
-                  </div>
+                <h3>Dimensiones aproximadas</h3>
+                <p class="wizard-help">¿Cuáles son las dimensiones aproximadas de la pieza?</p>
+                <div class="chip-grid">
+                  <input class="chip-input" type="radio" id="dim-lt10" name="dimensionsRange" value="lt_10mm" />
+                  <label class="chip" for="dim-lt10">&lt; 10 mm</label>
 
-                  <div>
-                    <label for="eval-email" data-i18n="evaluation.form.step5.fields.email">Email profesional *</label>
-                    <input id="eval-email" name="email" type="email" required />
-                  </div>
+                  <input class="chip-input" type="radio" id="dim-10-50" name="dimensionsRange" value="10_50mm" />
+                  <label class="chip" for="dim-10-50">10 - 50 mm</label>
 
-                  <div>
-                    <label for="eval-company" data-i18n="evaluation.form.step5.fields.company">Empresa *</label>
-                    <input id="eval-company" name="company" type="text" required />
-                  </div>
+                  <input class="chip-input" type="radio" id="dim-50-200" name="dimensionsRange" value="50_200mm" />
+                  <label class="chip" for="dim-50-200">50 - 200 mm</label>
 
-                  <div>
-                    <label for="eval-role" data-i18n="evaluation.form.step5.fields.role">Cargo *</label>
-                    <input id="eval-role" name="role" type="text" required />
-                  </div>
+                  <input class="chip-input" type="radio" id="dim-200-500" name="dimensionsRange" value="200_500mm" />
+                  <label class="chip" for="dim-200-500">200 - 500 mm</label>
 
+                  <input class="chip-input" type="radio" id="dim-gt500" name="dimensionsRange" value="gt_500mm" />
+                  <label class="chip" for="dim-gt500">500 mm</label>
+
+                  <input class="chip-input" type="radio" id="dim-undefined" name="dimensionsRange" value="no_definido" />
+                  <label class="chip" for="dim-undefined">No definido todavía</label>
+                </div>
+
+                <div class="input-grid" style="margin-top: 12px;">
                   <div class="input-grid__full">
-                    <label for="eval-start" data-i18n="evaluation.form.step5.fields.start">Cuándo necesitas empezar *</label>
-                    <select id="eval-start" name="start" required>
-                      <option value="" data-i18n="evaluation.form.step5.startOptions.placeholder">Selecciona una opción</option>
-                      <option value="immediate" data-i18n="evaluation.form.step5.startOptions.immediate">Inmediato</option>
-                      <option value="1_3_months" data-i18n="evaluation.form.step5.startOptions.oneThreeMonths">1-3 meses</option>
-                      <option value="3_6_months" data-i18n="evaluation.form.step5.startOptions.threeSixMonths">3-6 meses</option>
-                      <option value="exploring" data-i18n="evaluation.form.step5.startOptions.exploring">Explorando</option>
-                    </select>
+                    <label for="eval-exact-dimensions">Dimensiones exactas (mm)</label>
+                    <input id="eval-exact-dimensions" name="exactDimensions" type="text" placeholder="Ej: 30x20x5" />
                   </div>
                 </div>
 
                 <div class="wizard-actions wizard-actions--duo">
-                  <button type="button" class="wizard-back-btn" data-prev-step="4" data-i18n="evaluation.form.actions.back">Atrás</button>
-                  <button type="submit" class="submit-btn" id="eval-submit-btn" data-i18n="evaluation.form.step5.submit">Solicitar evaluación técnica</button>
+                  <button type="button" class="wizard-back-btn" data-prev-step="4">Atrás</button>
+                  <button type="button" class="step-next-btn" data-next-step="5">Continuar</button>
+                </div>
+              </section>
+
+              <section class="wizard-step" data-step="6" aria-hidden="true">
+                <h3>Aplicación o entorno tecnológico</h3>
+                <p class="wizard-help">¿En qué tipo de aplicación se utilizará la pieza?</p>
+                <div class="chip-grid">
+                  <input class="chip-input" type="radio" id="app-semiconductors" name="applicationType" value="semiconductores_microelectronica" />
+                  <label class="chip" for="app-semiconductors">Semiconductores / microelectrónica (Fab, epitaxia, wafers)</label>
+
+                  <input class="chip-input" type="radio" id="app-optics" name="applicationType" value="optica_fotonica" />
+                  <label class="chip" for="app-optics">Óptica / fotónica</label>
+
+                  <input class="chip-input" type="radio" id="app-energy" name="applicationType" value="energia" />
+                  <label class="chip" for="app-energy">Energía</label>
+
+                  <input class="chip-input" type="radio" id="app-electronics" name="applicationType" value="electronica" />
+                  <label class="chip" for="app-electronics">Electrónica</label>
+
+                  <input class="chip-input" type="radio" id="app-industry" name="applicationType" value="industria_maquinaria" />
+                  <label class="chip" for="app-industry">Industria / maquinaria</label>
+
+                  <input class="chip-input" type="radio" id="app-space" name="applicationType" value="aeroespacial_espacio" />
+                  <label class="chip" for="app-space">Aeroespacial / espacio</label>
+
+                  <input class="chip-input" type="radio" id="app-medical" name="applicationType" value="medicina_biotecnologia" />
+                  <label class="chip" for="app-medical">Medicina / biotecnología</label>
+
+                  <input class="chip-input" type="radio" id="app-research" name="applicationType" value="investigacion_cientifica" />
+                  <label class="chip" for="app-research">Investigación científica</label>
+
+                  <input class="chip-input" type="radio" id="app-vacuum" name="applicationType" value="vacio" />
+                  <label class="chip" for="app-vacuum">Vacío</label>
+
+                  <input class="chip-input" type="radio" id="app-chemical" name="applicationType" value="ambiente_quimico_corrosivo" />
+                  <label class="chip" for="app-chemical">Ambiente químico o corrosivo</label>
+
+                  <input class="chip-input" type="radio" id="app-wear" name="applicationType" value="alto_desgaste_abrasion" />
+                  <label class="chip" for="app-wear">Alto desgaste o abrasión</label>
+
+                  <input class="chip-input" type="radio" id="app-other" name="applicationType" value="other" data-other-target="eval-application-other" />
+                  <label class="chip" for="app-other">Otro</label>
+                </div>
+
+                <div class="input-grid conditional-field is-hidden" data-conditional-wrapper="eval-application-other">
+                  <div class="input-grid__full">
+                    <label for="eval-application-other">Especifica</label>
+                    <input id="eval-application-other" name="applicationOther" type="text" />
+                  </div>
+                </div>
+
+                <div class="wizard-actions wizard-actions--duo">
+                  <button type="button" class="wizard-back-btn" data-prev-step="5">Atrás</button>
+                  <button type="button" class="step-next-btn" data-next-step="6">Continuar</button>
+                </div>
+              </section>
+
+              <section class="wizard-step" data-step="7" aria-hidden="true">
+                <h3>Sector industrial</h3>
+                <p class="wizard-help">¿En qué sector se enmarca principalmente el proyecto?</p>
+                <div class="chip-grid">
+                  <input class="chip-input" type="radio" id="sector-semiconductors" name="industrySector" value="semiconductores" />
+                  <label class="chip" for="sector-semiconductors">Semiconductores</label>
+
+                  <input class="chip-input" type="radio" id="sector-space" name="industrySector" value="aeroespacial_espacio" />
+                  <label class="chip" for="sector-space">Aeroespacial / espacio</label>
+
+                  <input class="chip-input" type="radio" id="sector-energy" name="industrySector" value="energia" />
+                  <label class="chip" for="sector-energy">Energía</label>
+
+                  <input class="chip-input" type="radio" id="sector-industrial" name="industrySector" value="industrial_maquinaria" />
+                  <label class="chip" for="sector-industrial">Industrial / maquinaria</label>
+
+                  <input class="chip-input" type="radio" id="sector-electronics" name="industrySector" value="electronica" />
+                  <label class="chip" for="sector-electronics">Electrónica</label>
+
+                  <input class="chip-input" type="radio" id="sector-medical" name="industrySector" value="medicina_biotech" />
+                  <label class="chip" for="sector-medical">Medicina / biotech</label>
+
+                  <input class="chip-input" type="radio" id="sector-research" name="industrySector" value="investigacion_laboratorio" />
+                  <label class="chip" for="sector-research">Investigación / laboratorio</label>
+
+                  <input class="chip-input" type="radio" id="sector-other" name="industrySector" value="other" data-other-target="eval-sector-other" />
+                  <label class="chip" for="sector-other">Otro</label>
+                </div>
+
+                <div class="input-grid conditional-field is-hidden" data-conditional-wrapper="eval-sector-other">
+                  <div class="input-grid__full">
+                    <label for="eval-sector-other">Especifica</label>
+                    <input id="eval-sector-other" name="industrySectorOther" type="text" />
+                  </div>
+                </div>
+
+                <div class="wizard-actions wizard-actions--duo">
+                  <button type="button" class="wizard-back-btn" data-prev-step="6">Atrás</button>
+                  <button type="button" class="step-next-btn" data-next-step="7">Continuar</button>
+                </div>
+              </section>
+
+              <section class="wizard-step" data-step="8" aria-hidden="true">
+                <h3>Temperatura de operación</h3>
+                <p class="wizard-help">¿En qué rango de temperatura operará aproximadamente la pieza?</p>
+                <div class="chip-grid">
+                  <input class="chip-input" type="radio" id="temp-cryo" name="temperatureRange" value="lt_minus_100" />
+                  <label class="chip" for="temp-cryo">&lt; -100 °C (criogenia / espacio)</label>
+
+                  <input class="chip-input" type="radio" id="temp-minus100-0" name="temperatureRange" value="minus_100_0" />
+                  <label class="chip" for="temp-minus100-0">-100 - 0 °C</label>
+
+                  <input class="chip-input" type="radio" id="temp-0-200" name="temperatureRange" value="0_200" />
+                  <label class="chip" for="temp-0-200">0 - 200 °C</label>
+
+                  <input class="chip-input" type="radio" id="temp-200-800" name="temperatureRange" value="200_800" />
+                  <label class="chip" for="temp-200-800">200 - 800 °C</label>
+
+                  <input class="chip-input" type="radio" id="temp-gt800" name="temperatureRange" value="gt_800" />
+                  <label class="chip" for="temp-gt800">&gt; 800 °C</label>
+
+                  <input class="chip-input" type="radio" id="temp-unknown" name="temperatureRange" value="unknown" />
+                  <label class="chip" for="temp-unknown">No lo sé todavía</label>
+                </div>
+
+                <div class="wizard-actions wizard-actions--duo">
+                  <button type="button" class="wizard-back-btn" data-prev-step="7">Atrás</button>
+                  <button type="button" class="step-next-btn" data-next-step="8">Continuar</button>
+                </div>
+              </section>
+
+              <section class="wizard-step" data-step="9" aria-hidden="true">
+                <h3>Función principal de la pieza</h3>
+                <p class="wizard-help">¿Qué función debe cumplir principalmente la pieza? (puede seleccionar varias)</p>
+                <div class="chip-grid">
+                  <input class="chip-input" type="checkbox" id="func-wear" name="functionMain" value="resistencia_desgaste_abrasion" />
+                  <label class="chip" for="func-wear">Resistencia al desgaste o abrasión</label>
+
+                  <input class="chip-input" type="checkbox" id="func-hardness" name="functionMain" value="alta_dureza" />
+                  <label class="chip" for="func-hardness">Alta dureza</label>
+
+                  <input class="chip-input" type="checkbox" id="func-insulation" name="functionMain" value="aislamiento_electrico" />
+                  <label class="chip" for="func-insulation">Aislamiento eléctrico</label>
+
+                  <input class="chip-input" type="checkbox" id="func-high-temp" name="functionMain" value="resistencia_altas_temperaturas" />
+                  <label class="chip" for="func-high-temp">Resistencia a altas temperaturas</label>
+
+                  <input class="chip-input" type="checkbox" id="func-chemical" name="functionMain" value="resistencia_quimica_corrosion" />
+                  <label class="chip" for="func-chemical">Resistencia química o a la corrosión</label>
+
+                  <input class="chip-input" type="checkbox" id="func-mechanical" name="functionMain" value="alta_resistencia_mecanica_estructural" />
+                  <label class="chip" for="func-mechanical">Alta resistencia mecánica o estructural</label>
+
+                  <input class="chip-input" type="checkbox" id="func-tribology" name="functionMain" value="baja_friccion_tribologia" />
+                  <label class="chip" for="func-tribology">Baja fricción o propiedades tribológicas</label>
+
+                  <input class="chip-input" type="checkbox" id="func-thermal" name="functionMain" value="gestion_termica_conductividad" />
+                  <label class="chip" for="func-thermal">Gestión térmica / alta conductividad térmica</label>
+
+                  <input class="chip-input" type="checkbox" id="func-stability" name="functionMain" value="estabilidad_dimensional_precision" />
+                  <label class="chip" for="func-stability">Estabilidad dimensional o precisión</label>
+
+                  <input class="chip-input" type="checkbox" id="func-biocompatibility" name="functionMain" value="biocompatibilidad" />
+                  <label class="chip" for="func-biocompatibility">Biocompatibilidad</label>
+
+                  <input class="chip-input" type="checkbox" id="func-optical" name="functionMain" value="aplicacion_optica" />
+                  <label class="chip" for="func-optical">Aplicación óptica</label>
+
+                  <input class="chip-input" type="checkbox" id="func-other" name="functionMain" value="other" data-other-target="eval-function-other" />
+                  <label class="chip" for="func-other">Otra</label>
+                </div>
+
+                <div class="input-grid conditional-field is-hidden" data-conditional-wrapper="eval-function-other">
+                  <div class="input-grid__full">
+                    <label for="eval-function-other">Especifica</label>
+                    <input id="eval-function-other" name="functionMainOther" type="text" />
+                  </div>
+                </div>
+
+                <div class="wizard-actions wizard-actions--duo">
+                  <button type="button" class="wizard-back-btn" data-prev-step="8">Atrás</button>
+                  <button type="button" class="step-next-btn" data-next-step="9">Continuar</button>
+                </div>
+              </section>
+
+              <section class="wizard-step" data-step="10" aria-hidden="true">
+                <h3>Material considerado</h3>
+                <p class="wizard-help">¿Qué material está considerando para su aplicación?</p>
+                <div class="chip-grid">
+                  <input class="chip-input" type="radio" id="mat-sapphire" name="materialConsidered" value="zafiro" />
+                  <label class="chip" for="mat-sapphire">Zafiro (EPI / SOS / soluciones ópticas)</label>
+
+                  <input class="chip-input" type="radio" id="mat-sic" name="materialConsidered" value="sic" />
+                  <label class="chip" for="mat-sic">Carburo de silicio (SiC) - wafers o componentes para Fab</label>
+
+                  <input class="chip-input" type="radio" id="mat-cvd-diamond" name="materialConsidered" value="diamante_cvd" />
+                  <label class="chip" for="mat-cvd-diamond">Diamante CVD - cuántica, óptica o gestión térmica</label>
+
+                  <input class="chip-input" type="radio" id="mat-alumina" name="materialConsidered" value="alumina" />
+                  <label class="chip" for="mat-alumina">Alúmina (Al₂O₃)</label>
+
+                  <input class="chip-input" type="radio" id="mat-zirconia" name="materialConsidered" value="circona_estabilizada" />
+                  <label class="chip" for="mat-zirconia">Circona estabilizada (ZrO₂ / Y-TZP)</label>
+
+                  <input class="chip-input" type="radio" id="mat-b4c" name="materialConsidered" value="b4c" />
+                  <label class="chip" for="mat-b4c">Carburo de boro (B₄C)</label>
+
+                  <input class="chip-input" type="radio" id="mat-aln" name="materialConsidered" value="aln" />
+                  <label class="chip" for="mat-aln">Nitruro de aluminio (AlN)</label>
+
+                  <input class="chip-input" type="radio" id="mat-nanocomposites" name="materialConsidered" value="nanocompuestos_ceramicos" />
+                  <label class="chip" for="mat-nanocomposites">Nanocompuestos cerámicos</label>
+
+                  <input class="chip-input" type="radio" id="mat-other" name="materialConsidered" value="other" data-other-target="eval-material-other" />
+                  <label class="chip" for="mat-other">Otro material cerámico avanzado</label>
+
+                  <input class="chip-input" type="radio" id="mat-unsure" name="materialConsidered" value="unsure_need_advice" />
+                  <label class="chip" for="mat-unsure">No estoy seguro / necesito asesoramiento</label>
+                </div>
+
+                <div class="input-grid conditional-field is-hidden" data-conditional-wrapper="eval-material-other">
+                  <div class="input-grid__full">
+                    <label for="eval-material-other">Especifica</label>
+                    <input id="eval-material-other" name="materialOther" type="text" />
+                  </div>
+                </div>
+
+                <div class="wizard-actions wizard-actions--duo">
+                  <button type="button" class="wizard-back-btn" data-prev-step="9">Atrás</button>
+                  <button type="button" class="step-next-btn" data-next-step="10">Continuar</button>
+                </div>
+              </section>
+
+              <section class="wizard-step" data-step="11" aria-hidden="true">
+                <h3>Contacto y descripción</h3>
+                <p class="wizard-help">Comparte tus datos y una descripción breve para iniciar la evaluación técnica.</p>
+                <div class="input-grid">
+                  <div>
+                    <label for="eval-name">Nombre *</label>
+                    <input id="eval-name" name="name" type="text" required />
+                  </div>
+
+                  <div>
+                    <label for="eval-company">Empresa / organización *</label>
+                    <input id="eval-company" name="company" type="text" required />
+                  </div>
+
+                  <div>
+                    <label for="eval-role">Cargo</label>
+                    <input id="eval-role" name="role" type="text" />
+                  </div>
+
+                  <div>
+                    <label for="eval-email">Email *</label>
+                    <input id="eval-email" name="email" type="email" required />
+                  </div>
+
+                  <div>
+                    <label for="eval-phone">Teléfono</label>
+                    <input id="eval-phone" name="phone" type="text" />
+                  </div>
+
+                  <div>
+                    <label for="eval-country">País *</label>
+                    <input id="eval-country" name="country" type="text" required />
+                  </div>
+
+                  <div class="input-grid__full">
+                    <label for="eval-project-description">Descripción breve del proyecto *</label>
+                    <textarea
+                      id="eval-project-description"
+                      name="projectDescription"
+                      rows="7"
+                      minlength="20"
+                      required
+                      placeholder="Describe la aplicación, el entorno de operación y los requisitos principales."
+                    ></textarea>
+                  </div>
+
+                  <div class="input-grid__full">
+                    <label for="eval-files">Subir archivos (opcional, múltiples): CAD, planos, especificaciones, fotos</label>
+                    <input id="eval-files" name="files" type="file" multiple />
+                  </div>
+                </div>
+
+                <div class="wizard-actions wizard-actions--duo">
+                  <button type="button" class="wizard-back-btn" data-prev-step="10">Atrás</button>
+                  <button type="submit" class="submit-btn" id="eval-submit-btn">Enviar evaluación técnica</button>
                 </div>
               </section>
             </form>
@@ -406,5 +679,6 @@
     <script type="module" src="./js/main.js?v=11"></script>
   </body>
 </html>
+
 
 
