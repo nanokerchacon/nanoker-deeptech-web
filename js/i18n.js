@@ -166,6 +166,129 @@ export const I18N = deepFreeze({
       },
     },
 
+    evaluation: {
+      metaTitle: "Technical Evaluation | Nanoker",
+      metaDescription:
+        "Request a technical assessment for critical technologies and align material architecture, engineering execution and validation roadmap with Nanoker experts.",
+      hero: {
+        kicker: "EVALUATION",
+        titleHtml:
+          "Technical assessment for <span class=\"page-hero__accent\">critical technologies</span>",
+        lead:
+          "We define material architecture, engineering risks, and validation pathways to accelerate critical decisions with industrial-grade reliability.",
+      },
+      work: {
+        title: "How we work",
+        items: {
+          scope: "We align technical objectives, constraints, and system criticality.",
+          architecture:
+            "We propose material and electronics architecture with manufacturing readiness in mind.",
+          validation: "We design a validation plan with measurable milestones and success criteria.",
+          execution:
+            "We deliver actionable recommendations for execution in weeks, not quarters.",
+        },
+      },
+      wizard: {
+        kicker: "ENGINEERING INTERFACE",
+        title: "Guided assessment",
+        progress: "STEP 1 OF 5",
+        progressTemplate: "STEP {current} OF {total}",
+        confidentiality:
+          "All information will be handled confidentially.",
+        steps: {
+          step1: "STEP 1",
+          step2: "STEP 2",
+          step3: "STEP 3",
+          step4: "STEP 4",
+          step5: "STEP 5",
+        },
+      },
+      form: {
+        actions: {
+          continue: "Continue",
+          back: "Back",
+        },
+        validation: {
+          minCharacters: "Please provide at least 30 characters.",
+        },
+        step1: {
+          title: "Technology type",
+          help: "Select one or more categories.",
+          options: {
+            ai: "AI",
+            robotics: "Robotics",
+            electronics: "Electronic hardware",
+            embedded: "Embedded systems",
+            iot: "IoT",
+            deeptech: "Applied Science / DeepTech",
+            other: "Other",
+          },
+        },
+        step2: {
+          title: "Project phase",
+          help: "Select the current phase.",
+          options: {
+            concept: "Concept",
+            prototype: "Prototype",
+            mvp: "MVP",
+            functional: "Functional product",
+            scale: "Scale-up / industrialization",
+          },
+        },
+        step3: {
+          title: "Technical challenge",
+          label: "Technical challenge",
+          help: "Share the key challenge you need to solve.",
+          placeholder:
+            "Describe current architecture, technical bottlenecks, operating conditions, and target metrics.",
+        },
+        step4: {
+          title: "Engineering needs",
+          help: "Select the areas where you need support.",
+          options: {
+            hardwareArchitecture: "Hardware architecture",
+            materialSelection: "Material/component selection",
+            embedded: "Embedded systems",
+            edgeAi: "Edge AI",
+            performance: "Performance optimization",
+            industrialization: "Industrialization/manufacturing",
+            validation: "Validation/testing",
+            other: "Other",
+          },
+        },
+        step5: {
+          title: "Contact details",
+          help: "We need these details to coordinate a technical session.",
+          submit: "Request technical evaluation",
+          sending: "Sending...",
+          fields: {
+            name: "Name *",
+            email: "Business email *",
+            company: "Company *",
+            role: "Role *",
+            start: "When do you need to start? *",
+          },
+          startOptions: {
+            placeholder: "Select an option",
+            immediate: "Immediate",
+            oneThreeMonths: "1-3 months",
+            threeSixMonths: "3-6 months",
+            exploring: "Exploring",
+          },
+        },
+        status: {
+          requiredFields: "Complete required fields to continue.",
+          completePrevious: "Complete previous steps before submitting.",
+          challengeTooShort:
+            "Please provide at least 30 characters in the technical challenge.",
+          sending: "Sending evaluation request...",
+          success:
+            "Request received. Our engineering team will contact you shortly.",
+          error: "We could not process your request. Please try again.",
+        },
+      },
+    },
+
     certifications: {
       metaTitle: "Nanoker | Quality & Certifications",
       kicker: "QUALITY FRAMEWORK",
@@ -1426,6 +1549,131 @@ export const I18N = deepFreeze({
         title: "Ingeniería de materiales con propósito industrial",
         text:
           "En DeepTech, cada proyecto comienza con una conversación técnica rigurosa. Estamos preparados para acompañarte desde la especificación hasta la cualificación industrial.",
+      },
+    },
+
+    evaluation: {
+      metaTitle: "Evaluación técnica | Nanoker",
+      metaDescription:
+        "Solicita una evaluación técnica para tecnologías críticas y alinea arquitectura material, ejecución de ingeniería y ruta de validación con expertos de Nanoker.",
+      hero: {
+        kicker: "EVALUACIÓN",
+        titleHtml:
+          "Evaluación técnica de <span class=\"page-hero__accent\">tecnologías críticas</span>",
+        lead:
+          "Definimos arquitectura material, riesgos de ingeniería y rutas de validación para acelerar decisiones críticas con fiabilidad industrial.",
+      },
+      work: {
+        title: "Cómo trabajamos",
+        items: {
+          scope:
+            "Alineamos objetivos técnicos, restricciones y criticidad del sistema.",
+          architecture:
+            "Proponemos arquitectura de materiales y electrónica con enfoque de fabricación.",
+          validation:
+            "Diseñamos un plan de validación con hitos medibles y criterios de éxito.",
+          execution:
+            "Entregamos recomendaciones accionables para ejecución en semanas, no trimestres.",
+        },
+      },
+      wizard: {
+        kicker: "INTERFAZ DE INGENIERÍA",
+        title: "Evaluación guiada",
+        progress: "PASO 1 DE 5",
+        progressTemplate: "PASO {current} DE {total}",
+        confidentiality:
+          "Toda la información se tratará de forma confidencial.",
+        steps: {
+          step1: "PASO 1",
+          step2: "PASO 2",
+          step3: "PASO 3",
+          step4: "PASO 4",
+          step5: "PASO 5",
+        },
+      },
+      form: {
+        actions: {
+          continue: "Continuar",
+          back: "Atrás",
+        },
+        validation: {
+          minCharacters: "Describe el desafío con al menos 30 caracteres.",
+        },
+        step1: {
+          title: "Tipo de tecnología",
+          help: "Selecciona una o varias categorías.",
+          options: {
+            ai: "IA",
+            robotics: "Robótica",
+            electronics: "Hardware electrónico",
+            embedded: "Sistemas embebidos",
+            iot: "IoT",
+            deeptech: "Ciencia aplicada / DeepTech",
+            other: "Otro",
+          },
+        },
+        step2: {
+          title: "Fase del proyecto",
+          help: "Selecciona la fase actual.",
+          options: {
+            concept: "Concepto",
+            prototype: "Prototipo",
+            mvp: "MVP",
+            functional: "Producto funcional",
+            scale: "Escalado/industrialización",
+          },
+        },
+        step3: {
+          title: "Desafío técnico",
+          label: "Desafío técnico",
+          help: "Comparte el problema clave que necesitas resolver.",
+          placeholder:
+            "Describe arquitectura actual, cuellos de botella técnicos, condiciones de operación y métricas objetivo.",
+        },
+        step4: {
+          title: "Necesidades de ingeniería",
+          help: "Selecciona las áreas donde necesitas soporte.",
+          options: {
+            hardwareArchitecture: "Arquitectura hardware",
+            materialSelection: "Selección de materiales/componentes",
+            embedded: "Sistemas embebidos",
+            edgeAi: "Edge AI",
+            performance: "Optimización rendimiento",
+            industrialization: "Industrialización/fabricación",
+            validation: "Validación/ensayos",
+            other: "Otro",
+          },
+        },
+        step5: {
+          title: "Datos de contacto",
+          help: "Necesitamos estos datos para coordinar una sesión técnica.",
+          submit: "Solicitar evaluación técnica",
+          sending: "Enviando...",
+          fields: {
+            name: "Nombre *",
+            email: "Email profesional *",
+            company: "Empresa *",
+            role: "Cargo *",
+            start: "Cuándo necesitas empezar *",
+          },
+          startOptions: {
+            placeholder: "Selecciona una opción",
+            immediate: "Inmediato",
+            oneThreeMonths: "1-3 meses",
+            threeSixMonths: "3-6 meses",
+            exploring: "Explorando",
+          },
+        },
+        status: {
+          requiredFields: "Completa los campos obligatorios para continuar.",
+          completePrevious: "Completa los pasos previos antes de enviar.",
+          challengeTooShort:
+            "Describe el desafío técnico con al menos 30 caracteres.",
+          sending: "Enviando solicitud de evaluación...",
+          success:
+            "Solicitud recibida. Nuestro equipo de ingeniería te contactará en breve.",
+          error: "No pudimos procesar tu solicitud. Inténtalo de nuevo.",
+        },
       },
     },
 
