@@ -161,7 +161,7 @@ function renderRelated(policy) {
     .map(
       (item) => `
         <li>
-          <a href="/politicas/${item.slug}/">
+          <a href="../${item.slug}/">
             <strong>${escapeHtml(item.titleShort)}</strong>
             <span>${escapeHtml(item.titleFull)}</span>
           </a>
