@@ -154,6 +154,73 @@
   color: rgba(255, 255, 255, 0.72);
 }
 
+.policy-content form button[type="submit"],
+.policy-content form input[type="submit"] {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: #ffffff;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: all .25s ease;
+}
+
+.policy-content form button[type="submit"]:hover,
+.policy-content form input[type="submit"]:hover {
+  background: linear-gradient(135deg, #4f93ff, #2f6bff);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(59, 130, 246, 0.35);
+}
+
+.policy-content form button[type="submit"]:active,
+.policy-content form input[type="submit"]:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 10px rgba(59, 130, 246, 0.25);
+}
+
+.policy-content form button[type="submit"]:focus-visible,
+.policy-content form input[type="submit"]:focus-visible {
+  outline: 2px solid rgba(79, 147, 255, 0.95);
+  outline-offset: 2px;
+}
+
+.survey-button{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin-top:18px;
+  padding:14px 26px;
+  background:linear-gradient(135deg,#3b82f6,#2563eb);
+  color:#ffffff;
+  border-radius:10px;
+  font-size:15px;
+  font-weight:600;
+  letter-spacing:.02em;
+  text-decoration:none;
+  cursor:pointer;
+  transition:all .25s ease;
+}
+
+.survey-arrow{
+  transition:transform .25s ease;
+}
+
+.survey-button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(59,130,246,.35);
+}
+
+.survey-button:hover .survey-arrow{
+  transform:translateX(4px);
+}
+
+.survey-button:active{
+  transform:translateY(0);
+}
+
 @media (max-width: 860px) {
   .policy-main {
     padding-top: calc(var(--nav-h) + 56px);

@@ -143,7 +143,7 @@ function renderQualityForm(policy) {
     <section class="policy-card" aria-labelledby="customer-survey">
       <h2 id="customer-survey">NANOKER Customer Satisfaction Survey</h2>
       <p>Comparte tu experiencia para ayudarnos a mejorar continuamente nuestros procesos y soporte técnico.</p>
-      <a class="footer-action" href="${FORM_URL}" target="_blank" rel="noopener noreferrer">Rellenar formulario</a>
+      <a class="survey-button" href="${FORM_URL}" target="_blank" rel="noopener noreferrer">Rellenar formulario <span class="survey-arrow">→</span></a>
       ${embedMarkup}
     </section>
   `;
