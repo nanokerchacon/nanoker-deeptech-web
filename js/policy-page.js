@@ -79,7 +79,7 @@ function renderDownloadSection(policy) {
 
   return `
     <section class="policy-card" aria-labelledby="descargar-pdf">
-      <h2 id="descargar-pdf">Documento oficial</h2>
+      <h2 id="descargar-pdf">Accede a la política completa</h2>
       <a
         class="footer-action"
         href="#"
