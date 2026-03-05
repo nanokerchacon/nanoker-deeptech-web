@@ -69,9 +69,58 @@
       closeBtn.setAttribute("aria-label", "Close menu");
       closeBtn.textContent = "✕";
 
+      const mobileActions = document.createElement("div");
+      mobileActions.className = "mobile-menu-actions";
+
+      const mobileLangBtn = document.createElement("button");
+      mobileLangBtn.className = "nav-lang nav-lang--mobile";
+      mobileLangBtn.setAttribute("type", "button");
+      mobileLangBtn.setAttribute("data-lang-toggle", "");
+      mobileLangBtn.setAttribute("aria-label", "Change language");
+      mobileLangBtn.innerHTML =
+        '<span class="nav-lang__token nav-lang__token--es">ES</span>' +
+        '<span class="nav-lang__sep">/</span>' +
+        '<span class="nav-lang__token nav-lang__token--en">EN</span>';
+
+      mobileActions.appendChild(mobileLangBtn);
+      mobileActions.appendChild(closeBtn);
+
       menuHeader.appendChild(logoLink);
-      menuHeader.appendChild(closeBtn);
+      menuHeader.appendChild(mobileActions);
       menu.prepend(menuHeader);
+    }
+
+    let mobileActions = menuHeader.querySelector(".mobile-menu-actions");
+    if (!mobileActions) {
+      mobileActions = document.createElement("div");
+      mobileActions.className = "mobile-menu-actions";
+      menuHeader.appendChild(mobileActions);
+    }
+
+    let mobileLangBtn = menuHeader.querySelector(".nav-lang--mobile[data-lang-toggle]");
+    if (!mobileLangBtn) {
+      mobileLangBtn = document.createElement("button");
+      mobileLangBtn.className = "nav-lang nav-lang--mobile";
+      mobileLangBtn.setAttribute("type", "button");
+      mobileLangBtn.setAttribute("data-lang-toggle", "");
+      mobileLangBtn.setAttribute("aria-label", "Change language");
+      mobileLangBtn.innerHTML =
+        '<span class="nav-lang__token nav-lang__token--es">ES</span>' +
+        '<span class="nav-lang__sep">/</span>' +
+        '<span class="nav-lang__token nav-lang__token--en">EN</span>';
+      mobileActions.prepend(mobileLangBtn);
+    }
+
+    let menuCloseBtn = menuHeader.querySelector(".mobile-menu-close");
+    if (!menuCloseBtn) {
+      menuCloseBtn = document.createElement("button");
+      menuCloseBtn.className = "mobile-menu-close";
+      menuCloseBtn.setAttribute("type", "button");
+      menuCloseBtn.setAttribute("aria-label", "Close menu");
+      menuCloseBtn.textContent = "✕";
+    }
+    if (menuCloseBtn.parentElement !== mobileActions) {
+      mobileActions.appendChild(menuCloseBtn);
     }
 
     let divider = menu.querySelector(".mobile-menu-divider");
@@ -89,7 +138,6 @@
       menuHeader.insertAdjacentElement("afterend", divider);
     }
 
-    const menuCloseBtn = menu.querySelector(".mobile-menu-close");
     const menuLinks = Array.from(menu.querySelectorAll("a.nav-link")).filter((a) => !!a.getAttribute("href"));
     menuLinks.forEach((link, index) => {
       link.classList.add("mobile-menu-link");

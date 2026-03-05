@@ -695,6 +695,12 @@ html[data-lang="en"] .nav-lang__token--en{
     min-height: 32px;
   }
 
+  .mobile-menu-actions{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
   .mobile-menu-logo img{
     height: 120px;
     width: auto;
@@ -718,6 +724,26 @@ html[data-lang="en"] .nav-lang__token--en{
     line-height: 1;
     cursor: pointer;
     transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
+  }
+
+  .nav-lang--mobile{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    transition: all .25s ease;
+    margin-left: 0;
+  }
+
+  .nav-lang--mobile:hover{
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.25);
   }
 
   .mobile-menu-close:hover,
