@@ -62,7 +62,7 @@ function renderDownloadSection(policy) {
               <strong>${escapeHtml(file.label)}</strong>
               <p>${escapeHtml(file.description || "")}</p>
             </div>
-            <a class="footer-action" href="${file.path}" download>Descargar certificado (PDF)</a>
+            <a class="footer-action" href="${file.path}" target="_blank" rel="noopener noreferrer">Ver certificado (PDF)</a>
           </li>`
       )
       .join("\n");
@@ -80,7 +80,14 @@ function renderDownloadSection(policy) {
   return `
     <section class="policy-card" aria-labelledby="descargar-pdf">
       <h2 id="descargar-pdf">Documento oficial</h2>
-      <a class="footer-action" href="${policy.pdfPath}" download>Descargar política (PDF)</a>
+      <a
+        class="footer-action"
+        href="#"
+        data-policy-preview="${policy.pdfPath}"
+        data-policy-title="${escapeHtml(policy.titleFull)}"
+      >
+        Ver documento
+      </a>
     </section>
   `;
 }
@@ -143,7 +150,7 @@ function renderQualityForm(policy) {
     <section class="policy-card" aria-labelledby="customer-survey">
       <h2 id="customer-survey">NANOKER Customer Satisfaction Survey</h2>
       <p>Comparte tu experiencia para ayudarnos a mejorar continuamente nuestros procesos y soporte técnico.</p>
-      <a class="survey-button" href="${FORM_URL}" target="_blank" rel="noopener noreferrer">Rellenar formulario <span class="survey-arrow">→</span></a>
+      <a class="footer-action" href="${FORM_URL}" target="_blank" rel="noopener noreferrer">Rellenar formulario</a>
       ${embedMarkup}
     </section>
   `;
@@ -173,6 +180,43 @@ function renderRelated(policy) {
   `;
 }
 
+function renderPolicyModal() {
+  return `
+    <div class="policy-modal" id="policyModal" aria-hidden="true">
+      <div class="policy-modal-backdrop" data-policy-close></div>
+      <div class="policy-modal-panel" role="dialog" aria-modal="true" aria-labelledby="policyModalTitle" tabindex="-1">
+        <div class="policy-modal-header">
+          <h3 id="policyModalTitle"></h3>
+          <button type="button" class="policy-modal-close" data-policy-close aria-label="Cerrar">✕</button>
+        </div>
+        <div class="policy-modal-body">
+          <iframe id="policyModalFrame" title="Vista previa PDF" loading="lazy"></iframe>
+        </div>
+        <div class="policy-modal-footer">
+          <a
+            id="policyModalOpen"
+            class="policy-modal-open"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Abrir en pestaña
+          </a>
+          <a
+            id="policyModalDownload"
+            class="policy-modal-download"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Descargar PDF
+          </a>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 function renderPolicyMarkup(policy) {
   return `
     <main class="policy-main" id="top">
@@ -197,7 +241,105 @@ function renderPolicyMarkup(policy) {
         ${renderRelated(policy)}
       </section>
     </main>
+    ${renderPolicyModal()}
   `;
+}
+
+function initPolicyPreviewModal(root) {
+  const modal = root.querySelector("#policyModal");
+  if (!modal || modal.dataset.initialized === "true") return;
+
+  const panel = modal.querySelector(".policy-modal-panel");
+  const title = modal.querySelector("#policyModalTitle");
+  const frame = modal.querySelector("#policyModalFrame");
+  const openLink = modal.querySelector("#policyModalOpen");
+  const downloadLink = modal.querySelector("#policyModalDownload");
+  const closeTargets = modal.querySelectorAll("[data-policy-close]");
+  let lastTrigger = null;
+
+  function getFocusableElements() {
+    return Array.from(
+      modal.querySelectorAll(
+        'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+      )
+    ).filter((element) => !element.hasAttribute("disabled") && !element.getAttribute("aria-hidden"));
+  }
+
+  function handleTabTrap(event) {
+    if (event.key !== "Tab") return;
+
+    const focusable = getFocusableElements();
+    if (!focusable.length) {
+      event.preventDefault();
+      return;
+    }
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    const active = document.activeElement;
+
+    if (event.shiftKey && active === first) {
+      event.preventDefault();
+      last.focus();
+      return;
+    }
+
+    if (!event.shiftKey && active === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
+
+  function onModalKeydown(event) {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      closeModal();
+      return;
+    }
+
+    handleTabTrap(event);
+  }
+
+  function closeModal() {
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
+    document.removeEventListener("keydown", onModalKeydown);
+    frame.setAttribute("src", "about:blank");
+    if (lastTrigger && typeof lastTrigger.focus === "function") {
+      lastTrigger.focus();
+    }
+  }
+
+  function openModal({ pdf, policyTitle }, trigger) {
+    lastTrigger = trigger;
+    title.textContent = policyTitle;
+    frame.setAttribute("src", pdf);
+    openLink.setAttribute("href", pdf);
+    downloadLink.setAttribute("href", pdf);
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
+    document.addEventListener("keydown", onModalKeydown);
+    panel.focus();
+  }
+
+  root.addEventListener("click", (event) => {
+    const trigger = event.target.closest("[data-policy-preview]");
+    if (!trigger || !root.contains(trigger)) return;
+
+    event.preventDefault();
+    const pdf = trigger.getAttribute("data-policy-preview");
+    const policyTitle = trigger.getAttribute("data-policy-title") || "Documento";
+    if (!pdf) return;
+    openModal({ pdf, policyTitle }, trigger);
+  });
+
+  closeTargets.forEach((element) => {
+    element.addEventListener("click", () => closeModal());
+  });
+
+  modal.dataset.initialized = "true";
 }
 
 function setSeo(policy) {
@@ -236,4 +378,5 @@ export function initPolicyPage(policyId) {
 
   setSeo(policy);
   mount.innerHTML = renderPolicyMarkup(policy);
+  initPolicyPreviewModal(mount);
 }
