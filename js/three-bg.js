@@ -189,6 +189,14 @@ export function initThreeBackground() {
   const isLowPower = isIOS || /Android/i.test(navigator.userAgent);
   const useComposer = !isLowPower;
   const SPEED = 0.25;
+  const vv = window.visualViewport || null;
+
+  function getViewportSize() {
+    return {
+      w: Math.round(vv ? vv.width : window.innerWidth),
+      h: Math.round(vv ? vv.height : window.innerHeight),
+    };
+  }
 
   function colorDist(a, b) {
     const dr = a.r - b.r;
@@ -202,9 +210,10 @@ export function initThreeBackground() {
   scene.background = null;
   scene.fog = new THREE.FogExp2(0x020202, 0.01);
 
+  const initialViewport = getViewportSize();
   const camera = new THREE.PerspectiveCamera(
     45,
-    window.innerWidth / window.innerHeight,
+    initialViewport.w / initialViewport.h,
     0.1,
     220
   );
@@ -218,7 +227,7 @@ export function initThreeBackground() {
   });
 
   renderer.setClearColor(0x000000, 0);
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setSize(initialViewport.w, initialViewport.h);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isLowPower ? 1 : 1.25));
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
 
@@ -248,20 +257,18 @@ export function initThreeBackground() {
   if (isIOS) {
     canvas.style.position = "absolute";
     canvas.style.left = "0";
-    canvas.style.top = window.scrollY + "px";
+    canvas.style.top = window.scrollY + (vv ? vv.offsetTop : 0) + "px";
     canvas.style.right = "0";
     canvas.style.bottom = "auto";
 
     let ticking = false;
-    const syncCanvasTop = () => {
-      ticking = false;
-      canvas.style.top = window.scrollY + "px";
-    };
-
     onIOSScroll = () => {
       if (!ticking) {
         ticking = true;
-        requestAnimationFrame(syncCanvasTop);
+        requestAnimationFrame(() => {
+          ticking = false;
+          forceResize();
+        });
       }
     };
 
@@ -439,7 +446,7 @@ export function initThreeBackground() {
     composer.addPass(new RenderPass(scene, camera));
 
     bloomPass = new UnrealBloomPass(
-      new THREE.Vector2(window.innerWidth, window.innerHeight),
+      new THREE.Vector2(initialViewport.w, initialViewport.h),
       1.5,
       0.4,
       0.85
@@ -490,18 +497,19 @@ export function initThreeBackground() {
   let contextLost = false;
 
   function forceResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
+    const { w, h } = getViewportSize();
+    camera.aspect = w / h;
     camera.updateProjectionMatrix();
 
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(w, h, false);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isLowPower ? 1 : 1.25));
 
     if (useComposer) {
-      composer.setSize(window.innerWidth, window.innerHeight);
-      bloomPass.setSize(window.innerWidth, window.innerHeight);
+      composer.setSize(w, h);
+      bloomPass.setSize(w, h);
     }
 
-    if (isIOS) canvas.style.top = window.scrollY + "px";
+    if (isIOS) canvas.style.top = window.scrollY + (vv ? vv.offsetTop : 0) + "px";
   }
 
   function resetAfterSleep() {
@@ -510,7 +518,7 @@ export function initThreeBackground() {
     lastT = 0;
     targetPos.set(0, -100, 0);
     forceResize();
-    if (isIOS) canvas.style.top = window.scrollY + "px";
+    if (isIOS) canvas.style.top = window.scrollY + (vv ? vv.offsetTop : 0) + "px";
   }
 
   function stopLoop() {
@@ -731,7 +739,12 @@ export function initThreeBackground() {
   }
 
   const onResize = () => forceResize();
+  const onVisualViewportChange = () => forceResize();
   window.addEventListener("resize", onResize, { passive: true });
+  if (vv) {
+    vv.addEventListener("resize", onVisualViewportChange, { passive: true });
+    vv.addEventListener("scroll", onVisualViewportChange, { passive: true });
+  }
 
   clock.start();
   rafId = requestAnimationFrame(animate);
@@ -742,6 +755,10 @@ export function initThreeBackground() {
     document.removeEventListener("visibilitychange", onVisibility);
     window.removeEventListener("focus", onFocus);
     window.removeEventListener("resize", onResize);
+    if (vv) {
+      vv.removeEventListener("resize", onVisualViewportChange);
+      vv.removeEventListener("scroll", onVisualViewportChange);
+    }
     window.removeEventListener("mousemove", onMouseMove);
     if (onIOSScroll) window.removeEventListener("scroll", onIOSScroll);
 

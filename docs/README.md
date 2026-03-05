@@ -1,7 +1,5 @@
 # Documentos de politicas y certificaciones
 
-Sube aqui los PDF oficiales manteniendo exactamente estos nombres para no romper enlaces.
-
 ## Politicas
 - `/docs/politica-calidad-nanoker.pdf`
 - `/docs/politica-sostenibilidad-nanoker.pdf`

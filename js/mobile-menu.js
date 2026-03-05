@@ -12,6 +12,13 @@
   }
 
   function initMobileMenu() {
+    function normalizePath(pathname) {
+      const clean = (pathname || "").replace(/\\/g, "/");
+      const noIndex = clean.replace(/\/index\.html?$/i, "/");
+      const noTrailing = noIndex.replace(/\/+$/, "");
+      return noTrailing || "/";
+    }
+
     const nav = document.querySelector("[data-nav]");
     const toggleBtn = nav ? nav.querySelector(".nav-toggle") : document.querySelector(".nav-toggle");
     const menu = nav
@@ -31,8 +38,81 @@
     toggleBtn.setAttribute("aria-controls", menu.id);
     toggleBtn.setAttribute("aria-expanded", "false");
 
-    const menuLinks = Array.from(menu.querySelectorAll("a.nav-link, a")).filter((a) => !!a.getAttribute("href"));
-    menuLinks.forEach((link) => link.classList.add("mobile-menu-link"));
+    let menuHeader = menu.querySelector("[data-mobile-menu-header]");
+    if (!menuHeader) {
+      const navLogo = nav.querySelector(".nav-logo");
+      const navLogoImg = navLogo ? navLogo.querySelector("img") : null;
+      const logoHref = navLogo ? navLogo.getAttribute("href") : "./index.html";
+      const logoSrc = navLogoImg ? navLogoImg.getAttribute("src") : "";
+      const logoAlt = navLogoImg ? navLogoImg.getAttribute("alt") : "Nanoker";
+
+      menuHeader = document.createElement("div");
+      menuHeader.className = "mobile-menu-header";
+      menuHeader.setAttribute("data-mobile-menu-header", "");
+
+      const logoLink = document.createElement("a");
+      logoLink.className = "mobile-menu-logo";
+      logoLink.setAttribute("href", logoHref || "./index.html");
+      logoLink.setAttribute("aria-label", "Nanoker Home");
+      if (logoSrc) {
+        const logoImage = document.createElement("img");
+        logoImage.setAttribute("src", logoSrc);
+        logoImage.setAttribute("alt", logoAlt || "Nanoker");
+        logoLink.appendChild(logoImage);
+      } else {
+        logoLink.textContent = "Nanoker";
+      }
+
+      const closeBtn = document.createElement("button");
+      closeBtn.className = "mobile-menu-close";
+      closeBtn.setAttribute("type", "button");
+      closeBtn.setAttribute("aria-label", "Close menu");
+      closeBtn.textContent = "✕";
+
+      menuHeader.appendChild(logoLink);
+      menuHeader.appendChild(closeBtn);
+      menu.prepend(menuHeader);
+    }
+
+    let divider = menu.querySelector(".mobile-menu-divider");
+    if (!divider) {
+      divider = document.createElement("div");
+      divider.className = "mobile-menu-divider";
+      divider.setAttribute("aria-hidden", "true");
+      menuHeader.insertAdjacentElement("afterend", divider);
+    }
+
+    if (menu.firstElementChild !== menuHeader) {
+      menu.prepend(menuHeader);
+    }
+    if (menuHeader.nextElementSibling !== divider) {
+      menuHeader.insertAdjacentElement("afterend", divider);
+    }
+
+    const menuCloseBtn = menu.querySelector(".mobile-menu-close");
+    const menuLinks = Array.from(menu.querySelectorAll("a.nav-link")).filter((a) => !!a.getAttribute("href"));
+    menuLinks.forEach((link, index) => {
+      link.classList.add("mobile-menu-link");
+      link.style.setProperty("--menu-link-delay", `${60 + index * 30}ms`);
+    });
+
+    const currentPath = normalizePath(window.location.pathname);
+    const activeFromMarkup = menuLinks.find(
+      (link) => link.classList.contains("is-active") || link.getAttribute("aria-current") === "page"
+    );
+    const activeFromUrl = menuLinks.find((link) => {
+      try {
+        const href = link.getAttribute("href");
+        if (!href) return false;
+        const linkPath = normalizePath(new URL(href, window.location.href).pathname);
+        return linkPath === currentPath;
+      } catch (_error) {
+        return false;
+      }
+    });
+    const activeLink = activeFromMarkup || activeFromUrl || null;
+    menuLinks.forEach((link) => link.classList.remove("menu-item-active"));
+    if (activeLink) activeLink.classList.add("menu-item-active");
 
     let backdrop = nav.querySelector("[data-mobile-backdrop]");
     if (!backdrop) {
@@ -78,6 +158,12 @@
     }
 
     toggleBtn.addEventListener("click", toggleMenu);
+
+    if (menuCloseBtn) {
+      menuCloseBtn.addEventListener("click", () => {
+        toggleBtn.click();
+      });
+    }
 
     backdrop.addEventListener("click", () => {
       closeMenu();
