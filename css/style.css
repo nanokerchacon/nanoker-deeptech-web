@@ -575,6 +575,19 @@ html[data-lang="en"] .nav-lang__token--en{
   z-index: 9998;
 }
 
+/* Mobile-drawer UI stays hidden on desktop */
+.mobile-menu-header{
+  display: none;
+}
+
+.mobile-menu-actions{
+  display: none;
+}
+
+.nav-lang--mobile{
+  display: none;
+}
+
 /* =====================
    NAV (MÓVIL)
 ===================== */
