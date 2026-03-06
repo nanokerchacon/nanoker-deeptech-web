@@ -311,6 +311,14 @@
         transform: translateY(-1px);
         border-color: rgba(255,255,255,0.45);
       }
+
+      /* Placeholder circles hidden until final imagery is available */
+      .section .material-portal.decorative-circle,
+      .section .material-portal.decorative-circle::before,
+      .section .material-portal.decorative-circle > * {
+        opacity: 0 !important;
+        pointer-events: none !important;
+      }
     </style>
 
     <script type="importmap">
@@ -429,7 +437,7 @@
             <span aria-hidden="true">→</span>
           </a>
         </div>
-        <div class="material-portal" data-img="img/portals/example-01.jpg" data-readout="PURITY 99.998%" data-cooldown="7600" aria-hidden="true"></div>
+        <div class="material-portal decorative-circle" data-img="img/portals/example-01.jpg" data-readout="PURITY 99.998%" data-cooldown="7600" aria-hidden="true"></div>
       </section>
 
       <!-- ================= 02 - PLATFORM ================= -->
@@ -472,7 +480,7 @@
             <span aria-hidden="true">→</span>
           </a>
         </div>
-        <div class="material-portal" data-img="img/portals/example-02.jpg" data-readout="BATCH σ 0.4%" data-cooldown="6800" aria-hidden="true"></div>
+        <div class="material-portal decorative-circle" data-img="img/portals/example-02.jpg" data-readout="BATCH σ 0.4%" data-cooldown="6800" aria-hidden="true"></div>
       </section>
 
       <!-- ================= 03 - MATERIALS ================= -->
@@ -515,7 +523,7 @@
             <span aria-hidden="true">→</span>
           </a>
         </div>
-        <div class="material-portal" data-img="img/portals/example-03.jpg" data-readout="LEAD TIME -32%" data-cooldown="7400" aria-hidden="true"></div>
+        <div class="material-portal decorative-circle" data-img="img/portals/example-03.jpg" data-readout="LEAD TIME -32%" data-cooldown="7400" aria-hidden="true"></div>
       </section>
 
       <!-- ================= 04 - SECTORS ================= -->
@@ -557,7 +565,7 @@
             <span>Explorar sectores →</span>
           </a>
         </div>
-        <div class="material-portal" data-img="img/portals/example-04.jpg" data-readout="SURFACE Ra 12nm" data-cooldown="7900" aria-hidden="true"></div>
+        <div class="material-portal decorative-circle" data-img="img/portals/example-04.jpg" data-readout="SURFACE Ra 12nm" data-cooldown="7900" aria-hidden="true"></div>
       </section>
 
       <!-- ================= 06 - COMPETITIVE ================= -->
@@ -587,7 +595,7 @@
 
           <a class="card-cta" href="#sec-sovereignty"><span>Ver mensaje estratégico</span><span aria-hidden="true">→</span></a>
         </div>
-        <div class="material-portal" data-img="img/portals/example-05.jpg" data-readout="THROUGHPUT +18%" data-cooldown="7200" aria-hidden="true"></div>
+        <div class="material-portal decorative-circle" data-img="img/portals/example-05.jpg" data-readout="THROUGHPUT +18%" data-cooldown="7200" aria-hidden="true"></div>
       </section>
 
       <!-- ================= 05 - R&D ================= -->
@@ -630,7 +638,7 @@
             <span aria-hidden="true">→</span>
           </a>
         </div>
-        <div class="material-portal" data-img="img/portals/example-06.jpg" data-readout="BATCH LOCK 24/7" data-cooldown="7700" aria-hidden="true"></div>
+        <div class="material-portal decorative-circle" data-img="img/portals/example-06.jpg" data-readout="BATCH LOCK 24/7" data-cooldown="7700" aria-hidden="true"></div>
       </section>
 
       <!-- ================= 08 - SOVEREIGNTY ================= -->
@@ -642,7 +650,7 @@
           <p><b>Nanoker</b> contribuye a construir una infraestructura industrial europea capaz de garantizar calidad, coste y suministro en sectores estratégicos.</p>
           <a class="card-cta" href="#sec-cta"><span>Ir al CTA final</span><span aria-hidden="true">→</span></a>
         </div>
-        <div class="material-portal" data-img="img/portals/example-07.jpg" data-readout="EU CORE NODE" data-cooldown="8000" aria-hidden="true"></div>
+        <div class="material-portal decorative-circle" data-img="img/portals/example-07.jpg" data-readout="EU CORE NODE" data-cooldown="8000" aria-hidden="true"></div>
       </section>
 
       <!-- ================= 09 - CTA ================= -->
