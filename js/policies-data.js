@@ -33,6 +33,7 @@ export const POLICIES = [
     titleFull: "Política de Sostenibilidad",
     titlePrefix: "Política de",
     titleHighlight: "Sostenibilidad",
+    titleHighlightColor: "#2FBF9B",
     slug: "sostenibilidad",
     description:
       "Compromisos ambientales, eficiencia de recursos y mejora continua para una operación industrial sostenible.",
@@ -79,10 +80,11 @@ export const POLICIES = [
   },
   {
     id: "seguridad-informacion",
-    titleShort: "Seguridad de la información",
-    titleFull: "Política de Seguridad de la información",
+    titleShort: "Seguridad de la Información",
+    titleFull: "Política de Seguridad de la Información",
     titlePrefix: "Política de",
-    titleHighlight: "Seguridad de la información",
+    titleHighlight: "Seguridad de la Información",
+    titleHighlightColor: "#F5A623",
     slug: "seguridad-informacion",
     description:
       "Directrices para proteger información técnica y corporativa, garantizando confidencialidad, integridad y disponibilidad.",
@@ -129,10 +131,11 @@ export const POLICIES = [
   },
   {
     id: "igualdad-y-diversidad",
-    titleShort: "Igualdad y diversidad",
-    titleFull: "Política de Igualdad y diversidad",
+    titleShort: "Igualdad y Diversidad",
+    titleFull: "Política de Igualdad y Diversidad",
     titlePrefix: "Política de",
-    titleHighlight: "Igualdad y diversidad",
+    titleHighlight: "Igualdad y Diversidad",
+    titleHighlightColor: "#8B5CF6",
     slug: "igualdad-y-diversidad",
     description:
       "Compromiso con igualdad de oportunidades, no discriminación y entornos de trabajo inclusivos.",

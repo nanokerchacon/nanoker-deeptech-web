@@ -44,7 +44,10 @@ function renderIntro(introParagraphs) {
 
 function renderPolicyHeading(policy) {
   if (policy.category === "policy" && policy.titlePrefix && policy.titleHighlight) {
-    return `${escapeHtml(policy.titlePrefix)} <span class="policy-highlight">${escapeHtml(
+    const colorStyle = policy.titleHighlightColor
+      ? ` style="color: ${escapeHtml(policy.titleHighlightColor)};"`
+      : "";
+    return `${escapeHtml(policy.titlePrefix)} <span class="policy-highlight"${colorStyle}>${escapeHtml(
       policy.titleHighlight
     )}</span>`;
   }
