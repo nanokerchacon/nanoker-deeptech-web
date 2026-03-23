@@ -893,6 +893,23 @@ export const I18N = deepFreeze({
           item3: "Strengthening technological sovereignty",
           closing: "Nanoker is building that materials foundation.",
         },
+        datasheets: {
+          title: "Technical Datasheets",
+          subtitle: "Qualified ceramic references",
+          text:
+            "Access the available ceramic datasheets directly within the materials portfolio. Filter by family to review the relevant technical references faster.",
+          filters: {
+            all: "All",
+            alumina: "Alumina",
+            zirconia: "Zirconia",
+            carbides: "Carbides",
+            composites: "Composites",
+            nanocomposites: "Nanocomposites",
+          },
+          categoryLabel: "Category",
+          cta: "View PDF",
+          empty: "No datasheets available in this category.",
+        },
       },
       sectors: {
         metaTitle: "Nanoker | Sectors",
@@ -1178,33 +1195,17 @@ export const I18N = deepFreeze({
         titleHtml: "Sectors where materials<br /><b>are critical.</b>",
         text:
           "A shared challenge: reliability under extreme conditions. We integrate into OEM roadmaps and systems where the material defines performance, total cost, and scalability.",
-        tiles: {
-          semiconductors: {
-            title: "Semiconductors",
-            text: "Fab-grade, purity, defects, traceability.",
-          },
-          quantum: {
-            title: "Quantum & Sensors",
-            text: "Atomic control, NV centers, stability.",
-          },
-          energy: {
-            title: "Energy & Power",
-            text: "Thermal management, >200°C, high voltage.",
-          },
-          defense: {
-            title: "Defense & Space",
-            text: "Rad-hard, extreme environments, zero failure tolerance.",
-          },
-          photonics: {
-            title: "Photonics",
-            text: "UV–IR, high power, advanced optics.",
-          },
-          health: {
-            title: "Health",
-            text: "Biocompatibility, traceability, regulation.",
-          },
+        specs: {
+          industry: "INDUSTRY",
+          industryVal: "Advanced",
+          photonics: "PHOTONICS",
+          photonicsVal: "Optical technologies",
+          science: "SCIENCE",
+          scienceVal: "Critical infrastructures",
+          common: "COMMON CHALLENGE",
+          commonVal: "Extreme reliability",
         },
-        cta: "See R&D and scale-up",
+        cta: "Explore sectors",
       },
 
       rnd: {
@@ -1228,6 +1229,7 @@ export const I18N = deepFreeze({
 
     // ✅ Advantages used by index.html (advantages.*)
     advantages: {
+      tag: "BLOCK 6 · COMPETITIVE ADVANTAGE",
       titleHtml: "Structural<br /><b>advantages.</b>",
       subtitle:
         "Vertical integration + certified specification + European supply security. Critical materials are not interchangeable: they are technological infrastructure.",
@@ -1245,12 +1247,32 @@ export const I18N = deepFreeze({
           text: "Aligned with defense, aerospace and the green transition.",
         },
         {
-          title: "European IP & lock-in",
-          text: "Robust legal framework + qualification that anchors supply.",
+          title: "European IP protection",
+          text: "Robust legal framework and proximity to strategic customers.",
         },
       ],
       closing:
         "Europe cannot lead in semiconductors, quantum or defense while relying on external chains for critical materials. Nanoker helps build that industrial base.",
+      cta: "View strategic message",
+    },
+
+    sovereignty: {
+      tag: "BLOCK 8 · STRATEGIC MESSAGE",
+      titleHtml: "European technological<br /><b>sovereignty</b>",
+      text1:
+        "Europe cannot lead in semiconductors, quantum or defense while depending on external supply chains for critical materials.",
+      text2:
+        "<b>Nanoker</b> helps build a European industrial infrastructure capable of guaranteeing quality, cost and supply in strategic sectors.",
+      cta: "Go to final CTA",
+    },
+
+    finalCta: {
+      tag: "BLOCK 9 · FINAL CTA",
+      titleHtml: "Are you developing<br /><b>a critical technology?</b>",
+      text:
+        "Tell us about your application and let us work together on the material architecture that makes it viable.",
+      primary: "Request technical evaluation",
+      secondary: "Contact",
     },
 
     // ✅ Footer used by index.html (footer.*)
@@ -2280,6 +2302,23 @@ export const I18N = deepFreeze({
           item3: "Fortalecer soberanía tecnológica",
           closing: "Nanoker construye esa base material.",
         },
+        datasheets: {
+          title: "Fichas técnicas",
+          subtitle: "Referencias cerámicas cualificadas",
+          text:
+            "Accede directamente a las fichas técnicas cerámicas disponibles dentro del portfolio de materiales. Filtra por familia para revisar con más rapidez las referencias técnicas relevantes.",
+          filters: {
+            all: "Todas",
+            alumina: "Alúmina",
+            zirconia: "Circonia",
+            carbides: "Carburos",
+            composites: "Compuestos",
+            nanocomposites: "Nanocompuestos",
+          },
+          categoryLabel: "Categoría",
+          cta: "Ver PDF",
+          empty: "No hay fichas técnicas disponibles en esta categoría.",
+        },
       },
       sectors: {
         metaTitle: "Nanoker | Sectores",
@@ -2565,33 +2604,17 @@ export const I18N = deepFreeze({
         titleHtml: "Sectores donde el material<br /><b>es crítico.</b>",
         text:
           "Un reto común: fiabilidad bajo condiciones extremas. Nos integramos en roadmaps tecnológicos de OEMs y sistemas donde el material define rendimiento, coste total y escalabilidad.",
-        tiles: {
-          semiconductors: {
-            title: "Semiconductores",
-            text: "Fab-grade, pureza, defectos, trazabilidad.",
-          },
-          quantum: {
-            title: "Cuántica & Sensores",
-            text: "Control atómico, centros NV, estabilidad.",
-          },
-          energy: {
-            title: "Energía & Potencia",
-            text: "Gestión térmica, >200°C, alta tensión.",
-          },
-          defense: {
-            title: "Defensa & Espacio",
-            text: "Rad-hard, extremos, fallo no permitido.",
-          },
-          photonics: {
-            title: "Fotónica",
-            text: "UV–IR, alta potencia, óptica avanzada.",
-          },
-          health: {
-            title: "Salud",
-            text: "Biocompatibilidad, trazabilidad, regulación.",
-          },
+        specs: {
+          industry: "INDUSTRIA",
+          industryVal: "Avanzada",
+          photonics: "FOTÓNICA",
+          photonicsVal: "Tecnologías ópticas",
+          science: "CIENCIA",
+          scienceVal: "Infraestructuras críticas",
+          common: "RETO COMÚN",
+          commonVal: "Fiabilidad extrema",
         },
-        cta: "Ver I+D y escalado",
+        cta: "Explorar sectores",
       },
 
       rnd: {
@@ -2615,6 +2638,7 @@ export const I18N = deepFreeze({
 
     // ✅ Advantages used by index.html (advantages.*)
     advantages: {
+      tag: "BLOQUE 6 · VENTAJA COMPETITIVA",
       titleHtml: "Ventajas<br /><b>estructurales.</b>",
       subtitle:
         "Integración vertical + especificación certificada + seguridad de suministro europea. Los materiales críticos no son intercambiables: son infraestructura tecnológica.",
@@ -2622,10 +2646,30 @@ export const I18N = deepFreeze({
         { title: "Integración vertical", text: "Control total de proceso, metrología y QA/QC." },
         { title: "Ventaja energética", text: "Producción intensiva en energía optimizada y competitiva." },
         { title: "CBAM-ready & sostenibilidad", text: "Producción alineada con defensa, aeroespacial y transición verde." },
-        { title: "IP europea & lock-in", text: "Marco jurídico robusto + cualificación que consolida suministro." },
+        { title: "Protección de IP europea", text: "Marco jurídico robusto y proximidad a clientes estratégicos." },
       ],
       closing:
         "Europa no puede liderar en semiconductores, cuántica o defensa mientras dependa de cadenas externas para materiales críticos. Nanoker contribuye a construir esa base industrial.",
+      cta: "Ver mensaje estratégico",
+    },
+
+    sovereignty: {
+      tag: "BLOQUE 8 · MENSAJE ESTRATÉGICO",
+      titleHtml: "Soberanía<br /><b>tecnológica europea</b>",
+      text1:
+        "Europa no puede liderar en semiconductores, cuántica o defensa mientras dependa de cadenas de suministro externas para materiales críticos.",
+      text2:
+        "<b>Nanoker</b> contribuye a construir una infraestructura industrial europea capaz de garantizar calidad, coste y suministro en sectores estratégicos.",
+      cta: "Ir al CTA final",
+    },
+
+    finalCta: {
+      tag: "BLOQUE 9 · CTA FINAL",
+      titleHtml: "¿Estás desarrollando<br /><b>una tecnología crítica?</b>",
+      text:
+        "Cuéntanos tu aplicación y trabajemos juntos en la arquitectura material que la haga viable.",
+      primary: "Solicitar evaluación técnica",
+      secondary: "Contactar",
     },
 
     // ✅ Footer used by index.html (footer.*)
