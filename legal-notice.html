@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function () {
+        var doc = document.documentElement;
+        var lang = 'en';
+        try {
+          var raw = localStorage.getItem('nanoker-lang') || navigator.language || 'en';
+          lang = String(raw).toLowerCase().split('-')[0] === 'es' ? 'es' : 'en';
+        } catch (_error) {
+          var fallback = navigator.language || 'en';
+          lang = String(fallback).toLowerCase().split('-')[0] === 'es' ? 'es' : 'en';
+        }
+        doc.lang = lang;
+        doc.setAttribute('data-lang', lang);
+      })();
+    </script>
+    <title>Aviso Legal | Nanoker</title>
+    <meta
+      name="description"
+      content="Aviso legal de Nanoker Research S.L. con datos identificativos, condiciones de uso, propiedad intelectual y limitación de responsabilidad."
+    />
+    <link rel="canonical" href="https://nanoker.com/legal-notice.html" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nanoker" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Aviso Legal | Nanoker" />
+    <meta property="og:description" content="Condiciones generales de uso del sitio web de Nanoker Research S.L." />
+    <meta property="og:url" content="https://nanoker.com/legal-notice.html" />
+    <meta property="og:image" content="https://nanoker.com/img/og/og-default.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Aviso Legal | Nanoker" />
+    <meta name="twitter:description" content="Condiciones generales de uso del sitio web de Nanoker Research S.L." />
+    <meta name="twitter:image" content="https://nanoker.com/img/og/og-default.png" />
+    <link rel="icon" href="./favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-pack/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-pack/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon-pack/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="./favicon-pack/android-chrome-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="./favicon-pack/android-chrome-512x512.png" />
+    <meta name="theme-color" content="#020202" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/style.css?v=11" />
+    <link rel="stylesheet" href="./css/legal-pages.css?v=1" />
+  </head>
+  <body class="policy-page legal-page">
+    <nav class="nav" data-nav>
+      <a href="./index.html" class="nav-logo" aria-label="Inicio Nanoker">
+        <img src="./img/brand/logo-nanoker-26-hd.png" alt="Nanoker" />
+      </a>
+      <div id="mobileMenu" class="nav-center mobile-menu" data-mobile-menu role="dialog" aria-modal="true" aria-label="Navegación principal">
+        <a href="./index.html#top" class="nav-link mobile-menu-link" data-i18n="nav.home">Inicio</a>
+        <a href="./empresa.html" class="nav-link mobile-menu-link" data-i18n="nav.company">Empresa</a>
+        <a href="./sectores.html" class="nav-link mobile-menu-link" data-i18n="nav.sectors">Sectores</a>
+        <a href="./materiales.html" class="nav-link mobile-menu-link" data-i18n="nav.materials">Materiales</a>
+        <a href="./capacidades.html" class="nav-link mobile-menu-link" data-i18n="nav.capabilities">Capacidades</a>
+        <a href="./id.html" class="nav-link mobile-menu-link" data-i18n="nav.rnd">I+D</a>
+        <a href="./contacto.html" class="nav-link mobile-menu-link" data-i18n="nav.contact">Contacto</a>
+      </div>
+      <div class="mobile-menu-backdrop" data-mobile-backdrop></div>
+      <button class="nav-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileMenu">☰ <span class="sr-only" data-i18n="nav.menu">Abrir menu</span></button>
+    </nav>
+
+    <main class="legal-main">
+      <div class="legal-container">
+        <header class="legal-header">
+          <p class="legal-kicker" data-i18n="legalNotice.hero.kicker">Legal / Corporate</p>
+          <h1 class="legal-title" data-i18n-html="legalNotice.hero.titleHtml">Aviso <span>Legal</span></h1>
+          <p class="legal-lead" data-i18n="legalNotice.hero.lead">Este documento regula el acceso, navegación y uso del sitio web de Nanoker Research S.L., así como las condiciones aplicables a sus contenidos, derechos de propiedad intelectual y limitación de responsabilidad.</p>
+          <ul class="legal-meta" aria-label="Información de versión">
+            <li data-i18n="legalNotice.hero.metaUpdated">Última actualización: 24 de marzo de 2026</li>
+            <li data-i18n="legalNotice.hero.metaScope">Ámbito: sitio web corporativo</li>
+            <li data-i18n="legalNotice.hero.metaLaw">Legislación aplicable: España</li>
+          </ul>
+        </header>
+
+        <div class="legal-grid">
+          <div class="legal-content">
+            <section class="legal-card" aria-labelledby="datos-identificativos">
+              <h2 id="datos-identificativos" data-i18n="legalNotice.sections.identification.title">1. Datos identificativos</h2>
+              <dl class="legal-definition">
+                <div><dt data-i18n="legalNotice.sections.identification.labelOwner">Titular del sitio</dt><dd data-i18n="legalNotice.sections.identification.valueOwner">Nanoker Research S.L.</dd></div>
+                <div><dt data-i18n="legalNotice.sections.identification.labelAddress">Domicilio</dt><dd data-i18n="legalNotice.sections.identification.valueAddress">Polígono de Olloniego, Parcela 22A, Nave 6, 33660 Oviedo, Asturias, España.</dd></div>
+                <div><dt data-i18n="legalNotice.sections.identification.labelEmail">Email</dt><dd><a href="mailto:info@nanoker.com" data-i18n="legalNotice.sections.identification.valueEmail">info@nanoker.com</a></dd></div>
+                <div><dt data-i18n="legalNotice.sections.identification.labelPhone">Teléfono</dt><dd><a href="tel:+34985000000" data-i18n="legalNotice.sections.identification.valuePhone">+34 985 000 000</a></dd></div>
+              </dl>
+            </section>
+
+            <section class="legal-card" aria-labelledby="condiciones-uso">
+              <h2 id="condiciones-uso" data-i18n="legalNotice.sections.terms.title">2. Condiciones de uso</h2>
+              <p data-i18n="legalNotice.sections.terms.p1">El acceso y navegación por este sitio atribuyen la condición de usuario e implican la aceptación de este aviso legal. El usuario se compromete a hacer un uso adecuado del sitio, de sus contenidos y de los servicios disponibles conforme a la ley, la buena fe y el orden público.</p>
+              <p data-i18n="legalNotice.sections.terms.p2">Queda prohibido utilizar el sitio con fines ilícitos, lesivos para Nanoker o para terceros, así como introducir o difundir virus, scripts maliciosos o cualquier actuación que pueda alterar el funcionamiento de la plataforma.</p>
+            </section>
+
+            <section class="legal-card" aria-labelledby="propiedad-intelectual">
+              <h2 id="propiedad-intelectual" data-i18n="legalNotice.sections.ip.title">3. Propiedad intelectual</h2>
+              <p data-i18n="legalNotice.sections.ip.p1">Todos los contenidos del sitio, incluyendo textos, diseños, estructura, gráficos, logotipos, imágenes, vídeos, código fuente y elementos distintivos, son titularidad de Nanoker o se utilizan con autorización suficiente.</p>
+              <p data-i18n="legalNotice.sections.ip.p2">Queda prohibida la reproducción, distribución, transformación, comunicación pública o explotación total o parcial sin autorización previa y por escrito, salvo en los supuestos legalmente permitidos.</p>
+            </section>
+
+            <section class="legal-card" aria-labelledby="responsabilidad">
+              <h2 id="responsabilidad" data-i18n="legalNotice.sections.liability.title">4. Responsabilidad</h2>
+              <p data-i18n="legalNotice.sections.liability.p1">Nanoker adopta medidas razonables para asegurar la disponibilidad, exactitud y actualización del sitio, pero no garantiza la inexistencia de errores, interrupciones o incidencias técnicas puntuales.</p>
+              <p data-i18n="legalNotice.sections.liability.p2">Nanoker no será responsable de los daños derivados del uso indebido del sitio, de decisiones adoptadas a partir de la información publicada ni de contenidos de terceros enlazados desde esta web, salvo en los casos en que la ley disponga lo contrario.</p>
+            </section>
+          </div>
+
+          <aside class="legal-aside" aria-label="Resumen">
+            <section class="legal-card">
+              <h2 data-i18n="legalCommon.summary">Resumen</h2>
+              <ul class="legal-summary-list">
+                <li><strong data-i18n="legalNotice.summary.item1Title">Titular</strong><span data-i18n="legalNotice.summary.item1Text">Nanoker Research S.L.</span></li>
+                <li><strong data-i18n="legalNotice.summary.item2Title">Uso permitido</strong><span data-i18n="legalNotice.summary.item2Text">Navegación y consulta legítima de información corporativa.</span></li>
+                <li><strong data-i18n="legalNotice.summary.item3Title">Protección</strong><span data-i18n="legalNotice.summary.item3Text">Los contenidos y activos del sitio están protegidos por derechos de propiedad intelectual.</span></li>
+                <li><strong data-i18n="legalNotice.summary.item4Title">Responsabilidad</strong><span data-i18n="legalNotice.summary.item4Text">La información se ofrece con criterios de diligencia, sin garantía absoluta de ausencia de incidencias.</span></li>
+              </ul>
+            </section>
+
+            <section class="legal-card legal-footer">
+              <h2 data-i18n="legalCommon.moreInfo">Más información</h2>
+              <a class="legal-link-card" href="./privacy.html"><strong data-i18n="legalNotice.more.privacyTitle">Política de privacidad</strong><span data-i18n="legalNotice.more.privacyText">Tratamiento de datos, conservación y derechos del usuario.</span></a>
+              <a class="legal-link-card" href="./cookies.html"><strong data-i18n="legalNotice.more.cookiesTitle">Política de cookies</strong><span data-i18n="legalNotice.more.cookiesText">Cookies, tecnologías similares y gestión de preferencias.</span></a>
+            </section>
+          </aside>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer" id="contact">
+      <div class="footer-grid">
+        <div class="f-brand">
+          <h3 data-i18n="footer.brandTitle">nanoker</h3>
+          <p data-i18n-html="footer.brandTextHtml">Plataforma industrial europea para tecnologías críticas.<br />Materiales avanzados con especificación garantizada, trazabilidad completa y escalabilidad industrial.</p>
+          <p style="margin-top: 12px; opacity: 0.9" data-i18n-html="footer.noteHtml"><b>Contacto técnico:</b> procesamos solicitudes en <b>3-5 días laborables</b>.</p>
+        </div>
+        <div class="f-col">
+          <h4 class="footer-title" data-i18n="footer.colSite.title">Site</h4>
+          <ul>
+            <li><a href="./index.html" data-i18n="footer.colSite.links.home">Home</a></li>
+            <li><a href="./empresa.html" data-i18n="footer.colSite.links.company">Empresa</a></li>
+            <li><a href="./sectores.html" data-i18n="footer.colSite.links.sectors">Sectores</a></li>
+            <li><a href="./materiales.html" data-i18n="footer.colSite.links.materials">Materiales</a></li>
+            <li><a href="./capacidades.html" data-i18n="footer.colSite.links.capabilities">Capacidades</a></li>
+            <li><a href="./id.html" data-i18n="footer.colSite.links.rnd">I+D</a></li>
+            <li><a href="./contacto.html" data-i18n="footer.colSite.links.contact">Contacto</a></li>
+          </ul>
+        </div>
+        <div class="f-col">
+          <h4 class="footer-title" data-i18n="legalCommon.footerLegalTitle">Legal</h4>
+          <ul>
+            <li><a href="./privacy.html" data-i18n="footer.legal.privacy">Política de privacidad</a></li>
+            <li><a href="./cookies.html" data-i18n="footer.legal.cookies">Política de cookies</a></li>
+            <li><a href="./legal-notice.html" aria-current="page" data-i18n="footer.legal.notice">Aviso legal</a></li>
+          </ul>
+        </div>
+        <div class="f-col">
+          <h4 class="footer-title" data-i18n="footer.colConnect.title">Connect</h4>
+          <ul>
+            <li><a href="mailto:info@nanoker.com" class="contact-data" data-i18n="footer.colConnect.email">info@nanoker.com</a></li>
+            <li><a href="tel:+34985000000" class="contact-data" data-i18n="footer.colConnect.phone">+34 985 000 000</a></li>
+            <li><a href="https://www.linkedin.com/company/nanoker-research-sl/" target="_blank" rel="noopener noreferrer" data-i18n="footer.colConnect.links.linkedin">LinkedIn ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="f-copy">
+        <div class="system-status"><div class="status-dot"></div><span><span data-i18n="footer.system.label">SYSTEM STATUS:</span> <span data-i18n="footer.system.value">OPERATIONAL</span></span></div>
+        <div class="legal-footer">
+          <span data-i18n="footer.legal.copyright">© 2026 Nanoker Research S.L.</span>
+          <div>
+            <a class="footer-action footer-action--legal" href="./privacy.html" data-i18n="footer.legal.privacy">Política de privacidad</a>
+            <a class="footer-action footer-action--legal" href="./cookies.html" data-i18n="footer.legal.cookies">Política de cookies</a>
+            <a class="footer-action footer-action--legal" href="./legal-notice.html" aria-current="page" data-i18n="footer.legal.notice">Aviso legal</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./js/mobile-menu.js?v=1"></script>
+    <script type="module">
+      import { initLanguageSwitcher, t } from "./js/lang.js";
+
+      function setSeo() {
+        document.title = t("legalNotice.metaTitle", document.title);
+        const description = t("legalNotice.metaDescription", "");
+        const ogLocale = t("legalNotice.ogLocale", "es_ES");
+        const descriptionNodes = document.querySelectorAll('meta[name="description"], meta[property="og:description"], meta[name="twitter:description"]');
+        descriptionNodes.forEach((node) => node.setAttribute("content", description));
+        const titleNodes = document.querySelectorAll('meta[property="og:title"], meta[name="twitter:title"]');
+        titleNodes.forEach((node) => node.setAttribute("content", document.title));
+        const localeNode = document.querySelector('meta[property="og:locale"]');
+        if (localeNode) localeNode.setAttribute("content", ogLocale);
+      }
+
+      initLanguageSwitcher();
+      setSeo();
+      window.addEventListener("lang:change", setSeo);
+    </script>
+  </body>
+</html>

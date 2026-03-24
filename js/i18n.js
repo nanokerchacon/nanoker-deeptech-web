@@ -1336,7 +1336,215 @@ export const I18N = deepFreeze({
       legal: {
         copyright: "© 2026 Nanoker Research S.L.",
         privacy: "Privacy Policy",
+        cookies: "Cookie Policy",
         notice: "Legal Notice",
+      },
+    },
+
+    legalCommon: {
+      summary: "Summary",
+      moreInfo: "More information",
+      footerLegalTitle: "Legal",
+    },
+
+    cookieBanner: {
+      title: "Cookies",
+      description: "We use cookies to improve your experience and analyze website usage.",
+      accept: "Accept",
+      reject: "Reject",
+      learnMore: "Learn more",
+    },
+
+    privacy: {
+      metaTitle: "Privacy Policy | Nanoker",
+      metaDescription:
+        "Nanoker Research S.L. Privacy Policy with information on the data controller, purposes, legal basis, retention, user rights, and security.",
+      ogLocale: "en_US",
+      hero: {
+        kicker: "Legal / GDPR",
+        titleHtml: "Privacy <span>Policy</span>",
+        lead:
+          "This policy explains how Nanoker Research S.L. collects, uses, retains, and protects personal data obtained through the corporate website and the professional communications connected to its activity.",
+        metaUpdated: "Last updated: March 24, 2026",
+        metaLaw: "Framework: GDPR and Spanish data protection law",
+        metaScope: "Scope: corporate website and business contact",
+      },
+      sections: {
+        controller: {
+          title: "1. Data Controller",
+          labelCompany: "Controller",
+          valueCompany: "Nanoker Research S.L.",
+          labelAddress: "Address",
+          valueAddress: "Polígono de Olloniego, Parcela 22A, Nave 6, 33660 Oviedo, Asturias, Spain.",
+          labelEmail: "Email",
+          valueEmail: "info@nanoker.com",
+          labelPhone: "Phone",
+          valuePhone: "+34 985 000 000",
+        },
+        purpose: {
+          title: "2. Purpose of Processing",
+          p1: "We process personal data to handle enquiries, manage business and technical opportunities, maintain contractual relationships, and protect the security of the website and corporate communications.",
+          p2: "When users submit information through forms, email, or phone calls, the data is used solely to respond, process the request, or support the relevant professional relationship.",
+        },
+        legalBasis: {
+          title: "3. Legal Basis",
+          item1: "The data subject's consent when requests are submitted or optional processing is accepted.",
+          item2: "Pre-contractual measures to prepare proposals, technical assessments, or quotations.",
+          item3: "Performance of a contract when a commercial or supply relationship exists.",
+          item4: "Compliance with legal obligations in corporate, tax, or regulatory matters.",
+          item5: "Legitimate interest in preserving the security, continuity, and traceability of corporate activity.",
+        },
+        retention: {
+          title: "4. Data Retention",
+          p1: "Data is retained only for as long as strictly necessary to fulfil the purpose for which it was collected and, afterwards, for the legally required retention periods.",
+          item1: "General enquiries: up to 24 months from the last interaction.",
+          item2: "Commercial or technical requests: while the opportunity remains active and for the applicable legal defence periods.",
+          item3: "Contractual and administrative data: for the statutory corporate, tax, and accounting retention periods.",
+          item4: "Processing based on consent: until consent is withdrawn or the data is no longer needed.",
+        },
+        rights: {
+          title: "5. User Rights",
+          p1: "Data subjects may exercise their rights of access, rectification, erasure, objection, restriction of processing, portability, and withdrawal of consent.",
+          p2: 'To do so, they may contact <a href="mailto:info@nanoker.com">info@nanoker.com</a>. They may also lodge a complaint with the <a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer">Spanish Data Protection Agency</a> if they believe the processing does not comply with applicable law.',
+        },
+        security: {
+          title: "6. Security",
+          p1: "Nanoker applies reasonable technical and organisational measures to prevent loss, alteration, unauthorised access, or improper disclosure of data. These measures include access controls, supplier reviews, internal procedures, and incident monitoring.",
+          p2: "However, no Internet-connected environment can guarantee absolute security, so protection is applied under a standard of diligence and continuous improvement.",
+        },
+      },
+      summary: {
+        item1Title: "Controller",
+        item1Text: "Nanoker Research S.L.",
+        item2Title: "Purpose",
+        item2Text: "Contact, business management, operations, and security.",
+        item3Title: "Legal basis",
+        item3Text: "Consent, contract, legal obligation, and legitimate interest.",
+        item4Title: "Rights",
+        item4Text: "Access, rectification, erasure, objection, restriction, and portability.",
+      },
+      more: {
+        cookiesTitle: "Cookie Policy",
+        cookiesText: "Use of cookies, similar technologies, and consent management.",
+        noticeTitle: "Legal Notice",
+        noticeText: "Terms of use, intellectual property, and liability.",
+      },
+    },
+
+    cookies: {
+      metaTitle: "Cookie Policy | Nanoker",
+      metaDescription:
+        "Nanoker Cookie Policy explaining what cookies are, the types of cookies used, third-party cookies, and how to manage them.",
+      ogLocale: "en_US",
+      hero: {
+        kicker: "Legal / Cookies",
+        titleHtml: "Cookie <span>Policy</span>",
+        lead:
+          "This policy explains the use of cookies and similar technologies on the Nanoker website, their purpose, the possible involvement of third parties, and the options available to manage them.",
+        metaUpdated: "Last updated: March 24, 2026",
+        metaLaw: "Framework: GDPR, LSSI-CE, and AEPD guidance",
+        metaScope: "Scope: website browsing",
+      },
+      sections: {
+        definition: {
+          title: "1. What Cookies Are",
+          p1: "Cookies are small files downloaded to the user's device when accessing a website. They are used to store and retrieve information about browsing activity, remember preferences, or enable certain technical services.",
+          p2: "In addition to cookies, the site may use equivalent technologies such as browser local storage to retain basic interface settings.",
+        },
+        types: {
+          title: "2. Types of Cookies",
+          item1: "<strong>Technical:</strong> required for basic operation, security, browsing, and session handling.",
+          item2: "<strong>Preferences:</strong> remember settings such as language or display options.",
+          item3: "<strong>Analytics:</strong> help measure site usage and improve performance.",
+          item4: "<strong>Marketing:</strong> intended for advertising tracking and commercial personalisation.",
+        },
+        thirdParty: {
+          title: "3. Third-Party Cookies",
+          p1: "Certain services integrated into the site may set third-party cookies, such as analytics tools, maps, embedded video, or external platforms. In those cases, cookie management and duration depend on each provider.",
+          p2: "In the website's current configuration, Nanoker does not enable advertising cookies by default. If optional third-party services subject to consent are added, users will be informed in advance and the corresponding consent mechanism will be enabled.",
+        },
+        manage: {
+          title: "4. How to Manage Them",
+          p1: "Users can allow, block, or delete cookies through their browser settings. Disabling certain technical cookies may affect the proper operation of the site.",
+          item1: "Chrome: privacy and security settings.",
+          item2: "Firefox: privacy and cookies preferences.",
+          item3: "Safari: website data and cookie management.",
+          item4: "Edge: site permissions and browsing data removal.",
+        },
+      },
+      summary: {
+        item1Title: "Technical cookies",
+        item1Text: "Required for security, browsing, and core functionality.",
+        item2Title: "Optional cookies",
+        item2Text: "Analytics or third-party cookies only where applicable and with prior notice.",
+        item3Title: "Management",
+        item3Text: "Users can configure or delete cookies through their browser.",
+      },
+      more: {
+        privacyTitle: "Privacy Policy",
+        privacyText: "Personal data processing and user rights.",
+        noticeTitle: "Legal Notice",
+        noticeText: "Terms of use, intellectual property, and limitation of liability.",
+      },
+    },
+
+    legalNotice: {
+      metaTitle: "Legal Notice | Nanoker",
+      metaDescription:
+        "Nanoker Research S.L. legal notice including identifying details, terms of use, intellectual property, and limitation of liability.",
+      ogLocale: "en_US",
+      hero: {
+        kicker: "Legal / Corporate",
+        titleHtml: "Legal <span>Notice</span>",
+        lead:
+          "This document governs access to, browsing of, and use of the Nanoker Research S.L. website, together with the conditions applicable to its contents, intellectual property rights, and limitation of liability.",
+        metaUpdated: "Last updated: March 24, 2026",
+        metaScope: "Scope: corporate website",
+        metaLaw: "Applicable law: Spain",
+      },
+      sections: {
+        identification: {
+          title: "1. Identifying Details",
+          labelOwner: "Website owner",
+          valueOwner: "Nanoker Research S.L.",
+          labelAddress: "Address",
+          valueAddress: "Polígono de Olloniego, Parcela 22A, Nave 6, 33660 Oviedo, Asturias, Spain.",
+          labelEmail: "Email",
+          valueEmail: "info@nanoker.com",
+          labelPhone: "Phone",
+          valuePhone: "+34 985 000 000",
+        },
+        terms: {
+          title: "2. Terms of Use",
+          p1: "Access to and browsing of this site grants the status of user and implies acceptance of this legal notice. Users agree to make appropriate use of the site, its contents, and the services available in accordance with the law, good faith, and public order.",
+          p2: "It is prohibited to use the site for unlawful purposes, in a way that is harmful to Nanoker or third parties, or to introduce or distribute viruses, malicious scripts, or any action that may alter the operation of the platform.",
+        },
+        ip: {
+          title: "3. Intellectual Property",
+          p1: "All site content, including texts, designs, structure, graphics, logos, images, videos, source code, and distinctive elements, is owned by Nanoker or used with sufficient authorisation.",
+          p2: "Any reproduction, distribution, transformation, public communication, or full or partial exploitation is prohibited without prior written authorisation, except where legally permitted.",
+        },
+        liability: {
+          title: "4. Liability",
+          p1: "Nanoker adopts reasonable measures to ensure the availability, accuracy, and updating of the site, but does not guarantee the absence of errors, interruptions, or occasional technical incidents.",
+          p2: "Nanoker shall not be liable for damages arising from improper use of the site, decisions taken based on the published information, or third-party content linked from this website, except where required by law.",
+        },
+      },
+      summary: {
+        item1Title: "Owner",
+        item1Text: "Nanoker Research S.L.",
+        item2Title: "Permitted use",
+        item2Text: "Legitimate browsing and consultation of corporate information.",
+        item3Title: "Protection",
+        item3Text: "The site's content and assets are protected by intellectual property rights.",
+        item4Title: "Liability",
+        item4Text: "Information is provided under a standard of diligence, without an absolute guarantee against incidents.",
+      },
+      more: {
+        privacyTitle: "Privacy Policy",
+        privacyText: "Data processing, retention, and user rights.",
+        cookiesTitle: "Cookie Policy",
+        cookiesText: "Cookies, similar technologies, and preference management.",
       },
     },
 
@@ -2733,7 +2941,215 @@ export const I18N = deepFreeze({
       legal: {
         copyright: "© 2026 Nanoker Research S.L.",
         privacy: "Política de privacidad",
+        cookies: "Política de cookies",
         notice: "Aviso legal",
+      },
+    },
+
+    legalCommon: {
+      summary: "Resumen",
+      moreInfo: "Más información",
+      footerLegalTitle: "Legal",
+    },
+
+    cookieBanner: {
+      title: "Cookies",
+      description: "Utilizamos cookies para mejorar tu experiencia y analizar el uso de la web.",
+      accept: "Aceptar",
+      reject: "Rechazar",
+      learnMore: "Más información",
+    },
+
+    privacy: {
+      metaTitle: "Política de Privacidad | Nanoker",
+      metaDescription:
+        "Política de Privacidad de Nanoker Research S.L. con información sobre responsable del tratamiento, finalidades, bases jurídicas, conservación, derechos y seguridad.",
+      ogLocale: "es_ES",
+      hero: {
+        kicker: "Legal / RGPD",
+        titleHtml: "Política de <span>Privacidad</span>",
+        lead:
+          "Esta política explica cómo Nanoker Research S.L. recopila, utiliza, conserva y protege los datos personales obtenidos a través del sitio web corporativo y de las comunicaciones profesionales vinculadas a su actividad.",
+        metaUpdated: "Última actualización: 24 de marzo de 2026",
+        metaLaw: "Normativa: RGPD y LOPDGDD",
+        metaScope: "Ámbito: web corporativa y contacto comercial",
+      },
+      sections: {
+        controller: {
+          title: "1. Responsable del tratamiento",
+          labelCompany: "Responsable",
+          valueCompany: "Nanoker Research S.L.",
+          labelAddress: "Domicilio",
+          valueAddress: "Polígono de Olloniego, Parcela 22A, Nave 6, 33660 Oviedo, Asturias, España.",
+          labelEmail: "Email",
+          valueEmail: "info@nanoker.com",
+          labelPhone: "Teléfono",
+          valuePhone: "+34 985 000 000",
+        },
+        purpose: {
+          title: "2. Finalidad del tratamiento",
+          p1: "Tratamos datos personales para atender consultas, gestionar oportunidades comerciales y técnicas, mantener relaciones contractuales y proteger la seguridad del sitio web y de las comunicaciones corporativas.",
+          p2: "Cuando el usuario remite información mediante formularios, correo electrónico o llamadas, los datos se utilizan exclusivamente para responder, tramitar solicitudes o desarrollar la relación profesional correspondiente.",
+        },
+        legalBasis: {
+          title: "3. Base legal",
+          item1: "Consentimiento del interesado cuando envía solicitudes o acepta tratamientos opcionales.",
+          item2: "Aplicación de medidas precontractuales para preparar propuestas, evaluaciones técnicas o presupuestos.",
+          item3: "Ejecución de un contrato cuando existe una relación comercial o de suministro.",
+          item4: "Cumplimiento de obligaciones legales en materia mercantil, fiscal o regulatoria.",
+          item5: "Interés legítimo para preservar la seguridad, continuidad y trazabilidad de la actividad corporativa.",
+        },
+        retention: {
+          title: "4. Conservación de los datos",
+          p1: "Los datos se conservan durante el tiempo estrictamente necesario para cumplir la finalidad que motivó su recogida y, posteriormente, durante los plazos legales exigibles.",
+          item1: "Consultas generales: hasta 24 meses desde la última interacción.",
+          item2: "Solicitudes comerciales o técnicas: mientras la oportunidad siga activa y durante los plazos de defensa jurídica aplicables.",
+          item3: "Datos contractuales y administrativos: durante los plazos legales de conservación mercantil, fiscal y contable.",
+          item4: "Tratamientos basados en consentimiento: hasta su retirada o hasta que dejen de ser necesarios.",
+        },
+        rights: {
+          title: "5. Derechos del usuario",
+          p1: "La persona interesada puede ejercer sus derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento, portabilidad y retirada del consentimiento.",
+          p2: 'Para ello puede escribir a <a href="mailto:info@nanoker.com">info@nanoker.com</a>. También puede presentar una reclamación ante la <a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer">Agencia Española de Protección de Datos</a> si considera que el tratamiento no se ajusta a la normativa.',
+        },
+        security: {
+          title: "6. Seguridad",
+          p1: "Nanoker aplica medidas técnicas y organizativas razonables para evitar la pérdida, alteración, acceso no autorizado o divulgación indebida de los datos. Entre ellas se incluyen controles de acceso, revisión de proveedores, procedimientos internos y seguimiento de incidentes.",
+          p2: "No obstante, ningún entorno conectado a Internet puede garantizar una seguridad absoluta, por lo que la protección se aplica con criterios de diligencia y mejora continua.",
+        },
+      },
+      summary: {
+        item1Title: "Responsable",
+        item1Text: "Nanoker Research S.L.",
+        item2Title: "Finalidad",
+        item2Text: "Contacto, gestión comercial, operaciones y seguridad.",
+        item3Title: "Base jurídica",
+        item3Text: "Consentimiento, contrato, obligación legal e interés legítimo.",
+        item4Title: "Derechos",
+        item4Text: "Acceso, rectificación, supresión, oposición, limitación y portabilidad.",
+      },
+      more: {
+        cookiesTitle: "Política de Cookies",
+        cookiesText: "Uso de cookies, tecnologías similares y gestión del consentimiento.",
+        noticeTitle: "Aviso legal",
+        noticeText: "Condiciones de uso, propiedad intelectual y responsabilidad.",
+      },
+    },
+
+    cookies: {
+      metaTitle: "Política de Cookies | Nanoker",
+      metaDescription:
+        "Política de Cookies de Nanoker con explicación sobre qué son las cookies, sus tipos, cookies de terceros y cómo gestionarlas.",
+      ogLocale: "es_ES",
+      hero: {
+        kicker: "Legal / Cookies",
+        titleHtml: "Política de <span>Cookies</span>",
+        lead:
+          "Esta política informa sobre el uso de cookies y tecnologías similares en el sitio web de Nanoker, su finalidad, la posible intervención de terceros y las opciones disponibles para gestionarlas.",
+        metaUpdated: "Última actualización: 24 de marzo de 2026",
+        metaLaw: "Normativa: RGPD, LSSI-CE y guía AEPD",
+        metaScope: "Ámbito: navegación web",
+      },
+      sections: {
+        definition: {
+          title: "1. Qué son cookies",
+          p1: "Las cookies son pequeños archivos que se descargan en el dispositivo del usuario cuando accede a un sitio web. Sirven para almacenar y recuperar información sobre la navegación, recordar preferencias o facilitar determinados servicios técnicos.",
+          p2: "Además de cookies, el sitio puede utilizar tecnologías equivalentes como almacenamiento local del navegador para mantener configuraciones básicas de interfaz.",
+        },
+        types: {
+          title: "2. Tipos de cookies",
+          item1: "<strong>Técnicas:</strong> necesarias para el funcionamiento básico, seguridad, navegación y gestión de sesión.",
+          item2: "<strong>Preferencias:</strong> recuerdan configuraciones como idioma o visualización.",
+          item3: "<strong>Analíticas:</strong> permiten medir el uso del sitio y mejorar su rendimiento.",
+          item4: "<strong>Marketing:</strong> destinadas a seguimiento publicitario y personalización comercial.",
+        },
+        thirdParty: {
+          title: "3. Cookies de terceros",
+          p1: "Determinados servicios integrados en el sitio pueden instalar cookies de terceros, por ejemplo herramientas de analítica, mapas, vídeo embebido o plataformas externas. En esos casos, la gestión y duración de las cookies depende de cada proveedor.",
+          p2: "En la configuración actual del sitio de Nanoker no se activan cookies publicitarias por defecto. Si se incorporan servicios opcionales de terceros sujetos a consentimiento, se informará previamente y se habilitará el mecanismo de aceptación correspondiente.",
+        },
+        manage: {
+          title: "4. Cómo gestionarlas",
+          p1: "El usuario puede permitir, bloquear o eliminar cookies desde la configuración de su navegador. La desactivación de determinadas cookies técnicas puede afectar al correcto funcionamiento del sitio.",
+          item1: "Chrome: configuración de privacidad y seguridad.",
+          item2: "Firefox: preferencias de privacidad y cookies.",
+          item3: "Safari: gestión de cookies y datos de sitios web.",
+          item4: "Edge: permisos del sitio y eliminación de datos de navegación.",
+        },
+      },
+      summary: {
+        item1Title: "Cookies técnicas",
+        item1Text: "Necesarias para seguridad, navegación y funciones básicas.",
+        item2Title: "Cookies opcionales",
+        item2Text: "Analítica o terceros solo cuando proceda y bajo información previa.",
+        item3Title: "Gestión",
+        item3Text: "El usuario puede configurar o eliminar cookies desde su navegador.",
+      },
+      more: {
+        privacyTitle: "Política de privacidad",
+        privacyText: "Tratamiento de datos personales y derechos del usuario.",
+        noticeTitle: "Aviso legal",
+        noticeText: "Condiciones de uso, propiedad intelectual y limitación de responsabilidad.",
+      },
+    },
+
+    legalNotice: {
+      metaTitle: "Aviso Legal | Nanoker",
+      metaDescription:
+        "Aviso legal de Nanoker Research S.L. con datos identificativos, condiciones de uso, propiedad intelectual y limitación de responsabilidad.",
+      ogLocale: "es_ES",
+      hero: {
+        kicker: "Legal / Corporate",
+        titleHtml: "Aviso <span>Legal</span>",
+        lead:
+          "Este documento regula el acceso, navegación y uso del sitio web de Nanoker Research S.L., así como las condiciones aplicables a sus contenidos, derechos de propiedad intelectual y limitación de responsabilidad.",
+        metaUpdated: "Última actualización: 24 de marzo de 2026",
+        metaScope: "Ámbito: sitio web corporativo",
+        metaLaw: "Legislación aplicable: España",
+      },
+      sections: {
+        identification: {
+          title: "1. Datos identificativos",
+          labelOwner: "Titular del sitio",
+          valueOwner: "Nanoker Research S.L.",
+          labelAddress: "Domicilio",
+          valueAddress: "Polígono de Olloniego, Parcela 22A, Nave 6, 33660 Oviedo, Asturias, España.",
+          labelEmail: "Email",
+          valueEmail: "info@nanoker.com",
+          labelPhone: "Teléfono",
+          valuePhone: "+34 985 000 000",
+        },
+        terms: {
+          title: "2. Condiciones de uso",
+          p1: "El acceso y navegación por este sitio atribuyen la condición de usuario e implican la aceptación de este aviso legal. El usuario se compromete a hacer un uso adecuado del sitio, de sus contenidos y de los servicios disponibles conforme a la ley, la buena fe y el orden público.",
+          p2: "Queda prohibido utilizar el sitio con fines ilícitos, lesivos para Nanoker o para terceros, así como introducir o difundir virus, scripts maliciosos o cualquier actuación que pueda alterar el funcionamiento de la plataforma.",
+        },
+        ip: {
+          title: "3. Propiedad intelectual",
+          p1: "Todos los contenidos del sitio, incluyendo textos, diseños, estructura, gráficos, logotipos, imágenes, vídeos, código fuente y elementos distintivos, son titularidad de Nanoker o se utilizan con autorización suficiente.",
+          p2: "Queda prohibida la reproducción, distribución, transformación, comunicación pública o explotación total o parcial sin autorización previa y por escrito, salvo en los supuestos legalmente permitidos.",
+        },
+        liability: {
+          title: "4. Responsabilidad",
+          p1: "Nanoker adopta medidas razonables para asegurar la disponibilidad, exactitud y actualización del sitio, pero no garantiza la inexistencia de errores, interrupciones o incidencias técnicas puntuales.",
+          p2: "Nanoker no será responsable de los daños derivados del uso indebido del sitio, de decisiones adoptadas a partir de la información publicada ni de contenidos de terceros enlazados desde esta web, salvo en los casos en que la ley disponga lo contrario.",
+        },
+      },
+      summary: {
+        item1Title: "Titular",
+        item1Text: "Nanoker Research S.L.",
+        item2Title: "Uso permitido",
+        item2Text: "Navegación y consulta legítima de información corporativa.",
+        item3Title: "Protección",
+        item3Text: "Los contenidos y activos del sitio están protegidos por derechos de propiedad intelectual.",
+        item4Title: "Responsabilidad",
+        item4Text: "La información se ofrece con criterios de diligencia, sin garantía absoluta de ausencia de incidencias.",
+      },
+      more: {
+        privacyTitle: "Política de privacidad",
+        privacyText: "Tratamiento de datos, conservación y derechos del usuario.",
+        cookiesTitle: "Política de cookies",
+        cookiesText: "Cookies, tecnologías similares y gestión de preferencias.",
       },
     },
 

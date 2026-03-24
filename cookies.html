@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function () {
+        var doc = document.documentElement;
+        var lang = 'en';
+        try {
+          var raw = localStorage.getItem('nanoker-lang') || navigator.language || 'en';
+          lang = String(raw).toLowerCase().split('-')[0] === 'es' ? 'es' : 'en';
+        } catch (_error) {
+          var fallback = navigator.language || 'en';
+          lang = String(fallback).toLowerCase().split('-')[0] === 'es' ? 'es' : 'en';
+        }
+        doc.lang = lang;
+        doc.setAttribute('data-lang', lang);
+      })();
+    </script>
+    <title>Política de Cookies | Nanoker</title>
+    <meta
+      name="description"
+      content="Política de Cookies de Nanoker con explicación sobre qué son las cookies, sus tipos, cookies de terceros y cómo gestionarlas."
+    />
+    <link rel="canonical" href="https://nanoker.com/cookies.html" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nanoker" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Política de Cookies | Nanoker" />
+    <meta property="og:description" content="Información sobre cookies, tipos, terceros y gestión del consentimiento en el sitio web de Nanoker." />
+    <meta property="og:url" content="https://nanoker.com/cookies.html" />
+    <meta property="og:image" content="https://nanoker.com/img/og/og-default.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Política de Cookies | Nanoker" />
+    <meta name="twitter:description" content="Información sobre cookies, tipos, terceros y gestión del consentimiento en el sitio web de Nanoker." />
+    <meta name="twitter:image" content="https://nanoker.com/img/og/og-default.png" />
+    <link rel="icon" href="./favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-pack/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-pack/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon-pack/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="./favicon-pack/android-chrome-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="./favicon-pack/android-chrome-512x512.png" />
+    <meta name="theme-color" content="#020202" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/style.css?v=11" />
+    <link rel="stylesheet" href="./css/legal-pages.css?v=1" />
+  </head>
+  <body class="policy-page legal-page">
+    <nav class="nav" data-nav>
+      <a href="./index.html" class="nav-logo" aria-label="Inicio Nanoker">
+        <img src="./img/brand/logo-nanoker-26-hd.png" alt="Nanoker" />
+      </a>
+      <div id="mobileMenu" class="nav-center mobile-menu" data-mobile-menu role="dialog" aria-modal="true" aria-label="Navegación principal">
+        <a href="./index.html#top" class="nav-link mobile-menu-link" data-i18n="nav.home">Inicio</a>
+        <a href="./empresa.html" class="nav-link mobile-menu-link" data-i18n="nav.company">Empresa</a>
+        <a href="./sectores.html" class="nav-link mobile-menu-link" data-i18n="nav.sectors">Sectores</a>
+        <a href="./materiales.html" class="nav-link mobile-menu-link" data-i18n="nav.materials">Materiales</a>
+        <a href="./capacidades.html" class="nav-link mobile-menu-link" data-i18n="nav.capabilities">Capacidades</a>
+        <a href="./id.html" class="nav-link mobile-menu-link" data-i18n="nav.rnd">I+D</a>
+        <a href="./contacto.html" class="nav-link mobile-menu-link" data-i18n="nav.contact">Contacto</a>
+      </div>
+      <div class="mobile-menu-backdrop" data-mobile-backdrop></div>
+      <button class="nav-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileMenu">☰ <span class="sr-only" data-i18n="nav.menu">Abrir menu</span></button>
+    </nav>
+
+    <main class="legal-main">
+      <div class="legal-container">
+        <header class="legal-header">
+          <p class="legal-kicker" data-i18n="cookies.hero.kicker">Legal / Cookies</p>
+          <h1 class="legal-title" data-i18n-html="cookies.hero.titleHtml">Política de <span>Cookies</span></h1>
+          <p class="legal-lead" data-i18n="cookies.hero.lead">Esta política informa sobre el uso de cookies y tecnologías similares en el sitio web de Nanoker, su finalidad, la posible intervención de terceros y las opciones disponibles para gestionarlas.</p>
+          <ul class="legal-meta" aria-label="Información de versión">
+            <li data-i18n="cookies.hero.metaUpdated">Última actualización: 24 de marzo de 2026</li>
+            <li data-i18n="cookies.hero.metaLaw">Normativa: RGPD, LSSI-CE y guía AEPD</li>
+            <li data-i18n="cookies.hero.metaScope">Ámbito: navegación web</li>
+          </ul>
+        </header>
+
+        <div class="legal-grid">
+          <div class="legal-content">
+            <section class="legal-card" aria-labelledby="que-son">
+              <h2 id="que-son" data-i18n="cookies.sections.definition.title">1. Qué son cookies</h2>
+              <p data-i18n="cookies.sections.definition.p1">Las cookies son pequeños archivos que se descargan en el dispositivo del usuario cuando accede a un sitio web. Sirven para almacenar y recuperar información sobre la navegación, recordar preferencias o facilitar determinados servicios técnicos.</p>
+              <p data-i18n="cookies.sections.definition.p2">Además de cookies, el sitio puede utilizar tecnologías equivalentes como almacenamiento local del navegador para mantener configuraciones básicas de interfaz.</p>
+            </section>
+
+            <section class="legal-card" aria-labelledby="tipos">
+              <h2 id="tipos" data-i18n="cookies.sections.types.title">2. Tipos de cookies</h2>
+              <ul>
+                <li data-i18n-html="cookies.sections.types.item1"><strong>Técnicas:</strong> necesarias para el funcionamiento básico, seguridad, navegación y gestión de sesión.</li>
+                <li data-i18n-html="cookies.sections.types.item2"><strong>Preferencias:</strong> recuerdan configuraciones como idioma o visualización.</li>
+                <li data-i18n-html="cookies.sections.types.item3"><strong>Analíticas:</strong> permiten medir el uso del sitio y mejorar su rendimiento.</li>
+                <li data-i18n-html="cookies.sections.types.item4"><strong>Marketing:</strong> destinadas a seguimiento publicitario y personalización comercial.</li>
+              </ul>
+            </section>
+
+            <section class="legal-card" aria-labelledby="terceros">
+              <h2 id="terceros" data-i18n="cookies.sections.thirdParty.title">3. Cookies de terceros</h2>
+              <p data-i18n="cookies.sections.thirdParty.p1">Determinados servicios integrados en el sitio pueden instalar cookies de terceros, por ejemplo herramientas de analítica, mapas, vídeo embebido o plataformas externas. En esos casos, la gestión y duración de las cookies depende de cada proveedor.</p>
+              <p data-i18n="cookies.sections.thirdParty.p2">En la configuración actual del sitio de Nanoker no se activan cookies publicitarias por defecto. Si se incorporan servicios opcionales de terceros sujetos a consentimiento, se informará previamente y se habilitará el mecanismo de aceptación correspondiente.</p>
+            </section>
+
+            <section class="legal-card" aria-labelledby="gestionar">
+              <h2 id="gestionar" data-i18n="cookies.sections.manage.title">4. Cómo gestionarlas</h2>
+              <p data-i18n="cookies.sections.manage.p1">El usuario puede permitir, bloquear o eliminar cookies desde la configuración de su navegador. La desactivación de determinadas cookies técnicas puede afectar al correcto funcionamiento del sitio.</p>
+              <ul>
+                <li data-i18n="cookies.sections.manage.item1">Chrome: configuración de privacidad y seguridad.</li>
+                <li data-i18n="cookies.sections.manage.item2">Firefox: preferencias de privacidad y cookies.</li>
+                <li data-i18n="cookies.sections.manage.item3">Safari: gestión de cookies y datos de sitios web.</li>
+                <li data-i18n="cookies.sections.manage.item4">Edge: permisos del sitio y eliminación de datos de navegación.</li>
+              </ul>
+            </section>
+          </div>
+
+          <aside class="legal-aside" aria-label="Resumen">
+            <section class="legal-card">
+              <h2 data-i18n="legalCommon.summary">Resumen</h2>
+              <ul class="legal-summary-list">
+                <li><strong data-i18n="cookies.summary.item1Title">Cookies técnicas</strong><span data-i18n="cookies.summary.item1Text">Necesarias para seguridad, navegación y funciones básicas.</span></li>
+                <li><strong data-i18n="cookies.summary.item2Title">Cookies opcionales</strong><span data-i18n="cookies.summary.item2Text">Analítica o terceros solo cuando proceda y bajo información previa.</span></li>
+                <li><strong data-i18n="cookies.summary.item3Title">Gestión</strong><span data-i18n="cookies.summary.item3Text">El usuario puede configurar o eliminar cookies desde su navegador.</span></li>
+              </ul>
+            </section>
+
+            <section class="legal-card legal-footer">
+              <h2 data-i18n="legalCommon.moreInfo">Más información</h2>
+              <a class="legal-link-card" href="./privacy.html"><strong data-i18n="cookies.more.privacyTitle">Política de privacidad</strong><span data-i18n="cookies.more.privacyText">Tratamiento de datos personales y derechos del usuario.</span></a>
+              <a class="legal-link-card" href="./legal-notice.html"><strong data-i18n="cookies.more.noticeTitle">Aviso legal</strong><span data-i18n="cookies.more.noticeText">Condiciones de uso, propiedad intelectual y limitación de responsabilidad.</span></a>
+            </section>
+          </aside>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer" id="contact">
+      <div class="footer-grid">
+        <div class="f-brand">
+          <h3 data-i18n="footer.brandTitle">nanoker</h3>
+          <p data-i18n-html="footer.brandTextHtml">Plataforma industrial europea para tecnologías críticas.<br />Materiales avanzados con especificación garantizada, trazabilidad completa y escalabilidad industrial.</p>
+          <p style="margin-top: 12px; opacity: 0.9" data-i18n-html="footer.noteHtml"><b>Contacto técnico:</b> procesamos solicitudes en <b>3-5 días laborables</b>.</p>
+        </div>
+        <div class="f-col">
+          <h4 class="footer-title" data-i18n="footer.colSite.title">Site</h4>
+          <ul>
+            <li><a href="./index.html" data-i18n="footer.colSite.links.home">Home</a></li>
+            <li><a href="./empresa.html" data-i18n="footer.colSite.links.company">Empresa</a></li>
+            <li><a href="./sectores.html" data-i18n="footer.colSite.links.sectors">Sectores</a></li>
+            <li><a href="./materiales.html" data-i18n="footer.colSite.links.materials">Materiales</a></li>
+            <li><a href="./capacidades.html" data-i18n="footer.colSite.links.capabilities">Capacidades</a></li>
+            <li><a href="./id.html" data-i18n="footer.colSite.links.rnd">I+D</a></li>
+            <li><a href="./contacto.html" data-i18n="footer.colSite.links.contact">Contacto</a></li>
+          </ul>
+        </div>
+        <div class="f-col">
+          <h4 class="footer-title" data-i18n="legalCommon.footerLegalTitle">Legal</h4>
+          <ul>
+            <li><a href="./privacy.html" data-i18n="footer.legal.privacy">Política de privacidad</a></li>
+            <li><a href="./cookies.html" aria-current="page" data-i18n="footer.legal.cookies">Política de cookies</a></li>
+            <li><a href="./legal-notice.html" data-i18n="footer.legal.notice">Aviso legal</a></li>
+          </ul>
+        </div>
+        <div class="f-col">
+          <h4 class="footer-title" data-i18n="footer.colConnect.title">Connect</h4>
+          <ul>
+            <li><a href="mailto:info@nanoker.com" class="contact-data" data-i18n="footer.colConnect.email">info@nanoker.com</a></li>
+            <li><a href="tel:+34985000000" class="contact-data" data-i18n="footer.colConnect.phone">+34 985 000 000</a></li>
+            <li><a href="https://www.linkedin.com/company/nanoker-research-sl/" target="_blank" rel="noopener noreferrer" data-i18n="footer.colConnect.links.linkedin">LinkedIn ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="f-copy">
+        <div class="system-status"><div class="status-dot"></div><span><span data-i18n="footer.system.label">SYSTEM STATUS:</span> <span data-i18n="footer.system.value">OPERATIONAL</span></span></div>
+        <div class="legal-footer">
+          <span data-i18n="footer.legal.copyright">© 2026 Nanoker Research S.L.</span>
+          <div>
+            <a class="footer-action footer-action--legal" href="./privacy.html" data-i18n="footer.legal.privacy">Política de privacidad</a>
+            <a class="footer-action footer-action--legal" href="./cookies.html" aria-current="page" data-i18n="footer.legal.cookies">Política de cookies</a>
+            <a class="footer-action footer-action--legal" href="./legal-notice.html" data-i18n="footer.legal.notice">Aviso legal</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./js/mobile-menu.js?v=1"></script>
+    <script type="module">
+      import { initLanguageSwitcher, t } from "./js/lang.js";
+
+      function setSeo() {
+        document.title = t("cookies.metaTitle", document.title);
+        const description = t("cookies.metaDescription", "");
+        const ogLocale = t("cookies.ogLocale", "es_ES");
+        const descriptionNodes = document.querySelectorAll('meta[name="description"], meta[property="og:description"], meta[name="twitter:description"]');
+        descriptionNodes.forEach((node) => node.setAttribute("content", description));
+        const titleNodes = document.querySelectorAll('meta[property="og:title"], meta[name="twitter:title"]');
+        titleNodes.forEach((node) => node.setAttribute("content", document.title));
+        const localeNode = document.querySelector('meta[property="og:locale"]');
+        if (localeNode) localeNode.setAttribute("content", ogLocale);
+      }
+
+      initLanguageSwitcher();
+      setSeo();
+      window.addEventListener("lang:change", setSeo);
+    </script>
+  </body>
+</html>

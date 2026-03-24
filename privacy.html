@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function () {
+        var doc = document.documentElement;
+        var lang = 'en';
+        try {
+          var raw = localStorage.getItem('nanoker-lang') || navigator.language || 'en';
+          lang = String(raw).toLowerCase().split('-')[0] === 'es' ? 'es' : 'en';
+        } catch (_error) {
+          var fallback = navigator.language || 'en';
+          lang = String(fallback).toLowerCase().split('-')[0] === 'es' ? 'es' : 'en';
+        }
+        doc.lang = lang;
+        doc.setAttribute('data-lang', lang);
+      })();
+    </script>
+    <title>Política de Privacidad | Nanoker</title>
+    <meta
+      name="description"
+      content="Política de Privacidad de Nanoker Research S.L. con información sobre responsable del tratamiento, finalidades, bases jurídicas, conservación, derechos y seguridad."
+    />
+    <link rel="canonical" href="https://nanoker.com/privacy.html" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nanoker" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:title" content="Política de Privacidad | Nanoker" />
+    <meta property="og:description" content="Información sobre el tratamiento de datos personales en Nanoker Research S.L., conforme al RGPD y la normativa española aplicable." />
+    <meta property="og:url" content="https://nanoker.com/privacy.html" />
+    <meta property="og:image" content="https://nanoker.com/img/og/og-default.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Política de Privacidad | Nanoker" />
+    <meta name="twitter:description" content="Información sobre el tratamiento de datos personales en Nanoker Research S.L., conforme al RGPD y la normativa española aplicable." />
+    <meta name="twitter:image" content="https://nanoker.com/img/og/og-default.png" />
+    <link rel="icon" href="./favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-pack/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-pack/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon-pack/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="./favicon-pack/android-chrome-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="./favicon-pack/android-chrome-512x512.png" />
+    <meta name="theme-color" content="#020202" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/style.css?v=11" />
+    <link rel="stylesheet" href="./css/legal-pages.css?v=1" />
+  </head>
+  <body class="policy-page legal-page">
+    <nav class="nav" data-nav>
+      <a href="./index.html" class="nav-logo" aria-label="Inicio Nanoker">
+        <img src="./img/brand/logo-nanoker-26-hd.png" alt="Nanoker" />
+      </a>
+      <div id="mobileMenu" class="nav-center mobile-menu" data-mobile-menu role="dialog" aria-modal="true" aria-label="Navegación principal">
+        <a href="./index.html#top" class="nav-link mobile-menu-link" data-i18n="nav.home">Inicio</a>
+        <a href="./empresa.html" class="nav-link mobile-menu-link" data-i18n="nav.company">Empresa</a>
+        <a href="./sectores.html" class="nav-link mobile-menu-link" data-i18n="nav.sectors">Sectores</a>
+        <a href="./materiales.html" class="nav-link mobile-menu-link" data-i18n="nav.materials">Materiales</a>
+        <a href="./capacidades.html" class="nav-link mobile-menu-link" data-i18n="nav.capabilities">Capacidades</a>
+        <a href="./id.html" class="nav-link mobile-menu-link" data-i18n="nav.rnd">I+D</a>
+        <a href="./contacto.html" class="nav-link mobile-menu-link" data-i18n="nav.contact">Contacto</a>
+      </div>
+      <div class="mobile-menu-backdrop" data-mobile-backdrop></div>
+      <button class="nav-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileMenu">☰ <span class="sr-only" data-i18n="nav.menu">Abrir menu</span></button>
+    </nav>
+
+    <main class="legal-main">
+      <div class="legal-container">
+        <header class="legal-header">
+          <p class="legal-kicker" data-i18n="privacy.hero.kicker">Legal / RGPD</p>
+          <h1 class="legal-title" data-i18n-html="privacy.hero.titleHtml">Política de <span>Privacidad</span></h1>
+          <p class="legal-lead" data-i18n="privacy.hero.lead">Esta política explica cómo Nanoker Research S.L. recopila, utiliza, conserva y protege los datos personales obtenidos a través del sitio web corporativo y de las comunicaciones profesionales vinculadas a su actividad.</p>
+          <ul class="legal-meta" aria-label="Información de versión">
+            <li data-i18n="privacy.hero.metaUpdated">Última actualización: 24 de marzo de 2026</li>
+            <li data-i18n="privacy.hero.metaLaw">Normativa: RGPD y LOPDGDD</li>
+            <li data-i18n="privacy.hero.metaScope">Ámbito: web corporativa y contacto comercial</li>
+          </ul>
+        </header>
+
+        <div class="legal-grid">
+          <div class="legal-content">
+            <section class="legal-card" aria-labelledby="responsable">
+              <h2 id="responsable" data-i18n="privacy.sections.controller.title">1. Responsable del tratamiento</h2>
+              <dl class="legal-definition">
+                <div><dt data-i18n="privacy.sections.controller.labelCompany">Responsable</dt><dd data-i18n="privacy.sections.controller.valueCompany">Nanoker Research S.L.</dd></div>
+                <div><dt data-i18n="privacy.sections.controller.labelAddress">Domicilio</dt><dd data-i18n="privacy.sections.controller.valueAddress">Polígono de Olloniego, Parcela 22A, Nave 6, 33660 Oviedo, Asturias, España.</dd></div>
+                <div><dt data-i18n="privacy.sections.controller.labelEmail">Email</dt><dd><a href="mailto:info@nanoker.com" data-i18n="privacy.sections.controller.valueEmail">info@nanoker.com</a></dd></div>
+                <div><dt data-i18n="privacy.sections.controller.labelPhone">Teléfono</dt><dd><a href="tel:+34985000000" data-i18n="privacy.sections.controller.valuePhone">+34 985 000 000</a></dd></div>
+              </dl>
+            </section>
+
+            <section class="legal-card" aria-labelledby="finalidad">
+              <h2 id="finalidad" data-i18n="privacy.sections.purpose.title">2. Finalidad del tratamiento</h2>
+              <p data-i18n="privacy.sections.purpose.p1">Tratamos datos personales para atender consultas, gestionar oportunidades comerciales y técnicas, mantener relaciones contractuales y proteger la seguridad del sitio web y de las comunicaciones corporativas.</p>
+              <p data-i18n="privacy.sections.purpose.p2">Cuando el usuario remite información mediante formularios, correo electrónico o llamadas, los datos se utilizan exclusivamente para responder, tramitar solicitudes o desarrollar la relación profesional correspondiente.</p>
+            </section>
+
+            <section class="legal-card" aria-labelledby="base-legal">
+              <h2 id="base-legal" data-i18n="privacy.sections.legalBasis.title">3. Base legal</h2>
+              <ul>
+                <li data-i18n="privacy.sections.legalBasis.item1">Consentimiento del interesado cuando envía solicitudes o acepta tratamientos opcionales.</li>
+                <li data-i18n="privacy.sections.legalBasis.item2">Aplicación de medidas precontractuales para preparar propuestas, evaluaciones técnicas o presupuestos.</li>
+                <li data-i18n="privacy.sections.legalBasis.item3">Ejecución de un contrato cuando existe una relación comercial o de suministro.</li>
+                <li data-i18n="privacy.sections.legalBasis.item4">Cumplimiento de obligaciones legales en materia mercantil, fiscal o regulatoria.</li>
+                <li data-i18n="privacy.sections.legalBasis.item5">Interés legítimo para preservar la seguridad, continuidad y trazabilidad de la actividad corporativa.</li>
+              </ul>
+            </section>
+
+            <section class="legal-card" aria-labelledby="conservacion">
+              <h2 id="conservacion" data-i18n="privacy.sections.retention.title">4. Conservación de los datos</h2>
+              <p data-i18n="privacy.sections.retention.p1">Los datos se conservan durante el tiempo estrictamente necesario para cumplir la finalidad que motivó su recogida y, posteriormente, durante los plazos legales exigibles.</p>
+              <ul>
+                <li data-i18n="privacy.sections.retention.item1">Consultas generales: hasta 24 meses desde la última interacción.</li>
+                <li data-i18n="privacy.sections.retention.item2">Solicitudes comerciales o técnicas: mientras la oportunidad siga activa y durante los plazos de defensa jurídica aplicables.</li>
+                <li data-i18n="privacy.sections.retention.item3">Datos contractuales y administrativos: durante los plazos legales de conservación mercantil, fiscal y contable.</li>
+                <li data-i18n="privacy.sections.retention.item4">Tratamientos basados en consentimiento: hasta su retirada o hasta que dejen de ser necesarios.</li>
+              </ul>
+            </section>
+
+            <section class="legal-card" aria-labelledby="derechos">
+              <h2 id="derechos" data-i18n="privacy.sections.rights.title">5. Derechos del usuario</h2>
+              <p data-i18n="privacy.sections.rights.p1">La persona interesada puede ejercer sus derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento, portabilidad y retirada del consentimiento.</p>
+              <p data-i18n-html="privacy.sections.rights.p2">Para ello puede escribir a <a href="mailto:info@nanoker.com">info@nanoker.com</a>. También puede presentar una reclamación ante la <a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer">Agencia Española de Protección de Datos</a> si considera que el tratamiento no se ajusta a la normativa.</p>
+            </section>
+
+            <section class="legal-card" aria-labelledby="seguridad">
+              <h2 id="seguridad" data-i18n="privacy.sections.security.title">6. Seguridad</h2>
+              <p data-i18n="privacy.sections.security.p1">Nanoker aplica medidas técnicas y organizativas razonables para evitar la pérdida, alteración, acceso no autorizado o divulgación indebida de los datos. Entre ellas se incluyen controles de acceso, revisión de proveedores, procedimientos internos y seguimiento de incidentes.</p>
+              <p data-i18n="privacy.sections.security.p2">No obstante, ningún entorno conectado a Internet puede garantizar una seguridad absoluta, por lo que la protección se aplica con criterios de diligencia y mejora continua.</p>
+            </section>
+          </div>
+
+          <aside class="legal-aside" aria-label="Resumen">
+            <section class="legal-card">
+              <h2 data-i18n="legalCommon.summary">Resumen</h2>
+              <ul class="legal-summary-list">
+                <li><strong data-i18n="privacy.summary.item1Title">Responsable</strong><span data-i18n="privacy.summary.item1Text">Nanoker Research S.L.</span></li>
+                <li><strong data-i18n="privacy.summary.item2Title">Finalidad</strong><span data-i18n="privacy.summary.item2Text">Contacto, gestión comercial, operaciones y seguridad.</span></li>
+                <li><strong data-i18n="privacy.summary.item3Title">Base jurídica</strong><span data-i18n="privacy.summary.item3Text">Consentimiento, contrato, obligación legal e interés legítimo.</span></li>
+                <li><strong data-i18n="privacy.summary.item4Title">Derechos</strong><span data-i18n="privacy.summary.item4Text">Acceso, rectificación, supresión, oposición, limitación y portabilidad.</span></li>
+              </ul>
+            </section>
+
+            <section class="legal-card legal-footer">
+              <h2 data-i18n="legalCommon.moreInfo">Más información</h2>
+              <a class="legal-link-card" href="./cookies.html"><strong data-i18n="privacy.more.cookiesTitle">Política de Cookies</strong><span data-i18n="privacy.more.cookiesText">Uso de cookies, tecnologías similares y gestión del consentimiento.</span></a>
+              <a class="legal-link-card" href="./legal-notice.html"><strong data-i18n="privacy.more.noticeTitle">Aviso legal</strong><span data-i18n="privacy.more.noticeText">Condiciones de uso, propiedad intelectual y responsabilidad.</span></a>
+            </section>
+          </aside>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer" id="contact">
+      <div class="footer-grid">
+        <div class="f-brand">
+          <h3 data-i18n="footer.brandTitle">nanoker</h3>
+          <p data-i18n-html="footer.brandTextHtml">Plataforma industrial europea para tecnologías críticas.<br />Materiales avanzados con especificación garantizada, trazabilidad completa y escalabilidad industrial.</p>
+          <p style="margin-top: 12px; opacity: 0.9" data-i18n-html="footer.noteHtml"><b>Contacto técnico:</b> procesamos solicitudes en <b>3-5 días laborables</b>.</p>
+        </div>
+        <div class="f-col">
+          <h4 class="footer-title" data-i18n="footer.colSite.title">Site</h4>
+          <ul>
+            <li><a href="./index.html" data-i18n="footer.colSite.links.home">Home</a></li>
+            <li><a href="./empresa.html" data-i18n="footer.colSite.links.company">Empresa</a></li>
+            <li><a href="./sectores.html" data-i18n="footer.colSite.links.sectors">Sectores</a></li>
+            <li><a href="./materiales.html" data-i18n="footer.colSite.links.materials">Materiales</a></li>
+            <li><a href="./capacidades.html" data-i18n="footer.colSite.links.capabilities">Capacidades</a></li>
+            <li><a href="./id.html" data-i18n="footer.colSite.links.rnd">I+D</a></li>
+            <li><a href="./contacto.html" data-i18n="footer.colSite.links.contact">Contacto</a></li>
+          </ul>
+        </div>
+        <div class="f-col">
+          <h4 class="footer-title" data-i18n="legalCommon.footerLegalTitle">Legal</h4>
+          <ul>
+            <li><a href="./privacy.html" aria-current="page" data-i18n="footer.legal.privacy">Política de privacidad</a></li>
+            <li><a href="./cookies.html" data-i18n="footer.legal.cookies">Política de cookies</a></li>
+            <li><a href="./legal-notice.html" data-i18n="footer.legal.notice">Aviso legal</a></li>
+          </ul>
+        </div>
+        <div class="f-col">
+          <h4 class="footer-title" data-i18n="footer.colConnect.title">Connect</h4>
+          <ul>
+            <li><a href="mailto:info@nanoker.com" class="contact-data" data-i18n="footer.colConnect.email">info@nanoker.com</a></li>
+            <li><a href="tel:+34985000000" class="contact-data" data-i18n="footer.colConnect.phone">+34 985 000 000</a></li>
+            <li><a href="https://www.linkedin.com/company/nanoker-research-sl/" target="_blank" rel="noopener noreferrer" data-i18n="footer.colConnect.links.linkedin">LinkedIn ↗</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="f-copy">
+        <div class="system-status"><div class="status-dot"></div><span><span data-i18n="footer.system.label">SYSTEM STATUS:</span> <span data-i18n="footer.system.value">OPERATIONAL</span></span></div>
+        <div class="legal-footer">
+          <span data-i18n="footer.legal.copyright">© 2026 Nanoker Research S.L.</span>
+          <div>
+            <a class="footer-action footer-action--legal" href="./privacy.html" aria-current="page" data-i18n="footer.legal.privacy">Política de privacidad</a>
+            <a class="footer-action footer-action--legal" href="./cookies.html" data-i18n="footer.legal.cookies">Política de cookies</a>
+            <a class="footer-action footer-action--legal" href="./legal-notice.html" data-i18n="footer.legal.notice">Aviso legal</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./js/mobile-menu.js?v=1"></script>
+    <script type="module">
+      import { initLanguageSwitcher, t } from "./js/lang.js";
+
+      function setSeo() {
+        document.title = t("privacy.metaTitle", document.title);
+        const description = t("privacy.metaDescription", "");
+        const ogLocale = t("privacy.ogLocale", "es_ES");
+        const descriptionNodes = document.querySelectorAll('meta[name="description"], meta[property="og:description"], meta[name="twitter:description"]');
+        descriptionNodes.forEach((node) => node.setAttribute("content", description));
+        const titleNodes = document.querySelectorAll('meta[property="og:title"], meta[name="twitter:title"]');
+        titleNodes.forEach((node) => node.setAttribute("content", document.title));
+        const localeNode = document.querySelector('meta[property="og:locale"]');
+        if (localeNode) localeNode.setAttribute("content", ogLocale);
+      }
+
+      initLanguageSwitcher();
+      setSeo();
+      window.addEventListener("lang:change", setSeo);
+    </script>
+  </body>
+</html>
