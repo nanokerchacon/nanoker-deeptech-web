@@ -45,6 +45,8 @@
       const logoHref = navLogo ? navLogo.getAttribute("href") : "./index.html";
       const logoSrc = navLogoImg ? navLogoImg.getAttribute("src") : "";
       const logoAlt = navLogoImg ? navLogoImg.getAttribute("alt") : "Nanoker";
+      const logoWidth = navLogoImg ? navLogoImg.getAttribute("width") : "";
+      const logoHeight = navLogoImg ? navLogoImg.getAttribute("height") : "";
 
       menuHeader = document.createElement("div");
       menuHeader.className = "mobile-menu-header";
@@ -58,6 +60,9 @@
         const logoImage = document.createElement("img");
         logoImage.setAttribute("src", logoSrc);
         logoImage.setAttribute("alt", logoAlt || "Nanoker");
+        if (logoWidth) logoImage.setAttribute("width", logoWidth);
+        if (logoHeight) logoImage.setAttribute("height", logoHeight);
+        logoImage.setAttribute("decoding", "async");
         logoLink.appendChild(logoImage);
       } else {
         logoLink.textContent = "Nanoker";

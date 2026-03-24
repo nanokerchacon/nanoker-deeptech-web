@@ -50,29 +50,93 @@ export const I18N = deepFreeze({
       scroll: "Scroll to Explore",
     },
 
+    seo: {
+      home: {
+        metaTitle: "Nanoker | DeepTech Advanced Materials",
+        metaDescription:
+          "Nanoker manufactures advanced ceramics, CVD diamond, SiC and sapphire for critical industries with guaranteed specification, full traceability and industrial scale.",
+      },
+      company: {
+        metaTitle: "Nanoker | Company",
+        metaDescription:
+          "Learn how Nanoker builds European industrial capacity in advanced materials, combining process control, qualification and scalable manufacturing for strategic technology programs.",
+      },
+      capabilities: {
+        metaTitle: "Nanoker | Capabilities",
+        metaDescription:
+          "Review Nanoker capabilities across formulation, growth, qualification and industrialization, enabling repeatable material performance for mission-critical applications.",
+      },
+      rnd: {
+        metaTitle: "Nanoker | Research and Innovation",
+        metaDescription:
+          "Explore Nanoker research and innovation capabilities in advanced materials, crystal growth, quantum-grade diamond and industrial transfer for strategic technologies.",
+      },
+      materials: {
+        metaTitle: "Nanoker | Materials",
+        metaDescription:
+          "Discover Nanoker material portfolio in advanced ceramics, CVD diamond, SiC and sapphire, engineered for certified performance, qualification and industrial scalability.",
+      },
+      sectors: {
+        metaTitle: "Nanoker | Sectors",
+        metaDescription:
+          "Explore the sectors Nanoker serves, from defense and aerospace to semiconductors, energy and medical systems, with materials engineered for mission-critical reliability.",
+      },
+      contact: {
+        metaTitle: "Technical Contact | Nanoker",
+        metaDescription:
+          "Contact Nanoker engineering to discuss applications, critical specifications and qualification paths for advanced-material industrial programs.",
+      },
+      evaluation: {
+        metaTitle: "Technical Evaluation | Nanoker",
+        metaDescription:
+          "Request a technical assessment for critical technologies and align material architecture, engineering execution and validation roadmap with Nanoker experts.",
+      },
+      certifications: {
+        metaTitle: "Nanoker | Quality & Certifications",
+        metaDescription:
+          "Review Nanoker quality framework, certifications and regulated manufacturing standards supporting reliability, compliance and full traceability.",
+      },
+      privacy: {
+        metaTitle: "Privacy Policy | Nanoker",
+        metaDescription:
+          "Nanoker Research S.L. Privacy Policy with information on the data controller, purposes, legal basis, retention, user rights, and security.",
+      },
+      cookies: {
+        metaTitle: "Cookie Policy | Nanoker",
+        metaDescription:
+          "Nanoker Cookie Policy explaining what cookies are, the types of cookies used, third-party cookies, and how to manage them.",
+      },
+      legalNotice: {
+        metaTitle: "Legal Notice | Nanoker",
+        metaDescription:
+          "Nanoker Research S.L. legal notice including identifying details, terms of use, intellectual property, and limitation of liability.",
+      },
+    },
+
     contact: {
       metaTitle: "Technical Contact | Nanoker",
       hero: {
         kicker: "CONTACT",
         titleHtml: "Technical <span class=\"page-hero__accent\">contact</span>",
-        lead: "Critical technologies require technical conversations.",
+        lead: "The right material decision starts with the right technical brief.",
         text:
-          "If you are developing a system where materials determine performance, we will be glad to review your application.",
+          "If you are qualifying a component, de-risking a supply chain or defining a new material architecture, our engineering team can review the application with an industrial lens.",
+        cta: "Open technical form",
       },
       work: {
         title: "How we work",
-        intro: "Before sending a request, it is useful to have:",
+        intro: "To accelerate the first review, please share:",
         items: {
           application: "Application description",
-          specification: "Technical specification (if available)",
-          requirements: "Critical requirements (temperature, pressure, tolerances, etc.)",
-          volume: "Estimated volume or project stage",
+          specification: "Target specification or drawing set (if available)",
+          requirements: "Critical requirements (temperature, pressure, tolerances, lifetime, etc.)",
+          volume: "Estimated demand, qualification phase or project maturity",
         },
-        outro: "This allows us to provide a rigorous technical evaluation.",
+        outro: "This helps us frame feasibility, qualification logic and next technical steps with precision.",
       },
       wizard: {
         kicker: "ENGINEERING INTERFACE",
-        title: "Smart form",
+        title: "Technical intake",
         progress: "Step 1 of 6",
         progressTemplate: "STEP {current} OF {total}",
         steps: {
@@ -158,11 +222,19 @@ export const I18N = deepFreeze({
           oviedo: "Oviedo - Development and validation",
           leon: "León - Strategic industrial hub",
         },
+        readiness: {
+          title: "Ready for critical programs",
+          text:
+            "Initial conversations are handled with engineering rigor, confidentiality discipline and industrial-qualification criteria.",
+          item1: "Technical counterpart from the first review",
+          item2: "Focus on CTQs, risk and scale-up",
+          item3: "Initial response within 3-5 business days",
+        },
       },
       close: {
-        title: "Materials engineering with industrial purpose",
+        title: "Materials engineering aligned with qualification and scale-up",
         text:
-          "In DeepTech, every project starts with a rigorous technical conversation. We are ready to support you from specification to industrial qualification.",
+          "In DeepTech, commercial traction depends on technical credibility. We support customers from first specification review through industrial qualification and supply continuity.",
       },
     },
 
@@ -356,32 +428,32 @@ export const I18N = deepFreeze({
           titleHtml:
             "Industrial infrastructure for <span class=\"empresa-accent\">strategic technologies.</span>",
           text:
-            "Nanoker is an industrial platform specialized in advanced materials for DeepTech sectors where reliability, certified specification, and supply continuity are mission-critical.",
+            "Nanoker is an industrial platform for advanced materials and high-specification components in sectors where qualification cycles are long, failure is expensive, and supply continuity is strategic.",
         },
         mission: {
-          title: "Our Mission",
+          title: "Industrial Positioning",
           priorities: {
-            title: "Industrial priorities",
-            item1: "Purity and stability from batch to batch",
-            item2: "Reduced supply-chain risk",
-            item3: "End-to-end traceability",
-            item4: "European industrial scale-up",
+            title: "What customers need us to solve",
+            item1: "Batch-to-batch purity and process stability",
+            item2: "Qualification-ready documentation and traceability",
+            item3: "Reduced exposure to fragile external supply chains",
+            item4: "European industrial scale-up for critical programs",
           },
           who: {
-            title: "Who we are",
-            item1: "Manufacturer of ceramic components",
-            item2: "Developer of advanced formulations",
-            item3: "Integrator of advanced technologies",
-            item4: "Strategic partner to critical European OEMs",
+            title: "What Nanoker is built to do",
+            item1: "Manufacture advanced ceramic and crystal-based components",
+            item2: "Develop proprietary formulations and material routes",
+            item3: "Integrate processing, metrology and qualification logic",
+            item4: "Support European OEMs in long-cycle critical applications",
           },
         },
         platform: {
           titleHtml: "Integrated <span class=\"empresa-accent\">Platform</span>",
-          subtitle: "Complete vertical integration",
-          card1: "Synthesis & Growth",
+          subtitle: "From material architecture to qualified component",
+          card1: "Synthesis, Formulation & Growth",
           card2: "Precision Machining",
-          card3: "Finishing & Metrology",
-          card4: "QA & Control",
+          card3: "Surface Engineering & Metrology",
+          card4: "QA, Traceability & Control",
         },
         alliance: {
           title: "Strategic Technology Alliance",
@@ -393,38 +465,38 @@ export const I18N = deepFreeze({
           item4: "Extreme Ceramics",
         },
         infrastructure: {
-          title: "Industrial Infrastructure",
-          item1: "Progressive technical qualification (6-24 months by sector)",
-          item2: "Wave-based scale-up",
+          title: "Industrial Execution Model",
+          item1: "Progressive qualification routes aligned with sector requirements",
+          item2: "Wave-based industrial scale-up",
           item3: "24/7 operation",
-          item4: "Availability >95%",
+          item4: "Target availability above 95%",
         },
         advantage: {
           title: "European structural advantage",
           subtitle: "Energy, sustainability, and sovereignty",
           text:
-            "Advanced-material manufacturing is energy-intensive. Operating in a competitive renewable-energy environment with low carbon intensity provides:",
+            "Advanced-material manufacturing is energy-intensive and capital-sensitive. Operating in a competitive renewable-energy environment with low carbon intensity provides:",
           item1: "Structural cost advantage",
           item2: "CBAM compliance",
-          item3: "Access to demanding markets (defense, aerospace, premium automotive)",
+          item3: "Access to regulated and demanding markets",
           item4: "European legal certainty and IP protection",
           closingHtml:
-            "It is not only an environmental matter.<br />It is a durable competitive advantage.",
+            "This is not only a sustainability argument.<br />It is an industrial positioning advantage.",
         },
         approach: {
-          title: "Our approach",
-          subtitle: "How we work with our customers",
-          item1: "We define the critical material specification",
-          item2: "We validate technically and metrologically",
-          item3: "We qualify under sector standards",
-          item4: "We scale production with industrial repeatability",
-          text: "We integrate into each customer's technology roadmap.",
+          title: "Customer engagement model",
+          subtitle: "How we move from requirement to industrial execution",
+          item1: "Define the critical-to-quality material specification",
+          item2: "Validate through metrology, process windows and technical evidence",
+          item3: "Qualify under sector-specific constraints and standards",
+          item4: "Scale with industrial repeatability and supply continuity",
+          text: "We work inside the customer roadmap, not outside it.",
         },
         vision: {
           title: "Vision",
           subtitle: "Strategic infrastructure for European DeepTech",
           textHtml:
-            "Europe cannot lead in advanced semiconductors, quantum technologies, or defense systems without controlling the materials that enable them.<br />Nanoker is building that industrial foundation.",
+            "Europe cannot lead in advanced semiconductors, quantum technologies or defense systems without controlling the materials and process know-how that enable them.<br />Nanoker is building part of that industrial foundation.",
         },
         quote: "Whoever controls the material controls the technology.",
       },
@@ -433,14 +505,14 @@ export const I18N = deepFreeze({
         hero: {
           eyebrow: "CAPABILITIES",
           titleHtml: "Integrated Industrial <span class=\"mat-accent\">Capabilities</span>",
-          subtitle: "Full process control, from precursor to finished component.",
+          subtitle: "Process control from precursor engineering to qualified component.",
           text:
-            "Nanoker combines advanced crystal growth, densification, precision machining, and metrology to deliver certified specifications, industrial repeatability, and scalable production.",
+            "Nanoker combines crystal growth, densification, precision machining and metrology in one industrial flow to deliver specification control, repeatability and scalable output for critical applications.",
         },
         integration: {
-          title: "Vertical Integration Model",
+          title: "Vertical Integration Architecture",
           subtitle: "From precursor to component",
-          intro: "Our industrial platform covers the full value chain:",
+          intro: "Our industrial platform covers the full process chain required to move from material design to qualified part:",
           item1: "1. Synthesis and formulation",
           item2: "2. Crystal growth",
           item3: "3. Advanced densification",
@@ -448,7 +520,7 @@ export const I18N = deepFreeze({
           item5: "5. Surface finishing and CMP",
           item6: "6. Metrology and QA/QC",
           item7: "7. Qualification and scale-up",
-          outro: "Vertical integration removes external dependencies and reduces quality variability.",
+          outro: "Vertical integration reduces handoff risk, compresses qualification loops and limits quality variability.",
         },
         synthesis: {
           title: "Synthesis and Formulation",
@@ -457,7 +529,7 @@ export const I18N = deepFreeze({
           item2: "Purity tuning up to semiconductor grade",
           item3: "Particle-size and microstructure control",
           item4: "Optimization for SPS/HIP and crystal-growth routes",
-          outro: "This allows the material to be engineered for the application, not the opposite.",
+          outro: "The material is engineered around the application and process window, not adapted afterward.",
         },
         growth: {
           title: "Crystal Growth",
@@ -529,24 +601,24 @@ export const I18N = deepFreeze({
         },
         qualification: {
           title: "Qualification and Scale-Up",
-          subtitle: "Wave-based model",
+          subtitle: "Qualification before volume",
           flow: "Install -> Qualify -> Stabilize -> Scale",
-          item1: "CTQ definition",
-          item2: "Technical validation",
-          item3: "Yield optimization",
+          item1: "CTQ definition and acceptance logic",
+          item2: "Technical validation under use conditions",
+          item3: "Yield and process-capability optimization",
           item4: "24/7 operation",
           item5: "Availability >95%",
-          outro: "Designed for integration into OEM customer roadmaps.",
+          outro: "Designed to fit OEM qualification roadmaps and long-cycle industrial programs.",
         },
         advantage: {
-          title: "Competitive Advantage",
-          subtitle: "What differentiates us",
+          title: "Why this matters commercially",
+          subtitle: "Industrial leverage created by capability integration",
           item1: "End-to-end vertical integration",
           item2: "In-house defectology control",
           item3: "Structural energy advantage",
           item4: "European industrial base",
           item5: "Qualification-driven lock-in",
-          outro: "We do not depend on critical third parties to close the process chain.",
+          outro: "The result is a tighter, more defensible supply chain for high-value programs.",
         },
         diagram: {
           title: "Visual Diagram",
@@ -574,7 +646,7 @@ export const I18N = deepFreeze({
         closing: {
           title: "DeepTech Industrialization",
           text:
-            "In DeepTech, sustainable competitive advantage is defined not only by device design, but by the capability to manufacture material with certified specification, industrial repeatability, and supply continuity.",
+            "In DeepTech, competitive advantage is not secured only in the device architecture. It is secured in the ability to manufacture material with certified specification, industrial repeatability and qualified supply continuity.",
           statement: "Nanoker integrates that capability.",
         },
       },
@@ -583,15 +655,15 @@ export const I18N = deepFreeze({
         hero: {
           eyebrow: "INDUSTRIAL R&D",
           titleHtml: "<span class=\"id-accent id-glow\">Research</span> engineered for industrialization",
-          subtitle: "In DeepTech, research creates value only when it can be scaled.",
+          subtitle: "Research creates value only when it can survive qualification and scale-up.",
           text:
-            "Our R&D model is designed to industrialize advanced materials with certified specification and batch-to-batch repeatability.",
+            "Our R&D model is designed to convert advanced-material research into manufacturable routes, qualified data and repeatable industrial output.",
         },
         philosophy: {
           title: "Philosophy",
           subtitle: "From laboratory to 24/7 production",
           introHtml:
-            "Most advanced-material developments stop at experimental validation.<br />Our model integrates:",
+            "Most advanced-material programs stop at proof of concept.<br />Our model is built to bridge research, qualification and production:",
           card1Title: "High-demand materials",
           card1Claim: "Structure and functionality",
           card1Item1: "Advanced microstructural control",
@@ -620,7 +692,7 @@ export const I18N = deepFreeze({
           pipeline:
             "Basic research -> Technical validation -> Industrial qualification -> Production scale-up",
           outro:
-            "The objective is not to prove scientific feasibility, but to secure stable industrial manufacturing.",
+            "The objective is not only to prove scientific feasibility, but to establish a route to stable industrial manufacturing.",
         },
         areas: {
           title: "Strategic research domains",
@@ -632,7 +704,7 @@ export const I18N = deepFreeze({
           card1Text: "In advanced materials, defects define the performance ceiling.",
           card2Title: "Beyond Standard materials",
           card2Text:
-            "Development of proprietary formulations that outperform conventional commercial specifications. Where standard ceramics fail at 1200C, our formulations sustain structural integrity beyond that threshold.",
+            "Development of proprietary formulations that exceed conventional commercial specifications when standard materials are no longer sufficient for thermal, mechanical or reliability targets.",
           card3Title: "Diamond and quantum materials",
           card3Item1: "Advanced MPCVD growth",
           card3Item2: "NV-center control",
@@ -660,25 +732,25 @@ export const I18N = deepFreeze({
         },
         infrastructure: {
           title: "R&D infrastructure",
-          subtitle: "Experimental capabilities",
+          subtitle: "Experimental platforms with industrial intent",
           item1: "MPCVD reactors",
           item2: "SPS/HIP",
           item3: "Crystal-growth systems",
           item4: "Characterization laboratories",
           item5: "Advanced metrology",
           outro:
-            "Facilities designed for direct transition to industrial production lines.",
+            "Facilities are configured to shorten transfer from experimental validation to industrial implementation.",
         },
         collaboration: {
           title: "Scientific and industrial collaboration",
           subtitle: "European ecosystem",
-          intro: "We collaborate with:",
+          intro: "We work with:",
           item1: "Research centers",
           item2: "Universities",
           item3: "Industrial OEMs",
           item4: "European strategic programs",
           outro:
-            "Our scientific foundation is translated into validated industrial capability.",
+            "Scientific collaboration is valuable only if it translates into validated industrial capability.",
         },
         roadmap: {
           title: "Technology roadmap",
@@ -698,13 +770,13 @@ export const I18N = deepFreeze({
           item3: "Next-generation defense",
           item4: "Integrated photonics",
           text: "Without controlling the materials that enable them.",
-          outroHtml: "Our R&D is not incremental.<br />It is structural.",
+          outroHtml: "Our R&D is not disconnected from industry.<br />It is structural industrial capability in formation.",
         },
         closing: {
           title: "Final message",
           subtitle: "Research with industrial purpose",
           text:
-            "The difference between laboratory output and industrial leadership is the ability to manufacture with certified specification and batch-to-batch stability.",
+            "The difference between laboratory output and industrial leadership is the ability to manufacture with certified specification, process stability and repeatable qualification outcomes.",
           statement: "That is where we focus our research.",
         },
       },
@@ -714,21 +786,21 @@ export const I18N = deepFreeze({
           eyebrow: "MATERIALS",
           titleHtml: "Strategic <span style=\"color: #3B82F6;\">DeepTech</span> Materials",
           text1:
-            "To control materials is to control performance, reliability, and scalability in critical technologies.",
+            "Material control defines performance, qualification risk and industrial scalability in critical technologies.",
           text2:
-            "Nanoker integrates a portfolio of advanced materials that form the physical foundation of Europe’s next DeepTech wave: wide-bandgap semiconductors, advanced photonics, quantum sensing, defense, and high-efficiency energy systems.",
+            "Nanoker integrates a portfolio of advanced materials that supports the physical layer of Europe’s next DeepTech wave: wide-bandgap semiconductors, advanced photonics, quantum sensing, defense and high-efficiency power systems.",
         },
         philosophy: {
           title: "Philosophy",
-          subtitle: "More than raw materials: material architecture",
-          text: "We do not supply standard materials. We engineer materials:",
+          subtitle: "Material architecture, not catalog commodity",
+          text: "We do not position materials as interchangeable catalog references. We engineer them:",
           item1: "With controlled purity",
           item2: "With optimized defect engineering",
           item3: "With designed functional properties",
           item4: "With full traceability",
           item5: "Ready for industrial qualification",
           deliverHtml:
-            "Each material is delivered as <span class=\"mat-glow\">component-ready</span> or <span class=\"mat-glow\">device-ready</span>, not as a commodity.",
+            "Each material is delivered as <span class=\"mat-glow\">component-ready</span> or <span class=\"mat-glow\">device-ready</span>, aligned with real qualification pathways.",
         },
         portfolio: {
           title: "Materials Portfolio",
@@ -839,7 +911,7 @@ export const I18N = deepFreeze({
         },
         differential: {
           title: "Differential Advantage",
-          subtitle: "Complete vertical integration",
+          subtitle: "Industrial control across the full chain",
           stage1: "Synthesis and Formulation",
           stage2: "Crystal Growth (CVD/PVT/HME)",
           stage3: "Advanced Densification (SPS/HIP)",
@@ -849,11 +921,11 @@ export const I18N = deepFreeze({
           stage7: "Qualification and Industrial Scale-Up",
           strip:
             "Diamond | Silicon Carbide | Sapphire | Technical Ceramics | Carbon-Metal Composites",
-          text: "This enables:",
-          item1: "Dramatic supply-risk reduction",
-          item2: "Optimization of total cost of ownership",
-          item3: "Qualification-driven lock-in",
-          item4: "Batch-to-batch stability",
+          text: "This creates concrete industrial advantages:",
+          item1: "Reduced supply and handoff risk",
+          item2: "Better total cost of ownership",
+          item3: "Faster alignment with qualification workflows",
+          item4: "Higher batch-to-batch stability",
         },
         map: {
           title: "Visual Map",
@@ -885,7 +957,7 @@ export const I18N = deepFreeze({
         europe: {
           title: "DeepTech Materials for Europe",
           text1:
-            "Strategic materials are not interchangeable. They are technological infrastructure.",
+            "Strategic materials are not interchangeable inputs. They are industrial infrastructure.",
           text2:
             "Controlling diamond, SiC, sapphire, and advanced ceramics in Europe means:",
           item1: "Reducing external dependency",
@@ -895,9 +967,9 @@ export const I18N = deepFreeze({
         },
         datasheets: {
           title: "Technical Datasheets",
-          subtitle: "Qualified ceramic references",
+          subtitle: "Technical references for engineering review",
           text:
-            "Access the available ceramic datasheets directly within the materials portfolio. Filter by family to review the relevant technical references faster.",
+            "Access ceramic datasheets directly within the materials portfolio. Filter by family to review relevant references faster during specification and sourcing.",
           filters: {
             all: "All",
             alumina: "Alumina",
@@ -916,13 +988,13 @@ export const I18N = deepFreeze({
         hero: {
           titleHtml: "<span class=\"accent\">Sectors</span>",
           subtitle:
-            "Advanced materials for industries where performance depends on material control.",
+            "Advanced materials for sectors where reliability depends on controlling the material stack.",
           intro:
-            "Nanoker develops strategic materials and high-precision components for critical sectors where reliability, traceability, and industrial scalability are essential.",
+            "Nanoker supports sectors where material choice directly affects qualification time, operating reliability and supply resilience.",
         },
         industry: {
           title: "Industry and Advanced Manufacturing",
-          phrase: "High-precision materials for demanding industrial environments.",
+          phrase: "Materials engineered for uptime, wear resistance and repeatable production.",
           text:
             "Advanced manufacturing requires materials capable of operating under wear, corrosion, high temperatures, and continuous mechanical stress.",
           challengesTitle: "Challenges",
@@ -931,7 +1003,7 @@ export const I18N = deepFreeze({
           challenge3: "Controlled thermal conductivity",
           challenge4: "Dimensional precision",
           challenge5: "Batch-to-batch repeatability",
-          solutionsTitle: "Solutions",
+          solutionsTitle: "Industrial responses",
           solution1: "Advanced technical ceramics",
           solution2: "Thermal functional composites",
           solution3: "Industrial precision components",
@@ -950,7 +1022,7 @@ export const I18N = deepFreeze({
         energy: {
           title: "Energy and Power Electronics",
           phrase:
-            "Strategic materials for high-efficiency electrical systems and high power density.",
+            "Materials for high power density, thermal stress and long operating life.",
           challengesTitle: "Challenges",
           challenge1: "Extreme thermal management",
           challenge2: "Electrical insulation with high thermal conductivity",
@@ -980,7 +1052,7 @@ export const I18N = deepFreeze({
         health: {
           title: "Health and Medical Devices",
           phrase:
-            "Technical ceramics and bioceramics for medical applications where quality, traceability, and regulation are critical.",
+            "Technical ceramics and bioceramics for regulated applications where traceability and consistency are mandatory.",
           text:
             "The biomedical sector requires biocompatible, stable, and fully traceable materials under strict standards (ISO 13485, MDR). Nanoker contributes validated industrial expertise in high-precision devices.",
           challengesTitle: "Challenges",
@@ -1007,7 +1079,7 @@ export const I18N = deepFreeze({
         semiconductors: {
           title: "Semiconductors and Manufacturing Equipment",
           phrase:
-            "Fab-grade materials for critical processes with full control of specification, defects, and traceability.",
+            "Fab-grade materials for process-critical environments with control of specification, defects and traceability.",
           text:
             "DeepTech industrialization depends on materials with extreme purity, batch-to-batch stability, and scale-up capability. Nanoker integrates technical ceramics with strategic substrates such as SiC, diamond, and sapphire.",
           challengesTitle: "Challenges",
@@ -1037,7 +1109,7 @@ export const I18N = deepFreeze({
         photonics: {
           title: "Photonics and Advanced Optics",
           phrase:
-            "Optical materials for broad transmission, high power, and stability in extreme environments.",
+            "Optical materials for high power, spectral stability and precision surfaces.",
           text:
             "Advanced photonics requires materials with low absorption, high transmission, and exceptional thermal stability.",
           challengesTitle: "Challenges",
@@ -1059,7 +1131,7 @@ export const I18N = deepFreeze({
         quantum: {
           title: "Quantum and Next-Generation Sensors",
           phrase:
-            "Enabling materials for quantum technologies and ultra-precision sensing.",
+            "Enabling materials for quantum devices and ultra-precision sensing architectures.",
           text:
             "Diamond with NV centers enables magnetometry, GPS-denied navigation, and high-sensitivity sensing without cryogenics.",
           challengesTitle: "Challenges",
@@ -1100,7 +1172,7 @@ export const I18N = deepFreeze({
         science: {
           title: "Science and Infrastructure",
           phrase:
-            "Materials and components for large scientific facilities and advanced instrumentation.",
+            "Materials and components for large scientific facilities and advanced instrumentation under extreme constraints.",
           text:
             "Big Science demands extreme dimensional stability, material purity, and reliability under non-standard industrial conditions.",
           challengesTitle: "Challenges",
@@ -1117,7 +1189,7 @@ export const I18N = deepFreeze({
           application2: "Collimation systems",
           application3: "Scientific instrumentation",
         },
-        cta: "Does your sector require extreme material control? Contact engineering.",
+        cta: "Discuss your sector requirements with Nanoker engineering.",
       },
     },
 
@@ -1190,26 +1262,114 @@ export const I18N = deepFreeze({
         cta: "See application sectors",
       },
 
-      sectors: {
-        tag: "04 · Critical Sectors",
-        titleHtml: "Sectors where materials<br /><b>are critical.</b>",
+      capabilities: {
+        tag: "04 · Industrial Capabilities",
+        titleHtml: "Industrial capabilities<br /><b>built for specification control.</b>",
         text:
-          "A shared challenge: reliability under extreme conditions. We integrate into OEM roadmaps and systems where the material defines performance, total cost, and scalability.",
+          "Nanoker combines strategic materials, precision processes and industrial discipline to move from feasibility to repeatable production without losing control of specification.",
         specs: {
-          industry: "INDUSTRY",
-          industryVal: "Advanced",
-          photonics: "PHOTONICS",
-          photonicsVal: "Optical technologies",
-          science: "SCIENCE",
-          scienceVal: "Critical infrastructures",
-          common: "COMMON CHALLENGE",
-          commonVal: "Extreme reliability",
+          materials: "MATERIALS",
+          materialsVal: "SiC / CVD diamond / ceramics / sapphire",
+          processes: "PROCESSES",
+          processesVal: "Growth / densification / machining / metrology",
+          precision: "PRECISION",
+          precisionVal: "Tight tolerances and controlled finishing routes",
+          scale: "SCALABILITY",
+          scaleVal: "Qualification-ready scale-up",
         },
-        cta: "Explore sectors",
+        cards: {
+          materials: {
+            label: "Material stack",
+            title: "Critical materials under one industrial flow",
+            text: "SiC, CVD diamond, technical ceramics and sapphire aligned to application-specific performance windows.",
+          },
+          manufacturing: {
+            label: "Manufacturing",
+            title: "From synthesis and growth to finished component",
+            text: "Crystal growth, SPS/HIP densification, precision machining, polishing and metrology integrated to reduce handoff risk.",
+          },
+          precision: {
+            label: "Precision",
+            title: "Tolerance discipline for critical assemblies",
+            text: "Dimensional control, surface finishing and batch repeatability designed to support qualification and downstream integration.",
+          },
+          scale: {
+            label: "Industrial scale",
+            title: "Scalable output with qualification logic",
+            text: "Industrialization paths designed for pilot runs, documentation packages and progressive volume ramp without requalifying the full stack.",
+          },
+        },
+        cta: "See industrial readiness",
+      },
+
+      readiness: {
+        tag: "05 · Trust and Readiness",
+        titleHtml: "Industrial readiness<br /><b>customers can qualify.</b>",
+        text:
+          "Credibility in critical sectors is built on documentation, process control and compliance discipline. Nanoker structures delivery around what quality teams and procurement teams need to approve.",
+        items: {
+          spec: {
+            title: "Guaranteed specification",
+            text: "Controlled material and component specifications tied to agreed technical requirements.",
+          },
+          traceability: {
+            title: "Traceability",
+            text: "Lot-level traceability from precursor, process route and inspection record to delivered component.",
+          },
+          qc: {
+            title: "Quality control",
+            text: "Incoming, in-process and final inspection logic designed to detect deviation before it becomes system risk.",
+          },
+          compliance: {
+            title: "Compliance and standards",
+            text: "Industrial controls and documentation aligned with qualification, audits and regulated manufacturing environments.",
+          },
+        },
+        cta: "See strategic sectors",
+      },
+
+      sectors: {
+        tag: "06 · Strategic Sectors",
+        titleHtml: "Sectors where material control<br /><b>becomes strategic leverage.</b>",
+        text:
+          "Aerospace, defense, energy and advanced industry are not just end markets. They are strategic programs where qualified materials determine readiness, resilience and system-level advantage.",
+        cards: {
+          aerospace: {
+            label: "Aerospace",
+            title: "Flight-qualified reliability starts at material level",
+            text: "Thermal stability, lightweight architectures and dimensional consistency for high-consequence environments.",
+          },
+          defense: {
+            label: "Defense",
+            title: "Supply resilience for sovereign critical systems",
+            text: "Materials and components engineered for harsh environments, controlled supply and qualification-sensitive programs.",
+          },
+          energy: {
+            label: "Energy",
+            title: "Efficiency and thermal control where uptime is non-negotiable",
+            text: "SiC, thermal diamond and advanced ceramics supporting power density, reliability and long operating windows.",
+          },
+          industry: {
+            label: "Advanced industry",
+            title: "Process stability for next-generation industrial equipment",
+            text: "Precision components and engineered materials for wear, plasma, corrosion and high-throughput production environments.",
+          },
+        },
+        specs: {
+          positioning: "POSITIONING",
+          positioningVal: "Strategic programs",
+          requirement: "COMMON REQUIREMENT",
+          requirementVal: "Qualified reliability",
+          value: "VALUE DRIVER",
+          valueVal: "Material control",
+          outcome: "PROGRAM OUTCOME",
+          outcomeVal: "Readiness and supply resilience",
+        },
+        cta: "See industrial transfer model",
       },
 
       rnd: {
-        tag: "05 · R&D to 24/7",
+        tag: "08 · R&D to 24/7",
         titleHtml: "From research<br /><b>to 24/7 production.</b>",
         text:
           "15+ years in materials science oriented to industrialization: experimental development, validation, customer qualification (6–24 months) and progressive scale-up in waves.",
@@ -1229,7 +1389,7 @@ export const I18N = deepFreeze({
 
     // ✅ Advantages used by index.html (advantages.*)
     advantages: {
-      tag: "BLOCK 6 · COMPETITIVE ADVANTAGE",
+      tag: "BLOCK 7 · COMPETITIVE ADVANTAGE",
       titleHtml: "Structural<br /><b>advantages.</b>",
       subtitle:
         "Vertical integration + certified specification + European supply security. Critical materials are not interchangeable: they are technological infrastructure.",
@@ -1257,7 +1417,7 @@ export const I18N = deepFreeze({
     },
 
     sovereignty: {
-      tag: "BLOCK 8 · STRATEGIC MESSAGE",
+      tag: "BLOCK 9 · STRATEGIC MESSAGE",
       titleHtml: "European technological<br /><b>sovereignty</b>",
       text1:
         "Europe cannot lead in semiconductors, quantum or defense while depending on external supply chains for critical materials.",
@@ -1267,11 +1427,11 @@ export const I18N = deepFreeze({
     },
 
     finalCta: {
-      tag: "BLOCK 9 · FINAL CTA",
+      tag: "BLOCK 10 · FINAL CTA",
       titleHtml: "Are you developing<br /><b>a critical technology?</b>",
       text:
         "Tell us about your application and let us work together on the material architecture that makes it viable.",
-      primary: "Request technical evaluation",
+      primary: "Start technical evaluation",
       secondary: "Contact",
     },
 
@@ -1669,29 +1829,93 @@ export const I18N = deepFreeze({
       scroll: "Desplázate para explorar",
     },
 
+    seo: {
+      home: {
+        metaTitle: "Nanoker | Materiales avanzados DeepTech",
+        metaDescription:
+          "Nanoker fabrica cerámicas avanzadas, diamante CVD, SiC y zafiro para industrias críticas con especificación garantizada, trazabilidad completa y escalado industrial.",
+      },
+      company: {
+        metaTitle: "Nanoker | Empresa",
+        metaDescription:
+          "Descubre cómo Nanoker construye capacidad industrial europea en materiales avanzados, combinando control de proceso, cualificación y fabricación escalable para programas tecnológicos estratégicos.",
+      },
+      capabilities: {
+        metaTitle: "Nanoker | Capacidades",
+        metaDescription:
+          "Revisa las capacidades de Nanoker en formulación, crecimiento, cualificación e industrialización para asegurar prestaciones repetibles en aplicaciones críticas.",
+      },
+      rnd: {
+        metaTitle: "Nanoker | Investigación e Innovación",
+        metaDescription:
+          "Explora la capacidad de I+D de Nanoker en materiales avanzados, crecimiento cristalino, diamante de grado cuántico y transferencia industrial para tecnologías estratégicas.",
+      },
+      materials: {
+        metaTitle: "Nanoker | Materiales",
+        metaDescription:
+          "Descubre el portfolio de Nanoker en cerámicas avanzadas, diamante CVD, SiC y zafiro, diseñado para rendimiento certificado, cualificación y escalabilidad industrial.",
+      },
+      sectors: {
+        metaTitle: "Nanoker | Sectores",
+        metaDescription:
+          "Explora los sectores a los que sirve Nanoker, desde defensa y aeroespacial hasta semiconductores, energía y sistemas médicos, con materiales diseñados para fiabilidad crítica.",
+      },
+      contact: {
+        metaTitle: "Contacto técnico | Nanoker",
+        metaDescription:
+          "Contacta con el equipo de ingeniería de Nanoker para revisar aplicaciones, especificaciones críticas y rutas de cualificación en programas industriales de materiales avanzados.",
+      },
+      evaluation: {
+        metaTitle: "Evaluación técnica | Nanoker",
+        metaDescription:
+          "Solicita una evaluación técnica para tecnologías críticas y alinea arquitectura material, ejecución de ingeniería y plan de validación con expertos de Nanoker.",
+      },
+      certifications: {
+        metaTitle: "Nanoker | Calidad y Certificaciones",
+        metaDescription:
+          "Consulta el marco de calidad, las certificaciones y los estándares de fabricación regulada de Nanoker para asegurar fiabilidad, cumplimiento y trazabilidad completa.",
+      },
+      privacy: {
+        metaTitle: "Política de Privacidad | Nanoker",
+        metaDescription:
+          "Política de Privacidad de Nanoker Research S.L. con información sobre responsable del tratamiento, finalidades, bases jurídicas, conservación, derechos y seguridad.",
+      },
+      cookies: {
+        metaTitle: "Política de Cookies | Nanoker",
+        metaDescription:
+          "Política de Cookies de Nanoker con explicación sobre qué son las cookies, sus tipos, cookies de terceros y cómo gestionarlas.",
+      },
+      legalNotice: {
+        metaTitle: "Aviso Legal | Nanoker",
+        metaDescription:
+          "Aviso legal de Nanoker Research S.L. con datos identificativos, condiciones de uso, propiedad intelectual y limitación de responsabilidad.",
+      },
+    },
+
     contact: {
       metaTitle: "Contacto técnico | Nanoker",
       hero: {
         kicker: "CONTACTO",
         titleHtml: "Contacto <span class=\"page-hero__accent\">técnico</span>",
-        lead: "Las tecnologías críticas requieren conversaciones técnicas.",
+        lead: "La decisión correcta sobre material empieza con un briefing técnico sólido.",
         text:
-          "Si estás desarrollando un sistema donde el material es determinante para el rendimiento, estaremos encantados de analizar tu aplicación.",
+          "Si estás cualificando un componente, reduciendo riesgo de suministro o definiendo una nueva arquitectura material, nuestro equipo de ingeniería puede revisar la aplicación con enfoque industrial.",
+        cta: "Abrir formulario técnico",
       },
       work: {
         title: "Cómo trabajamos",
-        intro: "Antes de enviar una solicitud, es útil disponer de:",
+        intro: "Para acelerar la primera revisión, comparte:",
         items: {
           application: "Descripción de la aplicación",
-          specification: "Especificación técnica (si existe)",
-          requirements: "Requisitos críticos (temperatura, presión, tolerancias, etc.)",
-          volume: "Volumen estimado o fase del proyecto",
+          specification: "Especificación objetivo o plano técnico (si existe)",
+          requirements: "Requisitos críticos (temperatura, presión, tolerancias, vida útil, etc.)",
+          volume: "Demanda estimada, fase de cualificación o madurez del proyecto",
         },
-        outro: "Esto nos permite ofrecer una evaluación técnica rigurosa.",
+        outro: "Esto nos permite valorar con precisión la viabilidad, la lógica de cualificación y los siguientes pasos técnicos.",
       },
       wizard: {
         kicker: "INTERFAZ DE INGENIERÍA",
-        title: "Formulario inteligente",
+        title: "Captura técnica",
         progress: "Paso 1 de 6",
         progressTemplate: "PASO {current} DE {total}",
         steps: {
@@ -1777,11 +2001,19 @@ export const I18N = deepFreeze({
           oviedo: "Oviedo - Desarrollo y validación",
           leon: "León - Hub industrial estratégico",
         },
+        readiness: {
+          title: "Preparados para programas críticos",
+          text:
+            "Las primeras conversaciones se gestionan con rigor de ingeniería, disciplina de confidencialidad y criterios de cualificación industrial.",
+          item1: "Interlocución técnica desde la primera revisión",
+          item2: "Foco en CTQs, riesgo y escalado",
+          item3: "Respuesta inicial en 3-5 días laborables",
+        },
       },
       close: {
-        title: "Ingeniería de materiales con propósito industrial",
+        title: "Ingeniería de materiales alineada con cualificación y escalado",
         text:
-          "En DeepTech, cada proyecto comienza con una conversación técnica rigurosa. Estamos preparados para acompañarte desde la especificación hasta la cualificación industrial.",
+          "En DeepTech, la tracción comercial depende de la credibilidad técnica. Acompañamos a los clientes desde la primera revisión de especificación hasta la cualificación industrial y la continuidad de suministro.",
       },
     },
 
@@ -1977,32 +2209,32 @@ export const I18N = deepFreeze({
           titleHtml:
             "Infraestructura industrial para <span class=\"empresa-accent\">tecnologías estratégicas.</span>",
           text:
-            "Nanoker es una plataforma industrial especializada en materiales avanzados para sectores DeepTech donde la fiabilidad, la especificación certificada y la continuidad de suministro son críticas.",
+            "Nanoker es una plataforma industrial de materiales avanzados y componentes de alta especificación para sectores donde los ciclos de cualificación son largos, el fallo es costoso y la continuidad de suministro es estratégica.",
         },
         mission: {
-          title: "Nuestra Misión",
+          title: "Posicionamiento industrial",
           priorities: {
-            title: "Prioridades industriales",
-            item1: "Pureza y estabilidad lote a lote",
-            item2: "Reducción de riesgo de suministro",
-            item3: "Trazabilidad completa",
-            item4: "Escalado industrial europeo",
+            title: "Lo que nuestros clientes necesitan resolver",
+            item1: "Pureza y estabilidad de proceso lote a lote",
+            item2: "Documentación y trazabilidad listas para cualificación",
+            item3: "Menor exposición a cadenas de suministro frágiles",
+            item4: "Escalado industrial europeo para programas críticos",
           },
           who: {
-            title: "Quiénes somos",
-            item1: "Fabricante de componentes cerámicos",
-            item2: "Desarrollador de formulaciones avanzadas",
-            item3: "Integrador de tecnologías avanzadas",
-            item4: "Socio de OEMs europeos críticos",
+            title: "Para qué está construida Nanoker",
+            item1: "Fabricar componentes avanzados basados en cerámica y cristal",
+            item2: "Desarrollar formulaciones propietarias y rutas de material",
+            item3: "Integrar proceso, metrología y lógica de cualificación",
+            item4: "Acompañar a OEMs europeos en aplicaciones críticas de ciclo largo",
           },
         },
         platform: {
           titleHtml: "Plataforma <span class=\"empresa-accent\">Integrada</span>",
-          subtitle: "Integración vertical completa",
-          card1: "Síntesis & Crecimiento",
+          subtitle: "De la arquitectura material al componente cualificado",
+          card1: "Síntesis, Formulación & Crecimiento",
           card2: "Mecanizado de Precisión",
-          card3: "Acabado & Metrología",
-          card4: "QA & Control",
+          card3: "Ingeniería Superficial & Metrología",
+          card4: "QA, Trazabilidad & Control",
         },
         alliance: {
           title: "Alianza Tecnológica Estratégica",
@@ -2014,38 +2246,38 @@ export const I18N = deepFreeze({
           item4: "Cerámicas extremas",
         },
         infrastructure: {
-          title: "Infraestructura Industrial",
-          item1: "Cualificación técnica progresiva (6–24 meses según sector)",
-          item2: "Escalado en oleadas",
+          title: "Modelo de ejecución industrial",
+          item1: "Rutas de cualificación progresiva alineadas con cada sector",
+          item2: "Escalado industrial por oleadas",
           item3: "Operación 24/7",
-          item4: "Disponibilidad >95%",
+          item4: "Disponibilidad objetivo superior al 95%",
         },
         advantage: {
           title: "Ventaja estructural europea",
           subtitle: "Energía, sostenibilidad y soberanía",
           text:
-            "La fabricación de materiales avanzados es intensiva en energía. Operar en un entorno con energía renovable competitiva y baja intensidad de carbono proporciona:",
+            "La fabricación de materiales avanzados es intensiva en energía y sensible a capital. Operar en un entorno con energía renovable competitiva y baja intensidad de carbono proporciona:",
           item1: "Ventaja estructural de coste",
           item2: "Cumplimiento CBAM",
-          item3: "Acceso a mercados exigentes (defensa, aeroespacial, automoción premium)",
+          item3: "Acceso a mercados regulados y exigentes",
           item4: "Seguridad jurídica e IP europea",
           closingHtml:
-            "No es solo una cuestión medioambiental.<br />Es una ventaja competitiva permanente.",
+            "No es solo un argumento de sostenibilidad.<br />Es una ventaja de posicionamiento industrial.",
         },
         approach: {
-          title: "Nuestro enfoque",
-          subtitle: "Cómo trabajamos con nuestros clientes",
-          item1: "Definimos la especificación crítica del material",
-          item2: "Validamos técnica y metrológicamente",
-          item3: "Cualificamos bajo estándares sectoriales",
-          item4: "Escalamos producción con repetibilidad industrial",
-          text: "Nos integramos en los roadmaps tecnológicos del cliente.",
+          title: "Modelo de trabajo con cliente",
+          subtitle: "Cómo pasamos del requisito a la ejecución industrial",
+          item1: "Definimos la especificación crítica del material y sus CTQs",
+          item2: "Validamos con metrología, ventanas de proceso y evidencia técnica",
+          item3: "Cualificamos bajo restricciones y estándares sectoriales",
+          item4: "Escalamos con repetibilidad industrial y continuidad de suministro",
+          text: "Trabajamos dentro del roadmap del cliente, no al margen.",
         },
         vision: {
           title: "Visión",
           subtitle: "Infraestructura estratégica para la DeepTech europea",
           textHtml:
-            "Europa no puede liderar en semiconductores avanzados, tecnologías cuánticas o sistemas de defensa sin controlar los materiales que los hacen posibles.<br />Nanoker trabaja para construir esa base industrial.",
+            "Europa no puede liderar en semiconductores avanzados, tecnologías cuánticas o sistemas de defensa sin controlar los materiales y el know-how de proceso que los hacen posibles.<br />Nanoker contribuye a construir esa base industrial.",
         },
         quote: "Quien controla el material controla la tecnología.",
       },
@@ -2054,14 +2286,14 @@ export const I18N = deepFreeze({
         hero: {
           eyebrow: "CAPACIDADES",
           titleHtml: "Capacidades Industriales <span class=\"mat-accent\">Integradas</span>",
-          subtitle: "Control total del proceso, desde la síntesis hasta el componente terminado.",
+          subtitle: "Control del proceso desde la ingeniería del precursor hasta el componente cualificado.",
           text:
-            "Nanoker integra tecnologías avanzadas de crecimiento cristalino, densificación, mecanizado y metrología para garantizar especificación certificada, repetibilidad industrial y escalabilidad.",
+            "Nanoker integra crecimiento cristalino, densificación, mecanizado de precisión y metrología en un único flujo industrial para asegurar control de especificación, repetibilidad y escalabilidad en aplicaciones críticas.",
         },
         integration: {
-          title: "Modelo de Integración Vertical",
+          title: "Arquitectura de integración vertical",
           subtitle: "De precursor a componente",
-          intro: "Nuestra plataforma industrial cubre toda la cadena de valor:",
+          intro: "Nuestra plataforma industrial cubre la cadena necesaria para pasar del diseño material a la pieza cualificada:",
           item1: "1. Síntesis y formulación",
           item2: "2. Crecimiento cristalino",
           item3: "3. Densificación avanzada",
@@ -2069,7 +2301,7 @@ export const I18N = deepFreeze({
           item5: "5. Acabado superficial y CMP",
           item6: "6. Metrología y QA/QC",
           item7: "7. Cualificación y escalado",
-          outro: "La integración elimina dependencias externas y reduce variabilidad de calidad.",
+          outro: "La integración reduce riesgo de traspaso, acorta bucles de cualificación y limita la variabilidad de calidad.",
         },
         synthesis: {
           title: "Síntesis y Formulación",
@@ -2078,7 +2310,7 @@ export const I18N = deepFreeze({
           item2: "Ajuste de pureza hasta grado semiconductor",
           item3: "Control de tamaño de partícula y microestructura",
           item4: "Optimización para SPS/HIP o crecimiento cristalino",
-          outro: "Esto permite adaptar el material a la aplicación, no al revés.",
+          outro: "El material se diseña alrededor de la aplicación y la ventana de proceso, no se adapta a posteriori.",
         },
         growth: {
           title: "Crecimiento Cristalino",
@@ -2150,24 +2382,24 @@ export const I18N = deepFreeze({
         },
         qualification: {
           title: "Cualificación y Escalado",
-          subtitle: "Modelo en oleadas",
+          subtitle: "Cualificar antes de escalar volumen",
           flow: "Instalar -> Cualificar -> Estabilizar -> Escalar",
-          item1: "Definición de CTQs",
-          item2: "Validación técnica",
-          item3: "Optimización de yield",
+          item1: "Definición de CTQs y lógica de aceptación",
+          item2: "Validación técnica bajo condiciones de uso",
+          item3: "Optimización de yield y capacidad de proceso",
           item4: "Operación 24/7",
           item5: "Disponibilidad >95%",
-          outro: "Diseñado para integración en roadmaps de clientes OEM.",
+          outro: "Diseñado para integrarse en roadmaps OEM y programas industriales de ciclo largo.",
         },
         advantage: {
-          title: "Ventaja Competitiva",
-          subtitle: "Lo que nos diferencia",
+          title: "Por qué esto importa comercialmente",
+          subtitle: "Palancas industriales creadas por la integración de capacidades",
           item1: "Integración vertical completa",
           item2: "Control interno de defectología",
           item3: "Ventaja energética estructural",
           item4: "Base industrial europea",
           item5: "Lock-in por cualificación técnica",
-          outro: "No dependemos de terceros críticos para cerrar el proceso.",
+          outro: "El resultado es una cadena más defendible para programas de alto valor y alta exigencia.",
         },
         diagram: {
           title: "Diagrama visual",
@@ -2195,7 +2427,7 @@ export const I18N = deepFreeze({
         closing: {
           title: "Industrialización de la DeepTech",
           text:
-            "La verdadera ventaja competitiva en DeepTech no está solo en el diseño del dispositivo, sino en la capacidad de fabricar el material con especificación certificada, repetibilidad industrial y continuidad de suministro.",
+            "La ventaja competitiva en DeepTech no se asegura solo en la arquitectura del dispositivo. Se asegura en la capacidad de fabricar el material con especificación certificada, repetibilidad industrial y continuidad de suministro cualificada.",
           statement: "Nanoker integra esa capacidad.",
         },
       },
@@ -2204,15 +2436,15 @@ export const I18N = deepFreeze({
         hero: {
           eyebrow: "I+D INDUSTRIAL",
           titleHtml: "<span class=\"id-accent id-glow\">Investigación</span> orientada a industrialización",
-          subtitle: "En DeepTech, la investigación solo tiene valor cuando puede escalarse.",
+          subtitle: "La investigación solo genera valor cuando sobrevive a la cualificación y al escalado.",
           text:
-            "Nuestra actividad de I+D está diseñada para industrializar materiales avanzados con especificación certificada y repetibilidad lote a lote.",
+            "Nuestra actividad de I+D está diseñada para convertir investigación en rutas fabricables, datos cualificables y producción repetible de materiales avanzados.",
         },
         philosophy: {
           title: "Filosofía",
           subtitle: "Del laboratorio a la producción 24/7",
           introHtml:
-            "La mayoría de desarrollos en materiales avanzados se detienen en la validación experimental.<br />Nuestro modelo integra:",
+            "La mayoría de programas de materiales avanzados se detienen en la prueba de concepto.<br />Nuestro modelo está diseñado para unir investigación, cualificación y producción:",
           card1Title: "Materiales de alta exigencia",
           card1Claim: "Estructura y funcionalidad",
           card1Item1: "Control microestructural avanzado",
@@ -2241,7 +2473,7 @@ export const I18N = deepFreeze({
           pipeline:
             "Investigación básica ➔ Validación técnica ➔ Cualificación industrial ➔ Escalado productivo",
           outro:
-            "El objetivo no es demostrar viabilidad científica, sino asegurar fabricación industrial estable.",
+            "El objetivo no es solo demostrar viabilidad científica, sino establecer una ruta hacia fabricación industrial estable.",
         },
         areas: {
           title: "Áreas estratégicas de investigación",
@@ -2253,7 +2485,7 @@ export const I18N = deepFreeze({
           card1Text: "En materiales avanzados, el defecto es el límite del rendimiento.",
           card2Title: "Materiales Beyond Standard",
           card2Text:
-            "Desarrollo de formulaciones propietarias que superan especificaciones comerciales convencionales. Cuando las cerámicas estándar fallan a 1200ºC, nuestras formulaciones mantienen integridad estructural más allá.",
+            "Desarrollamos formulaciones propietarias que superan especificaciones comerciales convencionales cuando los materiales estándar dejan de cumplir objetivos térmicos, mecánicos o de fiabilidad.",
           card3Title: "Diamante y materiales cuánticos",
           card3Item1: "Crecimiento MPCVD avanzado",
           card3Item2: "Control de centros NV",
@@ -2281,25 +2513,25 @@ export const I18N = deepFreeze({
         },
         infrastructure: {
           title: "Infraestructura de I+D",
-          subtitle: "Capacidades experimentales",
+          subtitle: "Plataformas experimentales con intención industrial",
           item1: "Reactores MPCVD",
           item2: "SPS/HIP",
           item3: "Sistemas de crecimiento cristalino",
           item4: "Laboratorios de caracterización",
           item5: "Metrología avanzada",
           outro:
-            "Instalaciones diseñadas para transición directa a línea industrial.",
+            "Instalaciones configuradas para acortar la transferencia entre validación experimental e implementación industrial.",
         },
         collaboration: {
           title: "Colaboración científica e industrial",
           subtitle: "Ecosistema europeo",
-          intro: "Colaboramos con:",
+          intro: "Trabajamos con:",
           item1: "Centros de investigación",
           item2: "Universidades",
           item3: "OEMs industriales",
           item4: "Programas estratégicos europeos",
           outro:
-            "Nuestro origen científico se traduce en capacidad industrial validada.",
+            "La colaboración científica solo aporta valor cuando se traduce en capacidad industrial validada.",
         },
         roadmap: {
           title: "Roadmap tecnológico",
@@ -2320,13 +2552,13 @@ export const I18N = deepFreeze({
           item3: "Defensa de nueva generación",
           item4: "Fotónica integrada",
           text: "Sin controlar los materiales que los habilitan.",
-          outroHtml: "Nuestra I+D no es incremental.<br />Es estructural.",
+          outroHtml: "Nuestra I+D no está desconectada de la industria.<br />Es capacidad industrial estructural en formación.",
         },
         closing: {
           title: "Mensaje final",
           subtitle: "Investigación con propósito industrial",
           text:
-            "La diferencia entre laboratorio y liderazgo industrial es la capacidad de fabricar con especificación certificada y estabilidad lote a lote.",
+            "La diferencia entre resultado de laboratorio y liderazgo industrial está en la capacidad de fabricar con especificación certificada, estabilidad de proceso y resultados de cualificación repetibles.",
           statement: "Ahí es donde enfocamos nuestra investigación.",
         },
       },
@@ -2336,21 +2568,21 @@ export const I18N = deepFreeze({
           eyebrow: "MATERIALES",
           titleHtml: "Materiales Estratégicos <span style=\"color: #3B82F6;\">DeepTech</span>",
           text1:
-            "Controlar el material es controlar el rendimiento, la fiabilidad y la escalabilidad de las tecnologías críticas.",
+            "El control del material define el rendimiento, el riesgo de cualificación y la escalabilidad industrial de las tecnologías críticas.",
           text2:
-            "Nanoker integra un portfolio de materiales avanzados que constituyen la base física de la nueva DeepTech europea: semiconductores de banda ancha, fotónica avanzada, sensores cuánticos, defensa y sistemas energéticos de alta eficiencia.",
+            "Nanoker integra un portfolio de materiales avanzados que sostiene la capa física de la nueva DeepTech europea: semiconductores de banda ancha, fotónica avanzada, sensores cuánticos, defensa y sistemas energéticos de alta eficiencia.",
         },
         philosophy: {
           title: "Filosofía",
-          subtitle: "Más que materias primas: arquitectura material",
-          text: "No suministramos materiales estándar. Desarrollamos materiales:",
+          subtitle: "Arquitectura material, no commodity de catálogo",
+          text: "No tratamos el material como una referencia intercambiable. Lo desarrollamos:",
           item1: "Con pureza controlada",
           item2: "Con defectología optimizada",
           item3: "Con propiedades funcionales diseñadas",
           item4: "Con trazabilidad completa",
           item5: "Listos para cualificación industrial",
           deliverHtml:
-            "Cada material se entrega como <span class=\"mat-glow\">component-ready</span> o <span class=\"mat-glow\">device-ready</span>, no como commodity.",
+            "Cada material se entrega como <span class=\"mat-glow\">component-ready</span> o <span class=\"mat-glow\">device-ready</span>, alineado con rutas reales de cualificación.",
         },
         portfolio: {
           title: "Portfolio de Materiales",
@@ -2458,7 +2690,7 @@ export const I18N = deepFreeze({
         },
         differential: {
           title: "Ventaja diferencial",
-          subtitle: "Integración vertical completa",
+          subtitle: "Control industrial a lo largo de toda la cadena",
           stage1: "Síntesis y Formulación",
           stage2: "Crecimiento Cristalino (CVD/PVT/HME)",
           stage3: "Densificación Avanzada (SPS/HIP)",
@@ -2468,11 +2700,11 @@ export const I18N = deepFreeze({
           stage7: "Cualificación y Escalado Industrial",
           strip:
             "Diamante | Carburo de Silicio | Zafiro | Cerámicas Técnicas | Composites Carbono-Metal",
-          text: "Esto permite:",
-          item1: "Reducción dramática del riesgo de suministro",
-          item2: "Optimización del coste total de propiedad",
-          item3: "Lock-in por cualificación",
-          item4: "Estabilidad lote a lote",
+          text: "Esto genera ventajas industriales concretas:",
+          item1: "Menor riesgo de suministro y de traspasos",
+          item2: "Mejor coste total de propiedad",
+          item3: "Mejor alineación con flujos de cualificación",
+          item4: "Mayor estabilidad lote a lote",
         },
         map: {
           title: "Mapa visual",
@@ -2503,7 +2735,7 @@ export const I18N = deepFreeze({
         },
         europe: {
           title: "DeepTech Materials for Europe",
-          text1: "Los materiales estratégicos no son intercambiables. Son infraestructura tecnológica.",
+          text1: "Los materiales estratégicos no son inputs intercambiables. Son infraestructura industrial.",
           text2: "Controlar diamante, SiC, zafiro y cerámicas avanzadas en Europa significa:",
           item1: "Reducir dependencia externa",
           item2: "Asegurar continuidad industrial",
@@ -2512,9 +2744,9 @@ export const I18N = deepFreeze({
         },
         datasheets: {
           title: "Fichas técnicas",
-          subtitle: "Referencias cerámicas cualificadas",
+          subtitle: "Referencias técnicas para revisión de ingeniería",
           text:
-            "Accede directamente a las fichas técnicas cerámicas disponibles dentro del portfolio de materiales. Filtra por familia para revisar con más rapidez las referencias técnicas relevantes.",
+            "Accede a las fichas técnicas cerámicas directamente dentro del portfolio de materiales. Filtra por familia para revisar más rápido las referencias relevantes durante la especificación y el sourcing técnico.",
           filters: {
             all: "Todas",
             alumina: "Alúmina",
@@ -2533,13 +2765,13 @@ export const I18N = deepFreeze({
         hero: {
           titleHtml: "<span class=\"accent\">Sectores</span>",
           subtitle:
-            "Materiales avanzados para industrias donde el rendimiento depende del control del material.",
+            "Materiales avanzados para sectores donde la fiabilidad depende del control de la pila material.",
           intro:
-            "Nanoker desarrolla materiales estratégicos y componentes de alta precisión para sectores críticos donde la fiabilidad, trazabilidad y escalabilidad industrial son esenciales.",
+            "Nanoker trabaja con sectores donde la elección del material impacta directamente el tiempo de cualificación, la fiabilidad operativa y la resiliencia de suministro.",
         },
         industry: {
           title: "Industria y Fabricación Avanzada",
-          phrase: "Materiales de alta precisión para entornos industriales exigentes.",
+          phrase: "Materiales diseñados para uptime, resistencia al desgaste y producción repetible.",
           text:
             "La fabricación avanzada requiere materiales capaces de operar bajo desgaste, corrosión, altas temperaturas y esfuerzos mecánicos continuos.",
           challengesTitle: "Retos",
@@ -2548,7 +2780,7 @@ export const I18N = deepFreeze({
           challenge3: "Conductividad térmica controlada",
           challenge4: "Precisión dimensional",
           challenge5: "Repetibilidad lote a lote",
-          solutionsTitle: "Soluciones",
+          solutionsTitle: "Respuestas industriales",
           solution1: "Cerámicas técnicas avanzadas",
           solution2: "Composites funcionales térmicos",
           solution3: "Componentes de precisión industrial",
@@ -2567,7 +2799,7 @@ export const I18N = deepFreeze({
         energy: {
           title: "Energía y Electrónica de Potencia",
           phrase:
-            "Materiales estratégicos para sistemas eléctricos de alta eficiencia y densidad de potencia.",
+            "Materiales para alta densidad de potencia, estrés térmico y larga vida operativa.",
           challengesTitle: "Retos",
           challenge1: "Gestión térmica extrema",
           challenge2: "Aislamiento eléctrico con alta conductividad térmica",
@@ -2597,7 +2829,7 @@ export const I18N = deepFreeze({
         health: {
           title: "Salud y Dispositivos Médicos",
           phrase:
-            "Cerámicas técnicas y biocerámicas para aplicaciones médicas donde calidad, trazabilidad y regulación son críticas.",
+            "Cerámicas técnicas y biocerámicas para aplicaciones reguladas donde trazabilidad y consistencia son obligatorias.",
           text:
             "El sector biomédico requiere materiales biocompatibles, estables y totalmente trazables bajo normativa estricta (ISO 13485, MDR). Nanoker aporta experiencia industrial validada en dispositivos de alta precisión.",
           challengesTitle: "Retos",
@@ -2624,7 +2856,7 @@ export const I18N = deepFreeze({
         semiconductors: {
           title: "Semiconductores y equipamiento de fabricación",
           phrase:
-            "Materiales \"fab-grade\" para procesos críticos con control total de especificación, defectos y trazabilidad.",
+            "Materiales \"fab-grade\" para entornos de proceso críticos con control de especificación, defectos y trazabilidad.",
           text:
             "La industrialización DeepTech depende de materiales con pureza extrema, estabilidad lote a lote y capacidad de escalado. Nanoker integra cerámicas técnicas con sustratos estratégicos como SiC, diamante y zafiro.",
           challengesTitle: "Retos",
@@ -2654,7 +2886,7 @@ export const I18N = deepFreeze({
         photonics: {
           title: "Fotónica y Óptica Avanzada",
           phrase:
-            "Materiales ópticos para transmisión amplia, alta potencia y estabilidad en entornos extremos.",
+            "Materiales ópticos para alta potencia, estabilidad espectral y superficies de precisión.",
           text:
             "La fotónica avanzada requiere materiales con baja absorción, alta transmisión y estabilidad térmica excepcional.",
           challengesTitle: "Retos",
@@ -2676,7 +2908,7 @@ export const I18N = deepFreeze({
         quantum: {
           title: "Cuántica y Sensores de Nueva Generación",
           phrase:
-            "Materiales habilitadores para tecnologías cuánticas y sensado de ultra precisión.",
+            "Materiales habilitadores para dispositivos cuánticos y arquitecturas de sensado de ultra precisión.",
           text:
             "El diamante con centros NV permite magnetometría, navegación GPS-denied y sensado de alta sensibilidad sin criogenia.",
           challengesTitle: "Retos",
@@ -2717,7 +2949,7 @@ export const I18N = deepFreeze({
         science: {
           title: "Ciencia e Infraestructuras",
           phrase:
-            "Materiales y componentes para grandes instalaciones científicas e instrumentación avanzada.",
+            "Materiales y componentes para grandes instalaciones científicas e instrumentación avanzada bajo restricciones extremas.",
           text:
             "Big Science exige estabilidad dimensional extrema, pureza material y fiabilidad en condiciones fuera de estándar industrial.",
           challengesTitle: "Retos",
@@ -2734,7 +2966,7 @@ export const I18N = deepFreeze({
           application2: "Sistemas de colimación",
           application3: "Instrumentación científica",
         },
-        cta: "¿Tu sector requiere control extremo del material? Contacta con ingeniería.",
+        cta: "Habla con ingeniería de Nanoker sobre los requisitos de tu sector.",
       },
     },
 
@@ -2807,26 +3039,114 @@ export const I18N = deepFreeze({
         cta: "Ver sectores de aplicación",
       },
 
-      sectors: {
-        tag: "04 · Sectores críticos",
-        titleHtml: "Sectores donde el material<br /><b>es crítico.</b>",
+      capabilities: {
+        tag: "04 · Capacidades industriales",
+        titleHtml: "Capacidades industriales<br /><b>diseñadas para controlar la especificación.</b>",
         text:
-          "Un reto común: fiabilidad bajo condiciones extremas. Nos integramos en roadmaps tecnológicos de OEMs y sistemas donde el material define rendimiento, coste total y escalabilidad.",
+          "Nanoker combina materiales estratégicos, procesos de precisión y disciplina industrial para pasar de la viabilidad a la producción repetible sin perder control de especificación.",
         specs: {
-          industry: "INDUSTRIA",
-          industryVal: "Avanzada",
-          photonics: "FOTÓNICA",
-          photonicsVal: "Tecnologías ópticas",
-          science: "CIENCIA",
-          scienceVal: "Infraestructuras críticas",
-          common: "RETO COMÚN",
-          commonVal: "Fiabilidad extrema",
+          materials: "MATERIALES",
+          materialsVal: "SiC / diamante CVD / cerámicas / zafiro",
+          processes: "PROCESOS",
+          processesVal: "Crecimiento / densificación / mecanizado / metrología",
+          precision: "PRECISIÓN",
+          precisionVal: "Tolerancias exigentes y rutas de acabado controladas",
+          scale: "ESCALABILIDAD",
+          scaleVal: "Escalado listo para cualificación",
         },
-        cta: "Explorar sectores",
+        cards: {
+          materials: {
+            label: "Stack material",
+            title: "Materiales críticos bajo un mismo flujo industrial",
+            text: "SiC, diamante CVD, cerámicas técnicas y zafiro alineados con ventanas de rendimiento específicas de aplicación.",
+          },
+          manufacturing: {
+            label: "Fabricación",
+            title: "De síntesis y crecimiento a componente terminado",
+            text: "Crecimiento cristalino, densificación SPS/HIP, mecanizado de precisión, pulido y metrología integrados para reducir riesgo entre etapas.",
+          },
+          precision: {
+            label: "Precisión",
+            title: "Disciplina de tolerancias para ensamblajes críticos",
+            text: "Control dimensional, acabado superficial y repetibilidad lote a lote orientados a soportar cualificación e integración aguas abajo.",
+          },
+          scale: {
+            label: "Escala industrial",
+            title: "Producción escalable con lógica de cualificación",
+            text: "Rutas de industrialización diseñadas para lotes piloto, paquetes documentales y ramp-up progresivo de volumen sin recualificar toda la cadena.",
+          },
+        },
+        cta: "Ver preparación industrial",
+      },
+
+      readiness: {
+        tag: "05 · Confianza y preparación",
+        titleHtml: "Preparación industrial<br /><b>que el cliente puede cualificar.</b>",
+        text:
+          "La credibilidad en sectores críticos se construye con documentación, control de proceso y disciplina de cumplimiento. Nanoker estructura la entrega en torno a lo que necesitan aprobar calidad y compras.",
+        items: {
+          spec: {
+            title: "Especificación garantizada",
+            text: "Especificaciones de material y componente controladas y vinculadas a requisitos técnicos acordados.",
+          },
+          traceability: {
+            title: "Trazabilidad",
+            text: "Trazabilidad a nivel de lote desde precursor, ruta de proceso y registro de inspección hasta el componente entregado.",
+          },
+          qc: {
+            title: "Control de calidad",
+            text: "Lógica de inspección de entrada, en proceso y final diseñada para detectar desviaciones antes de que se conviertan en riesgo de sistema.",
+          },
+          compliance: {
+            title: "Cumplimiento y estándares",
+            text: "Controles industriales y documentación alineados con cualificación, auditorías y entornos de fabricación regulados.",
+          },
+        },
+        cta: "Ver sectores estratégicos",
+      },
+
+      sectors: {
+        tag: "06 · Sectores estratégicos",
+        titleHtml: "Sectores donde el control del material<br /><b>se convierte en ventaja estratégica.</b>",
+        text:
+          "Aeroespacial, defensa, energía e industria avanzada no son solo mercados finales. Son programas estratégicos donde los materiales cualificados determinan preparación, resiliencia y ventaja a nivel sistema.",
+        cards: {
+          aerospace: {
+            label: "Aeroespacial",
+            title: "La fiabilidad de vuelo empieza en el material",
+            text: "Estabilidad térmica, arquitecturas ligeras y consistencia dimensional para entornos de alta consecuencia.",
+          },
+          defense: {
+            label: "Defensa",
+            title: "Resiliencia de suministro para sistemas soberanos críticos",
+            text: "Materiales y componentes diseñados para entornos hostiles, suministro controlado y programas sensibles a la cualificación.",
+          },
+          energy: {
+            label: "Energía",
+            title: "Eficiencia y control térmico cuando el uptime no se negocia",
+            text: "SiC, diamante térmico y cerámicas avanzadas para soportar densidad de potencia, fiabilidad y largas ventanas operativas.",
+          },
+          industry: {
+            label: "Industria avanzada",
+            title: "Estabilidad de proceso para equipamiento industrial de nueva generación",
+            text: "Componentes de precisión y materiales diseñados para desgaste, plasma, corrosión y entornos de producción de alto throughput.",
+          },
+        },
+        specs: {
+          positioning: "POSICIONAMIENTO",
+          positioningVal: "Programas estratégicos",
+          requirement: "REQUISITO COMÚN",
+          requirementVal: "Fiabilidad cualificada",
+          value: "PALANCA DE VALOR",
+          valueVal: "Control material",
+          outcome: "RESULTADO DE PROGRAMA",
+          outcomeVal: "Preparación y resiliencia de suministro",
+        },
+        cta: "Ver modelo de transferencia industrial",
       },
 
       rnd: {
-        tag: "05 · I+D a 24/7",
+        tag: "08 · I+D a 24/7",
         titleHtml: "De la investigación<br /><b>a la producción 24/7.</b>",
         text:
           "Más de 15 años en ciencia de materiales orientada a industrialización: desarrollo experimental, validación, cualificación cliente (6–24 meses) y escalado progresivo en oleadas.",
@@ -2846,7 +3166,7 @@ export const I18N = deepFreeze({
 
     // ✅ Advantages used by index.html (advantages.*)
     advantages: {
-      tag: "BLOQUE 6 · VENTAJA COMPETITIVA",
+      tag: "BLOQUE 7 · VENTAJA COMPETITIVA",
       titleHtml: "Ventajas<br /><b>estructurales.</b>",
       subtitle:
         "Integración vertical + especificación certificada + seguridad de suministro europea. Los materiales críticos no son intercambiables: son infraestructura tecnológica.",
@@ -2862,7 +3182,7 @@ export const I18N = deepFreeze({
     },
 
     sovereignty: {
-      tag: "BLOQUE 8 · MENSAJE ESTRATÉGICO",
+      tag: "BLOQUE 9 · MENSAJE ESTRATÉGICO",
       titleHtml: "Soberanía<br /><b>tecnológica europea</b>",
       text1:
         "Europa no puede liderar en semiconductores, cuántica o defensa mientras dependa de cadenas de suministro externas para materiales críticos.",
@@ -2872,11 +3192,11 @@ export const I18N = deepFreeze({
     },
 
     finalCta: {
-      tag: "BLOQUE 9 · CTA FINAL",
+      tag: "BLOQUE 10 · CTA FINAL",
       titleHtml: "¿Estás desarrollando<br /><b>una tecnología crítica?</b>",
       text:
         "Cuéntanos tu aplicación y trabajemos juntos en la arquitectura material que la haga viable.",
-      primary: "Solicitar evaluación técnica",
+      primary: "Iniciar evaluación técnica",
       secondary: "Contactar",
     },
 

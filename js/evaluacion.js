@@ -2,25 +2,6 @@
   const STORAGE_KEY = "NK_EVAL_WIZARD_V2";
   const TOTAL_STEPS = 11;
 
-  const nav = document.querySelector("[data-nav]");
-  const navToggle = document.querySelector(".nav-toggle");
-  const navLinks = document.querySelectorAll(".nav-center .nav-link");
-
-  if (nav && navToggle) {
-    navToggle.addEventListener("click", () => {
-      const isOpen = !nav.classList.contains("is-open");
-      nav.classList.toggle("is-open", isOpen);
-      navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
-    });
-
-    navLinks.forEach((link) => {
-      link.addEventListener("click", () => {
-        nav.classList.remove("is-open");
-        navToggle.setAttribute("aria-expanded", "false");
-      });
-    });
-  }
-
   const form = document.getElementById("evaluation-form");
   const steps = Array.from(document.querySelectorAll(".wizard-step"));
   const stepButtons = Array.from(document.querySelectorAll(".wizard-stepBtn"));

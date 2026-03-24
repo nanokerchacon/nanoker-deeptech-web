@@ -8,7 +8,8 @@
         var doc = document.documentElement;
         var lang = 'en';
         try {
-          var raw = localStorage.getItem('nanoker-lang') || navigator.language || 'en';
+          var queryLang = new URLSearchParams(window.location.search).get('lang');
+          var raw = queryLang || localStorage.getItem('nanoker-lang') || navigator.language || 'en';
           lang = String(raw).toLowerCase().split('-')[0] === 'es' ? 'es' : 'en';
         } catch (_error) {
           var fallback = navigator.language || 'en';
@@ -24,10 +25,14 @@
       content="Explore the sectors Nanoker serves, from defense and aerospace to semiconductors, energy and medical systems, with materials engineered for mission-critical performance."
     />
     <link rel="canonical" href="https://nanoker.com/sectores.html" />
+    <link rel="alternate" hreflang="es" href="https://nanoker.com/sectores.html?lang=es" />
+    <link rel="alternate" hreflang="en" href="https://nanoker.com/sectores.html?lang=en" />
+    <link rel="alternate" hreflang="x-default" href="https://nanoker.com/sectores.html" />
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Nanoker" />
     <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="es_ES" />
     <meta property="og:title" content="Nanoker | Sectors" />
     <meta
       property="og:description"
@@ -280,7 +285,7 @@
   <body class="sectores-page">
     <nav class="nav" data-nav>
       <a href="./index.html" class="nav-logo" aria-label="Nanoker Home">
-        <img src="./img/brand/logo-nanoker-26-hd.png" alt="Nanoker" />
+        <img src="./img/brand/logo-nanoker-26-hd.png" alt="Nanoker" width="1563" height="1563" decoding="async" />
       </a>
 
       <div id="mobileMenu" class="nav-center mobile-menu" data-mobile-menu role="dialog" aria-modal="true" aria-label="Site navigation">
@@ -788,24 +793,6 @@
 
     <script>
       (function () {
-        const nav = document.querySelector("[data-nav]");
-        const btn = document.querySelector(".nav-toggle");
-        const links = document.querySelectorAll(".nav-center .nav-link");
-        if (nav && btn) {
-          btn.addEventListener("click", () => {
-            const open = !nav.classList.contains("is-open");
-            nav.classList.toggle("is-open", open);
-            btn.setAttribute("aria-expanded", open ? "true" : "false");
-          });
-        }
-
-        links.forEach((a) => {
-          a.addEventListener("click", () => {
-            nav?.classList.remove("is-open");
-            btn?.setAttribute("aria-expanded", "false");
-          });
-        });
-
         const revealEls = document.querySelectorAll("[data-reveal]");
         if (!("IntersectionObserver" in window)) {
           revealEls.forEach((el) => el.classList.add("is-visible"));
@@ -824,7 +811,7 @@
       })();
     </script>
 
-    <script src="./js/mobile-menu.js?v=1"></script>
+    <script src="./js/mobile-menu.js?v=1" defer></script>
     <script type="module">
       import { initLanguageSwitcher } from "./js/lang.js";
 

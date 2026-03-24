@@ -1,5 +1,5 @@
 // js/main.js
-import { initThreeBackground } from "./three-bg.js";
+import { initThreeBackground } from "./three-bg.js?v=13";
 import { initLanguageSwitcher, t } from "./lang.js?v=11";
 
 let three = null;
@@ -7,6 +7,13 @@ const DEV_BG_DEBUG =
   /localhost|127\.0\.0\.1/.test(window.location.hostname) ||
   window.location.search.includes("bgdebug=1");
 const MOBILE_BG_DEBUG = window.matchMedia("(max-width: 820px)").matches;
+const PREFERS_REDUCED_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)");
+const CONNECTION =
+  navigator.connection || navigator.mozConnection || navigator.webkitConnection || null;
+const SHOULD_LIMIT_HEAVY_WORK =
+  PREFERS_REDUCED_MOTION.matches ||
+  Boolean(CONNECTION?.saveData) ||
+  /(?:^|slow-)2g$/.test(String(CONNECTION?.effectiveType || ""));
 
 function logMaterialsCanvasState(state) {
   if (!DEV_BG_DEBUG || !MOBILE_BG_DEBUG || state !== "materials") return;
@@ -85,6 +92,43 @@ function setThreeState(state) {
   three.setTargetState(state || "hero");
 }
 
+function bindScrollDrivenBackground(bgSections) {
+  if (!bgSections.length) {
+    setThreeState("hero");
+    return () => {};
+  }
+
+  let currentBg = "";
+  let ticking = false;
+
+  const update = () => {
+    ticking = false;
+    const nextState = getVisibleBgState(bgSections);
+    if (!nextState || nextState === currentBg) return;
+    currentBg = nextState;
+    setThreeState(nextState);
+    logMaterialsCanvasState(nextState);
+  };
+
+  const requestUpdate = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  };
+
+  update();
+
+  window.addEventListener("scroll", requestUpdate, { passive: true });
+  window.addEventListener("resize", requestUpdate, { passive: true });
+  window.addEventListener("orientationchange", requestUpdate, { passive: true });
+
+  return () => {
+    window.removeEventListener("scroll", requestUpdate);
+    window.removeEventListener("resize", requestUpdate);
+    window.removeEventListener("orientationchange", requestUpdate);
+  };
+}
+
 function syncHeroI18nCopy() {
   const tagline = document.querySelector(".nk-hero__tagline[data-i18n='hero.headline']");
   if (tagline) {
@@ -113,7 +157,46 @@ function updateNavScrolled() {
   else nav.classList.remove("scrolled");
 }
 
-window.addEventListener("scroll", updateNavScrolled, { passive: true });
+let navScrollTicking = false;
+window.addEventListener(
+  "scroll",
+  () => {
+    if (navScrollTicking) return;
+    navScrollTicking = true;
+    requestAnimationFrame(() => {
+      navScrollTicking = false;
+      updateNavScrolled();
+    });
+  },
+  { passive: true }
+);
+
+function getVisibleBgState(bgSections) {
+  if (!bgSections.length) return "hero";
+  const best = getClosestSectionToViewportMid(bgSections);
+  return resolveBgState(best) || "hero";
+}
+
+function scheduleNonCriticalWork(task, options = {}) {
+  const timeout = Number.isFinite(options.timeout) ? options.timeout : 1200;
+
+  if (document.hidden) {
+    const onVisible = () => {
+      if (document.hidden) return;
+      document.removeEventListener("visibilitychange", onVisible);
+      scheduleNonCriticalWork(task, options);
+    };
+    document.addEventListener("visibilitychange", onVisible);
+    return;
+  }
+
+  if ("requestIdleCallback" in window) {
+    window.requestIdleCallback(task, { timeout });
+    return;
+  }
+
+  window.setTimeout(task, Math.min(timeout, 350));
+}
 
 /* ==========================
    INIT
@@ -132,14 +215,6 @@ window.addEventListener("DOMContentLoaded", () => {
   initLanguageSwitcher({ observeDOM: true });
   syncHeroI18nCopy();
   window.addEventListener("lang:change", syncHeroI18nCopy);
-
-  // 2) Three background
-  try {
-    three = initThreeBackground();
-  } catch (e) {
-    console.warn("Three no pudo inicializarse en este dispositivo:", e);
-    document.body.classList.add("no-three");
-  }
 
   // 3) Navbar scrolled init
   updateNavScrolled();
@@ -162,6 +237,30 @@ window.addEventListener("DOMContentLoaded", () => {
 
   // 5) Background state by visible section (data-bg)
   const bgSections = getBgSections();
+  const syncCurrentBgState = () => {
+    setThreeState(getVisibleBgState(bgSections));
+  };
+
+  if (SHOULD_LIMIT_HEAVY_WORK) {
+    document.body.classList.add("no-three");
+  } else {
+    const startThree = () => {
+      if (three || document.body.classList.contains("no-three")) return;
+
+      try {
+        three = initThreeBackground();
+        syncCurrentBgState();
+        bindScrollDrivenBackground(bgSections);
+      } catch (e) {
+        console.warn("Three no pudo inicializarse en este dispositivo:", e);
+        document.body.classList.add("no-three");
+      }
+    };
+
+    const deferThreeInit = MOBILE_BG_DEBUG || window.matchMedia("(max-width: 900px)").matches;
+    if (deferThreeInit) scheduleNonCriticalWork(startThree, { timeout: 1800 });
+    else requestAnimationFrame(() => requestAnimationFrame(startThree));
+  }
 
   // Si no hay elementos observables, mantenemos hero.
   if (!bgSections.length) {
@@ -170,93 +269,5 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   // Estado inicial
-  setThreeState("hero");
-
-  if (!("IntersectionObserver" in window)) {
-    // Fallback simple sin IO
-    window.addEventListener(
-      "scroll",
-      () => {
-        const best = getClosestSectionToViewportMid(bgSections);
-        const state = resolveBgState(best);
-        setThreeState(state);
-        logMaterialsCanvasState(state);
-      },
-      { passive: true }
-    );
-
-    return;
-  }
-
-  // IntersectionObserver PRO: elige la más visible
-  let currentBg = "hero";
-  let lastState = "hero";
-  let lastChangeTime = performance.now();
-  let bgStateTimer = null;
-
-  const visibility = new Map(bgSections.map((el) => [el, 0]));
-
-  const bgObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        visibility.set(entry.target, entry.isIntersecting ? entry.intersectionRatio : 0);
-      });
-
-      let bestEl = null;
-      let bestRatio = 0;
-      visibility.forEach((ratio, el) => {
-        if (ratio > bestRatio) {
-          bestRatio = ratio;
-          bestEl = el;
-        }
-      });
-
-      if (!bestEl || bestRatio <= 0) {
-        bestEl = getClosestSectionToViewportMid(bgSections);
-      }
-
-      const state = resolveBgState(bestEl);
-      if (!state) return;
-
-      if (state === currentBg) {
-        if (bgStateTimer) {
-          clearTimeout(bgStateTimer);
-          bgStateTimer = null;
-        }
-        lastState = state;
-        return;
-      }
-
-      const now = performance.now();
-      if (state !== lastState) {
-        lastState = state;
-        lastChangeTime = now;
-      }
-
-      const elapsed = now - lastChangeTime;
-      if (elapsed < 200) {
-        if (bgStateTimer) clearTimeout(bgStateTimer);
-        bgStateTimer = setTimeout(() => {
-          if (lastState !== currentBg) {
-            currentBg = lastState;
-            setThreeState(lastState);
-            logMaterialsCanvasState(lastState);
-          }
-          bgStateTimer = null;
-        }, 200 - elapsed);
-        return;
-      }
-
-      currentBg = state;
-      setThreeState(state);
-      logMaterialsCanvasState(state);
-    },
-    {
-      // Punto de lectura: el centro de pantalla aproximadamente
-      threshold: [0.2, 0.35, 0.5, 0.65],
-      rootMargin: "-20% 0px -55% 0px",
-    }
-  );
-
-  bgSections.forEach((el) => bgObserver.observe(el));
+  syncCurrentBgState();
 });

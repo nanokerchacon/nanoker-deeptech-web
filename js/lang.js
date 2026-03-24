@@ -2,11 +2,74 @@
 import { I18N } from "./i18n.js";
 
 const KEY = "nanoker-lang";
+const SEO_BASE_URL = "https://nanoker.com";
+const SEO_DEFAULT_IMAGE = `${SEO_BASE_URL}/img/og/og-default.png`;
+const SEO_PAGE_CONFIG = {
+  "/": { titleKey: "seo.home.metaTitle", descriptionKey: "seo.home.metaDescription" },
+  "/index.html": { titleKey: "seo.home.metaTitle", descriptionKey: "seo.home.metaDescription" },
+  "/empresa.html": {
+    titleKey: "seo.company.metaTitle",
+    descriptionKey: "seo.company.metaDescription",
+  },
+  "/capacidades.html": {
+    titleKey: "seo.capabilities.metaTitle",
+    descriptionKey: "seo.capabilities.metaDescription",
+  },
+  "/materiales.html": {
+    titleKey: "seo.materials.metaTitle",
+    descriptionKey: "seo.materials.metaDescription",
+  },
+  "/sectores.html": {
+    titleKey: "seo.sectors.metaTitle",
+    descriptionKey: "seo.sectors.metaDescription",
+  },
+  "/id.html": { titleKey: "seo.rnd.metaTitle", descriptionKey: "seo.rnd.metaDescription" },
+  "/contacto.html": {
+    titleKey: "seo.contact.metaTitle",
+    descriptionKey: "seo.contact.metaDescription",
+  },
+  "/evaluacion-tecnica.html": {
+    titleKey: "seo.evaluation.metaTitle",
+    descriptionKey: "seo.evaluation.metaDescription",
+  },
+  "/certifications.html": {
+    titleKey: "seo.certifications.metaTitle",
+    descriptionKey: "seo.certifications.metaDescription",
+  },
+  "/privacy.html": {
+    titleKey: "seo.privacy.metaTitle",
+    descriptionKey: "seo.privacy.metaDescription",
+  },
+  "/cookies.html": {
+    titleKey: "seo.cookies.metaTitle",
+    descriptionKey: "seo.cookies.metaDescription",
+  },
+  "/legal-notice.html": {
+    titleKey: "seo.legalNotice.metaTitle",
+    descriptionKey: "seo.legalNotice.metaDescription",
+  },
+};
+const SEO_LOCALES = {
+  es: { og: "es_ES", alternate: "en_US" },
+  en: { og: "en_US", alternate: "es_ES" },
+};
 
 // Normaliza: "es-ES" -> "es"
 function normalizeLang(raw) {
   const base = String(raw || "").toLowerCase().split("-")[0];
   return base === "es" ? "es" : "en";
+}
+
+function getLangFromUrl() {
+  try {
+    const raw = new URLSearchParams(window.location.search).get("lang");
+    if (!raw) return null;
+    const normalizedRaw = String(raw).toLowerCase();
+    if (normalizedRaw !== "es" && normalizedRaw !== "en") return null;
+    return normalizeLang(normalizedRaw);
+  } catch (_error) {
+    return null;
+  }
 }
 
 function safeGetStoredLang() {
@@ -29,7 +92,7 @@ const initialDocLang =
   document.documentElement.getAttribute("data-lang") ||
   document.documentElement.lang;
 
-let current = normalizeLang(safeGetStoredLang() || initialDocLang || navigator.language);
+let current = normalizeLang(getLangFromUrl() || safeGetStoredLang() || initialDocLang || navigator.language);
 if (!I18N[current]) current = "en";
 
 let domObserver = null;
@@ -73,6 +136,142 @@ function parseArgs(rawArgs) {
 function setHtmlLang(lang) {
   document.documentElement.lang = lang;
   document.documentElement.setAttribute("data-lang", lang);
+}
+
+function normalizeCanonicalPath(pathname) {
+  const raw = String(pathname || "/").replace(/\\/g, "/");
+  if (raw === "/" || raw === "") return "/";
+  if (/\/index\.html?$/i.test(raw)) {
+    return raw.replace(/index\.html?$/i, "");
+  }
+  return raw;
+}
+
+function buildCanonicalUrl() {
+  return new URL(normalizeCanonicalPath(window.location.pathname), `${SEO_BASE_URL}/`).toString();
+}
+
+function buildLocalizedUrl(lang) {
+  const url = new URL(buildCanonicalUrl());
+  url.searchParams.set("lang", lang);
+  return url.toString();
+}
+
+function syncLanguageQueryParam(lang) {
+  try {
+    const nextUrl = new URL(window.location.href);
+    nextUrl.searchParams.set("lang", lang);
+    window.history.replaceState(window.history.state, "", nextUrl.toString());
+  } catch (_error) {
+    // Ignore history / URL parsing issues.
+  }
+}
+
+function resolveSeoConfig() {
+  const pathname = String(window.location.pathname || "/").replace(/\\/g, "/");
+  return SEO_PAGE_CONFIG[pathname] || SEO_PAGE_CONFIG[normalizeCanonicalPath(pathname)] || null;
+}
+
+function ensureHeadNode(selector, tagName, attrs = {}) {
+  const nodes = document.head.querySelectorAll(selector);
+  const node = nodes[0];
+  if (nodes.length > 1) {
+    Array.from(nodes)
+      .slice(1)
+      .forEach((duplicate) => duplicate.parentNode?.removeChild(duplicate));
+  }
+  if (node) return node;
+
+  const createdNode = document.createElement(tagName);
+  Object.entries(attrs).forEach(([key, value]) => {
+    createdNode.setAttribute(key, value);
+  });
+  document.head.appendChild(createdNode);
+  return createdNode;
+}
+
+function setNodeContent(node, content) {
+  if (!node) return;
+  node.setAttribute("content", content);
+}
+
+function syncSeoMetadata() {
+  const config = resolveSeoConfig();
+  const existingDescription =
+    document.head.querySelector('meta[name="description"]')?.getAttribute("content") || "";
+  const title = config ? t(config.titleKey, document.title) : document.title;
+  const description = config ? t(config.descriptionKey, existingDescription) : existingDescription;
+  const canonicalUrl = buildCanonicalUrl();
+  const localizedUrl = buildLocalizedUrl(current);
+  const locales = SEO_LOCALES[current] || SEO_LOCALES.en;
+
+  if (typeof title === "string" && title.trim() !== "") {
+    document.title = title;
+    const titleTag = document.head.querySelector("title");
+    if (titleTag) titleTag.textContent = title;
+  }
+
+  if (typeof description === "string" && description.trim() !== "") {
+    [
+      ensureHeadNode('meta[name="description"]', "meta", { name: "description" }),
+      ensureHeadNode('meta[property="og:description"]', "meta", { property: "og:description" }),
+      ensureHeadNode('meta[name="twitter:description"]', "meta", { name: "twitter:description" }),
+    ].forEach((node) => setNodeContent(node, description));
+  }
+
+  [
+    ensureHeadNode('meta[property="og:title"]', "meta", { property: "og:title" }),
+    ensureHeadNode('meta[name="twitter:title"]', "meta", { name: "twitter:title" }),
+  ].forEach((node) => setNodeContent(node, title));
+
+  setNodeContent(
+    ensureHeadNode('meta[property="og:type"]', "meta", { property: "og:type" }),
+    "website"
+  );
+  setNodeContent(
+    ensureHeadNode('meta[property="og:url"]', "meta", { property: "og:url" }),
+    localizedUrl
+  );
+  setNodeContent(
+    ensureHeadNode('meta[property="og:image"]', "meta", { property: "og:image" }),
+    SEO_DEFAULT_IMAGE
+  );
+  setNodeContent(
+    ensureHeadNode('meta[property="og:locale"]', "meta", { property: "og:locale" }),
+    locales.og
+  );
+  setNodeContent(
+    ensureHeadNode('meta[property="og:locale:alternate"]', "meta", {
+      property: "og:locale:alternate",
+    }),
+    locales.alternate
+  );
+
+  setNodeContent(
+    ensureHeadNode('meta[name="twitter:card"]', "meta", { name: "twitter:card" }),
+    "summary_large_image"
+  );
+  setNodeContent(
+    ensureHeadNode('meta[name="twitter:image"]', "meta", { name: "twitter:image" }),
+    SEO_DEFAULT_IMAGE
+  );
+
+  ensureHeadNode('link[rel="canonical"]', "link", { rel: "canonical" }).setAttribute(
+    "href",
+    canonicalUrl
+  );
+  ensureHeadNode('link[rel="alternate"][hreflang="es"]', "link", {
+    rel: "alternate",
+    hreflang: "es",
+  }).setAttribute("href", buildLocalizedUrl("es"));
+  ensureHeadNode('link[rel="alternate"][hreflang="en"]', "link", {
+    rel: "alternate",
+    hreflang: "en",
+  }).setAttribute("href", buildLocalizedUrl("en"));
+  ensureHeadNode('link[rel="alternate"][hreflang="x-default"]', "link", {
+    rel: "alternate",
+    hreflang: "x-default",
+  }).setAttribute("href", canonicalUrl);
 }
 
 function updateToggleLabels(root = document) {
@@ -284,16 +483,21 @@ export function setLang(lang) {
 
   current = next;
   safeSetStoredLang(next);
+  syncLanguageQueryParam(next);
   setHtmlLang(next);
 
   applyTranslations();
+  syncSeoMetadata();
 
   window.dispatchEvent(new CustomEvent("lang:change", { detail: { lang: next } }));
 }
 
 export function initLanguageSwitcher(options = {}) {
+  safeSetStoredLang(current);
+  syncLanguageQueryParam(current);
   setHtmlLang(current);
   applyTranslations();
+  syncSeoMetadata();
   initCookieBanner();
   document.querySelectorAll("[data-lang-toggle]").forEach((btn) => {
     if (btn.dataset.langBound === "1") return;
