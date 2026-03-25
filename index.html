@@ -138,6 +138,7 @@
     />
 
     <link rel="stylesheet" href="css/style.css?v=11" />
+    <link rel="stylesheet" href="css/scroll-reveal.css?v=2" />
     <link rel="stylesheet" href="css/material-portals.css?v=1" />
 
     <!-- CSS extra (solo visual) -->
@@ -446,7 +447,7 @@
       <p class="hero-bridge-text" data-i18n-html="hero.bridgeHtml"></p>
 
       <div class="hero-bridge-actions">
-        <a class="btn primary" href="#sec-sectors" data-i18n="hero.bridgeCtaSectors">Explorar sectores</a>
+        <a class="btn primary" href="sectores.html" data-i18n="hero.bridgeCtaSectors">Explorar sectores</a>
         <a class="btn ghost" href="#contact" data-i18n="hero.bridgeCtaContact">Contactar con ingeniería</a>
       </div>
     </div>
@@ -576,7 +577,7 @@
             </div>
           </div>
 
-          <a class="card-cta" href="#sec-sectors">
+          <a class="card-cta" href="#sectores">
             <span data-i18n="sections.strategic.cta">Ver sectores de aplicación</span>
             <span aria-hidden="true">→</span>
           </a>
@@ -683,7 +684,7 @@
             </article>
           </div>
 
-          <a class="card-cta" href="#sec-sectors">
+          <a class="card-cta" href="#sectores">
             <span data-i18n="sections.readiness.cta">See strategic sectors</span>
             <span aria-hidden="true">→</span>
           </a>
@@ -692,11 +693,11 @@
       </section>
 
       <!-- ================= 06 - SECTORS ================= -->
-      <section class="section layout-right" id="sec-sectors" data-bg="sectors-strategic">
+      <section class="section layout-right" id="sectores" data-bg="sectors-strategic">
         <div class="card m-theme credibility-surface surface-sectors">
           <span class="card-tag" data-i18n="sections.sectors.tag">06 · Strategic Sectors</span>
 
-          <a class="card-title-link" href="#sec-sectors">
+          <a class="card-title-link" href="#sectores">
             <h2 data-i18n-html="sections.sectors.titleHtml">
               Sectors where material control<br /><b>becomes strategic leverage.</b>
             </h2>
@@ -957,7 +958,7 @@
     <!-- NAV MOBILE + ACTIVE LINK -->
     <script>
       (function () {
-        const sectionIds = ["top","sec-bottleneck","sec-platform","sec-materials","sec-sectors","sec-rnd","contact"];
+        const sectionIds = ["top","sec-bottleneck","sec-platform","sec-materials","sectores","sec-rnd","contact"];
         const sections = sectionIds.map((id) => document.getElementById(id)).filter(Boolean);
 
         const navLinks = Array.from(document.querySelectorAll(".nav-center .nav-link"));
@@ -988,7 +989,6 @@
     </script>
 
     <script src="./js/material-portals.js?v=1" defer></script>
-
     <!-- ✅ ÚNICO JS PRINCIPAL -->
     <script src="./js/mobile-menu.js?v=1" defer></script>
     <script type="module" src="./js/main.js?v=13"></script>

@@ -3,11 +3,19 @@ import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
 import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
 import { UnrealBloomPass } from "three/addons/postprocessing/UnrealBloomPass.js";
 
+const GLOBAL_BG_KEY = "__NK_THREE_BG__";
+
 export function initThreeBackground() {
-  // --- CONFIGURACIÓN ---
+  const existing = window[GLOBAL_BG_KEY];
+  if (existing && !existing.isDisposed?.()) {
+    existing.ensureCanvasMounted?.();
+    existing.refresh?.();
+    existing.resume?.();
+    return existing;
+  }
+
   const STATES = {
     hero: {
-      // oscuro y cinematográfico (el foco blanco lo hace CSS en el hero)
       color: new THREE.Color(0x0b1016),
       emissive: new THREE.Color(0x05070a),
       roughness: 0.22,
@@ -230,10 +238,16 @@ export function initThreeBackground() {
   const SPEED = 0.25;
   const vv = window.visualViewport || null;
 
+  let rafId = 0;
+  let running = false;
+  let contextLost = false;
+  let disposed = false;
+  let iOSScrollTicking = false;
+
   function getViewportSize() {
     return {
-      w: Math.round(vv ? vv.width : window.innerWidth),
-      h: Math.round(vv ? vv.height : window.innerHeight),
+      w: Math.max(1, Math.round(vv ? vv.width : window.innerWidth)),
+      h: Math.max(1, Math.round(vv ? vv.height : window.innerHeight)),
     };
   }
 
@@ -244,7 +258,6 @@ export function initThreeBackground() {
     return Math.sqrt(dr * dr + dg * dg + db * db);
   }
 
-  // --- SETUP ---
   const scene = new THREE.Scene();
   scene.background = null;
   scene.fog = new THREE.FogExp2(0x020202, 0.01);
@@ -270,11 +283,6 @@ export function initThreeBackground() {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isLowPower ? 1 : 1.25));
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
 
-  // ✅ evita duplicados si se inicializa 2 veces
-  const existing = document.querySelector("canvas.three-bg-canvas");
-  if (existing && existing.parentNode) existing.parentNode.removeChild(existing);
-
-  // Canvas fixed + class
   const canvas = renderer.domElement;
   canvas.classList.add("three-bg-canvas");
   canvas.style.position = "fixed";
@@ -289,38 +297,54 @@ export function initThreeBackground() {
   canvas.style.backfaceVisibility = "hidden";
   canvas.style.webkitBackfaceVisibility = "hidden";
   canvas.style.willChange = "transform";
-  document.body.appendChild(canvas);
-  document.body.classList.remove("no-three");
 
-  let onIOSScroll = null;
-  if (isIOS) {
-    canvas.style.position = "absolute";
-    canvas.style.left = "0";
-    canvas.style.top = window.scrollY + (vv ? vv.offsetTop : 0) + "px";
-    canvas.style.right = "0";
-    canvas.style.bottom = "auto";
-
-    let ticking = false;
-    onIOSScroll = () => {
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(() => {
-          ticking = false;
-          forceResize();
-        });
-      }
-    };
-
-    window.addEventListener("scroll", onIOSScroll, { passive: true });
+  function removeDuplicateCanvases() {
+    const canvases = document.querySelectorAll("canvas.three-bg-canvas");
+    canvases.forEach((node) => {
+      if (node !== canvas && node.parentNode) node.parentNode.removeChild(node);
+    });
   }
 
-  // --- LUCES ---
+  function applyCanvasPositioning() {
+    if (!isIOS) {
+      canvas.style.position = "fixed";
+      canvas.style.inset = "0";
+      canvas.style.left = "0";
+      canvas.style.top = "0";
+      canvas.style.right = "0";
+      canvas.style.bottom = "0";
+      return;
+    }
+
+    canvas.style.position = "absolute";
+    canvas.style.inset = "auto";
+    canvas.style.left = "0";
+    canvas.style.top = `${window.scrollY + (vv ? vv.offsetTop : 0)}px`;
+    canvas.style.right = "0";
+    canvas.style.bottom = "auto";
+  }
+
+  function ensureCanvasMounted() {
+    if (disposed) return;
+    if (!document.body.contains(canvas)) document.body.appendChild(canvas);
+    removeDuplicateCanvases();
+    applyCanvasPositioning();
+    if (contextLost) {
+      canvas.style.opacity = "0";
+      document.body.classList.add("no-three");
+      return;
+    }
+    canvas.style.opacity = "1";
+    document.body.classList.remove("no-three");
+  }
+
+  ensureCanvasMounted();
+
   scene.add(new THREE.AmbientLight(0xffffff, 2.0));
   const mainLight = new THREE.DirectionalLight(0xffffff, 3.0);
   mainLight.position.set(10, 20, 10);
   scene.add(mainLight);
 
-  // GRID (MALLA)
   const geometry = new THREE.TetrahedronGeometry(0.15, 0);
   geometry.scale(1, 5, 1);
   geometry.rotateX(Math.PI / 2);
@@ -337,7 +361,6 @@ export function initThreeBackground() {
 
   const ROWS = isLowPower ? 68 : 100;
   const COLS = isLowPower ? 68 : 100;
-
   const gridMesh = new THREE.InstancedMesh(geometry, material, ROWS * COLS);
   gridMesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
   scene.add(gridMesh);
@@ -354,12 +377,10 @@ export function initThreeBackground() {
     }
   }
 
-  // PARTÍCULAS
   const PCOUNT = isLowPower ? 920 : 1800;
   const pGeo = new THREE.BufferGeometry();
   const pPos = new Float32Array(PCOUNT * 3);
   const pVel = new Float32Array(PCOUNT);
-
   const rangeX = 80;
   const rangeY = 28;
   const rangeZ = 140;
@@ -388,7 +409,6 @@ export function initThreeBackground() {
   particles.frustumCulled = false;
   scene.add(particles);
 
-  // VALUE BACKDROP (NETWORK)
   const valueBackdrop = new THREE.Group();
   valueBackdrop.frustumCulled = false;
   valueBackdrop.visible = false;
@@ -448,12 +468,14 @@ export function initThreeBackground() {
       if (connectionsForNode >= maxConnectionsPerNode) break;
       const j = Math.floor(Math.random() * VALUE_NODES);
       if (i === j) continue;
+
       const ix = i * 3;
       const jx = j * 3;
       const dx = valueBasePos[ix] - valueBasePos[jx];
       const dy = valueBasePos[ix + 1] - valueBasePos[jx + 1];
       const dz = valueBasePos[ix + 2] - valueBasePos[jx + 2];
       const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+
       if (dist <= maxDistance) {
         valueConnections.push([i, j]);
         connectionsForNode++;
@@ -477,7 +499,6 @@ export function initThreeBackground() {
   valueLines.frustumCulled = false;
   valueBackdrop.add(valueLines);
 
-  // POST-PROCESSING
   let composer = null;
   let bloomPass = null;
   if (useComposer) {
@@ -496,7 +517,6 @@ export function initThreeBackground() {
     composer.addPass(bloomPass);
   }
 
-  // INPUT
   const clock = new THREE.Clock();
   const damp = (lambda, dt) => 1 - Math.exp(-lambda * dt);
   let lastT = 0;
@@ -506,18 +526,16 @@ export function initThreeBackground() {
   const plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
   const targetPos = new THREE.Vector3(0, -100, 0);
 
-  const onMouseMove = (e) => {
-    mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-    mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+  const onMouseMove = (event) => {
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
   };
   window.addEventListener("mousemove", onMouseMove, { passive: true });
 
-  // API
   function setTargetState(name) {
     target = STATES[name] ?? STATES.hero;
   }
 
-  // FUNDING HOOK (cinematic pulse)
   let pulse = 0;
   const PULSE_DECAY = 5.5;
   const onFundingOpen = () => {
@@ -530,12 +548,9 @@ export function initThreeBackground() {
   window.addEventListener("funding:open", onFundingOpen);
   window.addEventListener("funding:close", onFundingClose);
 
-  // ANTI-PETADAS
-  let rafId = 0;
-  let running = true;
-  let contextLost = false;
-
   function forceResize() {
+    if (disposed || contextLost) return;
+
     const { w, h } = getViewportSize();
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
@@ -543,21 +558,21 @@ export function initThreeBackground() {
     renderer.setSize(w, h, false);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isLowPower ? 1 : 1.25));
 
-    if (useComposer) {
+    if (useComposer && composer && bloomPass) {
       composer.setSize(w, h);
       bloomPass.setSize(w, h);
     }
 
-    if (isIOS) canvas.style.top = window.scrollY + (vv ? vv.offsetTop : 0) + "px";
+    applyCanvasPositioning();
   }
 
   function resetAfterSleep() {
+    if (disposed) return;
     clock.stop();
     clock.start();
     lastT = 0;
     targetPos.set(0, -100, 0);
     forceResize();
-    if (isIOS) canvas.style.top = window.scrollY + (vv ? vv.offsetTop : 0) + "px";
   }
 
   function stopLoop() {
@@ -566,47 +581,91 @@ export function initThreeBackground() {
     rafId = 0;
   }
 
-  const onContextLost = (e) => {
-    e.preventDefault();
+  function startLoop() {
+    if (disposed || contextLost || running) return;
+    running = true;
+    rafId = requestAnimationFrame(animate);
+  }
+
+  function pause() {
+    stopLoop();
+  }
+
+  function resume() {
+    if (disposed || contextLost) return;
+    ensureCanvasMounted();
+    if (running) {
+      forceResize();
+      return;
+    }
+    resetAfterSleep();
+    startLoop();
+  }
+
+  function refresh() {
+    if (disposed) return;
+    ensureCanvasMounted();
+    forceResize();
+  }
+
+  const onIOSScroll = () => {
+    if (!isIOS || disposed) return;
+    if (iOSScrollTicking) return;
+    iOSScrollTicking = true;
+    requestAnimationFrame(() => {
+      iOSScrollTicking = false;
+      refresh();
+    });
+  };
+
+  const onContextLost = (event) => {
+    event.preventDefault();
     contextLost = true;
-    console.warn("[three] context lost");
     canvas.style.opacity = "0";
     document.body.classList.add("no-three");
-    stopLoop();
+    pause();
   };
 
   const onContextRestored = () => {
     contextLost = false;
-    console.warn("[three] context restored");
     canvas.style.opacity = "1";
     document.body.classList.remove("no-three");
-    forceResize();
-    resetAfterSleep();
-    running = true;
-    rafId = requestAnimationFrame(animate);
+    resume();
   };
 
   canvas.addEventListener("webglcontextlost", onContextLost, false);
   canvas.addEventListener("webglcontextrestored", onContextRestored, false);
 
   const onVisibility = () => {
-    if (document.hidden) stopLoop();
-    else if (!contextLost) {
-      running = true;
-      resetAfterSleep();
-      rafId = requestAnimationFrame(animate);
+    if (disposed) return;
+    if (document.hidden) {
+      pause();
+      return;
     }
+    if (!contextLost) resume();
   };
   document.addEventListener("visibilitychange", onVisibility);
 
+  const onPageShow = () => {
+    if (disposed || contextLost) return;
+    refresh();
+    resume();
+  };
+  const onPageHide = () => {
+    if (disposed) return;
+    pause();
+  };
+
+  window.addEventListener("pageshow", onPageShow);
+  window.addEventListener("pagehide", onPageHide);
+
   const onFocus = () => {
-    if (!document.hidden && !contextLost) resetAfterSleep();
+    if (!document.hidden && !contextLost) resume();
   };
   window.addEventListener("focus", onFocus);
 
-  // LOOP
   function animate() {
-    if (!running || contextLost) return;
+    if (!running || contextLost || disposed) return;
     rafId = requestAnimationFrame(animate);
 
     const t = clock.getElapsedTime();
@@ -655,10 +714,9 @@ export function initThreeBackground() {
     const distToImplantes = colorDist(current.emissive, IMPLANTES_EMISSIVE);
     const implantesMix = 1 - THREE.MathUtils.smoothstep(distToImplantes, 0.18, 0.55);
     const implantesDim = THREE.MathUtils.lerp(1.0, 0.78, implantesMix);
-
     const sectionDim = Math.min(medicalDim, implantesDim);
 
-    if (useComposer) {
+    if (useComposer && bloomPass) {
       bloomPass.strength = Math.min(0.75, current.bloom * pulseBloom * sectionDim);
       bloomPass.radius = 0.75 + pulse * 0.12;
       bloomPass.threshold = 0.12;
@@ -675,7 +733,6 @@ export function initThreeBackground() {
     material.roughness = current.roughness;
     material.metalness = current.metalness;
 
-    // grid update
     if (gridMesh.visible) {
       let idx = 0;
       const animTime = ts * current.freq;
@@ -724,17 +781,16 @@ export function initThreeBackground() {
           idx++;
         }
       }
+
       gridMesh.instanceMatrix.needsUpdate = true;
     }
 
-    // flow partículas
     const arrP = pGeo.attributes.position.array;
     for (let i = 0; i < PCOUNT; i++) {
       const ix = i * 3;
 
       arrP[ix + 0] *= 0.9996;
       arrP[ix + 1] += Math.sin(ts * 0.6 + i) * 0.00035;
-
       arrP[ix + 2] += pVel[i] * dt * (0.45 + current.particles * 0.9);
 
       if (arrP[ix + 2] > rangeZ * 0.5) {
@@ -773,34 +829,44 @@ export function initThreeBackground() {
       valueLineGeo.attributes.position.needsUpdate = true;
     }
 
-    if (useComposer) composer.render();
+    if (useComposer && composer) composer.render();
     else renderer.render(scene, camera);
   }
 
-  const onResize = () => forceResize();
-  const onVisualViewportChange = () => forceResize();
+  const onResize = () => refresh();
+  const onVisualViewportChange = () => refresh();
+  const onOrientationChange = () => refresh();
   window.addEventListener("resize", onResize, { passive: true });
+  window.addEventListener("orientationchange", onOrientationChange, { passive: true });
+  if (isIOS) {
+    window.addEventListener("scroll", onIOSScroll, { passive: true });
+  }
   if (vv) {
     vv.addEventListener("resize", onVisualViewportChange, { passive: true });
     vv.addEventListener("scroll", onVisualViewportChange, { passive: true });
   }
 
-  clock.start();
-  rafId = requestAnimationFrame(animate);
+  startLoop();
 
   function dispose() {
-    stopLoop();
+    if (disposed) return;
+    disposed = true;
+    pause();
 
     document.removeEventListener("visibilitychange", onVisibility);
+    window.removeEventListener("pageshow", onPageShow);
+    window.removeEventListener("pagehide", onPageHide);
     window.removeEventListener("focus", onFocus);
     window.removeEventListener("resize", onResize);
+    window.removeEventListener("orientationchange", onOrientationChange);
+    if (isIOS) {
+      window.removeEventListener("scroll", onIOSScroll);
+    }
     if (vv) {
       vv.removeEventListener("resize", onVisualViewportChange);
       vv.removeEventListener("scroll", onVisualViewportChange);
     }
     window.removeEventListener("mousemove", onMouseMove);
-    if (onIOSScroll) window.removeEventListener("scroll", onIOSScroll);
-
     window.removeEventListener("funding:open", onFundingOpen);
     window.removeEventListener("funding:close", onFundingClose);
 
@@ -808,22 +874,35 @@ export function initThreeBackground() {
     canvas.removeEventListener("webglcontextrestored", onContextRestored);
 
     composer?.dispose?.();
-
     pGeo.dispose();
     pMat.dispose();
-
     valueGeo.dispose();
     valueMat.dispose();
     valueLineGeo.dispose();
     valueLineMat.dispose();
-
-    gridMesh.geometry?.dispose?.();
-    material.dispose?.();
-
+    geometry.dispose();
+    material.dispose();
     renderer.dispose();
 
-    if (canvas && canvas.parentNode) canvas.parentNode.removeChild(canvas);
+    if (canvas.parentNode) canvas.parentNode.removeChild(canvas);
+    if (window[GLOBAL_BG_KEY] === api) delete window[GLOBAL_BG_KEY];
   }
 
-  return { setTargetState, dispose };
+  function isDisposed() {
+    return disposed;
+  }
+
+  const api = {
+    setTargetState,
+    pause,
+    resume,
+    refresh,
+    dispose,
+    destroy: dispose,
+    ensureCanvasMounted,
+    isDisposed,
+  };
+
+  window[GLOBAL_BG_KEY] = api;
+  return api;
 }
