@@ -1177,6 +1177,46 @@ body.no-three .section[data-bg="sovereignty"]{
     linear-gradient(180deg, rgba(16,8,4,.95), rgba(0,0,0,.98));
 }
 
+body.has-three{
+  background-color: var(--c-bg);
+}
+
+body.has-three .three-bg-canvas{
+  z-index: 0;
+}
+
+body.has-three .nk-hero,
+body.has-three .hero-bridge,
+body.has-three .section[data-bg]{
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+body.has-three .nk-hero{
+  isolation: isolate;
+}
+
+body.has-three .nk-hero::before{
+  background:
+    radial-gradient(42% 34% at 50% 42%, rgba(255,255,255,.06), transparent 68%),
+    radial-gradient(52% 44% at 50% 22%, rgba(120,200,255,.10), transparent 72%),
+    linear-gradient(180deg, rgba(4,8,14,.18), rgba(2,2,2,0));
+}
+
+body.has-three .hero::after{
+  background: linear-gradient(
+    180deg,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,.44) 58%,
+    rgba(0,0,0,.72) 100%
+  );
+}
+
+body.has-three .section[data-bg]{
+  position: relative;
+  z-index: 1;
+}
+
 .layout-left{ justify-content: flex-start; }
 .layout-right{ justify-content: flex-end; }
 

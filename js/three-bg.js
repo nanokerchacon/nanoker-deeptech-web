@@ -4,6 +4,14 @@ import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
 import { UnrealBloomPass } from "three/addons/postprocessing/UnrealBloomPass.js";
 
 const GLOBAL_BG_KEY = "__NK_THREE_BG__";
+const THREE_ACTIVE_CLASS = "has-three";
+const THREE_FALLBACK_CLASS = "no-three";
+
+function syncThreeBodyState(isActive) {
+  if (!document.body) return;
+  document.body.classList.toggle(THREE_ACTIVE_CLASS, isActive);
+  document.body.classList.toggle(THREE_FALLBACK_CLASS, !isActive);
+}
 
 export function initThreeBackground() {
   const existing = window[GLOBAL_BG_KEY];
@@ -331,11 +339,11 @@ export function initThreeBackground() {
     applyCanvasPositioning();
     if (contextLost) {
       canvas.style.opacity = "0";
-      document.body.classList.add("no-three");
+      syncThreeBodyState(false);
       return;
     }
     canvas.style.opacity = "1";
-    document.body.classList.remove("no-three");
+    syncThreeBodyState(true);
   }
 
   ensureCanvasMounted();
@@ -622,14 +630,14 @@ export function initThreeBackground() {
     event.preventDefault();
     contextLost = true;
     canvas.style.opacity = "0";
-    document.body.classList.add("no-three");
+    syncThreeBodyState(false);
     pause();
   };
 
   const onContextRestored = () => {
     contextLost = false;
     canvas.style.opacity = "1";
-    document.body.classList.remove("no-three");
+    syncThreeBodyState(true);
     resume();
   };
 
@@ -852,6 +860,7 @@ export function initThreeBackground() {
     if (disposed) return;
     disposed = true;
     pause();
+    syncThreeBodyState(false);
 
     document.removeEventListener("visibilitychange", onVisibility);
     window.removeEventListener("pageshow", onPageShow);
