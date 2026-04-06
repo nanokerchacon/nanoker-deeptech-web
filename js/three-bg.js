@@ -330,6 +330,30 @@ export function initThreeBackground(options = {}) {
     };
   }
 
+  function getSceneProfile() {
+    const { w, h } = getViewportSize();
+    const aspect = w / Math.max(h, 1);
+    const isPortraitMobile = w <= 820 && h > w;
+
+    if (isPortraitMobile) {
+      return {
+        fov: aspect < 0.62 ? 54 : 52,
+        cameraY: aspect < 0.62 ? 21 : 22,
+        cameraZ: aspect < 0.62 ? 63 : 60,
+        lookAtY: aspect < 0.62 ? 2.2 : 1.8,
+        particleOpacityFactor: 0.88,
+      };
+    }
+
+    return {
+      fov: 45,
+      cameraY: 25,
+      cameraZ: 50,
+      lookAtY: 0,
+      particleOpacityFactor: 1,
+    };
+  }
+
   function colorDist(a, b) {
     const dr = a.r - b.r;
     const dg = a.g - b.g;
@@ -342,13 +366,15 @@ export function initThreeBackground(options = {}) {
   scene.fog = new THREE.FogExp2(0x020202, 0.01);
 
   const initialViewport = getViewportSize();
+  const initialSceneProfile = getSceneProfile();
   const camera = new THREE.PerspectiveCamera(
-    45,
+    initialSceneProfile.fov,
     initialViewport.w / initialViewport.h,
     0.1,
     220
   );
-  camera.position.set(0, 25, 50);
+  camera.position.set(0, initialSceneProfile.cameraY, initialSceneProfile.cameraZ);
+  camera.lookAt(0, initialSceneProfile.lookAtY, 0);
   const mountRoot = getMountRoot();
 
   let renderer = null;
@@ -821,7 +847,9 @@ export function initThreeBackground(options = {}) {
     if (disposed || contextLost) return;
 
     const { w, h } = getViewportSize();
+    const sceneProfile = getSceneProfile();
     camera.aspect = w / h;
+    camera.fov = sceneProfile.fov;
     camera.updateProjectionMatrix();
 
     renderer.setSize(w, h, false);
@@ -994,8 +1022,9 @@ export function initThreeBackground(options = {}) {
     raycaster.ray.intersectPlane(plane, intersect);
     if (intersect) targetPos.lerp(intersect, lerpMouse);
 
-    camera.position.set(0, 25, 50);
-    camera.lookAt(0, 0, 0);
+    const sceneProfile = getSceneProfile();
+    camera.position.set(0, sceneProfile.cameraY, sceneProfile.cameraZ);
+    camera.lookAt(0, sceneProfile.lookAtY, 0);
 
     const pulseBloom = 1 + pulse * 0.45;
     const pulseParticles = 1 + pulse * 0.28;
@@ -1017,7 +1046,11 @@ export function initThreeBackground(options = {}) {
 
     pMat.color.copy(current.emissive);
     pMat.opacity =
-      (0.05 + current.particles * 0.20) * pulseParticles * sectionDim * particleBoost;
+      (0.05 + current.particles * 0.20) *
+      pulseParticles *
+      sectionDim *
+      particleBoost *
+      sceneProfile.particleOpacityFactor;
 
     gridMesh.visible = !(current.noGrid > 0.5);
     valueBackdrop.visible = current.showValueBackdrop > 0.01;

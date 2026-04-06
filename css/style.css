@@ -267,13 +267,39 @@
 
 @media (max-width: 520px){
   .nk-hero{
-    min-height: min(100vh, 820px);
-    min-height: min(calc(var(--app-height, 1vh) * 100), 820px);
-    min-height: min(100svh, 820px);
-    min-height: min(100dvh, 820px);
+    min-height: 100vh;
+    min-height: calc(var(--app-height, 1vh) * 100);
+    min-height: 100svh;
+    min-height: 100dvh;
     padding-left: 18px;
     padding-right: 18px;
-    padding-bottom: 110px;
+    padding-top: calc(var(--nav-height, 72px) + clamp(54px, 9vh, 82px));
+    padding-bottom: max(122px, env(safe-area-inset-bottom, 0px) + 96px);
+  }
+  .nk-hero::before{
+    background:
+      radial-gradient(64% 48% at 50% 40%, rgba(255,255,255,.072), transparent 72%),
+      radial-gradient(70% 54% at 50% 18%, rgba(120,200,255,.125), transparent 76%),
+      linear-gradient(180deg, rgba(4,8,14,.18), rgba(2,2,2,0));
+  }
+  .hero::before{
+    inset: -16% -20% -10%;
+    background:
+      radial-gradient(74% 54% at 22% 88%, rgba(255,255,255,.29), transparent 60%),
+      radial-gradient(78% 58% at 50% 84%, rgba(255,255,255,.12), transparent 66%),
+      radial-gradient(70% 54% at 52% 78%, rgba(120,200,255,.10), transparent 68%);
+    filter: blur(28px);
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 calc(100% - 128px), transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 calc(100% - 128px), transparent 100%);
+  }
+  .hero::after{
+    height: 150px;
+    background: linear-gradient(
+      180deg,
+      rgba(0,0,0,0) 0%,
+      rgba(0,0,0,.48) 58%,
+      rgba(0,0,0,.82) 100%
+    );
   }
   .nk-hero__brand{
     margin-bottom: 12px;
