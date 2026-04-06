@@ -301,6 +301,30 @@
       rgba(0,0,0,.82) 100%
     );
   }
+  body.has-three .hero::after{
+    height: 128px;
+    background: linear-gradient(
+      180deg,
+      rgba(0,0,0,0) 0%,
+      rgba(0,0,0,.34) 56%,
+      rgba(0,0,0,.60) 100%
+    );
+  }
+  body.has-three .content-wrapper::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+    background:
+      radial-gradient(88% 26% at 50% 0%, rgba(120,200,255,.10), transparent 58%),
+      radial-gradient(78% 34% at 50% 22%, rgba(255,255,255,.05), transparent 62%),
+      linear-gradient(180deg, rgba(5,10,16,.12), rgba(5,10,16,0) 20%, rgba(5,10,16,.08) 100%);
+  }
+  body.has-three .content-wrapper > *{
+    position: relative;
+    z-index: 1;
+  }
   .nk-hero__brand{
     margin-bottom: 12px;
     font-size: clamp(66px, 18vw, 94px);
@@ -441,6 +465,7 @@ img, svg, video{
   width:100%;
   max-width:100%;
   overflow-x: clip;
+  isolation: isolate;
 }
 @supports not (overflow: clip){
   .content-wrapper{ overflow-x:hidden; }
