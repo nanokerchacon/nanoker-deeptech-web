@@ -1,4 +1,4 @@
-import { initThreeBackground } from "./three-bg.js?v=13";
+import { initThreeBackground } from "./three-bg.js?v=15";
 import { initLanguageSwitcher, t } from "./lang.js?v=11";
 
 let three = null;
@@ -17,7 +17,7 @@ const MOBILE_BG_DEBUG = window.matchMedia("(max-width: 820px)").matches;
 const PREFERS_REDUCED_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)");
 const CONNECTION =
   navigator.connection || navigator.mozConnection || navigator.webkitConnection || null;
-const SHOULD_LIMIT_HEAVY_WORK =
+const SHOULD_REDUCE_THREE_LOAD =
   PREFERS_REDUCED_MOTION.matches ||
   Boolean(CONNECTION?.saveData) ||
   /(?:^|slow-)2g$/.test(String(CONNECTION?.effectiveType || ""));
@@ -202,10 +202,12 @@ function scheduleNonCriticalWork(task, options = {}) {
 function startThreeNow() {
   threeStartScheduled = false;
 
-  if (SHOULD_LIMIT_HEAVY_WORK || document.body.classList.contains("no-three")) return;
+  if (document.body.classList.contains("no-three")) return;
 
   try {
-    three = initThreeBackground();
+    three = initThreeBackground({
+      performanceMode: SHOULD_REDUCE_THREE_LOAD ? "reduced" : "full",
+    });
     three.refresh?.();
     syncCurrentBgState();
 
@@ -219,11 +221,6 @@ function startThreeNow() {
 }
 
 function ensureThreeStarted() {
-  if (SHOULD_LIMIT_HEAVY_WORK) {
-    document.body.classList.add("no-three");
-    return;
-  }
-
   if (three?.isDisposed?.()) {
     three = null;
   }
@@ -238,12 +235,7 @@ function ensureThreeStarted() {
   if (threeStartScheduled) return;
   threeStartScheduled = true;
 
-  const deferThreeInit = MOBILE_BG_DEBUG || window.matchMedia("(max-width: 900px)").matches;
-  if (deferThreeInit) {
-    scheduleNonCriticalWork(startThreeNow, { timeout: 1800 });
-  } else {
-    requestAnimationFrame(() => requestAnimationFrame(startThreeNow));
-  }
+  requestAnimationFrame(() => requestAnimationFrame(startThreeNow));
 }
 
 function setRevealDelay(el, step) {
@@ -460,7 +452,6 @@ function bootstrapApp() {
 
 function handlePageShow(event) {
   if (!appBootstrapped) return;
-  if (SHOULD_LIMIT_HEAVY_WORK) return;
 
   bgSections = getBgSections();
   ensureThreeStarted();
@@ -484,6 +475,7 @@ function init() {
 
   bootstrapApp();
 
+  window.addEventListener("load", handleVisibilityResume, { once: true });
   window.addEventListener("pageshow", handlePageShow);
   window.addEventListener("pagehide", handlePageHide);
   document.addEventListener("visibilitychange", handleVisibilityResume);

@@ -6,6 +6,11 @@ import { UnrealBloomPass } from "three/addons/postprocessing/UnrealBloomPass.js"
 const GLOBAL_BG_KEY = "__NK_THREE_BG__";
 const THREE_ACTIVE_CLASS = "has-three";
 const THREE_FALLBACK_CLASS = "no-three";
+const VIEWPORT_HEIGHT_VAR = "--app-height";
+const THREE_ROOT_ID = "three-bg-root";
+const THREE_DEBUG_STYLE_ID = "three-bg-debug-style";
+const THREE_DEBUG_PANEL_ID = "three-bg-debug-panel";
+const THREE_DEBUG_OVERLAY_ID = "three-bg-debug-overlay";
 
 function syncThreeBodyState(isActive) {
   if (!document.body) return;
@@ -13,7 +18,23 @@ function syncThreeBodyState(isActive) {
   document.body.classList.toggle(THREE_FALLBACK_CLASS, !isActive);
 }
 
-export function initThreeBackground() {
+function setViewportHeightVar(height) {
+  if (!document.documentElement || !Number.isFinite(height) || height <= 0) return;
+  document.documentElement.style.setProperty(VIEWPORT_HEIGHT_VAR, `${height * 0.01}px`);
+}
+
+function getThreeDebugFlags() {
+  const params = new URLSearchParams(window.location.search);
+  return {
+    enabled: params.get("threeDebug") === "1",
+    force: params.get("threeForce") === "1",
+    staticScene: params.get("threeDebugStatic") === "1",
+    noAnim: params.get("threeNoAnim") === "1",
+    opaque: params.get("threeOpaque") === "1",
+  };
+}
+
+export function initThreeBackground(options = {}) {
   const existing = window[GLOBAL_BG_KEY];
   if (existing && !existing.isDisposed?.()) {
     existing.ensureCanvasMounted?.();
@@ -241,21 +262,71 @@ export function initThreeBackground() {
   const isIOS =
     /iP(ad|hone|od)/.test(navigator.userAgent) ||
     (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-  const isLowPower = isIOS || /Android/i.test(navigator.userAgent);
-  const useComposer = !isLowPower;
-  const SPEED = 0.25;
+  const isAndroid = /Android/i.test(navigator.userAgent);
+  const debugFlags = getThreeDebugFlags();
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const connection =
+    navigator.connection || navigator.mozConnection || navigator.webkitConnection || null;
+  const saveData = Boolean(connection?.saveData);
+  const networkIsSlow = /(?:^|slow-)2g$/.test(String(connection?.effectiveType || ""));
+  const deviceMemory = Number(navigator.deviceMemory || 0);
+  const hardwareConcurrency = Number(navigator.hardwareConcurrency || 0);
+  const isLowPower = isIOS || isAndroid;
+  const requestedPerformanceMode =
+    debugFlags.force ? "full" : options.performanceMode === "reduced" ? "reduced" : "full";
+  const useReducedProfile =
+    requestedPerformanceMode === "reduced" ||
+    saveData ||
+    networkIsSlow ||
+    prefersReducedMotion ||
+    (deviceMemory > 0 && deviceMemory <= 4) ||
+    (hardwareConcurrency > 0 && hardwareConcurrency <= 4);
+  const useComposer = !isLowPower && !useReducedProfile;
+  const SPEED = prefersReducedMotion ? 0.12 : isLowPower ? 0.18 : 0.25;
   const vv = window.visualViewport || null;
+  const visibilityBoost = useReducedProfile ? 1.55 : isLowPower ? 1.32 : 1;
+  const particleBoost = useReducedProfile ? 1.2 : isLowPower ? 1.1 : 1;
+  const clearAlpha = debugFlags.opaque ? 1 : useReducedProfile ? 0.16 : isLowPower ? 0.12 : 0;
+  const logPrefix = "[ThreeBG]";
 
   let rafId = 0;
   let running = false;
   let contextLost = false;
   let disposed = false;
-  let iOSScrollTicking = false;
+  let firstFrameRendered = false;
+  let contextEventLabel = "none";
+  let lastError = "";
+
+  const logDebug = (message, extra) => {
+    if (!debugFlags.enabled) return;
+    if (typeof extra === "undefined") console.info(`${logPrefix} ${message}`);
+    else console.info(`${logPrefix} ${message}`, extra);
+  };
+
+  logDebug("init start", {
+    flags: debugFlags,
+    requestedPerformanceMode,
+    useReducedProfile,
+    prefersReducedMotion,
+    saveData,
+    effectiveType: connection?.effectiveType || "",
+    deviceMemory,
+    hardwareConcurrency,
+  });
 
   function getViewportSize() {
+    const width = vv ? vv.width : window.innerWidth;
+    const height = vv ? vv.height : window.innerHeight;
     return {
-      w: Math.max(1, Math.round(vv ? vv.width : window.innerWidth)),
-      h: Math.max(1, Math.round(vv ? vv.height : window.innerHeight)),
+      w: Math.max(1, Math.round(width)),
+      h: Math.max(1, Math.round(height)),
+    };
+  }
+
+  function getViewportOffsets() {
+    return {
+      x: Math.round(vv ? vv.offsetLeft : 0),
+      y: Math.round(vv ? vv.offsetTop : 0),
     };
   }
 
@@ -278,80 +349,264 @@ export function initThreeBackground() {
     220
   );
   camera.position.set(0, 25, 50);
+  const mountRoot = getMountRoot();
 
-  const renderer = new THREE.WebGLRenderer({
+  let renderer = null;
+  try {
+    renderer = new THREE.WebGLRenderer({
+      alpha: true,
+      antialias: false,
+      powerPreference: "high-performance",
+      stencil: false,
+    });
+  } catch (error) {
+    lastError = error instanceof Error ? error.message : String(error);
+    mountRoot.dataset.threeStatus = "renderer-error";
+    mountRoot.dataset.threeError = lastError;
+    logDebug("fallback activated", { stage: "renderer-init", error: lastError });
+    syncThreeBodyState(false);
+    throw error;
+  }
+
+  renderer.setClearColor(0x02060b, clearAlpha);
+  renderer.setSize(initialViewport.w, initialViewport.h);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = useReducedProfile ? 1.2 : isLowPower ? 1.12 : 1;
+  logDebug("renderer ok", {
     alpha: true,
-    antialias: false,
-    powerPreference: "high-performance",
-    stencil: false,
+    clearAlpha,
+    dpr: Math.min(window.devicePixelRatio || 1, 1.5),
   });
 
-  renderer.setClearColor(0x000000, 0);
-  renderer.setSize(initialViewport.w, initialViewport.h);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isLowPower ? 1 : 1.25));
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  function getMountRoot() {
+    let root = document.getElementById(THREE_ROOT_ID);
+    if (root) return root;
 
+    root = document.createElement("div");
+    root.id = THREE_ROOT_ID;
+    root.className = THREE_ROOT_ID;
+    root.setAttribute("aria-hidden", "true");
+    document.body.prepend(root);
+    return root;
+  }
+
+  logDebug("mount root ok", { rootId: mountRoot.id });
   const canvas = renderer.domElement;
   canvas.classList.add("three-bg-canvas");
-  canvas.style.position = "fixed";
+  canvas.style.position = "absolute";
   canvas.style.inset = "0";
   canvas.style.width = "100%";
   canvas.style.height = "100%";
   canvas.style.pointerEvents = "none";
   canvas.style.display = "block";
-  canvas.style.zIndex = "0";
+  canvas.style.zIndex = "1";
+  canvas.style.opacity = "0";
+  canvas.style.visibility = "hidden";
   canvas.style.transform = "translate3d(0,0,0)";
   canvas.style.webkitTransform = "translate3d(0,0,0)";
   canvas.style.backfaceVisibility = "hidden";
   canvas.style.webkitBackfaceVisibility = "hidden";
   canvas.style.willChange = "transform";
+  if (debugFlags.enabled) {
+    canvas.style.outline = "1px dashed rgba(120,200,255,.85)";
+    canvas.style.boxShadow = "inset 0 0 0 1px rgba(255,255,255,.14), 0 0 28px rgba(120,200,255,.12)";
+  }
+
+  function ensureDebugStyle() {
+    if (!debugFlags.enabled || document.getElementById(THREE_DEBUG_STYLE_ID)) return;
+    const style = document.createElement("style");
+    style.id = THREE_DEBUG_STYLE_ID;
+    style.textContent = `
+#${THREE_DEBUG_PANEL_ID}{
+  position:fixed;
+  left:12px;
+  bottom:12px;
+  z-index:2147483647;
+  width:min(320px, calc(100vw - 24px));
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid rgba(120,200,255,.35);
+  background:rgba(7,10,14,.86);
+  color:#eaf6ff;
+  font:12px/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  box-shadow:0 14px 40px rgba(0,0,0,.35);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  pointer-events:none;
+  white-space:pre-wrap;
+}
+#${THREE_DEBUG_OVERLAY_ID}{
+  position:absolute;
+  inset:0;
+  z-index:2;
+  pointer-events:none;
+  border:1px dashed rgba(120,200,255,.7);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.16), inset 0 0 40px rgba(120,200,255,.12);
+  background:linear-gradient(180deg, rgba(0,255,255,.05), rgba(255,255,255,.02));
+}
+`;
+    document.head.appendChild(style);
+  }
+
+  function ensureDebugPanel() {
+    if (!debugFlags.enabled) return null;
+    ensureDebugStyle();
+    let panel = document.getElementById(THREE_DEBUG_PANEL_ID);
+    if (!panel) {
+      panel = document.createElement("div");
+      panel.id = THREE_DEBUG_PANEL_ID;
+      panel.setAttribute("aria-hidden", "true");
+      document.body.appendChild(panel);
+    }
+    return panel;
+  }
+
+  function ensureDebugOverlay() {
+    if (!debugFlags.enabled) return null;
+    let overlay = document.getElementById(THREE_DEBUG_OVERLAY_ID);
+    if (!overlay) {
+      overlay = document.createElement("div");
+      overlay.id = THREE_DEBUG_OVERLAY_ID;
+      overlay.setAttribute("aria-hidden", "true");
+      mountRoot.appendChild(overlay);
+    }
+    return overlay;
+  }
+
+  const debugPanel = ensureDebugPanel();
+  const debugOverlay = ensureDebugOverlay();
 
   function removeDuplicateCanvases() {
-    const canvases = document.querySelectorAll("canvas.three-bg-canvas");
+    const canvases = document.querySelectorAll(`#${THREE_ROOT_ID} canvas.three-bg-canvas, body > canvas.three-bg-canvas`);
     canvases.forEach((node) => {
       if (node !== canvas && node.parentNode) node.parentNode.removeChild(node);
     });
   }
 
-  function applyCanvasPositioning() {
-    if (!isIOS) {
-      canvas.style.position = "fixed";
-      canvas.style.inset = "0";
-      canvas.style.left = "0";
-      canvas.style.top = "0";
-      canvas.style.right = "0";
-      canvas.style.bottom = "0";
-      return;
-    }
+  function layoutMountRoot() {
+    const { w, h } = getViewportSize();
+    const { x, y } = getViewportOffsets();
 
-    canvas.style.position = "absolute";
-    canvas.style.inset = "auto";
-    canvas.style.left = "0";
-    canvas.style.top = `${window.scrollY + (vv ? vv.offsetTop : 0)}px`;
-    canvas.style.right = "0";
-    canvas.style.bottom = "auto";
+    mountRoot.style.width = `${w}px`;
+    mountRoot.style.height = `${h}px`;
+    mountRoot.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+    mountRoot.style.webkitTransform = `translate3d(${x}px, ${y}px, 0)`;
+    setViewportHeightVar(h);
+  }
+
+  function syncRuntimeDiagnostics(reason = "update") {
+    const viewport = getViewportSize();
+    const cssViewport = {
+      w: Math.max(1, Math.round(document.documentElement.clientWidth || window.innerWidth || 0)),
+      h: Math.max(1, Math.round(document.documentElement.clientHeight || window.innerHeight || 0)),
+    };
+    const mounted = canvas.isConnected && canvas.parentNode === mountRoot;
+    const rendererSize = new THREE.Vector2();
+    renderer.getSize(rendererSize);
+    const drawingBuffer = new THREE.Vector2();
+    renderer.getDrawingBufferSize(drawingBuffer);
+    const status = contextLost
+      ? "context-lost"
+      : disposed
+        ? "disposed"
+        : mounted
+          ? "mounted"
+          : "detached";
+
+    mountRoot.dataset.threeStatus = status;
+    mountRoot.dataset.threeReason = reason;
+    mountRoot.dataset.threeMode = useReducedProfile ? "reduced" : "full";
+    mountRoot.dataset.threeMounted = mounted ? "yes" : "no";
+    mountRoot.dataset.threeAnimating = running && !debugFlags.noAnim ? "yes" : "no";
+    mountRoot.dataset.threeCanvas = `${canvas.width}x${canvas.height}`;
+    mountRoot.dataset.threeRenderer = `${Math.round(rendererSize.x)}x${Math.round(rendererSize.y)}`;
+    mountRoot.dataset.threeDpr = String(Math.min(window.devicePixelRatio || 1, 1.5));
+    mountRoot.dataset.threeViewport = `${viewport.w}x${viewport.h}`;
+    mountRoot.dataset.threeCssViewport = `${cssViewport.w}x${cssViewport.h}`;
+    mountRoot.dataset.threeError = lastError || "none";
+    mountRoot.dataset.threeContext = contextEventLabel;
+
+    if (!debugPanel) return;
+
+    debugPanel.textContent =
+      `status: ${status}\n` +
+      `mode: ${useReducedProfile ? "reduced" : "full"}${debugFlags.force ? " (forced)" : ""}\n` +
+      `mounted: ${mounted ? "yes" : "no"}\n` +
+      `animating: ${running && !debugFlags.noAnim ? "yes" : "no"}\n` +
+      `canvas size: ${canvas.width}x${canvas.height}\n` +
+      `renderer size: ${Math.round(rendererSize.x)}x${Math.round(rendererSize.y)} | draw ${Math.round(drawingBuffer.x)}x${Math.round(drawingBuffer.y)}\n` +
+      `DPR: ${Math.min(window.devicePixelRatio || 1, 1.5)}\n` +
+      `viewport JS: ${viewport.w}x${viewport.h}\n` +
+      `viewport CSS: ${cssViewport.w}x${cssViewport.h}\n` +
+      `body classes: ${document.body.className || "(none)"}\n` +
+      `context: ${contextEventLabel}\n` +
+      `error: ${lastError || "none"}`;
+  }
+
+  function isCanvasRenderable() {
+    if (disposed || contextLost) return false;
+    if (!canvas.isConnected || canvas.parentNode !== mountRoot) return false;
+
+    const computed = window.getComputedStyle(canvas);
+    if (computed.display === "none" || computed.visibility === "hidden") return false;
+    if (Number.parseFloat(computed.opacity || "1") <= 0) return false;
+
+    const rect = canvas.getBoundingClientRect();
+    const width = rect.width || canvas.clientWidth || canvas.width;
+    const height = rect.height || canvas.clientHeight || canvas.height;
+    return width > 0 && height > 0;
   }
 
   function ensureCanvasMounted() {
     if (disposed) return;
-    if (!document.body.contains(canvas)) document.body.appendChild(canvas);
+    if (!mountRoot.isConnected) document.body.prepend(mountRoot);
+    layoutMountRoot();
+    if (canvas.parentNode !== mountRoot) mountRoot.appendChild(canvas);
     removeDuplicateCanvases();
-    applyCanvasPositioning();
     if (contextLost) {
       canvas.style.opacity = "0";
+      canvas.style.visibility = "hidden";
       syncThreeBodyState(false);
       return;
     }
     canvas.style.opacity = "1";
-    syncThreeBodyState(true);
+    canvas.style.visibility = "visible";
+    if (debugOverlay && debugOverlay.parentNode !== mountRoot) {
+      mountRoot.appendChild(debugOverlay);
+    }
+    syncRuntimeDiagnostics("mounted");
+    syncThreeBodyState(isCanvasRenderable());
+    logDebug("mount ok", {
+      mounted: canvas.parentNode === mountRoot,
+      canvas: `${canvas.width}x${canvas.height}`,
+    });
   }
 
   ensureCanvasMounted();
 
-  scene.add(new THREE.AmbientLight(0xffffff, 2.0));
-  const mainLight = new THREE.DirectionalLight(0xffffff, 3.0);
+  scene.add(new THREE.AmbientLight(0xffffff, useReducedProfile ? 2.55 : isLowPower ? 2.25 : 2.0));
+  const mainLight = new THREE.DirectionalLight(0xffffff, useReducedProfile ? 3.4 : 3.0);
   mainLight.position.set(10, 20, 10);
   scene.add(mainLight);
+  logDebug("scene ok", { staticScene: debugFlags.staticScene });
+
+  let staticDebugMesh = null;
+  if (debugFlags.staticScene) {
+    scene.background = new THREE.Color(0x16324f);
+    scene.fog = null;
+
+    const staticGeo = new THREE.IcosahedronGeometry(11, 1);
+    const staticMat = new THREE.MeshBasicMaterial({
+      color: 0x7fe8ff,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.95,
+    });
+    staticDebugMesh = new THREE.Mesh(staticGeo, staticMat);
+    staticDebugMesh.position.set(0, 8, 0);
+    scene.add(staticDebugMesh);
+  }
 
   const geometry = new THREE.TetrahedronGeometry(0.15, 0);
   geometry.scale(1, 5, 1);
@@ -367,8 +622,8 @@ export function initThreeBackground() {
     opacity: 1.0,
   });
 
-  const ROWS = isLowPower ? 68 : 100;
-  const COLS = isLowPower ? 68 : 100;
+  const ROWS = useReducedProfile ? 54 : isLowPower ? 68 : 100;
+  const COLS = useReducedProfile ? 54 : isLowPower ? 68 : 100;
   const gridMesh = new THREE.InstancedMesh(geometry, material, ROWS * COLS);
   gridMesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
   scene.add(gridMesh);
@@ -385,7 +640,7 @@ export function initThreeBackground() {
     }
   }
 
-  const PCOUNT = isLowPower ? 920 : 1800;
+  const PCOUNT = useReducedProfile ? 640 : isLowPower ? 920 : 1800;
   const pGeo = new THREE.BufferGeometry();
   const pPos = new Float32Array(PCOUNT * 3);
   const pVel = new Float32Array(PCOUNT);
@@ -422,7 +677,7 @@ export function initThreeBackground() {
   valueBackdrop.visible = false;
   scene.add(valueBackdrop);
 
-  const VALUE_NODES = isLowPower ? 110 : 170;
+  const VALUE_NODES = useReducedProfile ? 80 : isLowPower ? 110 : 170;
   const valueGeo = new THREE.BufferGeometry();
   const valueBasePos = new Float32Array(VALUE_NODES * 3);
   const valuePos = new Float32Array(VALUE_NODES * 3);
@@ -507,6 +762,12 @@ export function initThreeBackground() {
   valueLines.frustumCulled = false;
   valueBackdrop.add(valueLines);
 
+  if (debugFlags.staticScene) {
+    gridMesh.visible = false;
+    particles.visible = false;
+    valueBackdrop.visible = false;
+  }
+
   let composer = null;
   let bloomPass = null;
   if (useComposer) {
@@ -564,14 +825,21 @@ export function initThreeBackground() {
     camera.updateProjectionMatrix();
 
     renderer.setSize(w, h, false);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isLowPower ? 1 : 1.25));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+
+    if (renderer.domElement.width === 0 || renderer.domElement.height === 0) {
+      renderer.setSize(Math.max(1, w), Math.max(1, h), false);
+    }
 
     if (useComposer && composer && bloomPass) {
       composer.setSize(w, h);
       bloomPass.setSize(w, h);
     }
 
-    applyCanvasPositioning();
+    layoutMountRoot();
+    syncRuntimeDiagnostics("resize");
+    syncThreeBodyState(isCanvasRenderable());
+    logDebug(`resize ${w}x${h}`);
   }
 
   function resetAfterSleep() {
@@ -591,12 +859,20 @@ export function initThreeBackground() {
 
   function startLoop() {
     if (disposed || contextLost || running) return;
+    if (debugFlags.noAnim) {
+      running = false;
+      tryRenderFrame("static-frame");
+      syncRuntimeDiagnostics("static-frame");
+      return;
+    }
     running = true;
+    syncRuntimeDiagnostics("start-loop");
     rafId = requestAnimationFrame(animate);
   }
 
   function pause() {
     stopLoop();
+    syncRuntimeDiagnostics("pause");
   }
 
   function resume() {
@@ -616,28 +892,26 @@ export function initThreeBackground() {
     forceResize();
   }
 
-  const onIOSScroll = () => {
-    if (!isIOS || disposed) return;
-    if (iOSScrollTicking) return;
-    iOSScrollTicking = true;
-    requestAnimationFrame(() => {
-      iOSScrollTicking = false;
-      refresh();
-    });
-  };
-
   const onContextLost = (event) => {
     event.preventDefault();
     contextLost = true;
+    contextEventLabel = "lost";
     canvas.style.opacity = "0";
+    canvas.style.visibility = "hidden";
+    syncRuntimeDiagnostics("context-lost");
     syncThreeBodyState(false);
+    logDebug("context lost");
     pause();
   };
 
   const onContextRestored = () => {
     contextLost = false;
+    contextEventLabel = "restored";
     canvas.style.opacity = "1";
-    syncThreeBodyState(true);
+    canvas.style.visibility = "visible";
+    syncRuntimeDiagnostics("context-restored");
+    syncThreeBodyState(isCanvasRenderable());
+    logDebug("context restored");
     resume();
   };
 
@@ -672,10 +946,21 @@ export function initThreeBackground() {
   };
   window.addEventListener("focus", onFocus);
 
-  function animate() {
-    if (!running || contextLost || disposed) return;
-    rafId = requestAnimationFrame(animate);
+  const onLoad = () => {
+    if (disposed || contextLost) return;
+    refresh();
+  };
+  window.addEventListener("load", onLoad);
 
+  function handleRenderError(error, stage) {
+    lastError = error instanceof Error ? error.message : String(error);
+    running = false;
+    syncRuntimeDiagnostics(stage);
+    logDebug("fallback activated", { stage, error: lastError });
+    console.error(`${logPrefix} ${stage}`, error);
+  }
+
+  function renderFrame() {
     const t = clock.getElapsedTime();
     const ts = t * SPEED;
 
@@ -731,17 +1016,21 @@ export function initThreeBackground() {
     }
 
     pMat.color.copy(current.emissive);
-    pMat.opacity = (0.05 + current.particles * 0.20) * pulseParticles * sectionDim;
+    pMat.opacity =
+      (0.05 + current.particles * 0.20) * pulseParticles * sectionDim * particleBoost;
 
     gridMesh.visible = !(current.noGrid > 0.5);
     valueBackdrop.visible = current.showValueBackdrop > 0.01;
 
-    material.color.copy(current.color);
-    material.emissive.copy(current.emissive).multiplyScalar(sectionDim);
+    material.color.copy(current.color).multiplyScalar(isLowPower ? 1.08 : 1);
+    material.emissive.copy(current.emissive).multiplyScalar(sectionDim * visibilityBoost);
     material.roughness = current.roughness;
     material.metalness = current.metalness;
 
-    if (gridMesh.visible) {
+    if (staticDebugMesh) {
+      staticDebugMesh.rotation.y += debugFlags.noAnim ? 0 : dt * 0.9;
+      staticDebugMesh.rotation.x += debugFlags.noAnim ? 0 : dt * 0.35;
+    } else if (gridMesh.visible) {
       let idx = 0;
       const animTime = ts * current.freq;
 
@@ -839,6 +1128,26 @@ export function initThreeBackground() {
 
     if (useComposer && composer) composer.render();
     else renderer.render(scene, camera);
+
+    if (!firstFrameRendered) {
+      firstFrameRendered = true;
+      syncRuntimeDiagnostics("first-frame");
+      logDebug("first frame rendered");
+    }
+  }
+
+  function tryRenderFrame(stage) {
+    try {
+      renderFrame();
+    } catch (error) {
+      handleRenderError(error, stage);
+    }
+  }
+
+  function animate() {
+    if (!running || contextLost || disposed) return;
+    rafId = requestAnimationFrame(animate);
+    tryRenderFrame("animate");
   }
 
   const onResize = () => refresh();
@@ -846,9 +1155,6 @@ export function initThreeBackground() {
   const onOrientationChange = () => refresh();
   window.addEventListener("resize", onResize, { passive: true });
   window.addEventListener("orientationchange", onOrientationChange, { passive: true });
-  if (isIOS) {
-    window.addEventListener("scroll", onIOSScroll, { passive: true });
-  }
   if (vv) {
     vv.addEventListener("resize", onVisualViewportChange, { passive: true });
     vv.addEventListener("scroll", onVisualViewportChange, { passive: true });
@@ -860,17 +1166,17 @@ export function initThreeBackground() {
     if (disposed) return;
     disposed = true;
     pause();
+    syncRuntimeDiagnostics("dispose");
     syncThreeBodyState(false);
+    logDebug("destroy");
 
     document.removeEventListener("visibilitychange", onVisibility);
     window.removeEventListener("pageshow", onPageShow);
     window.removeEventListener("pagehide", onPageHide);
     window.removeEventListener("focus", onFocus);
+    window.removeEventListener("load", onLoad);
     window.removeEventListener("resize", onResize);
     window.removeEventListener("orientationchange", onOrientationChange);
-    if (isIOS) {
-      window.removeEventListener("scroll", onIOSScroll);
-    }
     if (vv) {
       vv.removeEventListener("resize", onVisualViewportChange);
       vv.removeEventListener("scroll", onVisualViewportChange);
@@ -889,11 +1195,18 @@ export function initThreeBackground() {
     valueMat.dispose();
     valueLineGeo.dispose();
     valueLineMat.dispose();
+    staticDebugMesh?.geometry?.dispose?.();
+    staticDebugMesh?.material?.dispose?.();
     geometry.dispose();
     material.dispose();
     renderer.dispose();
 
     if (canvas.parentNode) canvas.parentNode.removeChild(canvas);
+    if (debugOverlay?.parentNode) debugOverlay.parentNode.removeChild(debugOverlay);
+    if (debugPanel?.parentNode) debugPanel.parentNode.removeChild(debugPanel);
+    if (!mountRoot.hasChildNodes() && mountRoot.parentNode) {
+      mountRoot.parentNode.removeChild(mountRoot);
+    }
     if (window[GLOBAL_BG_KEY] === api) delete window[GLOBAL_BG_KEY];
   }
 

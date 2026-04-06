@@ -10,7 +10,10 @@
 }
 
 .nk-hero{
+  min-height: 100vh;
+  min-height: calc(var(--app-height, 1vh) * 100);
   min-height: 100svh;
+  min-height: 100dvh;
   position: relative;
   background: var(--bg);
   color: var(--text);
@@ -264,7 +267,10 @@
 
 @media (max-width: 520px){
   .nk-hero{
+    min-height: min(100vh, 820px);
+    min-height: min(calc(var(--app-height, 1vh) * 100), 820px);
     min-height: min(100svh, 820px);
+    min-height: min(100dvh, 820px);
     padding-left: 18px;
     padding-right: 18px;
     padding-bottom: 110px;
@@ -444,12 +450,31 @@ body{
   overflow-x:hidden;
 }
 
-body,
 header,
 main,
-.section{
+.nav,
+.nk-hero,
+.hero-bridge,
+.content-wrapper,
+.section,
+.footer{
   position: relative;
   z-index: 1;
+}
+
+#three-bg-root,
+.three-bg-root{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+  transform: translate3d(0,0,0);
+  -webkit-transform: translate3d(0,0,0);
+  will-change: transform;
 }
 
 /* Overlay sutil */
@@ -477,13 +502,15 @@ body::before{
 
 /* Canvas index (three-bg.js) */
 .three-bg-canvas{
-  position: fixed;
+  position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   display: block;
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
+  opacity: 0;
+  visibility: hidden;
   transform: translate3d(0,0,0);
   -webkit-transform: translate3d(0,0,0);
   backface-visibility: hidden;
@@ -1181,8 +1208,15 @@ body.has-three{
   background-color: var(--c-bg);
 }
 
+body.has-three #three-bg-root,
+body.has-three .three-bg-root{
+  z-index: 0;
+}
+
 body.has-three .three-bg-canvas{
   z-index: 0;
+  opacity: 1;
+  visibility: visible;
 }
 
 body.has-three .nk-hero,
@@ -1215,6 +1249,11 @@ body.has-three .hero::after{
 body.has-three .section[data-bg]{
   position: relative;
   z-index: 1;
+}
+
+body.no-three .three-bg-canvas{
+  opacity: 0 !important;
+  visibility: hidden !important;
 }
 
 .layout-left{ justify-content: flex-start; }
