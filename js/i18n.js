@@ -1,6 +1,8 @@
 // js/i18n.js
-// Single source of truth for UI copy (EN/ES).
+// Single source of truth for UI copy.
 // Tip: Keep keys identical between languages.
+
+import { DE_OVERRIDES, FR_OVERRIDES } from "./i18n-overrides.js";
 
 function deepFreeze(obj) {
   if (!obj || typeof obj !== "object" || Object.isFrozen(obj)) return obj;
@@ -9,7 +11,25 @@ function deepFreeze(obj) {
   return obj;
 }
 
-export const I18N = deepFreeze({
+function mergeDeep(base, overrides) {
+  if (Array.isArray(base)) {
+    if (!Array.isArray(overrides)) return base.map((item) => mergeDeep(item, undefined));
+    return base.map((item, index) => mergeDeep(item, overrides[index]));
+  }
+
+  if (!base || typeof base !== "object") {
+    return overrides === undefined ? base : overrides;
+  }
+
+  const result = {};
+  const keys = new Set([...Object.keys(base), ...Object.keys(overrides || {})]);
+  keys.forEach((key) => {
+    result[key] = mergeDeep(base[key], overrides?.[key]);
+  });
+  return result;
+}
+
+const BASE_I18N = deepFreeze({
   en: {
     nav: {
       // ✅ NAV MENU (matches index.html data-i18n)
@@ -26,9 +46,11 @@ export const I18N = deepFreeze({
       sectorsLabel: "Sectors:",
 
       // Existing keys you already had
-      partner: "Partner Access",
-      menu: "Open menu",
-      quantum: "Quantum",
+        partner: "Partner Access",
+        menu: "Open menu",
+        closeMenu: "Close menu",
+        mobileNavigationLabel: "Site navigation",
+        quantum: "Quantum",
       semi: "Semiconductors",
       extreme: "Defense & Space",
       medical: "Medical",
@@ -39,6 +61,8 @@ export const I18N = deepFreeze({
     hero: {
       headline: "DeepTech Materials for Critical Industries.",
       lead: "Advanced materials with guaranteed specification, full traceability and industrial scalability. From precursor to finished component.",
+      bridgeEyebrow: "EU DEEPTECH · MATERIALS INFRASTRUCTURE",
+      bridgeSectionAria: "Introduction",
       bridgeHtml: "Europe’s DeepTech transition from prototype to industrial production depends on a critical factor: mastery of advanced materials.<br /><br />Nanoker integrates capabilities in technical ceramics, CVD diamond, SiC and sapphire to deliver solutions with guaranteed specifications, full traceability and industrial scalability.",
       bridgeCtaSectors: "Explore sectors",
       bridgeCtaContact: "Contact engineering",
@@ -1805,9 +1829,11 @@ export const I18N = deepFreeze({
       sectorsLabel: "Sectores:",
 
       // Existing keys you already had
-      partner: "Acceso Partners",
-      menu: "Abrir menú",
-      quantum: "Cuántica",
+        partner: "Acceso Partners",
+        menu: "Abrir menú",
+        closeMenu: "Cerrar menú",
+        mobileNavigationLabel: "Navegación del sitio",
+        quantum: "Cuántica",
       semi: "Semiconductores",
       extreme: "Defensa y Espacio",
       medical: "Médico",
@@ -1818,6 +1844,8 @@ export const I18N = deepFreeze({
     hero: {
       headline: "Materiales DeepTech para industrias críticas.",
       lead: "Materiales avanzados con especificación garantizada, trazabilidad completa y escalabilidad industrial. De precursor a componente terminado.",
+      bridgeEyebrow: "DEEPTECH EUROPEA · INFRAESTRUCTURA DE MATERIALES",
+      bridgeSectionAria: "Introducción",
       bridgeHtml: "La transición de la DeepTech europea desde prototipo a producción industrial depende de un factor crítico: el dominio de los materiales avanzados.<br /><br />Nanoker integra capacidades en cerámicas técnicas, diamante CVD, SiC y zafiro para ofrecer soluciones con especificación garantizada, trazabilidad completa y escalabilidad industrial.",
       bridgeCtaSectors: "Explorar sectores",
       bridgeCtaContact: "Contactar con ingeniería",
@@ -3553,5 +3581,21 @@ export const I18N = deepFreeze({
       ],
     },
   },
+});
+
+export const BASE_LOCALES = deepFreeze({
+  en: BASE_I18N.en,
+  es: BASE_I18N.es,
+});
+
+export const LOCALE_OVERRIDES = deepFreeze({
+  fr: FR_OVERRIDES,
+  de: DE_OVERRIDES,
+});
+
+export const I18N = deepFreeze({
+  ...BASE_I18N,
+  fr: mergeDeep(BASE_I18N.en, FR_OVERRIDES),
+  de: mergeDeep(BASE_I18N.en, DE_OVERRIDES),
 });
 

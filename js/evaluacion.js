@@ -1,7 +1,143 @@
 (function () {
-  const STORAGE_KEY = "NK_EVAL_WIZARD_V2";
+  const STORAGE_KEY = "nanoker_eval_wizard_v1";
   const TOTAL_STEPS = 11;
+  const SUPPORTED_LANGS = new Set(["es", "en", "fr", "de"]);
 
+  const COPY = {
+    es: {
+      tablist: "Pasos de evaluación",
+      stepLabel: "PASO {n}",
+      progress: "PASO {current} DE {total}",
+      next: "Continuar",
+      back: "Atrás",
+      submit: "Enviar evaluación técnica",
+      sending: "Enviando...",
+      status: {
+        idle: "",
+        required: "Completa los campos obligatorios para continuar.",
+        completePrevious: "Completa los pasos previos antes de enviar.",
+        otherRequired: "Si seleccionas 'Otro', especifica el detalle.",
+        descriptionShort: "La descripción del proyecto debe tener al menos 20 caracteres.",
+        sending: "Enviando solicitud de evaluación técnica...",
+        success: "Gracias. Hemos recibido tu solicitud y te contactaremos en breve.",
+        error: "No pudimos procesar tu solicitud. Inténtalo de nuevo.",
+      },
+      fields: { specify: "Especifica" },
+      steps: {
+        1: { title: "Tipo de solicitud", help: "¿Qué tipo de ayuda necesita?", options: { "request-manufacturing": "Fabricación de una pieza en material cerámico o cristalino avanzado (incluye evaluación de viabilidad)", "request-selection": "Selección del material adecuado para una aplicación", "request-rd": "Desarrollo tecnológico o proyecto de I+D", "request-general": "Solicitud de presupuesto o consulta general" } },
+        2: { title: "Situación actual", help: "¿Qué información tiene actualmente sobre la pieza o aplicación?", options: { "current-drawings": "Plano/s técnico/s", "current-cad": "Modelo 3D (CAD)", "current-existing-part": "Una pieza existente", "current-functional": "Requisitos funcionales definidos", "current-idea": "Solo una idea inicial" } },
+        3: { title: "Fase del proyecto", help: "¿En qué fase se encuentra el proyecto?", options: { "phase-concept": "Concepto / estudio inicial", "phase-design": "Desarrollo o diseño", "phase-prototype": "Prototipo", "phase-series": "Producción en serie", "phase-improvement": "Producto existente que necesita mejora" } },
+        4: { title: "Cantidad estimada", help: "¿Qué volumen aproximado necesitaría?", options: { "qty-prototype": "Prototipo (1-10 unidades)", "qty-small": "Serie pequeña (10-100)", "qty-medium": "Serie media (100-1000)", "qty-industrial": "Producción industrial (+1000)", "qty-undefined": "Aún no definido" } },
+        5: { title: "Dimensiones aproximadas", help: "¿Cuáles son las dimensiones aproximadas de la pieza?", options: { "dim-lt10": "< 10 mm", "dim-10-50": "10 - 50 mm", "dim-50-200": "50 - 200 mm", "dim-200-500": "200 - 500 mm", "dim-gt500": "> 500 mm", "dim-undefined": "No definido todavía" }, exactLabel: "Dimensiones exactas (mm)", exactPlaceholder: "Ej.: 30x20x5" },
+        6: { title: "Aplicación o entorno tecnológico", help: "¿En qué tipo de aplicación se utilizará la pieza?", options: { "app-semiconductors": "Semiconductores / microelectrónica (Fab, epitaxia, wafers)", "app-optics": "Óptica / fotónica", "app-energy": "Energía", "app-electronics": "Electrónica", "app-industry": "Industria / maquinaria", "app-space": "Aeroespacial / espacio", "app-medical": "Medicina / biotecnología", "app-research": "Investigación científica", "app-vacuum": "Vacío", "app-chemical": "Ambiente químico o corrosivo", "app-wear": "Alto desgaste o abrasión", "app-other": "Otro" } },
+        7: { title: "Sector industrial", help: "¿En qué sector se enmarca principalmente el proyecto?", options: { "sector-semiconductors": "Semiconductores", "sector-space": "Aeroespacial / espacio", "sector-energy": "Energía", "sector-industrial": "Industrial / maquinaria", "sector-electronics": "Electrónica", "sector-medical": "Medicina / biotech", "sector-research": "Investigación / laboratorio", "sector-other": "Otro" } },
+        8: { title: "Temperatura de operación", help: "¿En qué rango de temperatura operará aproximadamente la pieza?", options: { "temp-cryo": "< -100 °C (criogenia / espacio)", "temp-minus100-0": "-100 - 0 °C", "temp-0-200": "0 - 200 °C", "temp-200-800": "200 - 800 °C", "temp-gt800": "> 800 °C", "temp-unknown": "No lo sé todavía" } },
+        9: { title: "Función principal de la pieza", help: "¿Qué función debe cumplir principalmente la pieza? (puede seleccionar varias)", options: { "func-wear": "Resistencia al desgaste o abrasión", "func-hardness": "Alta dureza", "func-insulation": "Aislamiento eléctrico", "func-high-temp": "Resistencia a altas temperaturas", "func-chemical": "Resistencia química o a la corrosión", "func-mechanical": "Alta resistencia mecánica o estructural", "func-tribology": "Baja fricción o propiedades tribológicas", "func-thermal": "Gestión térmica / alta conductividad térmica", "func-stability": "Estabilidad dimensional o precisión", "func-biocompatibility": "Biocompatibilidad", "func-optical": "Aplicación óptica", "func-other": "Otra" } },
+        10: { title: "Material considerado", help: "¿Qué material está considerando para su aplicación?", options: { "mat-sapphire": "Zafiro (EPI / SOS / soluciones ópticas)", "mat-sic": "Carburo de silicio (SiC) - wafers o componentes para Fab", "mat-cvd-diamond": "Diamante CVD - cuántica, óptica o gestión térmica", "mat-alumina": "Alúmina (Al2O3)", "mat-zirconia": "Circona estabilizada (ZrO2 / Y-TZP)", "mat-b4c": "Carburo de boro (B4C)", "mat-aln": "Nitruro de aluminio (AlN)", "mat-nanocomposites": "Nanocompuestos cerámicos", "mat-other": "Otro material cerámico avanzado", "mat-unsure": "No estoy seguro / necesito asesoramiento" } },
+        11: { title: "Contacto y descripción", help: "Comparte tus datos y una descripción breve para iniciar la evaluación técnica.", labels: { "eval-name": "Nombre *", "eval-company": "Empresa / organización *", "eval-role": "Cargo", "eval-email": "Email *", "eval-phone": "Teléfono", "eval-country": "País *", "eval-project-description": "Descripción breve del proyecto *", "eval-files": "Subir archivos (opcional, múltiples): CAD, planos, especificaciones, fotos" }, projectPlaceholder: "Describe la aplicación, el entorno de operación y los requisitos principales." },
+      },
+    },
+    en: {
+      tablist: "Evaluation steps",
+      stepLabel: "STEP {n}",
+      progress: "STEP {current} OF {total}",
+      next: "Continue",
+      back: "Back",
+      submit: "Submit technical evaluation",
+      sending: "Sending...",
+      status: {
+        idle: "",
+        required: "Complete the required fields to continue.",
+        completePrevious: "Complete the previous steps before submitting.",
+        otherRequired: "If you select 'Other', please specify the detail.",
+        descriptionShort: "The project description must contain at least 20 characters.",
+        sending: "Sending technical evaluation request...",
+        success: "Thank you. We have received your request and will contact you shortly.",
+        error: "We could not process your request. Please try again.",
+      },
+      fields: { specify: "Specify" },
+      steps: {
+        1: { title: "Request type", help: "What kind of support do you need?", options: { "request-manufacturing": "Manufacturing of a part in advanced ceramic or crystalline material (includes feasibility assessment)", "request-selection": "Selection of the right material for an application", "request-rd": "Technology development or R&D project", "request-general": "Quotation request or general inquiry" } },
+        2: { title: "Current situation", help: "What information do you currently have about the part or application?", options: { "current-drawings": "Technical drawing(s)", "current-cad": "3D model (CAD)", "current-existing-part": "An existing part", "current-functional": "Defined functional requirements", "current-idea": "Just an initial idea" } },
+        3: { title: "Project phase", help: "What phase is the project currently in?", options: { "phase-concept": "Concept / initial study", "phase-design": "Development or design", "phase-prototype": "Prototype", "phase-series": "Serial production", "phase-improvement": "Existing product requiring improvement" } },
+        4: { title: "Estimated quantity", help: "What approximate volume would you need?", options: { "qty-prototype": "Prototype (1-10 units)", "qty-small": "Small batch (10-100)", "qty-medium": "Mid-size batch (100-1000)", "qty-industrial": "Industrial production (+1000)", "qty-undefined": "Not yet defined" } },
+        5: { title: "Approximate dimensions", help: "What are the approximate dimensions of the part?", options: { "dim-lt10": "< 10 mm", "dim-10-50": "10 - 50 mm", "dim-50-200": "50 - 200 mm", "dim-200-500": "200 - 500 mm", "dim-gt500": "> 500 mm", "dim-undefined": "Not defined yet" }, exactLabel: "Exact dimensions (mm)", exactPlaceholder: "Ex.: 30x20x5" },
+        6: { title: "Application or technology environment", help: "In what type of application will the part be used?", options: { "app-semiconductors": "Semiconductors / microelectronics (Fab, epitaxy, wafers)", "app-optics": "Optics / photonics", "app-energy": "Energy", "app-electronics": "Electronics", "app-industry": "Industry / machinery", "app-space": "Aerospace / space", "app-medical": "Medical / biotechnology", "app-research": "Scientific research", "app-vacuum": "Vacuum", "app-chemical": "Chemical or corrosive environment", "app-wear": "High wear or abrasion", "app-other": "Other" } },
+        7: { title: "Industrial sector", help: "Which sector best describes the project?", options: { "sector-semiconductors": "Semiconductors", "sector-space": "Aerospace / space", "sector-energy": "Energy", "sector-industrial": "Industrial / machinery", "sector-electronics": "Electronics", "sector-medical": "Medical / biotech", "sector-research": "Research / laboratory", "sector-other": "Other" } },
+        8: { title: "Operating temperature", help: "Within what temperature range will the part operate approximately?", options: { "temp-cryo": "< -100 °C (cryogenics / space)", "temp-minus100-0": "-100 - 0 °C", "temp-0-200": "0 - 200 °C", "temp-200-800": "200 - 800 °C", "temp-gt800": "> 800 °C", "temp-unknown": "I do not know yet" } },
+        9: { title: "Main function of the part", help: "What main function must the part fulfill? (you may select several)", options: { "func-wear": "Wear or abrasion resistance", "func-hardness": "High hardness", "func-insulation": "Electrical insulation", "func-high-temp": "High-temperature resistance", "func-chemical": "Chemical or corrosion resistance", "func-mechanical": "High mechanical or structural strength", "func-tribology": "Low friction or tribological properties", "func-thermal": "Thermal management / high thermal conductivity", "func-stability": "Dimensional stability or precision", "func-biocompatibility": "Biocompatibility", "func-optical": "Optical application", "func-other": "Other" } },
+        10: { title: "Material under consideration", help: "Which material are you considering for your application?", options: { "mat-sapphire": "Sapphire (EPI / SOS / optical solutions)", "mat-sic": "Silicon carbide (SiC) - wafers or Fab components", "mat-cvd-diamond": "CVD diamond - quantum, optics or thermal management", "mat-alumina": "Alumina (Al2O3)", "mat-zirconia": "Stabilized zirconia (ZrO2 / Y-TZP)", "mat-b4c": "Boron carbide (B4C)", "mat-aln": "Aluminum nitride (AlN)", "mat-nanocomposites": "Ceramic nanocomposites", "mat-other": "Other advanced ceramic material", "mat-unsure": "I am not sure / I need guidance" } },
+        11: { title: "Contact and description", help: "Share your details and a brief description to start the technical assessment.", labels: { "eval-name": "Name *", "eval-company": "Company / organization *", "eval-role": "Role", "eval-email": "Email *", "eval-phone": "Phone", "eval-country": "Country *", "eval-project-description": "Brief project description *", "eval-files": "Upload files (optional, multiple): CAD, drawings, specifications, photos" }, projectPlaceholder: "Describe the application, operating environment, and main requirements." },
+      },
+    },
+    fr: {
+      tablist: "Étapes de l'évaluation",
+      stepLabel: "ÉTAPE {n}",
+      progress: "ÉTAPE {current} SUR {total}",
+      next: "Continuer",
+      back: "Retour",
+      submit: "Envoyer l'évaluation technique",
+      sending: "Envoi...",
+      status: {
+        idle: "",
+        required: "Complétez les champs obligatoires pour continuer.",
+        completePrevious: "Complétez les étapes précédentes avant l'envoi.",
+        otherRequired: "Si vous choisissez « Autre », précisez le détail.",
+        descriptionShort: "La description du projet doit contenir au moins 20 caractères.",
+        sending: "Envoi de la demande d'évaluation technique...",
+        success: "Merci. Nous avons reçu votre demande et vous contacterons sous peu.",
+        error: "Nous n'avons pas pu traiter votre demande. Veuillez réessayer.",
+      },
+      fields: { specify: "Préciser" },
+      steps: {
+        1: { title: "Type de demande", help: "De quel type d'aide avez-vous besoin ?", options: { "request-manufacturing": "Fabrication d'une pièce en matériau céramique ou cristallin avancé (inclut l'évaluation de faisabilité)", "request-selection": "Sélection du matériau adapté à une application", "request-rd": "Développement technologique ou projet de R&D", "request-general": "Demande de devis ou consultation générale" } },
+        2: { title: "Situation actuelle", help: "Quelles informations avez-vous actuellement sur la pièce ou l'application ?", options: { "current-drawings": "Plan(s) technique(s)", "current-cad": "Modèle 3D (CAO)", "current-existing-part": "Une pièce existante", "current-functional": "Exigences fonctionnelles définies", "current-idea": "Seulement une idée initiale" } },
+        3: { title: "Phase du projet", help: "À quelle phase se trouve actuellement le projet ?", options: { "phase-concept": "Concept / étude initiale", "phase-design": "Développement ou conception", "phase-prototype": "Prototype", "phase-series": "Production en série", "phase-improvement": "Produit existant nécessitant une amélioration" } },
+        4: { title: "Quantité estimée", help: "Quel volume approximatif vous faudrait-il ?", options: { "qty-prototype": "Prototype (1-10 unités)", "qty-small": "Petite série (10-100)", "qty-medium": "Série moyenne (100-1000)", "qty-industrial": "Production industrielle (+1000)", "qty-undefined": "Pas encore défini" } },
+        5: { title: "Dimensions approximatives", help: "Quelles sont les dimensions approximatives de la pièce ?", options: { "dim-lt10": "< 10 mm", "dim-10-50": "10 - 50 mm", "dim-50-200": "50 - 200 mm", "dim-200-500": "200 - 500 mm", "dim-gt500": "> 500 mm", "dim-undefined": "Pas encore défini" }, exactLabel: "Dimensions exactes (mm)", exactPlaceholder: "Ex. : 30x20x5" },
+        6: { title: "Application ou environnement technologique", help: "Dans quel type d'application la pièce sera-t-elle utilisée ?", options: { "app-semiconductors": "Semi-conducteurs / microélectronique (Fab, épitaxie, wafers)", "app-optics": "Optique / photonique", "app-energy": "Énergie", "app-electronics": "Électronique", "app-industry": "Industrie / machines", "app-space": "Aéronautique / spatial", "app-medical": "Médecine / biotechnologie", "app-research": "Recherche scientifique", "app-vacuum": "Vide", "app-chemical": "Environnement chimique ou corrosif", "app-wear": "Usure ou abrasion élevée", "app-other": "Autre" } },
+        7: { title: "Secteur industriel", help: "Dans quel secteur s'inscrit principalement le projet ?", options: { "sector-semiconductors": "Semi-conducteurs", "sector-space": "Aéronautique / spatial", "sector-energy": "Énergie", "sector-industrial": "Industrie / machines", "sector-electronics": "Électronique", "sector-medical": "Médecine / biotech", "sector-research": "Recherche / laboratoire", "sector-other": "Autre" } },
+        8: { title: "Température de fonctionnement", help: "Dans quelle plage de température la pièce fonctionnera-t-elle approximativement ?", options: { "temp-cryo": "< -100 °C (cryogénie / spatial)", "temp-minus100-0": "-100 - 0 °C", "temp-0-200": "0 - 200 °C", "temp-200-800": "200 - 800 °C", "temp-gt800": "> 800 °C", "temp-unknown": "Je ne sais pas encore" } },
+        9: { title: "Fonction principale de la pièce", help: "Quelle fonction principale la pièce doit-elle remplir ? (plusieurs choix possibles)", options: { "func-wear": "Résistance à l'usure ou à l'abrasion", "func-hardness": "Grande dureté", "func-insulation": "Isolation électrique", "func-high-temp": "Résistance aux hautes températures", "func-chemical": "Résistance chimique ou à la corrosion", "func-mechanical": "Haute résistance mécanique ou structurelle", "func-tribology": "Faible friction ou propriétés tribologiques", "func-thermal": "Gestion thermique / haute conductivité thermique", "func-stability": "Stabilité dimensionnelle ou précision", "func-biocompatibility": "Biocompatibilité", "func-optical": "Application optique", "func-other": "Autre" } },
+        10: { title: "Matériau envisagé", help: "Quel matériau envisagez-vous pour votre application ?", options: { "mat-sapphire": "Saphir (EPI / SOS / solutions optiques)", "mat-sic": "Carbure de silicium (SiC) - wafers ou composants pour Fab", "mat-cvd-diamond": "Diamant CVD - quantique, optique ou gestion thermique", "mat-alumina": "Alumine (Al2O3)", "mat-zirconia": "Zircone stabilisée (ZrO2 / Y-TZP)", "mat-b4c": "Carbure de bore (B4C)", "mat-aln": "Nitrure d'aluminium (AlN)", "mat-nanocomposites": "Nanocomposites céramiques", "mat-other": "Autre matériau céramique avancé", "mat-unsure": "Je ne suis pas sûr / j'ai besoin de conseil" } },
+        11: { title: "Contact et description", help: "Partagez vos coordonnées et une brève description pour lancer l'évaluation technique.", labels: { "eval-name": "Nom *", "eval-company": "Entreprise / organisation *", "eval-role": "Fonction", "eval-email": "E-mail *", "eval-phone": "Téléphone", "eval-country": "Pays *", "eval-project-description": "Brève description du projet *", "eval-files": "Téléverser des fichiers (optionnel, multiples) : CAO, plans, spécifications, photos" }, projectPlaceholder: "Décrivez l'application, l'environnement d'utilisation et les principales exigences." },
+      },
+    },
+    de: {
+      tablist: "Bewertungsschritte",
+      stepLabel: "SCHRITT {n}",
+      progress: "SCHRITT {current} VON {total}",
+      next: "Weiter",
+      back: "Zurück",
+      submit: "Technische Bewertung senden",
+      sending: "Wird gesendet...",
+      status: {
+        idle: "",
+        required: "Bitte füllen Sie die Pflichtfelder aus, um fortzufahren.",
+        completePrevious: "Bitte schließen Sie die vorherigen Schritte vor dem Senden ab.",
+        otherRequired: "Wenn Sie 'Andere' wählen, geben Sie bitte Details an.",
+        descriptionShort: "Die Projektbeschreibung muss mindestens 20 Zeichen enthalten.",
+        sending: "Anfrage zur technischen Bewertung wird gesendet...",
+        success: "Danke. Wir haben Ihre Anfrage erhalten und melden uns in Kürze.",
+        error: "Ihre Anfrage konnte nicht verarbeitet werden. Bitte versuchen Sie es erneut.",
+      },
+      fields: { specify: "Bitte angeben" },
+      steps: {
+        1: { title: "Anfragetyp", help: "Welche Art von Unterstützung benötigen Sie?", options: { "request-manufacturing": "Fertigung eines Bauteils aus fortschrittlichem keramischem oder kristallinem Material (inklusive Machbarkeitsbewertung)", "request-selection": "Auswahl des geeigneten Materials für eine Anwendung", "request-rd": "Technologieentwicklung oder F&E-Projekt", "request-general": "Angebotsanfrage oder allgemeine Anfrage" } },
+        2: { title: "Aktueller Stand", help: "Welche Informationen liegen Ihnen derzeit zur Komponente oder Anwendung vor?", options: { "current-drawings": "Technische Zeichnung(en)", "current-cad": "3D-Modell (CAD)", "current-existing-part": "Ein vorhandenes Bauteil", "current-functional": "Definierte Funktionsanforderungen", "current-idea": "Nur eine erste Idee" } },
+        3: { title: "Projektphase", help: "In welcher Phase befindet sich das Projekt derzeit?", options: { "phase-concept": "Konzept / erste Studie", "phase-design": "Entwicklung oder Konstruktion", "phase-prototype": "Prototyp", "phase-series": "Serienproduktion", "phase-improvement": "Bestehendes Produkt mit Verbesserungsbedarf" } },
+        4: { title: "Geschätzte Menge", help: "Welches ungefähre Volumen benötigen Sie?", options: { "qty-prototype": "Prototyp (1-10 Stück)", "qty-small": "Kleine Serie (10-100)", "qty-medium": "Mittlere Serie (100-1000)", "qty-industrial": "Industrielle Fertigung (+1000)", "qty-undefined": "Noch nicht definiert" } },
+        5: { title: "Ungefähre Abmessungen", help: "Wie groß ist das Bauteil ungefähr?", options: { "dim-lt10": "< 10 mm", "dim-10-50": "10 - 50 mm", "dim-50-200": "50 - 200 mm", "dim-200-500": "200 - 500 mm", "dim-gt500": "> 500 mm", "dim-undefined": "Noch nicht definiert" }, exactLabel: "Genaue Abmessungen (mm)", exactPlaceholder: "Bsp.: 30x20x5" },
+        6: { title: "Anwendung oder Technologieumfeld", help: "In welcher Art von Anwendung wird das Bauteil eingesetzt?", options: { "app-semiconductors": "Halbleiter / Mikroelektronik (Fab, Epitaxie, Wafer)", "app-optics": "Optik / Photonik", "app-energy": "Energie", "app-electronics": "Elektronik", "app-industry": "Industrie / Maschinenbau", "app-space": "Luft- und Raumfahrt / Space", "app-medical": "Medizin / Biotechnologie", "app-research": "Wissenschaftliche Forschung", "app-vacuum": "Vakuum", "app-chemical": "Chemische oder korrosive Umgebung", "app-wear": "Hoher Verschleiß oder Abrieb", "app-other": "Andere" } },
+        7: { title: "Industriesektor", help: "Welcher Sektor beschreibt das Projekt am besten?", options: { "sector-semiconductors": "Halbleiter", "sector-space": "Luft- und Raumfahrt / Space", "sector-energy": "Energie", "sector-industrial": "Industrie / Maschinenbau", "sector-electronics": "Elektronik", "sector-medical": "Medizin / Biotech", "sector-research": "Forschung / Labor", "sector-other": "Andere" } },
+        8: { title: "Betriebstemperatur", help: "In welchem Temperaturbereich wird das Bauteil ungefähr betrieben?", options: { "temp-cryo": "< -100 °C (Kryotechnik / Raumfahrt)", "temp-minus100-0": "-100 - 0 °C", "temp-0-200": "0 - 200 °C", "temp-200-800": "200 - 800 °C", "temp-gt800": "> 800 °C", "temp-unknown": "Ich weiß es noch nicht" } },
+        9: { title: "Hauptfunktion des Bauteils", help: "Welche Hauptfunktion muss das Bauteil erfüllen? (Mehrfachauswahl möglich)", options: { "func-wear": "Verschleiß- oder Abriebfestigkeit", "func-hardness": "Hohe Härte", "func-insulation": "Elektrische Isolation", "func-high-temp": "Beständigkeit gegen hohe Temperaturen", "func-chemical": "Chemikalien- oder Korrosionsbeständigkeit", "func-mechanical": "Hohe mechanische oder strukturelle Festigkeit", "func-tribology": "Geringe Reibung oder tribologische Eigenschaften", "func-thermal": "Thermisches Management / hohe Wärmeleitfähigkeit", "func-stability": "Maßstabilität oder Präzision", "func-biocompatibility": "Biokompatibilität", "func-optical": "Optische Anwendung", "func-other": "Andere" } },
+        10: { title: "Vorgesehenes Material", help: "Welches Material ziehen Sie für Ihre Anwendung in Betracht?", options: { "mat-sapphire": "Saphir (EPI / SOS / optische Lösungen)", "mat-sic": "Siliziumkarbid (SiC) - Wafer oder Fab-Komponenten", "mat-cvd-diamond": "CVD-Diamant - Quanten, Optik oder Wärmemanagement", "mat-alumina": "Aluminiumoxid (Al2O3)", "mat-zirconia": "Stabilisiertes Zirkonoxid (ZrO2 / Y-TZP)", "mat-b4c": "Borkarbid (B4C)", "mat-aln": "Aluminiumnitrid (AlN)", "mat-nanocomposites": "Keramische Nanokomposite", "mat-other": "Anderes fortschrittliches Keramikmaterial", "mat-unsure": "Ich bin nicht sicher / ich brauche Beratung" } },
+        11: { title: "Kontakt und Beschreibung", help: "Teilen Sie Ihre Kontaktdaten und eine kurze Beschreibung, um die technische Bewertung zu starten.", labels: { "eval-name": "Name *", "eval-company": "Unternehmen / Organisation *", "eval-role": "Position", "eval-email": "E-Mail *", "eval-phone": "Telefon", "eval-country": "Land *", "eval-project-description": "Kurze Projektbeschreibung *", "eval-files": "Dateien hochladen (optional, mehrere): CAD, Zeichnungen, Spezifikationen, Fotos" }, projectPlaceholder: "Beschreiben Sie die Anwendung, die Einsatzumgebung und die wichtigsten Anforderungen." },
+      },
+    },
+  };
+  const wizard = document.getElementById("eval-wizard");
   const form = document.getElementById("evaluation-form");
   const steps = Array.from(document.querySelectorAll(".wizard-step"));
   const stepButtons = Array.from(document.querySelectorAll(".wizard-stepBtn"));
@@ -10,257 +146,273 @@
   const statusEl = document.getElementById("eval-form-status");
   const submitBtn = document.getElementById("eval-submit-btn");
 
-  if (!form || !steps.length || !progressFill || !progressText || !statusEl || !submitBtn) return;
+  if (!wizard || !form || !steps.length || !progressFill || !progressText || !statusEl || !submitBtn) {
+    return;
+  }
 
-  const stepRules = {
-    1: { type: "radio", name: "requestType" },
-    2: { type: "radio", name: "currentInfo" },
-    3: { type: "radio", name: "projectPhase" },
-    4: { type: "radio", name: "estimatedVolume" },
-    5: { type: "radio", name: "dimensionsRange" },
-    6: { type: "radio", name: "applicationType", otherField: "eval-application-other" },
-    7: { type: "radio", name: "industrySector", otherField: "eval-sector-other" },
-    8: { type: "radio", name: "temperatureRange" },
-    9: { type: "checkbox", name: "functionMain", min: 1, otherField: "eval-function-other" },
-    10: { type: "radio", name: "materialConsidered", otherField: "eval-material-other" },
-    11: {
-      type: "contact",
-      requiredFields: ["eval-name", "eval-company", "eval-email", "eval-country", "eval-project-description"],
-      descriptionField: "eval-project-description",
-      minLength: 20,
-    },
-  };
-
-  const statusCopy = {
-    idle: "",
-    required: "Completa los campos obligatorios para continuar.",
-    completePrevious: "Completa los pasos previos antes de enviar.",
-    otherRequired: "Si seleccionas 'Otro', especifica el detalle.",
-    descriptionShort: "La descripción del proyecto debe tener al menos 20 caracteres.",
-    sending: "Enviando solicitud de evaluación técnica...",
-    success: "Gracias. Hemos recibido tu solicitud y te contactaremos en breve.",
-    error: "No pudimos procesar tu solicitud. Inténtalo de nuevo.",
-  };
-
+  let runtimeLang = normalizeLang(document.documentElement.getAttribute("data-lang") || document.documentElement.lang || "en");
   let activeStep = 1;
   let unlockedStep = 1;
   let isSubmitting = false;
+  let statusState = "idle";
 
-  function setStatus(state) {
-    statusEl.classList.remove("is-error", "is-success");
-    statusEl.textContent = statusCopy[state] || "";
-
-    if (state === "success") {
-      statusEl.classList.add("is-success");
-    } else if (state !== "idle") {
-      statusEl.classList.add("is-error");
-    }
+  function normalizeLang(raw) {
+    const base = String(raw || "").toLowerCase().split("-")[0];
+    return SUPPORTED_LANGS.has(base) ? base : "en";
   }
 
-  function updateSubmitText() {
-    submitBtn.textContent = isSubmitting ? "Enviando..." : "Enviar evaluación técnica";
+  function copyFor(lang = runtimeLang) {
+    return COPY[normalizeLang(lang)] || COPY.en;
   }
 
-  function getInputs(name) {
-    return Array.from(form.querySelectorAll(`input[name="${name}"]`));
+  function format(template, params) {
+    return String(template || "").replace(/\{(\w+)\}/g, (match, key) =>
+      Object.prototype.hasOwnProperty.call(params, key) ? String(params[key]) : match
+    );
   }
 
-  function getChecked(name) {
-    const inputs = getInputs(name);
-    return inputs.filter((input) => input.checked);
+  function getStepSection(step) {
+    return steps.find((section) => Number(section.dataset.step) === step) || null;
   }
 
-  function isOtherSelected(name) {
-    return getChecked(name).some((input) => input.value === "other");
+  function getConditionalTextInput(wrapper) {
+    return wrapper?.querySelector('input[type="text"], textarea') || null;
   }
 
-  function getStepElement(step) {
-    return form.querySelector(`.wizard-step[data-step="${step}"]`);
-  }
+  function toggleConditionalFields(scope = form) {
+    scope.querySelectorAll(".conditional-field[data-conditional-wrapper]").forEach((wrapper) => {
+      const targetId = wrapper.getAttribute("data-conditional-wrapper");
+      const trigger = form.querySelector(`[data-other-target="${targetId}"]`);
+      const input = getConditionalTextInput(wrapper);
+      const shouldShow = Boolean(trigger?.checked);
 
-  function clearInvalidStyles(step) {
-    const stepEl = getStepElement(step);
-    stepEl?.classList.remove("is-invalid-field");
-    stepEl?.querySelectorAll(".is-invalid-field").forEach((el) => el.classList.remove("is-invalid-field"));
-  }
-
-  function markInvalid(step) {
-    getStepElement(step)?.classList.add("is-invalid-field");
-  }
-
-  function setConditionalVisibility(groupName, targetId) {
-    const wrapper = form.querySelector(`[data-conditional-wrapper="${targetId}"]`);
-    const field = document.getElementById(targetId);
-    if (!wrapper || !field) return;
-
-    const shouldShow = isOtherSelected(groupName);
-    wrapper.classList.toggle("is-hidden", !shouldShow);
-    field.required = shouldShow;
-
-    if (!shouldShow) {
-      field.value = "";
-      field.classList.remove("is-invalid-field");
-    }
-  }
-
-  function validateRadioStep(step, rule, applyErrors = false) {
-    const checked = getChecked(rule.name);
-    let valid = checked.length === 1;
-
-    if (valid && rule.otherField && isOtherSelected(rule.name)) {
-      const otherField = document.getElementById(rule.otherField);
-      valid = Boolean(otherField && otherField.value.trim());
-      if (!valid && applyErrors && otherField) {
-        otherField.classList.add("is-invalid-field");
-      }
-    }
-
-    if (!valid && applyErrors) {
-      markInvalid(step);
-      const first = getInputs(rule.name)[0];
-      first?.focus({ preventScroll: true });
-    }
-
-    return valid;
-  }
-
-  function validateCheckboxStep(step, rule, applyErrors = false) {
-    const checked = getChecked(rule.name);
-    let valid = checked.length >= (rule.min || 1);
-
-    if (valid && rule.otherField && isOtherSelected(rule.name)) {
-      const otherField = document.getElementById(rule.otherField);
-      valid = Boolean(otherField && otherField.value.trim());
-      if (!valid && applyErrors && otherField) {
-        otherField.classList.add("is-invalid-field");
-      }
-    }
-
-    if (!valid && applyErrors) {
-      markInvalid(step);
-      const first = getInputs(rule.name)[0];
-      first?.focus({ preventScroll: true });
-    }
-
-    return valid;
-  }
-
-  function validateContactStep(step, rule, applyErrors = false) {
-    let valid = true;
-    let firstInvalid = null;
-
-    rule.requiredFields.forEach((fieldId) => {
-      const field = document.getElementById(fieldId);
-      if (!field) {
-        valid = false;
-        return;
-      }
-
-      const value = field.value.trim();
-      const fieldValid = value !== "" && field.checkValidity();
-
-      if (!fieldValid) {
-        valid = false;
-        if (!firstInvalid) firstInvalid = field;
-      }
-
-      if (applyErrors) {
-        field.classList.toggle("is-invalid-field", !fieldValid);
+      wrapper.classList.toggle("is-hidden", !shouldShow);
+      if (input) {
+        input.disabled = !shouldShow;
+        input.required = shouldShow;
+        if (!shouldShow) {
+          input.value = "";
+          input.classList.remove("is-invalid-field");
+        }
       }
     });
-
-    const descriptionField = document.getElementById(rule.descriptionField);
-    if (descriptionField) {
-      const lengthValid = descriptionField.value.trim().length >= (rule.minLength || 20);
-      if (!lengthValid) {
-        valid = false;
-        if (!firstInvalid) firstInvalid = descriptionField;
-      }
-      if (applyErrors) {
-        descriptionField.classList.toggle("is-invalid-field", !lengthValid);
-      }
-    }
-
-    if (!valid && applyErrors) {
-      markInvalid(step);
-      firstInvalid?.focus({ preventScroll: true });
-    }
-
-    return valid;
   }
 
-  function isStepComplete(step, applyErrors = false) {
-    const rule = stepRules[step];
-    if (!rule) return true;
+  function isStepComplete(step) {
+    const section = getStepSection(step);
+    if (!section) return false;
 
-    if (!applyErrors) clearInvalidStyles(step);
+    if (step <= 10) {
+      const hasSelection = Array.from(section.querySelectorAll('input[type="radio"], input[type="checkbox"]')).some((input) => input.checked);
+      if (!hasSelection) return false;
 
-    if (rule.type === "radio") return validateRadioStep(step, rule, applyErrors);
-    if (rule.type === "checkbox") return validateCheckboxStep(step, rule, applyErrors);
-    if (rule.type === "contact") return validateContactStep(step, rule, applyErrors);
+      const otherTrigger = section.querySelector("[data-other-target]:checked");
+      if (otherTrigger) {
+        const otherField = document.getElementById(otherTrigger.getAttribute("data-other-target"));
+        if (!otherField || otherField.value.trim() === "") return false;
+      }
+      return true;
+    }
 
-    return true;
+    const description = document.getElementById("eval-project-description");
+    const requiredFields = Array.from(section.querySelectorAll("[required]")).filter((field) => !field.disabled && field.type !== "file");
+    return requiredFields.every((field) => field.value.trim() !== "" && field.checkValidity()) && Boolean(description?.value.trim().length >= 20);
   }
 
   function getSequentialUnlockedStep() {
     let unlocked = 1;
     for (let step = 1; step <= TOTAL_STEPS; step += 1) {
-      if (!isStepComplete(step, false)) break;
-      unlocked = step + 1;
+      if (!isStepComplete(step)) break;
+      unlocked = Math.min(TOTAL_STEPS, step + 1);
     }
-    return Math.min(unlocked, TOTAL_STEPS);
+    return unlocked;
   }
 
   function updateProgress() {
-    const percent = Math.round(((activeStep - 1) / (TOTAL_STEPS - 1)) * 100);
+    const percent = TOTAL_STEPS <= 1 ? 100 : Math.round(((activeStep - 1) / (TOTAL_STEPS - 1)) * 100);
     progressFill.style.width = `${percent}%`;
-    progressText.textContent = `PASO ${activeStep} DE ${TOTAL_STEPS}`;
+    progressText.textContent = format(copyFor().progress, { current: activeStep, total: TOTAL_STEPS });
   }
 
-  function renderWizard() {
-    steps.forEach((stepEl) => {
-      const step = Number(stepEl.dataset.step);
-      const isActive = step === activeStep;
-      stepEl.classList.toggle("is-active", isActive);
-      stepEl.setAttribute("aria-hidden", isActive ? "false" : "true");
+  function setStatus(state) {
+    statusState = state;
+    statusEl.textContent = copyFor().status[state] || "";
+    statusEl.classList.toggle("is-error", state !== "idle" && state !== "success");
+    statusEl.classList.toggle("is-success", state === "success");
+  }
+
+  function updateActionLabels() {
+    form.querySelectorAll(".step-next-btn").forEach((button) => {
+      button.textContent = copyFor().next;
+    });
+    form.querySelectorAll(".wizard-back-btn").forEach((button) => {
+      button.textContent = copyFor().back;
+    });
+    submitBtn.textContent = isSubmitting ? copyFor().sending : copyFor().submit;
+  }
+
+  function localizeStep(step) {
+    const section = getStepSection(step);
+    const stepCopy = copyFor().steps[step];
+    if (!section || !stepCopy) return;
+
+    const title = section.querySelector("h3");
+    const help = section.querySelector(".wizard-help");
+    if (title) title.textContent = stepCopy.title;
+    if (help) help.textContent = stepCopy.help;
+
+    Object.entries(stepCopy.options || {}).forEach(([id, value]) => {
+      const label = section.querySelector(`label[for="${id}"]`);
+      if (label) label.textContent = value;
     });
 
-    stepButtons.forEach((btn) => {
-      const step = Number(btn.dataset.stepJump);
-      const canOpen = step <= unlockedStep;
-      const isCurrent = step === activeStep;
-      const isComplete = step < activeStep && isStepComplete(step, false);
+    if (step === 5) {
+      const exactLabel = section.querySelector('label[for="eval-exact-dimensions"]');
+      const exactInput = document.getElementById("eval-exact-dimensions");
+      if (exactLabel) exactLabel.textContent = stepCopy.exactLabel;
+      if (exactInput) exactInput.setAttribute("placeholder", stepCopy.exactPlaceholder);
+    }
 
-      btn.disabled = !canOpen;
-      btn.classList.toggle("is-current", isCurrent);
-      btn.classList.toggle("is-complete", isComplete);
-      btn.setAttribute("aria-selected", isCurrent ? "true" : "false");
-      btn.textContent = `PASO ${step}`;
+    if (step === 11) {
+      Object.entries(stepCopy.labels || {}).forEach(([id, value]) => {
+        const label = section.querySelector(`label[for="${id}"]`);
+        if (label) label.textContent = value;
+      });
+      const description = document.getElementById("eval-project-description");
+      if (description) description.setAttribute("placeholder", stepCopy.projectPlaceholder);
+    }
+  }
+
+  function syncI18nText() {
+    wizard.querySelector(".wizard-steps")?.setAttribute("aria-label", copyFor().tablist);
+    stepButtons.forEach((button) => {
+      const step = Number(button.dataset.stepJump);
+      button.textContent = format(copyFor().stepLabel, { n: step });
+    });
+
+    for (let step = 1; step <= TOTAL_STEPS; step += 1) {
+      localizeStep(step);
+    }
+
+    form.querySelectorAll(".conditional-field[data-conditional-wrapper]").forEach((wrapper) => {
+      const input = getConditionalTextInput(wrapper);
+      const label = input ? wrapper.querySelector(`label[for="${input.id}"]`) : null;
+      if (label) label.textContent = copyFor().fields.specify;
+    });
+
+    updateActionLabels();
+    updateProgress();
+    if (statusState !== "idle") setStatus(statusState);
+  }
+  function renderWizard() {
+    steps.forEach((section) => {
+      const step = Number(section.dataset.step);
+      const isActive = step === activeStep;
+      section.classList.toggle("is-active", isActive);
+      section.setAttribute("aria-hidden", isActive ? "false" : "true");
+    });
+
+    stepButtons.forEach((button) => {
+      const step = Number(button.dataset.stepJump);
+      const isCurrent = step === activeStep;
+      const isComplete = step < activeStep && isStepComplete(step);
+      const canOpen = step <= unlockedStep;
+      button.disabled = !canOpen;
+      button.classList.toggle("is-current", isCurrent);
+      button.classList.toggle("is-complete", isComplete);
+      button.setAttribute("aria-selected", isCurrent ? "true" : "false");
     });
 
     updateProgress();
   }
 
-  function focusStepFirstField(step) {
-    const stepEl = getStepElement(step);
-    if (!stepEl) return;
-    const first = stepEl.querySelector("input, textarea, select, button");
-    first?.focus?.({ preventScroll: true });
+  function focusStep(step) {
+    const section = getStepSection(step);
+    section?.querySelector("input, textarea, button")?.focus?.({ preventScroll: true });
+  }
+
+  function goToStep(step, shouldFocus = true) {
+    activeStep = Math.max(1, Math.min(step, unlockedStep));
+    renderWizard();
+    persistState();
+    if (shouldFocus) focusStep(activeStep);
+  }
+
+  function validateOtherField(step) {
+    const section = getStepSection(step);
+    const otherTrigger = section?.querySelector("[data-other-target]:checked");
+    if (!otherTrigger) return true;
+
+    const otherField = document.getElementById(otherTrigger.getAttribute("data-other-target"));
+    const valid = Boolean(otherField && otherField.value.trim() !== "");
+    otherField?.classList.toggle("is-invalid-field", !valid);
+    if (!valid) {
+      setStatus("otherRequired");
+      otherField?.focus?.({ preventScroll: true });
+    }
+    return valid;
+  }
+
+  function validateStep(step) {
+    if (!isStepComplete(step)) {
+      if (step === 11) {
+        const description = document.getElementById("eval-project-description");
+        if (description && description.value.trim().length > 0 && description.value.trim().length < 20) {
+          description.classList.add("is-invalid-field");
+          setStatus("descriptionShort");
+          description.focus({ preventScroll: true });
+          return false;
+        }
+
+        const invalidField = Array.from(getStepSection(step)?.querySelectorAll("input, textarea") || []).find((field) => {
+          if (field.type === "file" || field.disabled) return false;
+          const value = typeof field.value === "string" ? field.value.trim() : "";
+          const valid = !field.required || (value !== "" && field.checkValidity());
+          field.classList.toggle("is-invalid-field", !valid);
+          return !valid;
+        });
+
+        if (invalidField) {
+          setStatus("required");
+          invalidField.focus({ preventScroll: true });
+          return false;
+        }
+      } else {
+        setStatus("required");
+        getStepSection(step)?.querySelector('input[type="radio"], input[type="checkbox"]')?.focus?.({ preventScroll: true });
+        return false;
+      }
+    }
+
+    if (!validateOtherField(step)) return false;
+
+    if (step === 11) {
+      const description = document.getElementById("eval-project-description");
+      if (description && description.value.trim().length < 20) {
+        description.classList.add("is-invalid-field");
+        setStatus("descriptionShort");
+        description.focus({ preventScroll: true });
+        return false;
+      }
+    }
+
+    setStatus("idle");
+    return true;
   }
 
   function persistState() {
-    const checks = {};
-    form.querySelectorAll('input[type="checkbox"], input[type="radio"]').forEach((input) => {
-      checks[input.id] = input.checked;
+    const state = { activeStep, checked: {}, values: {} };
+
+    form.querySelectorAll("input, textarea").forEach((field) => {
+      if (!field.id || field.type === "file") return;
+      if (field.type === "radio" || field.type === "checkbox") {
+        state.checked[field.id] = field.checked;
+      } else {
+        state.values[field.id] = field.value;
+      }
     });
 
-    const values = {};
-    form.querySelectorAll("input[type='text'], input[type='email'], textarea, select").forEach((field) => {
-      values[field.id] = field.value;
-    });
-
-    const payload = { activeStep, unlockedStep, checks, values };
-    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   }
 
   function restoreState() {
@@ -268,236 +420,118 @@
     if (!raw) return;
 
     try {
-      const payload = JSON.parse(raw);
-      if (!payload || typeof payload !== "object") return;
-
-      if (payload.checks) {
-        Object.entries(payload.checks).forEach(([id, checked]) => {
-          const input = document.getElementById(id);
-          if (input && (input.type === "checkbox" || input.type === "radio")) {
-            input.checked = Boolean(checked);
-          }
-        });
-      }
-
-      if (payload.values) {
-        Object.entries(payload.values).forEach(([id, value]) => {
-          const field = document.getElementById(id);
-          if (field) field.value = typeof value === "string" ? value : "";
-        });
-      }
-
-      [
-        ["applicationType", "eval-application-other"],
-        ["industrySector", "eval-sector-other"],
-        ["functionMain", "eval-function-other"],
-        ["materialConsidered", "eval-material-other"],
-      ].forEach(([name, target]) => setConditionalVisibility(name, target));
-
-      unlockedStep = getSequentialUnlockedStep();
-      const storedStep = Number(payload.activeStep || 1);
-      activeStep = Math.min(Math.max(1, storedStep), unlockedStep);
+      const state = JSON.parse(raw);
+      Object.entries(state.checked || {}).forEach(([id, checked]) => {
+        const field = document.getElementById(id);
+        if (field && (field.type === "radio" || field.type === "checkbox")) {
+          field.checked = Boolean(checked);
+        }
+      });
+      Object.entries(state.values || {}).forEach(([id, value]) => {
+        const field = document.getElementById(id);
+        if (field && field.type !== "file") field.value = typeof value === "string" ? value : "";
+      });
+      toggleConditionalFields();
+      unlockedStep = Math.max(1, getSequentialUnlockedStep());
+      activeStep = Math.max(1, Math.min(Number(state.activeStep || 1), unlockedStep));
     } catch (_error) {
       sessionStorage.removeItem(STORAGE_KEY);
     }
   }
 
-  function goToStep(targetStep) {
-    const nextStep = Math.min(Math.max(1, targetStep), unlockedStep);
-    activeStep = nextStep;
+  function resetWizard() {
+    form.reset();
+    form.querySelectorAll(".is-invalid-field").forEach((field) => field.classList.remove("is-invalid-field"));
+    toggleConditionalFields();
+    activeStep = 1;
+    unlockedStep = 1;
+    isSubmitting = false;
+    submitBtn.disabled = false;
+    updateActionLabels();
+    sessionStorage.removeItem(STORAGE_KEY);
     renderWizard();
-    persistState();
   }
-
-  function handleNext(step) {
-    const rule = stepRules[step];
-    const valid = isStepComplete(step, true);
-
-    if (!valid) {
-      if (rule?.otherField && isOtherSelected(rule.name)) {
-        setStatus("otherRequired");
-      } else if (step === 11) {
-        const description = document.getElementById("eval-project-description")?.value.trim() || "";
-        if (description.length > 0 && description.length < 20) {
-          setStatus("descriptionShort");
-        } else {
-          setStatus("required");
-        }
-      } else {
-        setStatus("required");
-      }
-      return;
-    }
-
-    setStatus("idle");
-    unlockedStep = Math.max(unlockedStep, Math.min(step + 1, TOTAL_STEPS));
-    goToStep(Math.min(step + 1, TOTAL_STEPS));
-    focusStepFirstField(activeStep);
-  }
-
-  function getFormPayload() {
-    const payload = {
-      timestamp: new Date().toISOString(),
-      requestType: getChecked("requestType")[0]?.value || "",
-      currentInfo: getChecked("currentInfo")[0]?.value || "",
-      projectPhase: getChecked("projectPhase")[0]?.value || "",
-      estimatedVolume: getChecked("estimatedVolume")[0]?.value || "",
-      dimensionsRange: getChecked("dimensionsRange")[0]?.value || "",
-      exactDimensions: (document.getElementById("eval-exact-dimensions")?.value || "").trim(),
-      applicationType: getChecked("applicationType")[0]?.value || "",
-      applicationOther: (document.getElementById("eval-application-other")?.value || "").trim(),
-      industrySector: getChecked("industrySector")[0]?.value || "",
-      industrySectorOther: (document.getElementById("eval-sector-other")?.value || "").trim(),
-      temperatureRange: getChecked("temperatureRange")[0]?.value || "",
-      functionMain: getChecked("functionMain").map((item) => item.value),
-      functionMainOther: (document.getElementById("eval-function-other")?.value || "").trim(),
-      materialConsidered: getChecked("materialConsidered")[0]?.value || "",
-      materialOther: (document.getElementById("eval-material-other")?.value || "").trim(),
-      contact: {
-        name: (document.getElementById("eval-name")?.value || "").trim(),
-        company: (document.getElementById("eval-company")?.value || "").trim(),
-        role: (document.getElementById("eval-role")?.value || "").trim(),
-        email: (document.getElementById("eval-email")?.value || "").trim(),
-        phone: (document.getElementById("eval-phone")?.value || "").trim(),
-        country: (document.getElementById("eval-country")?.value || "").trim(),
-      },
-      projectDescription: (document.getElementById("eval-project-description")?.value || "").trim(),
-      files: Array.from(document.getElementById("eval-files")?.files || []).map((file) => file.name),
-    };
-
-    return payload;
-  }
-
-  async function sendForm(payload) {
-    // Stub de envío hasta conectar endpoint real.
-    console.log("[Nanoker] Evaluation payload", payload);
-    await new Promise((resolve) => window.setTimeout(resolve, 900));
-    return { ok: true };
-  }
-
-  function bindStepEvents() {
-    stepButtons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const target = Number(btn.dataset.stepJump);
-        if (target <= unlockedStep) {
-          goToStep(target);
-          focusStepFirstField(target);
-        }
-      });
+  stepButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const step = Number(button.dataset.stepJump);
+      if (step <= unlockedStep) goToStep(step);
     });
+  });
 
-    form.querySelectorAll("[data-next-step]").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const step = Number(btn.dataset.nextStep);
-        handleNext(step);
-      });
+  form.querySelectorAll("[data-next-step]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const step = Number(button.getAttribute("data-next-step"));
+      if (!validateStep(step)) return;
+      unlockedStep = Math.max(unlockedStep, Math.min(TOTAL_STEPS, step + 1));
+      goToStep(step + 1);
     });
+  });
 
-    form.querySelectorAll("[data-prev-step]").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const step = Number(btn.dataset.prevStep);
-        activeStep = Math.max(1, step);
-        renderWizard();
-        persistState();
-        focusStepFirstField(activeStep);
-      });
+  form.querySelectorAll("[data-prev-step]").forEach((button) => {
+    button.addEventListener("click", () => {
+      activeStep = Math.max(1, Number(button.getAttribute("data-prev-step")));
+      renderWizard();
+      persistState();
+      focusStep(activeStep);
     });
+  });
 
-    form.querySelectorAll('input[type="radio"], input[type="checkbox"], input[type="text"], input[type="email"], textarea, select').forEach((field) => {
-      const eventName = field.tagName === "SELECT" ? "change" : "input";
-      field.addEventListener(eventName, () => {
-        field.classList.remove("is-invalid-field");
-
-        setConditionalVisibility("applicationType", "eval-application-other");
-        setConditionalVisibility("industrySector", "eval-sector-other");
-        setConditionalVisibility("functionMain", "eval-function-other");
-        setConditionalVisibility("materialConsidered", "eval-material-other");
-
-        unlockedStep = getSequentialUnlockedStep();
-        if (activeStep > unlockedStep) activeStep = unlockedStep;
-        renderWizard();
-        persistState();
-
-        if (statusEl.textContent) setStatus("idle");
-      });
-
-      field.addEventListener("change", () => {
-        field.classList.remove("is-invalid-field");
-
-        setConditionalVisibility("applicationType", "eval-application-other");
-        setConditionalVisibility("industrySector", "eval-sector-other");
-        setConditionalVisibility("functionMain", "eval-function-other");
-        setConditionalVisibility("materialConsidered", "eval-material-other");
-
-        unlockedStep = getSequentialUnlockedStep();
-        if (activeStep > unlockedStep) activeStep = unlockedStep;
-        renderWizard();
-        persistState();
-      });
+  form.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach((field) => {
+    field.addEventListener("change", () => {
+      toggleConditionalFields(field.closest(".wizard-step") || form);
+      unlockedStep = Math.max(1, getSequentialUnlockedStep());
+      if (statusState !== "idle") setStatus("idle");
+      persistState();
+      renderWizard();
     });
-  }
+  });
 
-  form.addEventListener("submit", async (event) => {
+  form.querySelectorAll('input[type="text"], input[type="email"], textarea').forEach((field) => {
+    field.addEventListener("input", () => {
+      field.classList.remove("is-invalid-field");
+      unlockedStep = Math.max(1, getSequentialUnlockedStep());
+      if (statusState !== "idle") setStatus("idle");
+      persistState();
+      renderWizard();
+    });
+  });
+
+  form.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    const unlocked = getSequentialUnlockedStep();
-    if (unlocked < TOTAL_STEPS || activeStep < TOTAL_STEPS) {
+    unlockedStep = Math.max(1, getSequentialUnlockedStep());
+    if (unlockedStep < TOTAL_STEPS) {
+      goToStep(unlockedStep);
       setStatus("completePrevious");
-      activeStep = unlocked;
-      renderWizard();
-      focusStepFirstField(activeStep);
-      persistState();
       return;
     }
 
-    const valid = isStepComplete(11, true);
-    if (!valid) {
-      const description = document.getElementById("eval-project-description")?.value.trim() || "";
-      if (description.length > 0 && description.length < 20) {
-        setStatus("descriptionShort");
-      } else {
-        setStatus("required");
-      }
-      return;
-    }
+    if (!validateStep(TOTAL_STEPS)) return;
 
     isSubmitting = true;
     submitBtn.disabled = true;
-    updateSubmitText();
+    updateActionLabels();
     setStatus("sending");
 
-    try {
-      const payload = getFormPayload();
-      await sendForm(payload);
-
-      form.reset();
-      form.querySelectorAll(".is-invalid-field").forEach((el) => el.classList.remove("is-invalid-field"));
-      [
-        ["applicationType", "eval-application-other"],
-        ["industrySector", "eval-sector-other"],
-        ["functionMain", "eval-function-other"],
-        ["materialConsidered", "eval-material-other"],
-      ].forEach(([name, target]) => setConditionalVisibility(name, target));
-
-      activeStep = 1;
-      unlockedStep = 1;
-      sessionStorage.removeItem(STORAGE_KEY);
-      renderWizard();
-      setStatus("success");
-    } catch (_error) {
-      setStatus("error");
-    } finally {
+    window.setTimeout(() => {
       isSubmitting = false;
       submitBtn.disabled = false;
-      updateSubmitText();
-    }
+      updateActionLabels();
+      resetWizard();
+      setStatus("success");
+    }, 1000);
+  });
+
+  window.addEventListener("lang:change", (event) => {
+    runtimeLang = normalizeLang(event.detail?.lang || runtimeLang);
+    syncI18nText();
   });
 
   restoreState();
-  bindStepEvents();
-  unlockedStep = getSequentialUnlockedStep();
+  toggleConditionalFields();
+  unlockedStep = Math.max(1, getSequentialUnlockedStep());
   if (activeStep > unlockedStep) activeStep = unlockedStep;
+  syncI18nText();
   renderWizard();
-  updateSubmitText();
   persistState();
 })();

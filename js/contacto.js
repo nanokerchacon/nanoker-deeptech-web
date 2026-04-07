@@ -4,7 +4,7 @@
 
   function normalizeLang(raw) {
     const base = String(raw || "").toLowerCase().split("-")[0];
-    return base === "es" ? "es" : "en";
+    return ["es", "en", "fr", "de"].includes(base) ? base : "en";
   }
 
   const initialLang = normalizeLang(

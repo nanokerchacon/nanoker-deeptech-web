@@ -3,22 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script>
-      (function () {
-        var doc = document.documentElement;
-        var lang = 'en';
-        try {
-          var queryLang = new URLSearchParams(window.location.search).get('lang');
-          var raw = queryLang || localStorage.getItem('nanoker-lang') || navigator.language || 'en';
-          lang = String(raw).toLowerCase().split('-')[0] === 'es' ? 'es' : 'en';
-        } catch (_error) {
-          var fallback = navigator.language || 'en';
-          lang = String(fallback).toLowerCase().split('-')[0] === 'es' ? 'es' : 'en';
-        }
-        doc.lang = lang;
-        doc.setAttribute('data-lang', lang);
-      })();
-    </script>
+    <script src="./js/lang-bootstrap.js"></script>
     <title>Nanoker | DeepTech Advanced Materials</title>
     <meta
       name="description"
@@ -441,10 +426,10 @@
   </a>
 </header>
 
-<section class="hero-bridge" aria-label="Introducción">
+<section class="hero-bridge" aria-label="Introducción" data-i18n-aria-label="hero.bridgeSectionAria">
   <div class="hero-bridge-content">
     <div class="hero-bridge-panel">
-      <div class="hero-bridge-eyebrow">EU DEEPTECH · MATERIALS INFRASTRUCTURE</div>
+      <div class="hero-bridge-eyebrow" data-i18n="hero.bridgeEyebrow">EU DEEPTECH · MATERIALS INFRASTRUCTURE</div>
 
       <p class="hero-bridge-text" data-i18n-html="hero.bridgeHtml"></p>
 

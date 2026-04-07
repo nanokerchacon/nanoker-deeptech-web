@@ -55,7 +55,7 @@
       const logoLink = document.createElement("a");
       logoLink.className = "mobile-menu-logo";
       logoLink.setAttribute("href", logoHref || "./index.html");
-      logoLink.setAttribute("aria-label", "Nanoker Home");
+      logoLink.setAttribute("aria-label", "Nanoker");
       if (logoSrc) {
         const logoImage = document.createElement("img");
         logoImage.setAttribute("src", logoSrc);
@@ -81,11 +81,7 @@
       mobileLangBtn.className = "nav-lang nav-lang--mobile";
       mobileLangBtn.setAttribute("type", "button");
       mobileLangBtn.setAttribute("data-lang-toggle", "");
-      mobileLangBtn.setAttribute("aria-label", "Change language");
-      mobileLangBtn.innerHTML =
-        '<span class="nav-lang__token nav-lang__token--es">ES</span>' +
-        '<span class="nav-lang__sep">/</span>' +
-        '<span class="nav-lang__token nav-lang__token--en">EN</span>';
+      mobileLangBtn.setAttribute("aria-label", "Language");
 
       mobileActions.appendChild(mobileLangBtn);
       mobileActions.appendChild(closeBtn);
@@ -108,11 +104,7 @@
       mobileLangBtn.className = "nav-lang nav-lang--mobile";
       mobileLangBtn.setAttribute("type", "button");
       mobileLangBtn.setAttribute("data-lang-toggle", "");
-      mobileLangBtn.setAttribute("aria-label", "Change language");
-      mobileLangBtn.innerHTML =
-        '<span class="nav-lang__token nav-lang__token--es">ES</span>' +
-        '<span class="nav-lang__sep">/</span>' +
-        '<span class="nav-lang__token nav-lang__token--en">EN</span>';
+      mobileLangBtn.setAttribute("aria-label", "Language");
       mobileActions.prepend(mobileLangBtn);
     }
 

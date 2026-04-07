@@ -3,22 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script>
-      (function () {
-        var doc = document.documentElement;
-        var lang = 'en';
-        try {
-          var queryLang = new URLSearchParams(window.location.search).get('lang');
-          var raw = queryLang || localStorage.getItem('nanoker-lang') || navigator.language || 'en';
-          lang = String(raw).toLowerCase().split('-')[0] === 'es' ? 'es' : 'en';
-        } catch (_error) {
-          var fallback = navigator.language || 'en';
-          lang = String(fallback).toLowerCase().split('-')[0] === 'es' ? 'es' : 'en';
-        }
-        doc.lang = lang;
-        doc.setAttribute('data-lang', lang);
-      })();
-    </script>
+    <script src="./js/lang-bootstrap.js"></script>
     <title data-i18n="pages.sectors.metaTitle">Nanoker | Sectors</title>
     <meta
       name="description"
