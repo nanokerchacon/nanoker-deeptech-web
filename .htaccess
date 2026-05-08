@@ -1,0 +1,24 @@
+# =========================
+# REDIRECCIONES SEO ANTIGUAS
+# =========================
+
+RedirectMatch 301 ^/welding-and-positioning-pins/?$ https://nanoker.com/sectores.html
+RedirectMatch 301 ^/medical-devices/?$ https://nanoker.com/sectores.html
+RedirectMatch 301 ^/high-performance-heat-sinks/?$ https://nanoker.com/sectores.html
+RedirectMatch 301 ^/custom-technical-ceramics/?$ https://nanoker.com/capacidades.html
+RedirectMatch 301 ^/request-quotation/?$ https://nanoker.com/contacto.html
+RedirectMatch 301 ^/materials/?$ https://nanoker.com/materiales.html
+RedirectMatch 301 ^/shop__trashed/?$ https://nanoker.com/contacto.html
+RedirectMatch 301 ^/pasadores-de-soldadura-y-posicionamiento/?$ https://nanoker.com/sectores.html
+RedirectMatch 301 ^/personal-data-request/?$ https://nanoker.com/privacy.html
+RedirectMatch 301 ^/cart-2/?$ https://nanoker.com/contacto.html
+RedirectMatch 301 ^/cookies-policy/?$ https://nanoker.com/cookies.html
+
+# URLs antiguas genéricas
+RedirectMatch 301 ^/company/?$ https://nanoker.com/empresa.html
+RedirectMatch 301 ^/contact/?$ https://nanoker.com/contacto.html
+RedirectMatch 301 ^/privacy-policy/?$ https://nanoker.com/privacy.html
+RedirectMatch 301 ^/cookie-policy/?$ https://nanoker.com/cookies.html
+RedirectMatch 301 ^/legal-notice/?$ https://nanoker.com/legal-notice.html
+
+DirectoryIndex index.html
