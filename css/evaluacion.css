@@ -17,6 +17,7 @@
   min-height: 100%;
   background: linear-gradient(180deg, #050505 0%, #040404 48%, #030303 100%);
   color: var(--eval-text);
+  overflow-x: clip;
 }
 
 .eval-main {
@@ -216,6 +217,7 @@
 }
 
 .wizard-stepBtn {
+  min-width: 0;
   min-height: 34px;
   padding: 0 10px;
   border-radius: 999px;
@@ -230,6 +232,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  overflow-wrap: anywhere;
   cursor: pointer;
   transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
 }
@@ -300,6 +303,7 @@
   color: rgba(255, 255, 255, 0.88);
   padding: 11px 14px;
   line-height: 1.3;
+  word-break: break-word;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -470,6 +474,11 @@ select option {
 }
 
 .submit-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   min-height: 48px;
   max-width: 100%;
   padding: 12px 18px;
@@ -481,6 +490,7 @@ select option {
   font-size: 0.95rem;
   line-height: 1.3;
   white-space: normal;
+  word-break: break-word;
   cursor: pointer;
   transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
 }
@@ -494,6 +504,16 @@ select option {
   opacity: 0.72;
   cursor: progress;
   transform: none;
+}
+
+.submit-btn.is-loading::before {
+  content: "";
+  width: 15px;
+  height: 15px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(255, 255, 255, 0.24);
+  border-top-color: #fff;
+  animation: evalSpin 0.72s linear infinite;
 }
 
 .form-note {
@@ -510,18 +530,48 @@ select option {
   color: rgba(255, 255, 255, 0.66);
 }
 
+.file-meta {
+  margin: 8px 0 0;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
 .form-status {
   min-height: 1.3em;
-  margin: 0;
+  margin: 10px 0 0;
+  padding: 0;
+  border-radius: 16px;
+  border: 1px solid transparent;
+  background: transparent;
   color: rgba(255, 255, 255, 0.95);
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+  transition: border-color 0.24s ease, background 0.24s ease, box-shadow 0.24s ease, padding 0.24s ease;
+}
+
+.form-status:not(:empty) {
+  padding: 14px 16px;
+}
+
+.form-status.is-sending {
+  border-color: rgba(244, 164, 96, 0.32);
+  background: linear-gradient(180deg, rgba(244, 164, 96, 0.14), rgba(244, 164, 96, 0.06));
+  box-shadow: inset 0 0 0 1px rgba(244, 164, 96, 0.1), 0 18px 44px rgba(244, 164, 96, 0.08);
 }
 
 .form-status.is-error {
-  color: #ffcece;
+  color: #ffe2e2;
+  border-color: rgba(255, 77, 79, 0.34);
+  background: linear-gradient(180deg, rgba(255, 77, 79, 0.16), rgba(255, 77, 79, 0.08));
+  box-shadow: inset 0 0 0 1px rgba(255, 77, 79, 0.14), 0 18px 44px rgba(255, 77, 79, 0.08);
 }
 
 .form-status.is-success {
   color: rgba(196, 255, 201, 0.95);
+  border-color: rgba(112, 244, 160, 0.3);
+  background: linear-gradient(180deg, rgba(82, 220, 134, 0.18), rgba(82, 220, 134, 0.07));
+  box-shadow: inset 0 0 0 1px rgba(82, 220, 134, 0.14), 0 18px 44px rgba(82, 220, 134, 0.08);
 }
 
 input:focus-visible,
@@ -548,6 +598,12 @@ select:focus-visible,
     opacity: 1;
     transform: translateY(0);
     filter: blur(0);
+  }
+}
+
+@keyframes evalSpin {
+  to {
+    transform: rotate(360deg);
   }
 }
 

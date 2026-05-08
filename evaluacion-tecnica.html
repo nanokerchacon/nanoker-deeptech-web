@@ -60,7 +60,7 @@
     />
 
     <link rel="stylesheet" href="css/style.css?v=11" />
-    <link rel="stylesheet" href="css/evaluacion.css?v=1" />
+    <link rel="stylesheet" href="css/evaluacion.css?v=2" />
 
     <script type="importmap">
       {
@@ -152,7 +152,18 @@
               <button type="button" class="wizard-stepBtn" data-step-jump="11" role="tab" aria-selected="false">PASO 11</button>
             </div>
 
-            <form id="evaluation-form" novalidate>
+            <form
+              id="evaluation-form"
+              action="https://formsubmit.co/info@nanoker.com"
+              method="POST"
+              enctype="multipart/form-data"
+              novalidate
+            >
+              <input type="hidden" name="_subject" value="Nanoker | Nueva evaluación técnica" />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_template" value="table" />
+              <input type="hidden" name="_honey" value="" />
+              <input type="hidden" name="_url" value="https://nanoker.com/evaluacion-tecnica.html" />
               <section class="wizard-step is-active" data-step="1" aria-hidden="false">
                 <h3>Tipo de solicitud</h3>
                 <p class="wizard-help">¿Qué tipo de ayuda necesita?</p>
@@ -564,7 +575,14 @@
 
                   <div class="input-grid__full">
                     <label for="eval-files">Subir archivos (opcional, múltiples): CAD, planos, especificaciones, fotos</label>
-                    <input id="eval-files" name="files" type="file" multiple />
+                    <input
+                      id="eval-files"
+                      name="attachment"
+                      type="file"
+                      multiple
+                      accept=".pdf,.dwg,.step,.stp,.png,.jpg,.jpeg,application/pdf,image/png,image/jpeg"
+                    />
+                    <p class="file-meta" id="eval-files-meta">Formatos permitidos: PDF, DWG, STEP, PNG, JPG. Tamaño total recomendado: hasta 5 MB.</p>
                   </div>
                 </div>
 
@@ -667,7 +685,7 @@
       </div>
     </footer>
 
-    <script src="./js/evaluacion.js?v=1" defer></script>
+    <script src="./js/evaluacion.js?v=2" defer></script>
     <script src="./js/mobile-menu.js?v=1" defer></script>
     <script type="module" src="./js/main.js?v=11"></script>
   </body>

@@ -2,6 +2,8 @@
   const STORAGE_KEY = "nanoker_eval_wizard_v1";
   const TOTAL_STEPS = 11;
   const SUPPORTED_LANGS = new Set(["es", "en", "fr", "de"]);
+  const MAX_TOTAL_FILE_SIZE = 5 * 1024 * 1024;
+  const ALLOWED_FILE_EXTENSIONS = new Set(["pdf", "dwg", "step", "stp", "png", "jpg", "jpeg"]);
 
   const COPY = {
     es: {
@@ -12,15 +14,22 @@
       back: "Atrás",
       submit: "Enviar evaluación técnica",
       sending: "Enviando...",
+      fileMeta: {
+        idle: "Formatos permitidos: PDF, DWG, STEP, PNG, JPG. Tamaño total recomendado: hasta 5 MB.",
+        selected: "{count} archivo(s) seleccionado(s) · {size}. Formatos permitidos: PDF, DWG, STEP, PNG, JPG.",
+      },
       status: {
         idle: "",
         required: "Completa los campos obligatorios para continuar.",
         completePrevious: "Completa los pasos previos antes de enviar.",
         otherRequired: "Si seleccionas 'Otro', especifica el detalle.",
         descriptionShort: "La descripción del proyecto debe tener al menos 20 caracteres.",
+        invalidEmail: "Introduce un email válido para poder responder a la solicitud.",
+        fileType: "Revisa los adjuntos. Solo se admiten archivos PDF, DWG, STEP, PNG y JPG.",
+        fileSize: "El peso total recomendado de los archivos es de 5 MB como máximo.",
         sending: "Enviando solicitud de evaluación técnica...",
-        success: "Gracias. Hemos recibido tu solicitud y te contactaremos en breve.",
-        error: "No pudimos procesar tu solicitud. Inténtalo de nuevo.",
+        success: "Solicitud enviada. El equipo de Nanoker revisará la evaluación y responderá por email.",
+        error: "No pudimos procesar tu solicitud ahora mismo. Inténtalo de nuevo en unos minutos.",
       },
       fields: { specify: "Especifica" },
       steps: {
@@ -34,7 +43,7 @@
         8: { title: "Temperatura de operación", help: "¿En qué rango de temperatura operará aproximadamente la pieza?", options: { "temp-cryo": "< -100 °C (criogenia / espacio)", "temp-minus100-0": "-100 - 0 °C", "temp-0-200": "0 - 200 °C", "temp-200-800": "200 - 800 °C", "temp-gt800": "> 800 °C", "temp-unknown": "No lo sé todavía" } },
         9: { title: "Función principal de la pieza", help: "¿Qué función debe cumplir principalmente la pieza? (puede seleccionar varias)", options: { "func-wear": "Resistencia al desgaste o abrasión", "func-hardness": "Alta dureza", "func-insulation": "Aislamiento eléctrico", "func-high-temp": "Resistencia a altas temperaturas", "func-chemical": "Resistencia química o a la corrosión", "func-mechanical": "Alta resistencia mecánica o estructural", "func-tribology": "Baja fricción o propiedades tribológicas", "func-thermal": "Gestión térmica / alta conductividad térmica", "func-stability": "Estabilidad dimensional o precisión", "func-biocompatibility": "Biocompatibilidad", "func-optical": "Aplicación óptica", "func-other": "Otra" } },
         10: { title: "Material considerado", help: "¿Qué material está considerando para su aplicación?", options: { "mat-sapphire": "Zafiro (EPI / SOS / soluciones ópticas)", "mat-sic": "Carburo de silicio (SiC) - wafers o componentes para Fab", "mat-cvd-diamond": "Diamante CVD - cuántica, óptica o gestión térmica", "mat-alumina": "Alúmina (Al2O3)", "mat-zirconia": "Circona estabilizada (ZrO2 / Y-TZP)", "mat-b4c": "Carburo de boro (B4C)", "mat-aln": "Nitruro de aluminio (AlN)", "mat-nanocomposites": "Nanocompuestos cerámicos", "mat-other": "Otro material cerámico avanzado", "mat-unsure": "No estoy seguro / necesito asesoramiento" } },
-        11: { title: "Contacto y descripción", help: "Comparte tus datos y una descripción breve para iniciar la evaluación técnica.", labels: { "eval-name": "Nombre *", "eval-company": "Empresa / organización *", "eval-role": "Cargo", "eval-email": "Email *", "eval-phone": "Teléfono", "eval-country": "País *", "eval-project-description": "Descripción breve del proyecto *", "eval-files": "Subir archivos (opcional, múltiples): CAD, planos, especificaciones, fotos" }, projectPlaceholder: "Describe la aplicación, el entorno de operación y los requisitos principales." },
+        11: { title: "Contacto y descripción", help: "Comparte tus datos y una descripción breve para iniciar la evaluación técnica.", labels: { "eval-name": "Nombre *", "eval-company": "Empresa / organización *", "eval-role": "Cargo", "eval-email": "Email *", "eval-phone": "Teléfono", "eval-country": "País *", "eval-project-description": "Descripción breve del proyecto *", "eval-files": "Subir archivos (opcional, múltiples): PDF, DWG, STEP, PNG, JPG" }, projectPlaceholder: "Describe la aplicación, el entorno de operación y los requisitos principales." },
       },
     },
     en: {
@@ -45,15 +54,22 @@
       back: "Back",
       submit: "Submit technical evaluation",
       sending: "Sending...",
+      fileMeta: {
+        idle: "Allowed formats: PDF, DWG, STEP, PNG, JPG. Recommended total size: up to 5 MB.",
+        selected: "{count} file(s) selected · {size}. Allowed formats: PDF, DWG, STEP, PNG, JPG.",
+      },
       status: {
         idle: "",
         required: "Complete the required fields to continue.",
         completePrevious: "Complete the previous steps before submitting.",
         otherRequired: "If you select 'Other', please specify the detail.",
         descriptionShort: "The project description must contain at least 20 characters.",
+        invalidEmail: "Enter a valid email so we can respond to your request.",
+        fileType: "Please review the attachments. Only PDF, DWG, STEP, PNG, and JPG files are allowed.",
+        fileSize: "The recommended total attachment size is 5 MB maximum.",
         sending: "Sending technical evaluation request...",
-        success: "Thank you. We have received your request and will contact you shortly.",
-        error: "We could not process your request. Please try again.",
+        success: "Request sent. The Nanoker team will review the evaluation and reply by email.",
+        error: "We could not process your request right now. Please try again in a few minutes.",
       },
       fields: { specify: "Specify" },
       steps: {
@@ -67,7 +83,7 @@
         8: { title: "Operating temperature", help: "Within what temperature range will the part operate approximately?", options: { "temp-cryo": "< -100 °C (cryogenics / space)", "temp-minus100-0": "-100 - 0 °C", "temp-0-200": "0 - 200 °C", "temp-200-800": "200 - 800 °C", "temp-gt800": "> 800 °C", "temp-unknown": "I do not know yet" } },
         9: { title: "Main function of the part", help: "What main function must the part fulfill? (you may select several)", options: { "func-wear": "Wear or abrasion resistance", "func-hardness": "High hardness", "func-insulation": "Electrical insulation", "func-high-temp": "High-temperature resistance", "func-chemical": "Chemical or corrosion resistance", "func-mechanical": "High mechanical or structural strength", "func-tribology": "Low friction or tribological properties", "func-thermal": "Thermal management / high thermal conductivity", "func-stability": "Dimensional stability or precision", "func-biocompatibility": "Biocompatibility", "func-optical": "Optical application", "func-other": "Other" } },
         10: { title: "Material under consideration", help: "Which material are you considering for your application?", options: { "mat-sapphire": "Sapphire (EPI / SOS / optical solutions)", "mat-sic": "Silicon carbide (SiC) - wafers or Fab components", "mat-cvd-diamond": "CVD diamond - quantum, optics or thermal management", "mat-alumina": "Alumina (Al2O3)", "mat-zirconia": "Stabilized zirconia (ZrO2 / Y-TZP)", "mat-b4c": "Boron carbide (B4C)", "mat-aln": "Aluminum nitride (AlN)", "mat-nanocomposites": "Ceramic nanocomposites", "mat-other": "Other advanced ceramic material", "mat-unsure": "I am not sure / I need guidance" } },
-        11: { title: "Contact and description", help: "Share your details and a brief description to start the technical assessment.", labels: { "eval-name": "Name *", "eval-company": "Company / organization *", "eval-role": "Role", "eval-email": "Email *", "eval-phone": "Phone", "eval-country": "Country *", "eval-project-description": "Brief project description *", "eval-files": "Upload files (optional, multiple): CAD, drawings, specifications, photos" }, projectPlaceholder: "Describe the application, operating environment, and main requirements." },
+        11: { title: "Contact and description", help: "Share your details and a brief description to start the technical assessment.", labels: { "eval-name": "Name *", "eval-company": "Company / organization *", "eval-role": "Role", "eval-email": "Email *", "eval-phone": "Phone", "eval-country": "Country *", "eval-project-description": "Brief project description *", "eval-files": "Upload files (optional, multiple): PDF, DWG, STEP, PNG, JPG" }, projectPlaceholder: "Describe the application, operating environment, and main requirements." },
       },
     },
     fr: {
@@ -78,15 +94,22 @@
       back: "Retour",
       submit: "Envoyer l'évaluation technique",
       sending: "Envoi...",
+      fileMeta: {
+        idle: "Formats autorisés : PDF, DWG, STEP, PNG, JPG. Taille totale recommandée : jusqu'à 5 Mo.",
+        selected: "{count} fichier(s) sélectionné(s) · {size}. Formats autorisés : PDF, DWG, STEP, PNG, JPG.",
+      },
       status: {
         idle: "",
         required: "Complétez les champs obligatoires pour continuer.",
         completePrevious: "Complétez les étapes précédentes avant l'envoi.",
         otherRequired: "Si vous choisissez « Autre », précisez le détail.",
         descriptionShort: "La description du projet doit contenir au moins 20 caractères.",
+        invalidEmail: "Saisissez une adresse e-mail valide afin que nous puissions vous répondre.",
+        fileType: "Vérifiez les pièces jointes. Seuls les fichiers PDF, DWG, STEP, PNG et JPG sont acceptés.",
+        fileSize: "La taille totale recommandée des pièces jointes est de 5 Mo maximum.",
         sending: "Envoi de la demande d'évaluation technique...",
-        success: "Merci. Nous avons reçu votre demande et vous contacterons sous peu.",
-        error: "Nous n'avons pas pu traiter votre demande. Veuillez réessayer.",
+        success: "Demande envoyée. L'équipe Nanoker examinera l'évaluation et répondra par e-mail.",
+        error: "Nous n'avons pas pu traiter votre demande pour le moment. Veuillez réessayer dans quelques minutes.",
       },
       fields: { specify: "Préciser" },
       steps: {
@@ -100,7 +123,7 @@
         8: { title: "Température de fonctionnement", help: "Dans quelle plage de température la pièce fonctionnera-t-elle approximativement ?", options: { "temp-cryo": "< -100 °C (cryogénie / spatial)", "temp-minus100-0": "-100 - 0 °C", "temp-0-200": "0 - 200 °C", "temp-200-800": "200 - 800 °C", "temp-gt800": "> 800 °C", "temp-unknown": "Je ne sais pas encore" } },
         9: { title: "Fonction principale de la pièce", help: "Quelle fonction principale la pièce doit-elle remplir ? (plusieurs choix possibles)", options: { "func-wear": "Résistance à l'usure ou à l'abrasion", "func-hardness": "Grande dureté", "func-insulation": "Isolation électrique", "func-high-temp": "Résistance aux hautes températures", "func-chemical": "Résistance chimique ou à la corrosion", "func-mechanical": "Haute résistance mécanique ou structurelle", "func-tribology": "Faible friction ou propriétés tribologiques", "func-thermal": "Gestion thermique / haute conductivité thermique", "func-stability": "Stabilité dimensionnelle ou précision", "func-biocompatibility": "Biocompatibilité", "func-optical": "Application optique", "func-other": "Autre" } },
         10: { title: "Matériau envisagé", help: "Quel matériau envisagez-vous pour votre application ?", options: { "mat-sapphire": "Saphir (EPI / SOS / solutions optiques)", "mat-sic": "Carbure de silicium (SiC) - wafers ou composants pour Fab", "mat-cvd-diamond": "Diamant CVD - quantique, optique ou gestion thermique", "mat-alumina": "Alumine (Al2O3)", "mat-zirconia": "Zircone stabilisée (ZrO2 / Y-TZP)", "mat-b4c": "Carbure de bore (B4C)", "mat-aln": "Nitrure d'aluminium (AlN)", "mat-nanocomposites": "Nanocomposites céramiques", "mat-other": "Autre matériau céramique avancé", "mat-unsure": "Je ne suis pas sûr / j'ai besoin de conseil" } },
-        11: { title: "Contact et description", help: "Partagez vos coordonnées et une brève description pour lancer l'évaluation technique.", labels: { "eval-name": "Nom *", "eval-company": "Entreprise / organisation *", "eval-role": "Fonction", "eval-email": "E-mail *", "eval-phone": "Téléphone", "eval-country": "Pays *", "eval-project-description": "Brève description du projet *", "eval-files": "Téléverser des fichiers (optionnel, multiples) : CAO, plans, spécifications, photos" }, projectPlaceholder: "Décrivez l'application, l'environnement d'utilisation et les principales exigences." },
+        11: { title: "Contact et description", help: "Partagez vos coordonnées et une brève description pour lancer l'évaluation technique.", labels: { "eval-name": "Nom *", "eval-company": "Entreprise / organisation *", "eval-role": "Fonction", "eval-email": "E-mail *", "eval-phone": "Téléphone", "eval-country": "Pays *", "eval-project-description": "Brève description du projet *", "eval-files": "Téléverser des fichiers (optionnel, multiples) : PDF, DWG, STEP, PNG, JPG" }, projectPlaceholder: "Décrivez l'application, l'environnement d'utilisation et les principales exigences." },
       },
     },
     de: {
@@ -111,15 +134,22 @@
       back: "Zurück",
       submit: "Technische Bewertung senden",
       sending: "Wird gesendet...",
+      fileMeta: {
+        idle: "Erlaubte Formate: PDF, DWG, STEP, PNG, JPG. Empfohlene Gesamtgröße: bis zu 5 MB.",
+        selected: "{count} Datei(en) ausgewählt · {size}. Erlaubte Formate: PDF, DWG, STEP, PNG, JPG.",
+      },
       status: {
         idle: "",
         required: "Bitte füllen Sie die Pflichtfelder aus, um fortzufahren.",
         completePrevious: "Bitte schließen Sie die vorherigen Schritte vor dem Senden ab.",
         otherRequired: "Wenn Sie 'Andere' wählen, geben Sie bitte Details an.",
         descriptionShort: "Die Projektbeschreibung muss mindestens 20 Zeichen enthalten.",
+        invalidEmail: "Bitte geben Sie eine gültige E-Mail-Adresse ein, damit wir antworten können.",
+        fileType: "Bitte prüfen Sie die Anhänge. Nur PDF-, DWG-, STEP-, PNG- und JPG-Dateien sind erlaubt.",
+        fileSize: "Die empfohlene Gesamtgröße der Anhänge beträgt maximal 5 MB.",
         sending: "Anfrage zur technischen Bewertung wird gesendet...",
-        success: "Danke. Wir haben Ihre Anfrage erhalten und melden uns in Kürze.",
-        error: "Ihre Anfrage konnte nicht verarbeitet werden. Bitte versuchen Sie es erneut.",
+        success: "Anfrage gesendet. Das Nanoker-Team prüft die Bewertung und antwortet per E-Mail.",
+        error: "Ihre Anfrage konnte im Moment nicht verarbeitet werden. Bitte versuchen Sie es in einigen Minuten erneut.",
       },
       fields: { specify: "Bitte angeben" },
       steps: {
@@ -133,10 +163,11 @@
         8: { title: "Betriebstemperatur", help: "In welchem Temperaturbereich wird das Bauteil ungefähr betrieben?", options: { "temp-cryo": "< -100 °C (Kryotechnik / Raumfahrt)", "temp-minus100-0": "-100 - 0 °C", "temp-0-200": "0 - 200 °C", "temp-200-800": "200 - 800 °C", "temp-gt800": "> 800 °C", "temp-unknown": "Ich weiß es noch nicht" } },
         9: { title: "Hauptfunktion des Bauteils", help: "Welche Hauptfunktion muss das Bauteil erfüllen? (Mehrfachauswahl möglich)", options: { "func-wear": "Verschleiß- oder Abriebfestigkeit", "func-hardness": "Hohe Härte", "func-insulation": "Elektrische Isolation", "func-high-temp": "Beständigkeit gegen hohe Temperaturen", "func-chemical": "Chemikalien- oder Korrosionsbeständigkeit", "func-mechanical": "Hohe mechanische oder strukturelle Festigkeit", "func-tribology": "Geringe Reibung oder tribologische Eigenschaften", "func-thermal": "Thermisches Management / hohe Wärmeleitfähigkeit", "func-stability": "Maßstabilität oder Präzision", "func-biocompatibility": "Biokompatibilität", "func-optical": "Optische Anwendung", "func-other": "Andere" } },
         10: { title: "Vorgesehenes Material", help: "Welches Material ziehen Sie für Ihre Anwendung in Betracht?", options: { "mat-sapphire": "Saphir (EPI / SOS / optische Lösungen)", "mat-sic": "Siliziumkarbid (SiC) - Wafer oder Fab-Komponenten", "mat-cvd-diamond": "CVD-Diamant - Quanten, Optik oder Wärmemanagement", "mat-alumina": "Aluminiumoxid (Al2O3)", "mat-zirconia": "Stabilisiertes Zirkonoxid (ZrO2 / Y-TZP)", "mat-b4c": "Borkarbid (B4C)", "mat-aln": "Aluminiumnitrid (AlN)", "mat-nanocomposites": "Keramische Nanokomposite", "mat-other": "Anderes fortschrittliches Keramikmaterial", "mat-unsure": "Ich bin nicht sicher / ich brauche Beratung" } },
-        11: { title: "Kontakt und Beschreibung", help: "Teilen Sie Ihre Kontaktdaten und eine kurze Beschreibung, um die technische Bewertung zu starten.", labels: { "eval-name": "Name *", "eval-company": "Unternehmen / Organisation *", "eval-role": "Position", "eval-email": "E-Mail *", "eval-phone": "Telefon", "eval-country": "Land *", "eval-project-description": "Kurze Projektbeschreibung *", "eval-files": "Dateien hochladen (optional, mehrere): CAD, Zeichnungen, Spezifikationen, Fotos" }, projectPlaceholder: "Beschreiben Sie die Anwendung, die Einsatzumgebung und die wichtigsten Anforderungen." },
+        11: { title: "Kontakt und Beschreibung", help: "Teilen Sie Ihre Kontaktdaten und eine kurze Beschreibung, um die technische Bewertung zu starten.", labels: { "eval-name": "Name *", "eval-company": "Unternehmen / Organisation *", "eval-role": "Position", "eval-email": "E-Mail *", "eval-phone": "Telefon", "eval-country": "Land *", "eval-project-description": "Kurze Projektbeschreibung *", "eval-files": "Dateien hochladen (optional, mehrere): PDF, DWG, STEP, PNG, JPG" }, projectPlaceholder: "Beschreiben Sie die Anwendung, die Einsatzumgebung und die wichtigsten Anforderungen." },
       },
     },
   };
+
   const wizard = document.getElementById("eval-wizard");
   const form = document.getElementById("evaluation-form");
   const steps = Array.from(document.querySelectorAll(".wizard-step"));
@@ -145,8 +176,10 @@
   const progressText = document.getElementById("eval-progress-text");
   const statusEl = document.getElementById("eval-form-status");
   const submitBtn = document.getElementById("eval-submit-btn");
+  const filesInput = document.getElementById("eval-files");
+  const filesMeta = document.getElementById("eval-files-meta");
 
-  if (!wizard || !form || !steps.length || !progressFill || !progressText || !statusEl || !submitBtn) {
+  if (!wizard || !form || !steps.length || !progressFill || !progressText || !statusEl || !submitBtn || !filesInput || !filesMeta) {
     return;
   }
 
@@ -171,12 +204,27 @@
     );
   }
 
+  function formatFileSize(bytes) {
+    if (!Number.isFinite(bytes) || bytes <= 0) return "0 MB";
+    const mb = bytes / (1024 * 1024);
+    return `${mb.toFixed(mb >= 1 ? 1 : 2)} MB`;
+  }
+
+  function getAjaxEndpoint() {
+    const action = form.getAttribute("action") || "";
+    return action.replace("https://formsubmit.co/", "https://formsubmit.co/ajax/");
+  }
+
   function getStepSection(step) {
     return steps.find((section) => Number(section.dataset.step) === step) || null;
   }
 
   function getConditionalTextInput(wrapper) {
     return wrapper?.querySelector('input[type="text"], textarea') || null;
+  }
+
+  function clearFieldInvalidState(field) {
+    field?.classList.remove("is-invalid-field");
   }
 
   function toggleConditionalFields(scope = form) {
@@ -192,7 +240,7 @@
         input.required = shouldShow;
         if (!shouldShow) {
           input.value = "";
-          input.classList.remove("is-invalid-field");
+          clearFieldInvalidState(input);
         }
       }
     });
@@ -211,6 +259,7 @@
         const otherField = document.getElementById(otherTrigger.getAttribute("data-other-target"));
         if (!otherField || otherField.value.trim() === "") return false;
       }
+
       return true;
     }
 
@@ -237,7 +286,8 @@
   function setStatus(state) {
     statusState = state;
     statusEl.textContent = copyFor().status[state] || "";
-    statusEl.classList.toggle("is-error", state !== "idle" && state !== "success");
+    statusEl.classList.toggle("is-sending", state === "sending");
+    statusEl.classList.toggle("is-error", !["idle", "sending", "success"].includes(state));
     statusEl.classList.toggle("is-success", state === "success");
   }
 
@@ -249,6 +299,20 @@
       button.textContent = copyFor().back;
     });
     submitBtn.textContent = isSubmitting ? copyFor().sending : copyFor().submit;
+    submitBtn.classList.toggle("is-loading", isSubmitting);
+  }
+
+  function updateFilesMeta(mode = "idle", files = filesInput.files) {
+    if (mode === "selected") {
+      const totalSize = Array.from(files || []).reduce((sum, file) => sum + (file.size || 0), 0);
+      filesMeta.textContent = format(copyFor().fileMeta.selected, {
+        count: files?.length || 0,
+        size: formatFileSize(totalSize),
+      });
+      return;
+    }
+
+    filesMeta.textContent = copyFor().fileMeta.idle;
   }
 
   function localizeStep(step) {
@@ -300,10 +364,12 @@
       if (label) label.textContent = copyFor().fields.specify;
     });
 
+    updateFilesMeta(filesInput.files?.length ? "selected" : "idle");
     updateActionLabels();
     updateProgress();
     if (statusState !== "idle") setStatus(statusState);
   }
+
   function renderWizard() {
     steps.forEach((section) => {
       const step = Number(section.dataset.step);
@@ -353,6 +419,30 @@
     return valid;
   }
 
+  function validateFiles() {
+    const files = Array.from(filesInput.files || []);
+    const totalSize = files.reduce((sum, file) => sum + (file.size || 0), 0);
+    const hasInvalidExtension = files.some((file) => {
+      const parts = String(file.name || "").toLowerCase().split(".");
+      const extension = parts.length > 1 ? parts.pop() : "";
+      return !ALLOWED_FILE_EXTENSIONS.has(extension || "");
+    });
+
+    filesInput.classList.toggle("is-invalid-field", hasInvalidExtension || totalSize > MAX_TOTAL_FILE_SIZE);
+
+    if (hasInvalidExtension) {
+      setStatus("fileType");
+      return false;
+    }
+
+    if (totalSize > MAX_TOTAL_FILE_SIZE) {
+      setStatus("fileSize");
+      return false;
+    }
+
+    return true;
+  }
+
   function validateStep(step) {
     if (!isStepComplete(step)) {
       if (step === 11) {
@@ -373,7 +463,11 @@
         });
 
         if (invalidField) {
-          setStatus("required");
+          if (invalidField.type === "email") {
+            setStatus("invalidEmail");
+          } else {
+            setStatus("required");
+          }
           invalidField.focus({ preventScroll: true });
           return false;
         }
@@ -388,10 +482,24 @@
 
     if (step === 11) {
       const description = document.getElementById("eval-project-description");
+      const email = document.getElementById("eval-email");
+
       if (description && description.value.trim().length < 20) {
         description.classList.add("is-invalid-field");
         setStatus("descriptionShort");
         description.focus({ preventScroll: true });
+        return false;
+      }
+
+      if (email && !email.checkValidity()) {
+        email.classList.add("is-invalid-field");
+        setStatus("invalidEmail");
+        email.focus({ preventScroll: true });
+        return false;
+      }
+
+      if (!validateFiles()) {
+        filesInput.focus({ preventScroll: true });
         return false;
       }
     }
@@ -448,9 +556,38 @@
     isSubmitting = false;
     submitBtn.disabled = false;
     updateActionLabels();
+    updateFilesMeta("idle");
     sessionStorage.removeItem(STORAGE_KEY);
     renderWizard();
   }
+
+  async function submitForm() {
+    const ajaxEndpoint = getAjaxEndpoint();
+    const formData = new FormData(form);
+    const email = document.getElementById("eval-email");
+
+    formData.set("_replyto", email?.value.trim() || "");
+
+    const response = await fetch(ajaxEndpoint, {
+      method: "POST",
+      body: formData,
+      headers: {
+        Accept: "application/json",
+      },
+    });
+
+    let payload = null;
+    try {
+      payload = await response.json();
+    } catch (_error) {
+      payload = null;
+    }
+
+    if (!response.ok) {
+      throw new Error(payload?.message || "formsubmit_request_failed");
+    }
+  }
+
   stepButtons.forEach((button) => {
     button.addEventListener("click", () => {
       const step = Number(button.dataset.stepJump);
@@ -488,7 +625,7 @@
 
   form.querySelectorAll('input[type="text"], input[type="email"], textarea').forEach((field) => {
     field.addEventListener("input", () => {
-      field.classList.remove("is-invalid-field");
+      clearFieldInvalidState(field);
       unlockedStep = Math.max(1, getSequentialUnlockedStep());
       if (statusState !== "idle") setStatus("idle");
       persistState();
@@ -496,7 +633,20 @@
     });
   });
 
-  form.addEventListener("submit", (event) => {
+  filesInput.addEventListener("change", () => {
+    clearFieldInvalidState(filesInput);
+    if (filesInput.files?.length) {
+      updateFilesMeta("selected");
+      if (validateFiles()) {
+        if (statusState === "fileType" || statusState === "fileSize") setStatus("idle");
+      }
+    } else {
+      updateFilesMeta("idle");
+      if (statusState === "fileType" || statusState === "fileSize") setStatus("idle");
+    }
+  });
+
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     unlockedStep = Math.max(1, getSequentialUnlockedStep());
@@ -513,13 +663,16 @@
     updateActionLabels();
     setStatus("sending");
 
-    window.setTimeout(() => {
+    try {
+      await submitForm();
+      resetWizard();
+      setStatus("success");
+    } catch (_error) {
       isSubmitting = false;
       submitBtn.disabled = false;
       updateActionLabels();
-      resetWizard();
-      setStatus("success");
-    }, 1000);
+      setStatus("error");
+    }
   });
 
   window.addEventListener("lang:change", (event) => {

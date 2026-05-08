@@ -46,8 +46,9 @@
   const step4NextBtn = document.getElementById("step4-next-btn");
   const step5NextBtn = document.getElementById("step5-next-btn");
   const startBtn = document.querySelector("[data-start-request]");
+  const emailInput = document.getElementById("email");
 
-  if (!form || !steps.length || !statusEl || !submitBtn) return;
+  if (!form || !steps.length || !statusEl || !submitBtn || !emailInput) return;
 
   let activeStep = 1;
   let unlockedStep = 1;
@@ -85,20 +86,40 @@
       key: "contact.form.status.reviewRequired",
       fallback: () =>
         trFallback(
-          "Review required fields before submitting.",
+          "Review the required fields before submitting.",
           "Revisa los campos obligatorios antes de enviar."
+        ),
+    },
+    invalidEmail: {
+      key: "contact.form.status.invalidEmail",
+      fallback: () =>
+        trFallback(
+          "Enter a valid email so we can reply.",
+          "Introduce un email válido para poder responder."
         ),
     },
     sending: {
       key: "contact.form.status.sending",
-      fallback: () => trFallback("Sending...", "Enviando..."),
+      fallback: () =>
+        trFallback(
+          "Sending technical contact request...",
+          "Enviando solicitud de contacto técnico..."
+        ),
     },
     received: {
       key: "contact.form.status.received",
       fallback: () =>
         trFallback(
-          "Received. We will reply within 3-5 business days.",
-          "Recibido. Te responderemos en 3-5 dias laborables."
+          "Request sent. We will reply within 3-5 business days.",
+          "Solicitud enviada. Te responderemos en 3-5 días laborables."
+        ),
+    },
+    error: {
+      key: "contact.form.status.error",
+      fallback: () =>
+        trFallback(
+          "We could not process your request right now. Please try again in a few minutes.",
+          "No pudimos procesar tu solicitud ahora mismo. Inténtalo de nuevo en unos minutos."
         ),
     },
   };
@@ -127,6 +148,11 @@
     return unlocked;
   }
 
+  function getAjaxEndpoint() {
+    const action = form.getAttribute("action") || "";
+    return action.replace("https://formsubmit.co/", "https://formsubmit.co/ajax/");
+  }
+
   function updateProgress() {
     const percent = Math.round(((activeStep - 1) / (TOTAL_STEPS - 1)) * 100);
     progressFill.style.width = `${percent}%`;
@@ -144,11 +170,14 @@
     statusState = state;
     if (state === "idle") {
       statusEl.textContent = "";
-      return;
+    } else {
+      const copy = STATUS_COPY[state];
+      if (copy) statusEl.textContent = tr(copy.key, copy.fallback());
     }
-    const copy = STATUS_COPY[state];
-    if (!copy) return;
-    statusEl.textContent = tr(copy.key, copy.fallback());
+
+    statusEl.classList.toggle("is-sending", state === "sending");
+    statusEl.classList.toggle("is-error", ["requiredFields", "completePrevious", "reviewRequired", "invalidEmail", "error"].includes(state));
+    statusEl.classList.toggle("is-success", state === "received");
   }
 
   function updateSubmitText() {
@@ -157,12 +186,15 @@
         "contact.form.step6.sending",
         trFallback("Sending...", "Enviando...")
       );
+      submitBtn.classList.add("is-loading");
       return;
     }
+
     submitBtn.textContent = tr(
       "contact.form.step6.submit",
-      trFallback("Send technical request", "Enviar solicitud tecnica")
+      trFallback("Send technical request", "Enviar solicitud técnica")
     );
+    submitBtn.classList.remove("is-loading");
   }
 
   function syncI18nRuntimeText() {
@@ -297,6 +329,48 @@
     }
   }
 
+  function clearInvalidState(input) {
+    input.classList.remove("is-invalid-field");
+  }
+
+  function resetWizard() {
+    form.reset();
+    form.querySelectorAll(".is-invalid-field").forEach((input) => input.classList.remove("is-invalid-field"));
+    step3Confirmed = false;
+    step4Confirmed = false;
+    activeStep = 1;
+    unlockedStep = 1;
+    isSubmitting = false;
+    submitBtn.disabled = false;
+    updateSubmitText();
+    sessionStorage.removeItem(STORAGE_KEY);
+    renderWizard();
+  }
+
+  async function submitForm() {
+    const formData = new FormData(form);
+    formData.set("_replyto", emailInput.value.trim());
+
+    const response = await fetch(getAjaxEndpoint(), {
+      method: "POST",
+      body: formData,
+      headers: {
+        Accept: "application/json",
+      },
+    });
+
+    let payload = null;
+    try {
+      payload = await response.json();
+    } catch (_error) {
+      payload = null;
+    }
+
+    if (!response.ok) {
+      throw new Error(payload?.message || "formsubmit_request_failed");
+    }
+  }
+
   stepButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
       const target = Number(btn.dataset.stepJump);
@@ -330,6 +404,7 @@
   if (techInfo) {
     techInfo.addEventListener("input", () => {
       persistState();
+      if (statusState !== "idle") setStatus("idle");
     });
   }
 
@@ -353,23 +428,28 @@
     });
 
     if (firstInvalid) {
-      setStatus("requiredFields");
-      statusEl.classList.add("is-error");
+      setStatus(firstInvalid.type === "email" ? "invalidEmail" : "requiredFields");
       firstInvalid.focus({ preventScroll: true });
       return false;
     }
 
-    statusEl.classList.remove("is-error");
+    if (!emailInput.checkValidity()) {
+      emailInput.classList.add("is-invalid-field");
+      setStatus("invalidEmail");
+      emailInput.focus({ preventScroll: true });
+      return false;
+    }
+
     if (activeStep === 5) setStatus("idle");
     return true;
   }
 
   stepGroups[5]().forEach((input) => {
     input.addEventListener("input", () => {
-      if (input.classList.contains("is-invalid-field")) {
-        const valid = input.value.trim() !== "" && input.checkValidity();
-        input.classList.toggle("is-invalid-field", !valid);
-      }
+      const valid = input.value.trim() !== "" && input.checkValidity();
+      input.classList.toggle("is-invalid-field", !valid);
+      if (statusState !== "idle") setStatus("idle");
+      persistState();
     });
   });
 
@@ -382,24 +462,21 @@
     });
   }
 
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
-
-    statusEl.classList.remove("is-error");
 
     unlockedStep = getSequentialUnlockedStep();
     if (unlockedStep < 6) {
       const firstPending = Math.min(unlockedStep, 5);
       goToStep(firstPending);
       setStatus("completePrevious");
-      statusEl.classList.add("is-error");
       return;
     }
 
+    if (!validateStep5()) return;
+
     if (!form.checkValidity()) {
-      form.reportValidity();
       setStatus("reviewRequired");
-      statusEl.classList.add("is-error");
       return;
     }
 
@@ -408,22 +485,16 @@
     updateSubmitText();
     setStatus("sending");
 
-    // TODO: Reemplazar este timeout por una petición POST al endpoint real de contacto técnico.
-    window.setTimeout(() => {
+    try {
+      await submitForm();
+      resetWizard();
       setStatus("received");
+    } catch (_error) {
       isSubmitting = false;
       submitBtn.disabled = false;
       updateSubmitText();
-
-      form.reset();
-      stepGroups[5]().forEach((input) => input.classList.remove("is-invalid-field"));
-      step3Confirmed = false;
-      step4Confirmed = false;
-      activeStep = 1;
-      unlockedStep = 1;
-      sessionStorage.removeItem(STORAGE_KEY);
-      renderWizard();
-    }, 1100);
+      setStatus("error");
+    }
   });
 
   if (startBtn) {
