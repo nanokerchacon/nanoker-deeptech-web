@@ -1,4 +1,6 @@
 (function () {
+  console.log("[nanoker][contact] contacto.js loaded");
+
   const STORAGE_KEY = "nanoker_contact_wizard_v1";
   const TOTAL_STEPS = 6;
 
@@ -48,7 +50,16 @@
   const startBtn = document.querySelector("[data-start-request]");
   const emailInput = document.getElementById("email");
 
-  if (!form || !steps.length || !statusEl || !submitBtn || !emailInput) return;
+  if (!form || !steps.length || !statusEl || !submitBtn || !emailInput) {
+    console.warn("[nanoker][contact] missing required elements", {
+      form: !!form,
+      steps: steps.length,
+      statusEl: !!statusEl,
+      submitBtn: !!submitBtn,
+      emailInput: !!emailInput,
+    });
+    return;
+  }
 
   console.log("[nanoker][contact] submit listener ready", form.id);
 
