@@ -148,7 +148,7 @@ export const FR_OVERRIDES = {
       hero: {
         titleHtml: "<span class=\"accent\">Secteurs</span>",
         subtitle:
-          "Matériaux avancés pour les secteurs où la fiabilité dépend du contrôle des matériaux et des procédés.",
+          "Matériaux avancés pour les secteurs où la fiabilité dépend du contrôle de la fonctionnalité du matériau.",
         intro:
           "Nanoker accompagne des secteurs où le choix du matériau affecte directement le temps de qualification, la fiabilité en service et la résilience d'approvisionnement.",
       },
@@ -2030,7 +2030,7 @@ export const DE_OVERRIDES = {
       hero: {
         titleHtml: "<span class=\"accent\">Sektoren</span>",
         subtitle:
-          "Fortschrittliche Materialien für Branchen, in denen die Zuverlässigkeit von der Kontrolle von Materialien und Prozessen abhängt.",
+          "Fortschrittliche Materialien für Branchen, in denen die Zuverlässigkeit von der Kontrolle der Materialfunktionalität abhängt.",
         intro:
           "Nanoker unterstützt Sektoren, in denen die Materialwahl direkten Einfluss auf Qualifizierungszeit, Betriebszuverlässigkeit und Versorgungsresilienz hat.",
       },

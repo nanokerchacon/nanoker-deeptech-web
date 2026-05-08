@@ -1012,7 +1012,7 @@ const BASE_I18N = deepFreeze({
         hero: {
           titleHtml: "<span class=\"accent\">Sectors</span>",
           subtitle:
-            "Advanced materials for industries where reliability depends on the control of materials and processes.",
+            "Advanced materials for industries where reliability depends on controlling material functionality.",
           intro:
             "Nanoker supports sectors where material choice directly affects qualification time, operating reliability and supply resilience.",
         },
@@ -2793,7 +2793,7 @@ const BASE_I18N = deepFreeze({
         hero: {
           titleHtml: "<span class=\"accent\">Sectores</span>",
           subtitle:
-            "Materiales avanzados para sectores donde la fiabilidad depende del control de materiales y procesos.",
+            "Materiales avanzados para sectores donde la fiabilidad depende del control de la funcionalidad del material.",
           intro:
             "Nanoker trabaja con sectores donde la elección del material impacta directamente el tiempo de cualificación, la fiabilidad operativa y la resiliencia de suministro.",
         },

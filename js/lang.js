@@ -144,8 +144,8 @@ const AUTO_TRANSLATION_RULES = {
         "La maîtrise des matériaux définit la performance, le risque de qualification et l'évolutivité industrielle dans les technologies critiques.",
       ],
       [
-        "Advanced materials for industries where reliability depends on the control of materials and processes.",
-        "Matériaux avancés pour les secteurs où la fiabilité dépend du contrôle des matériaux et des procédés.",
+        "Advanced materials for industries where reliability depends on controlling material functionality.",
+        "Matériaux avancés pour les secteurs où la fiabilité dépend du contrôle de la fonctionnalité du matériau.",
       ],
       [
         "Nanoker combines crystal growth, densification, precision machining and metrology in one industrial flow to deliver specification control, repeatability and scalable output for critical applications.",
@@ -288,7 +288,7 @@ const AUTO_TRANSLATION_RULES = {
       ["operating environment", "environnement d'utilisation"],
       ["customer roadmap", "feuille de route client"],
       ["material architecture", "architecture matière"],
-      ["materials and processes", "matériaux et procédés"],
+      ["material functionality", "fonctionnalité du matériau"],
       ["industrial readiness", "préparation industrielle"],
       ["technical rigor", "rigueur technique"],
       ["continuous improvement", "amélioration continue"],
@@ -413,8 +413,8 @@ const AUTO_TRANSLATION_RULES = {
         "Die Materialbeherrschung bestimmt Leistung, Qualifizierungsrisiko und industrielle Skalierbarkeit in kritischen Technologien.",
       ],
       [
-        "Advanced materials for industries where reliability depends on the control of materials and processes.",
-        "Fortschrittliche Materialien für Branchen, in denen die Zuverlässigkeit von der Kontrolle von Materialien und Prozessen abhängt.",
+        "Advanced materials for industries where reliability depends on controlling material functionality.",
+        "Fortschrittliche Materialien für Branchen, in denen die Zuverlässigkeit von der Kontrolle der Materialfunktionalität abhängt.",
       ],
       [
         "Nanoker combines crystal growth, densification, precision machining and metrology in one industrial flow to deliver specification control, repeatability and scalable output for critical applications.",
@@ -554,7 +554,7 @@ const AUTO_TRANSLATION_RULES = {
       ["operating environment", "Einsatzumgebung"],
       ["customer roadmap", "Kunden-Roadmap"],
       ["material architecture", "Materialarchitektur"],
-      ["materials and processes", "Materialien und Prozesse"],
+      ["material functionality", "Materialfunktionalität"],
       ["industrial readiness", "industrielle Einsatzbereitschaft"],
       ["technical rigor", "technische Strenge"],
       ["continuous improvement", "kontinuierliche Verbesserung"],
