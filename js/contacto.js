@@ -50,6 +50,8 @@
 
   if (!form || !steps.length || !statusEl || !submitBtn || !emailInput) return;
 
+  console.log("[nanoker][contact] submit listener ready", form.id);
+
   let activeStep = 1;
   let unlockedStep = 1;
   let advanceTimer = null;
@@ -350,8 +352,16 @@
   async function submitForm() {
     const formData = new FormData(form);
     formData.set("_replyto", emailInput.value.trim());
+    const ajaxEndpoint = getAjaxEndpoint();
 
-    const response = await fetch(getAjaxEndpoint(), {
+    console.log("submit triggered", {
+      formId: form.id,
+      action: form.getAttribute("action"),
+      ajaxEndpoint,
+    });
+    console.log("[nanoker][contact] fetch starting", ajaxEndpoint);
+
+    const response = await fetch(ajaxEndpoint, {
       method: "POST",
       body: formData,
       headers: {
@@ -464,18 +474,24 @@
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
+    console.log("[nanoker][contact] form submit event captured");
 
     unlockedStep = getSequentialUnlockedStep();
     if (unlockedStep < 6) {
       const firstPending = Math.min(unlockedStep, 5);
+      console.log("[nanoker][contact] submit blocked by incomplete previous steps", { unlockedStep });
       goToStep(firstPending);
       setStatus("completePrevious");
       return;
     }
 
-    if (!validateStep5()) return;
+    if (!validateStep5()) {
+      console.log("[nanoker][contact] submit blocked by step-5 validation");
+      return;
+    }
 
     if (!form.checkValidity()) {
+      console.log("[nanoker][contact] submit blocked by native form validity");
       setStatus("reviewRequired");
       return;
     }
@@ -487,9 +503,11 @@
 
     try {
       await submitForm();
+      console.log("[nanoker][contact] fetch resolved successfully");
       resetWizard();
       setStatus("received");
     } catch (_error) {
+      console.error("[nanoker][contact] fetch failed", _error);
       isSubmitting = false;
       submitBtn.disabled = false;
       updateSubmitText();

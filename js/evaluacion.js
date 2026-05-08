@@ -183,6 +183,8 @@
     return;
   }
 
+  console.log("[nanoker][evaluation] submit listener ready", form.id);
+
   let runtimeLang = normalizeLang(document.documentElement.getAttribute("data-lang") || document.documentElement.lang || "en");
   let activeStep = 1;
   let unlockedStep = 1;
@@ -568,6 +570,13 @@
 
     formData.set("_replyto", email?.value.trim() || "");
 
+    console.log("submit triggered", {
+      formId: form.id,
+      action: form.getAttribute("action"),
+      ajaxEndpoint,
+    });
+    console.log("[nanoker][evaluation] fetch starting", ajaxEndpoint);
+
     const response = await fetch(ajaxEndpoint, {
       method: "POST",
       body: formData,
@@ -648,15 +657,20 @@
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
+    console.log("[nanoker][evaluation] form submit event captured");
 
     unlockedStep = Math.max(1, getSequentialUnlockedStep());
     if (unlockedStep < TOTAL_STEPS) {
+      console.log("[nanoker][evaluation] submit blocked by incomplete previous steps", { unlockedStep });
       goToStep(unlockedStep);
       setStatus("completePrevious");
       return;
     }
 
-    if (!validateStep(TOTAL_STEPS)) return;
+    if (!validateStep(TOTAL_STEPS)) {
+      console.log("[nanoker][evaluation] submit blocked by final-step validation");
+      return;
+    }
 
     isSubmitting = true;
     submitBtn.disabled = true;
@@ -665,9 +679,11 @@
 
     try {
       await submitForm();
+      console.log("[nanoker][evaluation] fetch resolved successfully");
       resetWizard();
       setStatus("success");
     } catch (_error) {
+      console.error("[nanoker][evaluation] fetch failed", _error);
       isSubmitting = false;
       submitBtn.disabled = false;
       updateActionLabels();
