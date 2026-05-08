@@ -521,6 +521,14 @@ select option {
   color: rgba(255, 255, 255, 0.72);
 }
 
+.form-honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 .form-note--confidential {
   margin-top: 18px;
   font-family: var(--font-tech);

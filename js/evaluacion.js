@@ -178,12 +178,11 @@
   const submitBtn = document.getElementById("eval-submit-btn");
   const filesInput = document.getElementById("eval-files");
   const filesMeta = document.getElementById("eval-files-meta");
+  const honeypotInput = document.getElementById("evaluation-website");
 
-  if (!wizard || !form || !steps.length || !progressFill || !progressText || !statusEl || !submitBtn || !filesInput || !filesMeta) {
+  if (!wizard || !form || !steps.length || !progressFill || !progressText || !statusEl || !submitBtn || !filesInput || !filesMeta || !honeypotInput) {
     return;
   }
-
-  console.log("[nanoker][evaluation] submit listener ready", form.id);
 
   let runtimeLang = normalizeLang(document.documentElement.getAttribute("data-lang") || document.documentElement.lang || "en");
   let activeStep = 1;
@@ -210,11 +209,6 @@
     if (!Number.isFinite(bytes) || bytes <= 0) return "0 MB";
     const mb = bytes / (1024 * 1024);
     return `${mb.toFixed(mb >= 1 ? 1 : 2)} MB`;
-  }
-
-  function getAjaxEndpoint() {
-    const action = form.getAttribute("action") || "";
-    return action.replace("https://formsubmit.co/", "https://formsubmit.co/ajax/");
   }
 
   function getStepSection(step) {
@@ -564,20 +558,10 @@
   }
 
   async function submitForm() {
-    const ajaxEndpoint = getAjaxEndpoint();
     const formData = new FormData(form);
-    const email = document.getElementById("eval-email");
+    formData.set("website", honeypotInput.value.trim());
 
-    formData.set("_replyto", email?.value.trim() || "");
-
-    console.log("submit triggered", {
-      formId: form.id,
-      action: form.getAttribute("action"),
-      ajaxEndpoint,
-    });
-    console.log("[nanoker][evaluation] fetch starting", ajaxEndpoint);
-
-    const response = await fetch(ajaxEndpoint, {
+    const response = await fetch(form.getAttribute("action") || "/api/send-evaluation", {
       method: "POST",
       body: formData,
       headers: {
@@ -592,8 +576,8 @@
       payload = null;
     }
 
-    if (!response.ok) {
-      throw new Error(payload?.message || "formsubmit_request_failed");
+    if (!response.ok || !payload?.ok) {
+      throw new Error(payload?.error || "mail_delivery_failed");
     }
   }
 
@@ -657,20 +641,15 @@
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
-    console.log("[nanoker][evaluation] form submit event captured");
 
     unlockedStep = Math.max(1, getSequentialUnlockedStep());
     if (unlockedStep < TOTAL_STEPS) {
-      console.log("[nanoker][evaluation] submit blocked by incomplete previous steps", { unlockedStep });
       goToStep(unlockedStep);
       setStatus("completePrevious");
       return;
     }
 
-    if (!validateStep(TOTAL_STEPS)) {
-      console.log("[nanoker][evaluation] submit blocked by final-step validation");
-      return;
-    }
+    if (!validateStep(TOTAL_STEPS)) return;
 
     isSubmitting = true;
     submitBtn.disabled = true;
@@ -679,11 +658,9 @@
 
     try {
       await submitForm();
-      console.log("[nanoker][evaluation] fetch resolved successfully");
       resetWizard();
       setStatus("success");
     } catch (_error) {
-      console.error("[nanoker][evaluation] fetch failed", _error);
       isSubmitting = false;
       submitBtn.disabled = false;
       updateActionLabels();

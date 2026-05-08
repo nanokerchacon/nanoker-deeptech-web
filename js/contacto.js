@@ -1,6 +1,4 @@
 (function () {
-  console.log("[nanoker][contact] contacto.js loaded");
-
   const STORAGE_KEY = "nanoker_contact_wizard_v1";
   const TOTAL_STEPS = 6;
 
@@ -49,19 +47,9 @@
   const step5NextBtn = document.getElementById("step5-next-btn");
   const startBtn = document.querySelector("[data-start-request]");
   const emailInput = document.getElementById("email");
+  const honeypotInput = document.getElementById("contact-website");
 
-  if (!form || !steps.length || !statusEl || !submitBtn || !emailInput) {
-    console.warn("[nanoker][contact] missing required elements", {
-      form: !!form,
-      steps: steps.length,
-      statusEl: !!statusEl,
-      submitBtn: !!submitBtn,
-      emailInput: !!emailInput,
-    });
-    return;
-  }
-
-  console.log("[nanoker][contact] submit listener ready", form.id);
+  if (!form || !steps.length || !statusEl || !submitBtn || !emailInput || !honeypotInput) return;
 
   let activeStep = 1;
   let unlockedStep = 1;
@@ -159,11 +147,6 @@
       unlocked = step + 1;
     }
     return unlocked;
-  }
-
-  function getAjaxEndpoint() {
-    const action = form.getAttribute("action") || "";
-    return action.replace("https://formsubmit.co/", "https://formsubmit.co/ajax/");
   }
 
   function updateProgress() {
@@ -361,34 +344,38 @@
   }
 
   async function submitForm() {
-    const formData = new FormData(form);
-    formData.set("_replyto", emailInput.value.trim());
-    const ajaxEndpoint = getAjaxEndpoint();
+    const payload = {
+      tipo_consulta: Array.from(form.querySelectorAll('input[name="tipo_consulta"]:checked')).map((input) => input.value),
+      sector: Array.from(form.querySelectorAll('input[name="sector"]:checked')).map((input) => input.value),
+      material: Array.from(form.querySelectorAll('input[name="material"]:checked')).map((input) => input.value),
+      informacion_tecnica: techInfo?.value.trim() || "",
+      nombre: document.getElementById("nombre")?.value.trim() || "",
+      empresa: document.getElementById("empresa")?.value.trim() || "",
+      cargo: document.getElementById("cargo")?.value.trim() || "",
+      email: emailInput.value.trim(),
+      pais: document.getElementById("pais")?.value.trim() || "",
+      telefono: document.getElementById("telefono")?.value.trim() || "",
+      website: honeypotInput.value.trim(),
+    };
 
-    console.log("submit triggered", {
-      formId: form.id,
-      action: form.getAttribute("action"),
-      ajaxEndpoint,
-    });
-    console.log("[nanoker][contact] fetch starting", ajaxEndpoint);
-
-    const response = await fetch(ajaxEndpoint, {
+    const response = await fetch(form.getAttribute("action") || "/api/send-contact", {
       method: "POST",
-      body: formData,
       headers: {
+        "Content-Type": "application/json",
         Accept: "application/json",
       },
+      body: JSON.stringify(payload),
     });
 
-    let payload = null;
+    let payloadResponse = null;
     try {
-      payload = await response.json();
+      payloadResponse = await response.json();
     } catch (_error) {
-      payload = null;
+      payloadResponse = null;
     }
 
-    if (!response.ok) {
-      throw new Error(payload?.message || "formsubmit_request_failed");
+    if (!response.ok || !payloadResponse?.ok) {
+      throw new Error(payloadResponse?.error || "mail_delivery_failed");
     }
   }
 
@@ -485,24 +472,18 @@
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
-    console.log("[nanoker][contact] form submit event captured");
 
     unlockedStep = getSequentialUnlockedStep();
     if (unlockedStep < 6) {
       const firstPending = Math.min(unlockedStep, 5);
-      console.log("[nanoker][contact] submit blocked by incomplete previous steps", { unlockedStep });
       goToStep(firstPending);
       setStatus("completePrevious");
       return;
     }
 
-    if (!validateStep5()) {
-      console.log("[nanoker][contact] submit blocked by step-5 validation");
-      return;
-    }
+    if (!validateStep5()) return;
 
     if (!form.checkValidity()) {
-      console.log("[nanoker][contact] submit blocked by native form validity");
       setStatus("reviewRequired");
       return;
     }
@@ -514,11 +495,9 @@
 
     try {
       await submitForm();
-      console.log("[nanoker][contact] fetch resolved successfully");
       resetWizard();
       setStatus("received");
     } catch (_error) {
-      console.error("[nanoker][contact] fetch failed", _error);
       isSubmitting = false;
       submitBtn.disabled = false;
       updateSubmitText();

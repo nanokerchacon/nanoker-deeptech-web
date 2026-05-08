@@ -159,15 +159,14 @@
 
             <form
               id="contact-tech-form"
-              action="https://formsubmit.co/a.chacon@nanoker.com"
+              action="/api/send-contact"
               method="POST"
               novalidate
             >
-              <input type="hidden" name="_subject" value="Nuevo contacto web - Nanoker" />
-              <input type="hidden" name="_captcha" value="false" />
-              <input type="hidden" name="_template" value="table" />
-              <input type="hidden" name="_honey" value="" />
-              <input type="hidden" name="_url" value="https://nanoker.com/contacto.html" />
+              <div class="form-honeypot" aria-hidden="true">
+                <label for="contact-website">Website</label>
+                <input id="contact-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+              </div>
               <section class="wizard-step is-active" data-step="1" aria-hidden="false">
                 <h3 data-i18n="contact.form.step1.title">Tipo de consulta</h3>
                 <div class="chip-grid">
@@ -435,7 +434,7 @@
       </div>
     </footer>
 
-    <script src="./js/contacto.js?v=6" defer></script>
+    <script src="./js/contacto.js?v=7" defer></script>
     <script src="./js/mobile-menu.js?v=1" defer></script>
     <script type="module" src="./js/main.js?v=11"></script>
   </body>
