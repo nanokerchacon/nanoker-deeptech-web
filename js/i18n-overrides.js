@@ -148,7 +148,7 @@ export const FR_OVERRIDES = {
       hero: {
         titleHtml: "<span class=\"accent\">Secteurs</span>",
         subtitle:
-          "Des matériaux avancés pour des secteurs où la fiabilité dépend de la maîtrise de l'empilement matière.",
+          "Matériaux avancés pour les secteurs où la fiabilité dépend du contrôle des matériaux et des procédés.",
         intro:
           "Nanoker accompagne des secteurs où le choix du matériau affecte directement le temps de qualification, la fiabilité en service et la résilience d'approvisionnement.",
       },
@@ -2030,7 +2030,7 @@ export const DE_OVERRIDES = {
       hero: {
         titleHtml: "<span class=\"accent\">Sektoren</span>",
         subtitle:
-          "Fortschrittliche Materialien für Sektoren, in denen Zuverlässigkeit von der Beherrschung des Material-Stacks abhängt.",
+          "Fortschrittliche Materialien für Branchen, in denen die Zuverlässigkeit von der Kontrolle von Materialien und Prozessen abhängt.",
         intro:
           "Nanoker unterstützt Sektoren, in denen die Materialwahl direkten Einfluss auf Qualifizierungszeit, Betriebszuverlässigkeit und Versorgungsresilienz hat.",
       },
@@ -2370,7 +2370,7 @@ export const DE_OVERRIDES = {
     capabilities: {
       cards: {
         materials: {
-          label: "Material-Stack",
+          label: "Materialien und Prozesse",
           title: "Kritische Materialien in einem einzigen industriellen Ablauf",
           text:
             "SiC, CVD-Diamant, technische Keramiken und Saphir, abgestimmt auf anwendungsspezifische Leistungsfenster.",
