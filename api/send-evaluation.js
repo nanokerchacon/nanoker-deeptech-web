@@ -8,7 +8,11 @@ const {
   collectAttachments,
   enforceRateLimit,
   extractFirst,
+  handleOptions,
   json,
+  logError,
+  logInfo,
+  methodNotAllowed,
   normalizeToArray,
   parseMultipartForm,
   requireField,
@@ -18,12 +22,21 @@ const {
   sendMail,
 } = require("./_lib/mail");
 
-async function extractPayload(req) {
+function resolveOtherValue(selectedValue, otherValue, fallbackLabel) {
+  if (selectedValue === "other") {
+    requireField(otherValue, fallbackLabel, `Please specify the field: ${fallbackLabel}.`);
+    return `other: ${otherValue}`;
+  }
+
+  return selectedValue;
+}
+
+async function parseRequest(req) {
   const { fields, files } = await parseMultipartForm(req);
   const attachments = collectAttachments(files.attachment);
-  const website = sanitizeText(extractFirst(fields.website), 200);
 
   const payload = {
+    website: sanitizeText(extractFirst(fields.website), 200),
     requestType: sanitizeText(extractFirst(fields.requestType), 180),
     currentInfo: sanitizeText(extractFirst(fields.currentInfo), 180),
     projectPhase: sanitizeText(extractFirst(fields.projectPhase), 180),
@@ -42,57 +55,102 @@ async function extractPayload(req) {
     name: sanitizeText(extractFirst(fields.name), 160),
     company: sanitizeText(extractFirst(fields.company), 200),
     role: sanitizeText(extractFirst(fields.role), 160),
-    email: sanitizeText(extractFirst(fields.email), 320),
+    email: sanitizeEmail(extractFirst(fields.email)),
     phone: sanitizeText(extractFirst(fields.phone), 80),
     country: sanitizeText(extractFirst(fields.country), 120),
-    projectDescription: sanitizeMultilineText(extractFirst(fields.projectDescription), 10000),
-    website,
+    projectDescription: sanitizeMultilineText(
+      extractFirst(fields.projectDescription),
+      10000
+    ),
   };
 
-  return { payload, attachments, filesToCleanup: files.attachment };
+  return {
+    payload,
+    attachments,
+    filesToCleanup: files.attachment,
+  };
 }
 
 module.exports = async function handler(req, res) {
-  if (req.method !== "POST") {
-    res.setHeader("Allow", "POST");
-    return json(res, 405, { ok: false, error: "Method not allowed." });
+  const endpoint = "/api/send-evaluation";
+  const method = req.method || "GET";
+
+  if (method === "OPTIONS") {
+    return handleOptions(req, res);
   }
 
-  let cleanupTarget = null;
+  if (method !== "POST") {
+    return methodNotAllowed(req, res, ["POST", "OPTIONS"]);
+  }
+
+  logInfo(endpoint, method, "Request received");
+
+  let filesToCleanup = null;
 
   try {
     enforceRateLimit(req, "evaluation");
 
-    const { payload, attachments, filesToCleanup } = await extractPayload(req);
-    cleanupTarget = filesToCleanup;
+    const { payload, attachments, filesToCleanup: pendingFiles } = await parseRequest(req);
+    filesToCleanup = pendingFiles;
 
     if (payload.website) {
-      await cleanupUploadedFiles(cleanupTarget);
-      return json(res, 200, { ok: true });
+      logInfo(endpoint, method, "Honeypot triggered");
+      await cleanupUploadedFiles(filesToCleanup);
+      return json(req, res, 200, { ok: true, message: "sent" });
     }
 
-    payload.email = sanitizeEmail(payload.email);
+    requireField(payload.requestType, "requestType", "Request type is required.");
+    requireField(payload.currentInfo, "currentInfo", "Current situation is required.");
+    requireField(payload.projectPhase, "projectPhase", "Project phase is required.");
+    requireField(payload.estimatedVolume, "estimatedVolume", "Estimated volume is required.");
+    requireField(payload.dimensionsRange, "dimensionsRange", "Dimensions range is required.");
+    requireField(payload.applicationType, "applicationType", "Application type is required.");
+    requireField(payload.industrySector, "industrySector", "Industry sector is required.");
+    requireField(payload.temperatureRange, "temperatureRange", "Temperature range is required.");
+    requireField(payload.functionMain.length, "functionMain", "Select at least one main function.");
+    requireField(payload.materialConsidered, "materialConsidered", "Material considered is required.");
+    requireField(payload.name, "name", "Name is required.");
+    requireField(payload.company, "company", "Company is required.");
+    requireField(payload.email, "email", "Email is required.");
+    requireField(payload.country, "country", "Country is required.");
+    requireField(
+      payload.projectDescription,
+      "projectDescription",
+      "Project description is required."
+    );
 
-    requireField(payload.requestType, "requestType");
-    requireField(payload.currentInfo, "currentInfo");
-    requireField(payload.projectPhase, "projectPhase");
-    requireField(payload.estimatedVolume, "estimatedVolume");
-    requireField(payload.dimensionsRange, "dimensionsRange");
-    requireField(payload.applicationType, "applicationType");
-    requireField(payload.industrySector, "industrySector");
-    requireField(payload.temperatureRange, "temperatureRange");
-    requireField(payload.functionMain.length, "functionMain");
-    requireField(payload.materialConsidered, "materialConsidered");
-    requireField(payload.name, "name");
-    requireField(payload.company, "company");
-    requireField(payload.country, "country");
-    requireField(payload.projectDescription, "projectDescription");
     if (payload.projectDescription.length < 20) {
-      const error = new Error("Project description is too short.");
-      error.statusCode = 400;
-      throw error;
+      requireField("", "projectDescription", "Project description must be at least 20 characters long.");
     }
 
+    const applicationValue = resolveOtherValue(
+      payload.applicationType,
+      payload.applicationOther,
+      "applicationOther"
+    );
+    const sectorValue = resolveOtherValue(
+      payload.industrySector,
+      payload.industrySectorOther,
+      "industrySectorOther"
+    );
+    const materialValue = resolveOtherValue(
+      payload.materialConsidered,
+      payload.materialOther,
+      "materialOther"
+    );
+    const functionValues = payload.functionMain.map((value) =>
+      value === "other"
+        ? resolveOtherValue(value, payload.functionMainOther, "functionMainOther")
+        : value
+    );
+
+    logInfo(endpoint, method, "Validation OK", {
+      attachmentCount: attachments.length,
+    });
+
+    const subject = "Nueva evaluación técnica - Nanoker";
+    const intro =
+      "Se ha recibido una nueva solicitud desde el formulario de evaluación técnica de Nanoker.";
     const fields = [
       { label: "Tipo de solicitud", value: payload.requestType },
       { label: "Situación actual", value: payload.currentInfo },
@@ -100,15 +158,11 @@ module.exports = async function handler(req, res) {
       { label: "Cantidad estimada", value: payload.estimatedVolume },
       { label: "Rango dimensional", value: payload.dimensionsRange },
       { label: "Dimensiones exactas", value: payload.exactDimensions || "-" },
-      { label: "Aplicación", value: payload.applicationType },
-      { label: "Aplicación (otro)", value: payload.applicationOther || "-" },
-      { label: "Sector industrial", value: payload.industrySector },
-      { label: "Sector (otro)", value: payload.industrySectorOther || "-" },
+      { label: "Aplicación / entorno", value: applicationValue },
+      { label: "Sector industrial", value: sectorValue },
       { label: "Temperatura de operación", value: payload.temperatureRange },
-      { label: "Función principal", value: payload.functionMain.join(", ") },
-      { label: "Función principal (otra)", value: payload.functionMainOther || "-" },
-      { label: "Material considerado", value: payload.materialConsidered },
-      { label: "Material (otro)", value: payload.materialOther || "-" },
+      { label: "Función principal", value: functionValues.join(", ") },
+      { label: "Material considerado", value: materialValue },
       { label: "Nombre", value: payload.name },
       { label: "Empresa", value: payload.company },
       { label: "Cargo", value: payload.role || "-" },
@@ -116,36 +170,40 @@ module.exports = async function handler(req, res) {
       { label: "Teléfono", value: payload.phone || "-" },
       { label: "País", value: payload.country },
       { label: "Descripción del proyecto", value: payload.projectDescription },
-      { label: "Adjuntos", value: attachments.map((item) => item.filename).join(", ") || "-" },
+      {
+        label: "Adjuntos",
+        value: attachments.map((attachment) => attachment.filename).join(", ") || "-",
+      },
     ];
-
-    const meta = buildMeta(req, [{ label: "Form type", value: "Technical evaluation" }]);
-    const subject = "Nueva evaluación técnica - Nanoker";
+    const meta = buildMeta(req, "evaluacion-tecnica");
 
     await sendMail({
+      endpoint,
+      method,
       subject,
       replyTo: payload.email,
-      html: buildHtmlEmail({
-        title: subject,
-        intro: "Se ha recibido una nueva solicitud desde el formulario de evaluación técnica.",
-        fields,
-        meta,
-      }),
-      text: buildTextEmail({ title: subject, fields, meta }),
+      html: buildHtmlEmail({ title: subject, intro, fields, meta }),
+      text: buildTextEmail({ title: subject, intro, fields, meta }),
       attachments,
     });
 
-    await cleanupUploadedFiles(cleanupTarget);
-    return json(res, 200, { ok: true });
+    await cleanupUploadedFiles(filesToCleanup);
+
+    return json(req, res, 200, { ok: true, message: "sent" });
   } catch (error) {
-    if (cleanupTarget) {
-      await cleanupUploadedFiles(cleanupTarget);
+    if (filesToCleanup) {
+      await cleanupUploadedFiles(filesToCleanup);
     }
 
-    const statusCode = error.statusCode || error.httpCode || 500;
-    return json(res, statusCode, {
+    logError(endpoint, method, error);
+
+    return json(req, res, error.statusCode || 500, {
       ok: false,
-      error: statusCode >= 500 ? "Mail delivery failed." : error.message,
+      code: error.code || "UNEXPECTED_ERROR",
+      message:
+        error.code === "SMTP_ERROR"
+          ? "No se pudo entregar el correo en este momento."
+          : error.message || "Unexpected error.",
     });
   }
 };

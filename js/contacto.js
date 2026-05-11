@@ -1,6 +1,8 @@
 (function () {
+  const API_BASE_URL = "https://nanoker-deeptech-web.vercel.app";
   const STORAGE_KEY = "nanoker_contact_wizard_v1";
   const TOTAL_STEPS = 6;
+  const REQUEST_TIMEOUT_MS = 25000;
 
   function normalizeLang(raw) {
     const base = String(raw || "").toLowerCase().split("-")[0];
@@ -103,25 +105,27 @@
       key: "contact.form.status.sending",
       fallback: () =>
         trFallback(
-          "Sending technical contact request...",
-          "Enviando solicitud de contacto técnico..."
+          "Sending...",
+          "Enviando..."
         ),
     },
     received: {
       key: "contact.form.status.received",
       fallback: () =>
         trFallback(
-          "Request sent. We will reply within 3-5 business days.",
-          "Solicitud enviada. Te responderemos en 3-5 días laborables."
+          "Contact request sent successfully. Thank you for contacting Nanoker. Our team will review your inquiry and respond as soon as possible.",
+          "Solicitud enviada correctamente. Gracias por contactar con Nanoker. Nuestro equipo revisará tu consulta y te responderá lo antes posible."
         ),
+      html: false,
     },
     error: {
       key: "contact.form.status.error",
       fallback: () =>
         trFallback(
-          "We could not process your request right now. Please try again in a few minutes.",
-          "No pudimos procesar tu solicitud ahora mismo. Inténtalo de nuevo en unos minutos."
+          'We could not send your request right now. Please try again or email <a href="mailto:web@nanoker.com">web@nanoker.com</a>.',
+          'No hemos podido enviar la solicitud en este momento. Por favor, inténtalo de nuevo o escribe a <a href="mailto:web@nanoker.com">web@nanoker.com</a>.'
         ),
+      html: true,
     },
   };
 
@@ -168,7 +172,14 @@
       statusEl.textContent = "";
     } else {
       const copy = STATUS_COPY[state];
-      if (copy) statusEl.textContent = tr(copy.key, copy.fallback());
+      if (copy) {
+        const message = tr(copy.key, copy.fallback());
+        if (copy.html) {
+          statusEl.innerHTML = message;
+        } else {
+          statusEl.textContent = message;
+        }
+      }
     }
 
     statusEl.classList.toggle("is-sending", state === "sending");
@@ -358,14 +369,23 @@
       website: honeypotInput.value.trim(),
     };
 
-    const response = await fetch(form.getAttribute("action") || "/api/send-contact", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+
+    let response;
+    try {
+      response = await fetch(`${API_BASE_URL}/api/send-contact`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
+        signal: controller.signal,
+      });
+    } finally {
+      window.clearTimeout(timeoutId);
+    }
 
     let payloadResponse = null;
     try {
@@ -375,7 +395,7 @@
     }
 
     if (!response.ok || !payloadResponse?.ok) {
-      throw new Error(payloadResponse?.error || "mail_delivery_failed");
+      throw new Error(payloadResponse?.message || "mail_delivery_failed");
     }
   }
 

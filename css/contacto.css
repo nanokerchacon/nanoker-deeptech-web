@@ -478,6 +478,15 @@ textarea::placeholder {
   box-shadow: 0 0 0 1px rgba(255, 120, 120, 0.28);
 }
 
+.input-grid textarea.is-invalid-field,
+textarea.is-invalid-field,
+input[type="text"].is-invalid-field,
+input[type="email"].is-invalid-field,
+input[type="tel"].is-invalid-field {
+  border-color: rgba(255, 120, 120, 0.72);
+  box-shadow: 0 0 0 1px rgba(255, 120, 120, 0.28);
+}
+
 .submit-btn {
   position: relative;
   display: inline-flex;
@@ -570,6 +579,16 @@ textarea::placeholder {
   border-color: rgba(112, 244, 160, 0.3);
   background: linear-gradient(180deg, rgba(82, 220, 134, 0.18), rgba(82, 220, 134, 0.07));
   box-shadow: inset 0 0 0 1px rgba(82, 220, 134, 0.14), 0 18px 44px rgba(82, 220, 134, 0.08);
+}
+
+.form-status a {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.form-status a:hover {
+  color: var(--contact-cyan);
 }
 
 .contact-processing-note {

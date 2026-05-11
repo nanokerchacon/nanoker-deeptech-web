@@ -1,9 +1,11 @@
 (function () {
+  const API_BASE_URL = "https://nanoker-deeptech-web.vercel.app";
   const STORAGE_KEY = "nanoker_eval_wizard_v1";
   const TOTAL_STEPS = 11;
   const SUPPORTED_LANGS = new Set(["es", "en", "fr", "de"]);
   const MAX_TOTAL_FILE_SIZE = 5 * 1024 * 1024;
   const ALLOWED_FILE_EXTENSIONS = new Set(["pdf", "dwg", "step", "stp", "png", "jpg", "jpeg"]);
+  const REQUEST_TIMEOUT_MS = 25000;
 
   const COPY = {
     es: {
@@ -26,10 +28,10 @@
         descriptionShort: "La descripción del proyecto debe tener al menos 20 caracteres.",
         invalidEmail: "Introduce un email válido para poder responder a la solicitud.",
         fileType: "Revisa los adjuntos. Solo se admiten archivos PDF, DWG, STEP, PNG y JPG.",
-        fileSize: "El peso total recomendado de los archivos es de 5 MB como máximo.",
-        sending: "Enviando solicitud de evaluación técnica...",
-        success: "Solicitud enviada. El equipo de Nanoker revisará la evaluación y responderá por email.",
-        error: "No pudimos procesar tu solicitud ahora mismo. Inténtalo de nuevo en unos minutos.",
+        fileSize: "El tamaño total de los adjuntos no puede superar 5 MB.",
+        sending: "Enviando...",
+        success: "Solicitud técnica enviada correctamente. Hemos recibido tu información y el equipo de Nanoker revisará tu caso.",
+        error: 'No hemos podido enviar la solicitud técnica en este momento. Por favor, inténtalo de nuevo o escribe a <a href="mailto:web@nanoker.com">web@nanoker.com</a>.',
       },
       fields: { specify: "Especifica" },
       steps: {
@@ -66,10 +68,10 @@
         descriptionShort: "The project description must contain at least 20 characters.",
         invalidEmail: "Enter a valid email so we can respond to your request.",
         fileType: "Please review the attachments. Only PDF, DWG, STEP, PNG, and JPG files are allowed.",
-        fileSize: "The recommended total attachment size is 5 MB maximum.",
-        sending: "Sending technical evaluation request...",
-        success: "Request sent. The Nanoker team will review the evaluation and reply by email.",
-        error: "We could not process your request right now. Please try again in a few minutes.",
+        fileSize: "The total attachment size cannot exceed 5 MB.",
+        sending: "Sending...",
+        success: "Technical request sent successfully. We have received your information and the Nanoker team will review your case.",
+        error: 'We could not send your technical request right now. Please try again or email <a href="mailto:web@nanoker.com">web@nanoker.com</a>.',
       },
       fields: { specify: "Specify" },
       steps: {
@@ -281,7 +283,12 @@
 
   function setStatus(state) {
     statusState = state;
-    statusEl.textContent = copyFor().status[state] || "";
+    const message = copyFor().status[state] || "";
+    if (message.includes("<a ")) {
+      statusEl.innerHTML = message;
+    } else {
+      statusEl.textContent = message;
+    }
     statusEl.classList.toggle("is-sending", state === "sending");
     statusEl.classList.toggle("is-error", !["idle", "sending", "success"].includes(state));
     statusEl.classList.toggle("is-success", state === "success");
@@ -561,13 +568,22 @@
     const formData = new FormData(form);
     formData.set("website", honeypotInput.value.trim());
 
-    const response = await fetch(form.getAttribute("action") || "/api/send-evaluation", {
-      method: "POST",
-      body: formData,
-      headers: {
-        Accept: "application/json",
-      },
-    });
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+
+    let response;
+    try {
+      response = await fetch(`${API_BASE_URL}/api/send-evaluation`, {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+        signal: controller.signal,
+      });
+    } finally {
+      window.clearTimeout(timeoutId);
+    }
 
     let payload = null;
     try {
@@ -577,7 +593,7 @@
     }
 
     if (!response.ok || !payload?.ok) {
-      throw new Error(payload?.error || "mail_delivery_failed");
+      throw new Error(payload?.message || "mail_delivery_failed");
     }
   }
 
