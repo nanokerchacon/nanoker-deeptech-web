@@ -191,6 +191,7 @@
   let unlockedStep = 1;
   let isSubmitting = false;
   let statusState = "idle";
+  let statusScrollTimer = null;
 
   function normalizeLang(raw) {
     const base = String(raw || "").toLowerCase().split("-")[0];
@@ -292,6 +293,30 @@
     statusEl.classList.toggle("is-sending", state === "sending");
     statusEl.classList.toggle("is-error", !["idle", "sending", "success"].includes(state));
     statusEl.classList.toggle("is-success", state === "success");
+    statusEl.classList.toggle("is-visible", state !== "idle");
+  }
+
+  function isStatusVisible() {
+    const rect = statusEl.getBoundingClientRect();
+    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+    return rect.top >= 0 && rect.bottom <= viewportHeight;
+  }
+
+  function revealStatus() {
+    if (statusScrollTimer) {
+      window.clearTimeout(statusScrollTimer);
+    }
+
+    statusScrollTimer = window.setTimeout(() => {
+      if (!statusEl.textContent.trim() && !statusEl.innerHTML.trim()) return;
+      if (!isStatusVisible()) {
+        statusEl.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+          inline: "nearest",
+        });
+      }
+    }, 40);
   }
 
   function updateActionLabels() {
@@ -550,7 +575,8 @@
     }
   }
 
-  function resetWizard() {
+  function resetWizard(options = {}) {
+    const preserveStatus = Boolean(options.preserveStatus);
     form.reset();
     form.querySelectorAll(".is-invalid-field").forEach((field) => field.classList.remove("is-invalid-field"));
     toggleConditionalFields();
@@ -562,6 +588,9 @@
     updateFilesMeta("idle");
     sessionStorage.removeItem(STORAGE_KEY);
     renderWizard();
+    if (!preserveStatus) {
+      setStatus("idle");
+    }
   }
 
   async function submitForm() {
@@ -674,13 +703,15 @@
 
     try {
       await submitForm();
-      resetWizard();
       setStatus("success");
+      revealStatus();
+      resetWizard({ preserveStatus: true });
     } catch (_error) {
       isSubmitting = false;
       submitBtn.disabled = false;
       updateActionLabels();
       setStatus("error");
+      revealStatus();
     }
   });
 

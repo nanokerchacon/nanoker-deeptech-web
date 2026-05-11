@@ -56,6 +56,7 @@
   let activeStep = 1;
   let unlockedStep = 1;
   let advanceTimer = null;
+  let statusScrollTimer = null;
   let step3Confirmed = false;
   let step4Confirmed = false;
   let statusState = "idle";
@@ -185,6 +186,30 @@
     statusEl.classList.toggle("is-sending", state === "sending");
     statusEl.classList.toggle("is-error", ["requiredFields", "completePrevious", "reviewRequired", "invalidEmail", "error"].includes(state));
     statusEl.classList.toggle("is-success", state === "received");
+    statusEl.classList.toggle("is-visible", state !== "idle");
+  }
+
+  function isStatusVisible() {
+    const rect = statusEl.getBoundingClientRect();
+    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+    return rect.top >= 0 && rect.bottom <= viewportHeight;
+  }
+
+  function revealStatus() {
+    if (statusScrollTimer) {
+      window.clearTimeout(statusScrollTimer);
+    }
+
+    statusScrollTimer = window.setTimeout(() => {
+      if (!statusEl.textContent.trim() && !statusEl.innerHTML.trim()) return;
+      if (!isStatusVisible()) {
+        statusEl.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+          inline: "nearest",
+        });
+      }
+    }, 40);
   }
 
   function updateSubmitText() {
@@ -340,7 +365,8 @@
     input.classList.remove("is-invalid-field");
   }
 
-  function resetWizard() {
+  function resetWizard(options = {}) {
+    const preserveStatus = Boolean(options.preserveStatus);
     form.reset();
     form.querySelectorAll(".is-invalid-field").forEach((input) => input.classList.remove("is-invalid-field"));
     step3Confirmed = false;
@@ -352,6 +378,9 @@
     updateSubmitText();
     sessionStorage.removeItem(STORAGE_KEY);
     renderWizard();
+    if (!preserveStatus) {
+      setStatus("idle");
+    }
   }
 
   async function submitForm() {
@@ -515,13 +544,15 @@
 
     try {
       await submitForm();
-      resetWizard();
       setStatus("received");
+      revealStatus();
+      resetWizard({ preserveStatus: true });
     } catch (_error) {
       isSubmitting = false;
       submitBtn.disabled = false;
       updateSubmitText();
       setStatus("error");
+      revealStatus();
     }
   });
 
