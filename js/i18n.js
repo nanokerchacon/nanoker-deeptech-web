@@ -1506,7 +1506,8 @@ const BASE_I18N = deepFreeze({
         title: "Connect",
         email: "info@nanoker.com",
         phone: "+34 985 000 000",
-        address: "Parque Empresarial de Oviedo, Parcela 22A, Nave 6, 33660 Oviedo, Asturias, Spain",
+        address:
+          "Parque Empresarial de Oviedo,<br />Parcela 22A, Nave 6, 33660<br />Oviedo, Asturias, Spain",
         links: {
           linkedin: "LinkedIn ↗",
         },
@@ -1692,7 +1693,7 @@ const BASE_I18N = deepFreeze({
           labelOwner: "Website owner",
           valueOwner: "Nanoker Research S.L.",
           labelAddress: "Address",
-          valueAddress: "Polígono de Olloniego, Parcela 22A, Nave 6, 33660 Oviedo, Asturias, Spain.",
+          valueAddress: "Parque Empresarial de Oviedo, Parcela 22A, Nave 6, 33660 Oviedo, Asturias, Spain.",
           labelEmail: "Email",
           valueEmail: "info@nanoker.com",
           labelPhone: "Phone",
@@ -3275,7 +3276,8 @@ const BASE_I18N = deepFreeze({
         title: "Contacto",
         email: "info@nanoker.com",
         phone: "+34 985 000 000",
-        address: "Parque Empresarial de Oviedo, Parcela 22A, Nave 6, 33660 Oviedo, Asturias, Spain",
+        address:
+          "Parque Empresarial de Oviedo,<br />Parcela 22A, Nave 6, 33660<br />Oviedo, Asturias, Spain",
         links: {
           linkedin: "LinkedIn ↗",
         },
@@ -3461,7 +3463,7 @@ const BASE_I18N = deepFreeze({
           labelOwner: "Titular del sitio",
           valueOwner: "Nanoker Research S.L.",
           labelAddress: "Domicilio",
-          valueAddress: "Polígono de Olloniego, Parcela 22A, Nave 6, 33660 Oviedo, Asturias, España.",
+          valueAddress: "Parque Empresarial de Oviedo, Parcela 22A, Nave 6, 33660 Oviedo, Asturias, España.",
           labelEmail: "Email",
           valueEmail: "info@nanoker.com",
           labelPhone: "Teléfono",
