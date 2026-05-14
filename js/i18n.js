@@ -76,49 +76,49 @@ const BASE_I18N = deepFreeze({
 
     seo: {
       home: {
-        metaTitle: "Nanoker | DeepTech Advanced Materials",
+        metaTitle: "Nanoker | DeepTech Advanced Materials & Technical Ceramics",
         metaDescription:
-          "Nanoker manufactures advanced ceramics, CVD diamond, SiC and sapphire for critical industries with guaranteed specification, full traceability and industrial scale.",
+          "Nanoker develops and manufactures technical ceramics, silicon carbide, CVD diamond and sapphire for semiconductors, aerospace, defense and thermal management.",
       },
       company: {
-        metaTitle: "Nanoker | Company",
+        metaTitle: "Nanoker | DeepTech Company for Advanced Materials Manufacturing",
         metaDescription:
-          "Learn how Nanoker builds European industrial capacity in advanced materials, combining process control, qualification and scalable manufacturing for strategic technology programs.",
+          "Learn how Nanoker builds European deeptech manufacturing capacity in advanced materials, combining industrial R&D, qualification and scalable production for critical technologies.",
       },
       capabilities: {
-        metaTitle: "Nanoker | Capabilities",
+        metaTitle: "Nanoker | Advanced Manufacturing & Technical Ceramics Capabilities",
         metaDescription:
-          "Review Nanoker capabilities across formulation, growth, qualification and industrialization, enabling repeatable material performance for mission-critical applications.",
+          "Review Nanoker capabilities across formulation, crystal growth, densification, precision machining, metrology and qualification for advanced manufacturing programs.",
       },
       rnd: {
-        metaTitle: "Nanoker | Research and Innovation",
+        metaTitle: "Nanoker | Industrial R&D in Advanced Materials and Semiconductors",
         metaDescription:
-          "Explore Nanoker research and innovation capabilities in advanced materials, crystal growth, quantum-grade diamond and industrial transfer for strategic technologies.",
+          "Explore Nanoker industrial R&D in advanced materials, silicon carbide, quantum-grade diamond and semiconductor-enabling processes for strategic technology programs.",
       },
       materials: {
-        metaTitle: "Nanoker | Materials",
+        metaTitle: "Nanoker | Technical Ceramics, Silicon Carbide & Advanced Materials",
         metaDescription:
-          "Discover Nanoker material portfolio in advanced ceramics, CVD diamond, SiC and sapphire, engineered for certified performance, qualification and industrial scalability.",
+          "Discover Nanoker's portfolio in technical ceramics, silicon carbide, CVD diamond and sapphire for thermal management, semiconductors, defense and aerospace.",
       },
       sectors: {
-        metaTitle: "Nanoker | Sectors",
+        metaTitle: "Nanoker | Advanced Materials for Aerospace, Defense & Semiconductors",
         metaDescription:
-          "Explore the sectors Nanoker serves, from defense and aerospace to semiconductors, energy and medical systems, with materials engineered for mission-critical reliability.",
+          "Explore how Nanoker serves aerospace, defense, semiconductors, energy, photonics and industrial R&D with advanced materials engineered for mission-critical reliability.",
       },
       contact: {
-        metaTitle: "Technical Contact | Nanoker",
+        metaTitle: "Nanoker | Contact DeepTech Materials Engineering Team",
         metaDescription:
-          "Contact Nanoker engineering to discuss applications, critical specifications and qualification paths for advanced-material industrial programs.",
+          "Contact Nanoker's engineering team to discuss technical ceramics, silicon carbide, thermal management and qualification requirements for critical applications.",
       },
       evaluation: {
-        metaTitle: "Technical Evaluation | Nanoker",
+        metaTitle: "Nanoker | Technical Evaluation for Advanced Materials Applications",
         metaDescription:
-          "Request a technical assessment for critical technologies and align material architecture, engineering execution and validation roadmap with Nanoker experts.",
+          "Request a technical evaluation for advanced materials applications and align material architecture, manufacturing route and validation roadmap with Nanoker experts.",
       },
       certifications: {
-        metaTitle: "Nanoker | Quality & Certifications",
+        metaTitle: "Nanoker | Quality, Certifications & Traceability",
         metaDescription:
-          "Review Nanoker quality framework, certifications and regulated manufacturing standards supporting reliability, compliance and full traceability.",
+          "Review Nanoker's quality framework, certifications and traceability standards supporting compliant deeptech manufacturing for critical industries.",
       },
       privacy: {
         metaTitle: "Privacy Policy | Nanoker",
@@ -1860,49 +1860,49 @@ const BASE_I18N = deepFreeze({
 
     seo: {
       home: {
-        metaTitle: "Nanoker | Materiales avanzados DeepTech",
+        metaTitle: "Nanoker | Materiales avanzados DeepTech y cerámicas técnicas",
         metaDescription:
-          "Nanoker fabrica cerámicas avanzadas, diamante CVD, SiC y zafiro para industrias críticas con especificación garantizada, trazabilidad completa y escalado industrial.",
+          "Nanoker desarrolla y fabrica cerámicas técnicas, carburo de silicio, diamante CVD y zafiro para semiconductores, aeroespacial, defensa y gestión térmica.",
       },
       company: {
-        metaTitle: "Nanoker | Empresa",
+        metaTitle: "Nanoker | Empresa DeepTech de fabricación avanzada",
         metaDescription:
-          "Descubre cómo Nanoker construye capacidad industrial europea en materiales avanzados, combinando control de proceso, cualificación y fabricación escalable para programas tecnológicos estratégicos.",
+          "Descubre cómo Nanoker construye capacidad industrial deeptech en materiales avanzados combinando I+D industrial, cualificación y fabricación escalable para tecnologías críticas.",
       },
       capabilities: {
-        metaTitle: "Nanoker | Capacidades",
+        metaTitle: "Nanoker | Capacidades de fabricación avanzada y cerámicas técnicas",
         metaDescription:
-          "Revisa las capacidades de Nanoker en formulación, crecimiento, cualificación e industrialización para asegurar prestaciones repetibles en aplicaciones críticas.",
+          "Revisa las capacidades de Nanoker en formulación, crecimiento cristalino, densificación, mecanizado de precisión, metrología y cualificación para programas avanzados.",
       },
       rnd: {
-        metaTitle: "Nanoker | Investigación e Innovación",
+        metaTitle: "Nanoker | I+D industrial en materiales avanzados y semiconductores",
         metaDescription:
-          "Explora la capacidad de I+D de Nanoker en materiales avanzados, crecimiento cristalino, diamante de grado cuántico y transferencia industrial para tecnologías estratégicas.",
+          "Explora el I+D industrial de Nanoker en materiales avanzados, carburo de silicio, diamante de grado cuántico y procesos habilitadores para semiconductores.",
       },
       materials: {
-        metaTitle: "Nanoker | Materiales",
+        metaTitle: "Nanoker | Cerámicas técnicas, carburo de silicio y materiales avanzados",
         metaDescription:
-          "Descubre el portfolio de Nanoker en cerámicas avanzadas, diamante CVD, SiC y zafiro, diseñado para rendimiento certificado, cualificación y escalabilidad industrial.",
+          "Descubre el portfolio de Nanoker en cerámicas técnicas, carburo de silicio, diamante CVD y zafiro para gestión térmica, semiconductores, defensa y aeroespacial.",
       },
       sectors: {
-        metaTitle: "Nanoker | Sectores",
+        metaTitle: "Nanoker | Materiales avanzados para aeroespacial, defensa y semiconductores",
         metaDescription:
-          "Explora los sectores a los que sirve Nanoker, desde defensa y aeroespacial hasta semiconductores, energía y sistemas médicos, con materiales diseñados para fiabilidad crítica.",
+          "Explora cómo Nanoker sirve a aeroespacial, defensa, semiconductores, energía, fotónica e I+D industrial con materiales avanzados diseñados para fiabilidad crítica.",
       },
       contact: {
-        metaTitle: "Contacto técnico | Nanoker",
+        metaTitle: "Nanoker | Contacto con el equipo de ingeniería deeptech",
         metaDescription:
-          "Contacta con el equipo de ingeniería de Nanoker para revisar aplicaciones, especificaciones críticas y rutas de cualificación en programas industriales de materiales avanzados.",
+          "Contacta con el equipo de ingeniería de Nanoker para revisar cerámicas técnicas, carburo de silicio, gestión térmica y rutas de cualificación en aplicaciones críticas.",
       },
       evaluation: {
-        metaTitle: "Evaluación técnica | Nanoker",
+        metaTitle: "Nanoker | Evaluación técnica para aplicaciones de materiales avanzados",
         metaDescription:
-          "Solicita una evaluación técnica para tecnologías críticas y alinea arquitectura material, ejecución de ingeniería y plan de validación con expertos de Nanoker.",
+          "Solicita una evaluación técnica para aplicaciones de materiales avanzados y alinea arquitectura material, ruta de fabricación y plan de validación con expertos de Nanoker.",
       },
       certifications: {
-        metaTitle: "Nanoker | Calidad y Certificaciones",
+        metaTitle: "Nanoker | Calidad, certificaciones y trazabilidad",
         metaDescription:
-          "Consulta el marco de calidad, las certificaciones y los estándares de fabricación regulada de Nanoker para asegurar fiabilidad, cumplimiento y trazabilidad completa.",
+          "Consulta el marco de calidad, las certificaciones y la trazabilidad de Nanoker para una fabricación deeptech fiable y conforme en industrias críticas.",
       },
       privacy: {
         metaTitle: "Política de Privacidad | Nanoker",

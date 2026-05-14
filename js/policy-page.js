@@ -6,6 +6,12 @@ import {
 } from "./policies-data.js";
 
 const SUPPORTED_LANGS = new Set(["es", "en", "fr", "de"]);
+const POLICY_LOCALES = {
+  es: { og: "es_ES", alternates: ["en_US", "fr_FR", "de_DE"] },
+  en: { og: "en_US", alternates: ["es_ES", "fr_FR", "de_DE"] },
+  fr: { og: "fr_FR", alternates: ["en_US", "es_ES", "de_DE"] },
+  de: { og: "de_DE", alternates: ["en_US", "es_ES", "fr_FR"] },
+};
 
 const UI_COPY = {
   es: {
@@ -541,6 +547,35 @@ function policyCanonical(policy) {
   return `https://nanoker.com/politicas/${policy.slug}/`;
 }
 
+function policyLocalizedUrl(policy, lang) {
+  const url = new URL(policyCanonical(policy));
+  url.searchParams.set("lang", lang);
+  return url.toString();
+}
+
+function ensureHeadNode(selector, tagName, attrs = {}) {
+  const nodes = document.head.querySelectorAll(selector);
+  const node = nodes[0];
+  if (nodes.length > 1) {
+    Array.from(nodes)
+      .slice(1)
+      .forEach((duplicate) => duplicate.parentNode?.removeChild(duplicate));
+  }
+  if (node) return node;
+
+  const createdNode = document.createElement(tagName);
+  Object.entries(attrs).forEach(([key, value]) => {
+    createdNode.setAttribute(key, value);
+  });
+  document.head.appendChild(createdNode);
+  return createdNode;
+}
+
+function setNodeContent(node, content) {
+  if (!node) return;
+  node.setAttribute("content", content);
+}
+
 function renderIntro(introParagraphs) {
   return introParagraphs.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("\n");
 }
@@ -812,31 +847,80 @@ function initPolicyPreviewModal(root, strings) {
   modal.dataset.initialized = "true";
 }
 
-function setSeo(policy) {
-  document.title = policyTitle(policy);
+function setSeo(policy, lang) {
+  const title = policyTitle(policy);
   const description = createMetaDescription(policy);
   const canonicalUrl = policyCanonical(policy);
+  const localizedUrl = policyLocalizedUrl(policy, lang);
+  const locales = POLICY_LOCALES[lang] || POLICY_LOCALES.en;
 
-  const metaDescription = document.querySelector('meta[name="description"]');
-  if (metaDescription) metaDescription.setAttribute("content", description);
+  document.documentElement.lang = lang;
+  document.documentElement.setAttribute("data-lang", lang);
+  document.title = title;
 
-  const ogTitle = document.querySelector('meta[property="og:title"]');
-  if (ogTitle) ogTitle.setAttribute("content", policyTitle(policy));
+  const titleTag = ensureHeadNode("title", "title");
+  titleTag.textContent = title;
 
-  const ogDescription = document.querySelector('meta[property="og:description"]');
-  if (ogDescription) ogDescription.setAttribute("content", description);
+  [
+    ensureHeadNode('meta[name="description"]', "meta", { name: "description" }),
+    ensureHeadNode('meta[property="og:description"]', "meta", { property: "og:description" }),
+    ensureHeadNode('meta[name="twitter:description"]', "meta", { name: "twitter:description" }),
+  ].forEach((node) => setNodeContent(node, description));
 
-  const ogUrl = document.querySelector('meta[property="og:url"]');
-  if (ogUrl) ogUrl.setAttribute("content", canonicalUrl);
+  [
+    ensureHeadNode('meta[property="og:title"]', "meta", { property: "og:title" }),
+    ensureHeadNode('meta[name="twitter:title"]', "meta", { name: "twitter:title" }),
+  ].forEach((node) => setNodeContent(node, title));
 
-  const twitterTitle = document.querySelector('meta[name="twitter:title"]');
-  if (twitterTitle) twitterTitle.setAttribute("content", policyTitle(policy));
+  setNodeContent(
+    ensureHeadNode('meta[property="og:type"]', "meta", { property: "og:type" }),
+    "website"
+  );
+  setNodeContent(
+    ensureHeadNode('meta[property="og:url"]', "meta", { property: "og:url" }),
+    localizedUrl
+  );
+  setNodeContent(
+    ensureHeadNode('meta[property="og:locale"]', "meta", { property: "og:locale" }),
+    locales.og
+  );
 
-  const twitterDescription = document.querySelector('meta[name="twitter:description"]');
-  if (twitterDescription) twitterDescription.setAttribute("content", description);
+  const existingOgAlternates = Array.from(
+    document.head.querySelectorAll('meta[property="og:locale:alternate"]')
+  );
+  existingOgAlternates.forEach((node) => node.parentNode?.removeChild(node));
+  locales.alternates.forEach((locale) => {
+    setNodeContent(
+      ensureHeadNode(`meta[property="og:locale:alternate"][content="${locale}"]`, "meta", {
+        property: "og:locale:alternate",
+      }),
+      locale
+    );
+  });
 
-  const canonical = document.querySelector('link[rel="canonical"]');
-  if (canonical) canonical.setAttribute("href", canonicalUrl);
+  setNodeContent(
+    ensureHeadNode('meta[name="twitter:card"]', "meta", { name: "twitter:card" }),
+    "summary_large_image"
+  );
+  setNodeContent(
+    ensureHeadNode('meta[name="twitter:image"]', "meta", { name: "twitter:image" }),
+    "https://nanoker.com/img/og/og-default.png"
+  );
+
+  ensureHeadNode('link[rel="canonical"]', "link", { rel: "canonical" }).setAttribute(
+    "href",
+    canonicalUrl
+  );
+  ["es", "en", "fr", "de"].forEach((supportedLang) => {
+    ensureHeadNode(`link[rel="alternate"][hreflang="${supportedLang}"]`, "link", {
+      rel: "alternate",
+      hreflang: supportedLang,
+    }).setAttribute("href", policyLocalizedUrl(policy, supportedLang));
+  });
+  ensureHeadNode('link[rel="alternate"][hreflang="x-default"]', "link", {
+    rel: "alternate",
+    hreflang: "x-default",
+  }).setAttribute("href", canonicalUrl);
 }
 
 export function initPolicyPage(policyId) {
@@ -848,7 +932,7 @@ export function initPolicyPage(policyId) {
     const lang = getPolicyLanguage();
     const strings = UI_COPY[lang] || UI_COPY.en;
     const policy = localizePolicy(basePolicy, lang);
-    setSeo(policy);
+    setSeo(policy, lang);
     mount.innerHTML = renderPolicyMarkup(policy, strings, lang);
     initPolicyPreviewModal(mount, strings);
   };
