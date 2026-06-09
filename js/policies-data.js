@@ -172,7 +172,7 @@ export const POLICIES = [
         label: "ISO 9001",
         description:
           "Sistema de gestión orientado a la mejora continua, la consistencia de procesos y el enfoque al cliente.",
-        path: "/docs/certificaciones/iso-9001-nanoker.pdf"
+        path: "/docs/certificaciones/NANOKER RESEARCH - ISO 9001.pdf"
       },
       {
         label: "ISO 13485",
