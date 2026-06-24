@@ -5,12 +5,13 @@ import {
   getPolicyById,
 } from "./policies-data.js";
 
-const SUPPORTED_LANGS = new Set(["es", "en", "fr", "de"]);
+const SUPPORTED_LANGS = new Set(["es", "en", "fr", "de", "it"]);
 const POLICY_LOCALES = {
-  es: { og: "es_ES", alternates: ["en_US", "fr_FR", "de_DE"] },
-  en: { og: "en_US", alternates: ["es_ES", "fr_FR", "de_DE"] },
-  fr: { og: "fr_FR", alternates: ["en_US", "es_ES", "de_DE"] },
-  de: { og: "de_DE", alternates: ["en_US", "es_ES", "fr_FR"] },
+  es: { og: "es_ES", alternates: ["en_US", "fr_FR", "de_DE", "it_IT"] },
+  en: { og: "en_US", alternates: ["es_ES", "fr_FR", "de_DE", "it_IT"] },
+  fr: { og: "fr_FR", alternates: ["en_US", "es_ES", "de_DE", "it_IT"] },
+  de: { og: "de_DE", alternates: ["en_US", "es_ES", "fr_FR", "it_IT"] },
+  it: { og: "it_IT", alternates: ["en_US", "es_ES", "fr_FR", "de_DE"] },
 };
 
 const UI_COPY = {
@@ -90,6 +91,25 @@ const UI_COPY = {
     download: "PDF herunterladen",
     document: "Dokument",
   },
+  it: {
+    kicker: "POLITICHE",
+    intro: "Introduzione",
+    commitments: "Il nostro impegno",
+    scope: "Ambito",
+    certifications: "Certificati disponibili",
+    certificationCta: "Visualizza certificato (PDF)",
+    accessPolicy: "Accedi alla politica completa",
+    viewDocument: "Visualizza documento",
+    surveyTitle: "Sondaggio di soddisfazione clienti NANOKER",
+    surveyLead: "Condividi la tua esperienza per aiutarci a migliorare continuamente processi e supporto tecnico.",
+    surveyCta: "Compila il modulo",
+    related: "Potrebbe interessarti anche",
+    close: "Chiudi",
+    preview: "Anteprima PDF",
+    openTab: "Apri in una scheda",
+    download: "Scarica PDF",
+    document: "Documento",
+  },
 };
 
 const POLICY_LOCALIZED_COPY = {
@@ -151,6 +171,25 @@ const POLICY_LOCALIZED_COPY = {
       ],
       scope: "Diese Richtlinie gilt für sämtliche Aktivitäten, internen Prozesse und professionellen Beziehungen von Nanoker.",
     },
+    it: {
+      titleShort: "Qualità",
+      titleFull: "Politica della Qualità",
+      titlePrefix: "Politica della",
+      titleHighlight: "Qualità",
+      description: "Quadro di gestione della qualità focalizzato su tracciabilità, miglioramento continuo e conformità alle specifiche critiche.",
+      intro: [
+        "La Politica della Qualità di Nanoker definisce un quadro operativo orientato a coerenza, miglioramento continuo e soddisfazione di clienti e collaboratori.",
+        "Questo approccio rafforza una cultura di rigore tecnico e coordinamento tra team per mantenere standard omogenei in ogni fase dell'attività.",
+      ],
+      commitments: [
+        "Definire e mantenere criteri di qualità chiari per processi, prodotti e servizi.",
+        "Promuovere il miglioramento continuo tramite revisione periodica di pratiche e risultati.",
+        "Prevenire incidenti attraverso pianificazione, controllo e monitoraggio.",
+        "Rafforzare le competenze del team con formazione e condivisione di buone pratiche.",
+        "Mantenere una comunicazione trasparente con clienti e parti interessate.",
+      ],
+      scope: "Questa politica si applica a tutte le attività, ai processi interni e alle relazioni professionali di Nanoker.",
+    },
   },
   sostenibilidad: {
     en: {
@@ -209,6 +248,25 @@ const POLICY_LOCALIZED_COPY = {
         "Klare Kommunikation über Nachhaltigkeitsziele und Fortschritte gewährleisten.",
       ],
       scope: "Diese Richtlinie gilt für operative und unterstützende Prozesse sowie für die Beziehungen von Nanoker zu Lieferanten und Partnern.",
+    },
+    it: {
+      titleShort: "Sostenibilità",
+      titleFull: "Politica di Sostenibilità",
+      titlePrefix: "Politica di",
+      titleHighlight: "Sostenibilità",
+      description: "Impegni ambientali, efficienza delle risorse e miglioramento continuo per un'attività industriale sostenibile.",
+      intro: [
+        "La Politica di Sostenibilità di Nanoker orienta le decisioni verso un modello di gestione responsabile che bilancia prestazioni tecniche e uso efficiente delle risorse.",
+        "Il suo obiettivo è integrare criteri ambientali e organizzativi nell'attività quotidiana per sostenere un progresso duraturo.",
+      ],
+      commitments: [
+        "Promuovere una gestione responsabile di risorse e consumi nelle attività quotidiane.",
+        "Favorire pratiche di miglioramento continuo con approccio preventivo e di lungo periodo.",
+        "Rafforzare una cultura interna allineata ai principi di responsabilità aziendale.",
+        "Integrare criteri di sostenibilità nella pianificazione, revisione e monitoraggio dei processi.",
+        "Mantenere una comunicazione chiara su obiettivi e progressi di sostenibilità.",
+      ],
+      scope: "Questa politica si applica ai processi operativi e di supporto, nonché ai rapporti di Nanoker con fornitori e collaboratori.",
     },
   },
   "seguridad-laboral": {
@@ -269,6 +327,25 @@ const POLICY_LOCALIZED_COPY = {
       ],
       scope: "Diese Richtlinie gilt für alle von Nanoker durchgeführten Aktivitäten, einschließlich Arbeitsumgebungen, Betriebsabläufen und Zusammenarbeit mit Dritten.",
     },
+    it: {
+      titleShort: "Sicurezza sul lavoro",
+      titleFull: "Politica di Sicurezza sul lavoro",
+      titlePrefix: "Politica di",
+      titleHighlight: "Sicurezza sul lavoro",
+      description: "Impegno per prevenzione dei rischi, salute occupazionale e cultura della sicurezza in stabilimento e laboratori.",
+      intro: [
+        "La Politica di Salute e Sicurezza sul lavoro di Nanoker rafforza la protezione delle persone come principio essenziale per un'operazione solida e sostenibile.",
+        "L'organizzazione promuove una cultura preventiva basata su identificazione dei rischi, apprendimento continuo e responsabilità condivisa.",
+      ],
+      commitments: [
+        "Promuovere ambienti di lavoro sicuri e sani per tutte le persone.",
+        "Integrare la prevenzione nella pianificazione e nell'esecuzione delle attività.",
+        "Incoraggiare la partecipazione attiva del team sui temi di sicurezza sul lavoro.",
+        "Promuovere formazione e sensibilizzazione sulle pratiche sicure.",
+        "Rivedere periodicamente le misure preventive per migliorarne l'efficacia.",
+      ],
+      scope: "Questa politica si applica a tutte le attività svolte da Nanoker, inclusi luoghi di lavoro, operazioni e collaborazione con terzi.",
+    },
   },
   "seguridad-informacion": {
     en: {
@@ -327,6 +404,25 @@ const POLICY_LOCALIZED_COPY = {
         "Sicherheitskontrollen regelmäßig überprüfen und aktualisieren.",
       ],
       scope: "Diese Richtlinie gilt für Informationen und Systeme von Nanoker einschließlich interner Verarbeitung und Zusammenarbeit mit Dritten.",
+    },
+    it: {
+      titleShort: "Sicurezza delle informazioni",
+      titleFull: "Politica di Sicurezza delle informazioni",
+      titlePrefix: "Politica di",
+      titleHighlight: "Sicurezza delle informazioni",
+      description: "Linee guida per proteggere informazioni tecniche e aziendali garantendo riservatezza, integrità e disponibilità.",
+      intro: [
+        "La Politica di Sicurezza delle informazioni di Nanoker definisce linee guida per proteggere informazioni aziendali e tecniche, sostenendo la continuità operativa.",
+        "Il suo obiettivo è rafforzare pratiche di protezione e gestione responsabile delle informazioni in tutta l'organizzazione.",
+      ],
+      commitments: [
+        "Proteggere riservatezza, integrità e disponibilità delle informazioni.",
+        "Applicare misure di sicurezza allineate ai rischi identificati.",
+        "Promuovere una cultura di uso responsabile di sistemi e asset digitali.",
+        "Favorire rilevazione precoce e risposta coordinata agli incidenti.",
+        "Rivedere e aggiornare periodicamente i controlli di sicurezza.",
+      ],
+      scope: "Questa politica si applica alle informazioni e ai sistemi utilizzati da Nanoker, inclusi trattamento interno e collaborazione con terzi.",
     },
   },
   "etica-y-cumplimiento": {
@@ -387,6 +483,25 @@ const POLICY_LOCALIZED_COPY = {
       ],
       scope: "Diese Richtlinie gilt für alle mit Nanoker verbundenen Personen und Aktivitäten sowie für die Interaktion mit Kunden, Lieferanten und Partnern.",
     },
+    it: {
+      titleShort: "Etica e conformità",
+      titleFull: "Politica di Etica e conformità",
+      titlePrefix: "Politica di",
+      titleHighlight: "Etica e conformità",
+      description: "Principi di condotta, integrità e conformità normativa nelle relazioni commerciali, istituzionali e operative.",
+      intro: [
+        "La Politica di Etica e conformità di Nanoker definisce principi di condotta che rafforzano l'integrità nelle relazioni professionali e nella gestione quotidiana.",
+        "L'organizzazione promuove una cultura basata su responsabilità, rispetto e conformità alle norme applicabili.",
+      ],
+      commitments: [
+        "Agire con integrità in ogni decisione e relazione professionale.",
+        "Promuovere comportamenti allineati a principi etici e di rispetto.",
+        "Rafforzare la conoscenza degli obblighi normativi in ogni area di lavoro.",
+        "Mantenere canali interni di comunicazione per domande e segnalazioni.",
+        "Migliorare continuamente le pratiche di conformità e buona governance.",
+      ],
+      scope: "Questa politica si applica a tutte le persone e attività collegate a Nanoker, nonché alle interazioni con clienti, fornitori e collaboratori.",
+    },
   },
   "igualdad-y-diversidad": {
     en: {
@@ -446,6 +561,25 @@ const POLICY_LOCALIZED_COPY = {
       ],
       scope: "Diese Richtlinie gilt für die gesamte Organisation und ihre professionellen Beziehungen, insbesondere in Personalprozessen.",
     },
+    it: {
+      titleShort: "Uguaglianza e diversità",
+      titleFull: "Politica di Uguaglianza e diversità",
+      titlePrefix: "Politica di",
+      titleHighlight: "Uguaglianza e diversità",
+      description: "Impegno per pari opportunità, non discriminazione e ambienti di lavoro inclusivi.",
+      intro: [
+        "La Politica di Uguaglianza e diversità di Nanoker promuove un ambiente professionale inclusivo basato su equità, rispetto e non discriminazione.",
+        "Questo impegno sostiene una cultura organizzativa che valorizza pluralità e sviluppo delle persone.",
+      ],
+      commitments: [
+        "Promuovere pari opportunità nei processi di selezione e sviluppo.",
+        "Rafforzare un ambiente di lavoro rispettoso, inclusivo e libero da discriminazioni.",
+        "Sviluppare pratiche di gestione delle persone basate su criteri oggettivi.",
+        "Favorire la consapevolezza interna su diversità e inclusione.",
+        "Rivedere periodicamente le misure destinate a rafforzare l'equità.",
+      ],
+      scope: "Questa politica si applica all'intera organizzazione e alle sue relazioni professionali, in particolare nei processi di gestione delle persone.",
+    },
   },
   certificaciones: {
     en: {
@@ -491,6 +625,21 @@ const POLICY_LOCALIZED_COPY = {
         { label: "ISO 13485", description: "Referenzrahmen für Qualitätsmanagement in regulierten medizinischen Umgebungen." },
         { label: "Herstellerlizenz für Medizinprodukte", description: "Offizielles Dokument zur Fertigungstätigkeit im Bereich Medizinprodukte." },
         { label: "CE-Kennzeichnung InPerio (0222 MDR 2025)", description: "Dokumentation zur CE-Kennzeichnung des InPerio-Systems im geltenden regulatorischen Rahmen." },
+      ],
+    },
+    it: {
+      titleShort: "Certificazioni",
+      titleFull: "Certificazioni",
+      description: "Documentazione certificata di riferimento per sistemi di gestione e autorizzazioni regolatorie.",
+      intro: [
+        "Questa sezione centralizza certificati e risoluzioni chiave per revisione tecnica, commerciale e regolatoria.",
+        "Tutti i documenti collegati corrispondono ai file ufficiali vigenti di Nanoker.",
+      ],
+      files: [
+        { label: "ISO 9001", description: "Sistema di gestione orientato a miglioramento continuo, coerenza dei processi e attenzione al cliente." },
+        { label: "ISO 13485", description: "Quadro di riferimento per la gestione della qualità in ambienti medicali regolati." },
+        { label: "Licenza di fabbricante di dispositivi medici", description: "Documento ufficiale collegato all'attività produttiva nel settore dei dispositivi medici." },
+        { label: "Marcatura CE InPerio (0222 MDR 2025)", description: "Documentazione associata alla marcatura CE del sistema InPerio nel quadro regolatorio applicabile." },
       ],
     },
   },
@@ -911,7 +1060,7 @@ function setSeo(policy, lang) {
     "href",
     canonicalUrl
   );
-  ["es", "en", "fr", "de"].forEach((supportedLang) => {
+  ["es", "en", "fr", "de", "it"].forEach((supportedLang) => {
     ensureHeadNode(`link[rel="alternate"][hreflang="${supportedLang}"]`, "link", {
       rel: "alternate",
       hreflang: supportedLang,

@@ -1,6 +1,6 @@
 (() => {
   const STORAGE_KEY = "nanoker-lang";
-  const SUPPORTED_LANGS = new Set(["es", "en", "fr", "de"]);
+  const SUPPORTED_LANGS = new Set(["es", "en", "fr", "de", "it"]);
 
   function normalizeLang(raw) {
     const base = String(raw || "")

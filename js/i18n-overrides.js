@@ -9,6 +9,7 @@ export const FR_OVERRIDES = {
       en: "Anglais",
       fr: "Français",
       de: "Allemand",
+      it: "Italien",
     },
   },
   nav: {
@@ -104,6 +105,11 @@ export const FR_OVERRIDES = {
       metaTitle: "Mentions légales | Nanoker",
       metaDescription:
         "Mentions légales de Nanoker Research S.L. incluant les données d'identification, les conditions d'utilisation, la propriété intellectuelle et la limitation de responsabilité.",
+    },
+    publicProjects: {
+      metaTitle: "Publicité des projets de R&D&I | Nanoker Research",
+      metaDescription:
+        "Information publique sur les projets de recherche, développement et innovation auxquels participe Nanoker Research et sur la documentation exigée par les programmes publics de soutien à la R&D&I.",
     },
   },
   contact: {
@@ -1175,6 +1181,21 @@ export const FR_OVERRIDES = {
       },
     },
   },
+  advantages: {
+    tag: "BLOC 7 · AVANTAGE COMPÉTITIF",
+    titleHtml: "Avantages<br /><b>structurels.</b>",
+    subtitle:
+      "Intégration verticale + spécification certifiée + sécurité d'approvisionnement européenne. Les matériaux critiques ne sont pas interchangeables : ils constituent une infrastructure technologique.",
+    items: [
+      { title: "Intégration verticale", text: "Contrôle complet du procédé, de la métrologie et du QA/QC." },
+      { title: "Avantage énergétique", text: "Production intensive en énergie optimisée et compétitive." },
+      { title: "Préparation CBAM et durabilité", text: "Alignement avec la défense, l'aéronautique et la transition verte." },
+      { title: "Protection européenne de la PI", text: "Cadre juridique robuste et proximité avec les clients stratégiques." },
+    ],
+    closing:
+      "L'Europe ne peut pas mener les semi-conducteurs, le quantique ou la défense tout en dépendant de chaînes externes pour les matériaux critiques. Nanoker contribue à bâtir cette base industrielle.",
+    cta: "Voir le message stratégique",
+  },
   footer: {
     brandTextHtml:
       "Plateforme industrielle européenne pour les technologies critiques.<br/>Matériaux avancés avec spécification garantie, traçabilité complète et évolutivité industrielle.",
@@ -1221,7 +1242,245 @@ export const FR_OVERRIDES = {
       privacy: "Politique de confidentialité",
       cookies: "Politique de cookies",
       notice: "Mentions légales",
+      publicProjects: "Publicité des projets de R&D&I",
     },
+  },
+  privacy: {
+    metaTitle: "Politique de confidentialité | Nanoker",
+    metaDescription:
+      "Politique de confidentialité de Nanoker Research S.L. avec des informations sur le responsable du traitement, les finalités, les bases juridiques, la conservation, les droits et la sécurité.",
+    ogLocale: "fr_FR",
+    hero: {
+      kicker: "Juridique / RGPD",
+      titleHtml: "Politique de <span>confidentialité</span>",
+      lead:
+        "Cette politique explique comment Nanoker Research S.L. traite, conserve et protège les données personnelles collectées via le site web corporate et les communications professionnelles liées à son activité.",
+      metaUpdated: "Dernière mise à jour : 24 mars 2026",
+      metaLaw: "Cadre légal : RGPD et réglementation espagnole sur la protection des données",
+      metaScope: "Champ d'application : site web corporate et contact professionnel",
+    },
+    sections: {
+      controller: {
+        title: "1. Responsable du traitement",
+        labelCompany: "Responsable",
+        valueCompany: "Nanoker Research S.L.",
+        labelAddress: "Adresse",
+        valueAddress: "Parque Empresarial de Oviedo, Parcela 22C, Nave 6, 33660 Oviedo, Asturies, Espagne.",
+        labelEmail: "Email",
+        valueEmail: "info@nanoker.com",
+        labelPhone: "Téléphone",
+        valuePhone: "(+34) 985 76 11 41 / 985 20 76 13",
+      },
+      purpose: {
+        title: "2. Finalités du traitement",
+        p1:
+          "Les données personnelles fournies via les formulaires, emails ou canaux de contact sont utilisées pour répondre aux demandes techniques, commerciales ou institutionnelles, gérer les relations professionnelles et assurer le suivi des communications nécessaires.",
+        p2:
+          "Nanoker peut également traiter des données strictement nécessaires au fonctionnement technique du site, à la sécurité, à la prévention des abus et à l'analyse agrégée de l'utilisation du site lorsque cela est applicable.",
+      },
+      legalBasis: {
+        title: "3. Bases juridiques",
+        item1: "Consentement de l'utilisateur lorsqu'il envoie volontairement une demande ou accepte des cookies optionnels.",
+        item2: "Exécution de mesures précontractuelles ou contractuelles liées à des demandes techniques ou commerciales.",
+        item3: "Intérêt légitime de Nanoker à répondre aux communications professionnelles et à protéger le site.",
+        item4: "Respect d'obligations légales en matière corporate, fiscale ou réglementaire.",
+        item5: "Toute autre base juridique applicable selon la nature de la relation avec la personne concernée.",
+      },
+      retention: {
+        title: "4. Conservation",
+        p1:
+          "Les données sont conservées uniquement pendant la durée nécessaire à la finalité pour laquelle elles ont été collectées, puis pendant les délais exigés ou autorisés par la réglementation applicable.",
+        item1: "Demandes générales : jusqu'à leur résolution et pendant le délai raisonnable de suivi.",
+        item2: "Demandes commerciales ou techniques : tant que l'opportunité reste active et pendant les délais de défense juridique applicables.",
+        item3: "Données liées à des obligations légales : pendant les délais imposés par la réglementation correspondante.",
+        item4: "Préférences de cookies : pendant la durée indiquée dans la politique de cookies ou jusqu'au retrait du consentement.",
+      },
+      rights: {
+        title: "5. Droits des personnes concernées",
+        p1:
+          "Les personnes concernées peuvent demander l'accès, la rectification, l'effacement, l'opposition, la limitation du traitement, la portabilité ou le retrait du consentement lorsque cela est applicable.",
+        p2:
+          "Pour exercer ces droits, il est possible d'écrire à info@nanoker.com en indiquant clairement le droit exercé et les informations nécessaires pour identifier la demande. Les personnes concernées peuvent également déposer une réclamation auprès de l'autorité de contrôle compétente.",
+      },
+      security: {
+        title: "6. Sécurité et confidentialité",
+        p1:
+          "Nanoker applique des mesures techniques et organisationnelles raisonnables pour protéger les données personnelles contre tout accès non autorisé, perte, altération ou divulgation.",
+        p2:
+          "L'accès aux données est limité aux personnes qui en ont besoin pour gérer les finalités indiquées et qui doivent respecter les obligations de confidentialité correspondantes.",
+      },
+    },
+    summary: {
+      item1Title: "Responsable",
+      item1Text: "Nanoker Research S.L.",
+      item2Title: "Finalités",
+      item2Text: "Gestion des demandes, communications professionnelles, sécurité et fonctionnement du site.",
+      item3Title: "Base juridique",
+      item3Text: "Consentement, contrat, obligation légale et intérêt légitime.",
+      item4Title: "Droits",
+      item4Text: "Accès, rectification, effacement, opposition, limitation, portabilité et retrait du consentement.",
+    },
+    more: {
+      cookiesTitle: "Politique de cookies",
+      cookiesText: "Utilisation des cookies, technologies similaires et gestion du consentement.",
+      noticeTitle: "Mentions légales",
+      noticeText: "Conditions d'utilisation, propriété intellectuelle et responsabilité.",
+    },
+  },
+  cookies: {
+    metaTitle: "Politique de cookies | Nanoker",
+    metaDescription:
+      "Politique de cookies de Nanoker expliquant ce que sont les cookies, les types utilisés, les cookies tiers et la manière de les gérer.",
+    ogLocale: "fr_FR",
+    hero: {
+      kicker: "Juridique / Cookies",
+      titleHtml: "Politique de <span>cookies</span>",
+      lead:
+        "Cette politique explique l'utilisation des cookies et technologies similaires sur le site web de Nanoker, leur finalité, la possible intervention de tiers et les options disponibles pour les gérer.",
+      metaUpdated: "Dernière mise à jour : 24 mars 2026",
+      metaLaw: "Cadre légal : RGPD, LSSI-CE et réglementation applicable sur les cookies",
+      metaScope: "Champ d'application : site web corporate de Nanoker",
+    },
+    sections: {
+      definition: {
+        title: "1. Que sont les cookies",
+        p1:
+          "Les cookies sont de petits fichiers téléchargés sur l'appareil de l'utilisateur lors de l'accès à un site web. Ils servent à stocker et récupérer des informations sur la navigation, mémoriser des préférences ou activer certains services techniques.",
+        p2:
+          "En plus des cookies, le site peut utiliser des technologies équivalentes telles que le stockage local du navigateur afin de conserver des réglages de base de l'interface.",
+      },
+      types: {
+        title: "2. Types de cookies",
+        item1: "<strong>Cookies techniques nécessaires :</strong> indispensables aux fonctions de base, à la sécurité, à la navigation et à la gestion de session.",
+        item2: "<strong>Cookies de préférence :</strong> conservent des réglages tels que la langue ou les options d'affichage.",
+        item3: "<strong>Cookies d'analyse :</strong> permettent de mesurer l'utilisation du site et d'améliorer ses performances.",
+        item4: "<strong>Cookies marketing :</strong> utilisés pour le suivi publicitaire ou la personnalisation commerciale.",
+      },
+      thirdParty: {
+        title: "3. Cookies de tiers",
+        p1:
+          "Certains services intégrés au site peuvent installer des cookies de tiers, par exemple des outils d'analyse, cartes, vidéos intégrées ou plateformes externes. Dans ce cas, la gestion et la durée de conservation dépendent de chaque fournisseur.",
+        p2:
+          "Dans la configuration actuelle du site de Nanoker, les cookies publicitaires ne sont pas activés par défaut. Si des services tiers optionnels soumis au consentement sont ajoutés, les utilisateurs en seront informés au préalable et le mécanisme de consentement correspondant sera activé.",
+      },
+      manage: {
+        title: "4. Gestion des cookies",
+        p1:
+          "Les utilisateurs peuvent autoriser, bloquer ou supprimer les cookies via les paramètres de leur navigateur. La désactivation de certains cookies techniques peut affecter le bon fonctionnement du site.",
+        item1: "Chrome : paramètres de confidentialité et de sécurité.",
+        item2: "Firefox : préférences de confidentialité et cookies.",
+        item3: "Safari : gestion des cookies et données de sites web.",
+        item4: "Edge : paramètres de cookies et autorisations du site.",
+      },
+    },
+    summary: {
+      item1Title: "Cookies techniques",
+      item1Text: "Nécessaires au fonctionnement de base du site.",
+      item2Title: "Cookies optionnels",
+      item2Text: "Analyse ou cookies de tiers uniquement lorsque cela est applicable et avec information préalable.",
+      item3Title: "Gestion",
+      item3Text: "Les utilisateurs peuvent configurer ou supprimer les cookies dans leur navigateur.",
+    },
+    more: {
+      privacyTitle: "Politique de confidentialité",
+      privacyText: "Traitement des données personnelles et droits de l'utilisateur.",
+      noticeTitle: "Mentions légales",
+      noticeText: "Conditions d'utilisation, propriété intellectuelle et limitation de responsabilité.",
+    },
+  },
+  legalNotice: {
+    metaTitle: "Mentions légales | Nanoker",
+    metaDescription:
+      "Mentions légales de Nanoker Research S.L. incluant les données d'identification, les conditions d'utilisation, la propriété intellectuelle et la limitation de responsabilité.",
+    ogLocale: "fr_FR",
+    hero: {
+      kicker: "Juridique / Corporate",
+      titleHtml: "Mentions <span>légales</span>",
+      lead:
+        "Ce document régit l'accès, la navigation et l'utilisation du site web de Nanoker Research S.L., ainsi que les conditions applicables à ses contenus, droits de propriété intellectuelle et limitations de responsabilité.",
+      metaUpdated: "Dernière mise à jour : 24 mars 2026",
+      metaScope: "Champ d'application : site web corporate",
+      metaLaw: "Législation applicable : Espagne",
+    },
+    sections: {
+      identification: {
+        title: "1. Données d'identification",
+        labelOwner: "Titulaire du site",
+        valueOwner: "Nanoker Research S.L.",
+        labelAddress: "Adresse",
+        valueAddress: "Parque Empresarial de Oviedo, Parcela 22C, Nave 6, 33660 Oviedo, Asturies, Espagne.",
+        labelEmail: "Email",
+        valueEmail: "info@nanoker.com",
+        labelPhone: "Téléphone",
+        valuePhone: "(+34) 985 76 11 41 / 985 20 76 13",
+      },
+      terms: {
+        title: "2. Conditions d'utilisation",
+        p1:
+          "L'accès à ce site et sa navigation confèrent la qualité d'utilisateur et impliquent l'acceptation des présentes mentions légales. L'utilisateur s'engage à faire un usage approprié du site, de ses contenus et des services disponibles conformément à la loi, à la bonne foi et à l'ordre public.",
+        p2:
+          "Il est interdit d'utiliser le site à des fins illicites, préjudiciables à Nanoker ou à des tiers, ainsi que d'introduire ou de diffuser des virus, scripts malveillants ou toute action susceptible d'altérer le fonctionnement de la plateforme.",
+      },
+      ip: {
+        title: "3. Propriété intellectuelle",
+        p1:
+          "Tous les contenus du site, y compris textes, designs, structure, graphiques, logos, images, vidéos, code source et éléments distinctifs, appartiennent à Nanoker ou sont utilisés avec une autorisation suffisante.",
+        p2:
+          "Toute reproduction, distribution, transformation, communication publique ou exploitation totale ou partielle sans autorisation écrite préalable est interdite, sauf dans les cas légalement permis.",
+      },
+      liability: {
+        title: "4. Responsabilité",
+        p1:
+          "Nanoker adopte des mesures raisonnables pour assurer la disponibilité, l'exactitude et la mise à jour du site, mais ne garantit pas l'absence d'erreurs, interruptions ou incidents techniques ponctuels.",
+        p2:
+          "Nanoker ne saurait être tenue responsable des dommages résultant d'une utilisation inappropriée du site, de décisions prises à partir des informations publiées ou de contenus de tiers liés depuis ce site, sauf disposition légale contraire.",
+      },
+    },
+    summary: {
+      item1Title: "Titulaire",
+      item1Text: "Nanoker Research S.L.",
+      item2Title: "Utilisation autorisée",
+      item2Text: "Navigation et consultation légitime des informations corporate.",
+      item3Title: "Protection",
+      item3Text: "Les contenus et actifs du site sont protégés par des droits de propriété intellectuelle.",
+      item4Title: "Responsabilité",
+      item4Text: "Les informations sont fournies selon un critère de diligence, sans garantie absolue d'absence d'incidents.",
+    },
+    more: {
+      privacyTitle: "Politique de confidentialité",
+      privacyText: "Traitement des données, conservation et droits de l'utilisateur.",
+      cookiesTitle: "Politique de cookies",
+      cookiesText: "Cookies, technologies similaires et gestion des préférences.",
+    },
+  },
+  publicProjects: {
+    kicker: "Projets financés / R&D&I",
+    titleHtml: "Publicité des projets de <span>R&D&I</span>",
+    lead:
+      "Information publique relative aux projets de recherche, développement et innovation auxquels participe Nanoker Research, S.L., ainsi qu'à la documentation exigée par les organismes financeurs.",
+    documentsKicker: "Documentation publique",
+    documentsTitle: "Affiches et documents de projets",
+    viewDocument: "Voir le document",
+    currentPage: "Publicité des projets de R&D&I",
+    open: {
+      lion: "Ouvrir le document LION-HD",
+      estratesic: "Ouvrir le PDF EstrateSiC",
+      cpp: "Ouvrir le PDF CPP",
+      epita: "Ouvrir le PDF EPITA",
+      ifast: "Ouvrir le PDF I.FAST",
+      megavatio: "Ouvrir le PDF MEGAVATIO",
+      recon: "Ouvrir le PDF RECON",
+    },
+    alt: {
+      lion: "Affiche du projet LION-HD",
+      estratesic: "Aperçu de l'affiche EstrateSiC",
+      cpp: "Aperçu de l'affiche CPP",
+      epita: "Aperçu de l'affiche EPITA",
+      ifast: "Aperçu de l'affiche I.FAST",
+      megavatio: "Aperçu de l'affiche MEGAVATIO",
+      recon: "Aperçu de l'affiche RECON",
+    },
+    cppTitle: "CPP - Wafers SiC pour l'électronique de puissance",
   },
   legalCommon: {
     summary: "Résumé",
@@ -1256,6 +1515,7 @@ export const DE_OVERRIDES = {
       en: "Englisch",
       fr: "Französisch",
       de: "Deutsch",
+      it: "Italienisch",
     },
   },
   nav: {
@@ -1351,6 +1611,11 @@ export const DE_OVERRIDES = {
       metaTitle: "Impressum | Nanoker",
       metaDescription:
         "Impressum von Nanoker Research S.L. mit Identifikationsdaten, Nutzungsbedingungen, geistigem Eigentum und Haftungsbeschränkung.",
+    },
+    publicProjects: {
+      metaTitle: "Bekanntmachungen zu F&E&I-Projekten | Nanoker Research",
+      metaDescription:
+        "Öffentliche Informationen zu Forschungs-, Entwicklungs- und Innovationsprojekten, an denen Nanoker Research beteiligt ist, sowie zu den von öffentlichen Förderprogrammen geforderten Hinweisen.",
     },
   },
   contact: {
@@ -2424,6 +2689,21 @@ export const DE_OVERRIDES = {
       },
     },
   },
+  advantages: {
+    tag: "BLOCK 7 · WETTBEWERBSVORTEIL",
+    titleHtml: "Strukturelle<br /><b>Vorteile.</b>",
+    subtitle:
+      "Vertikale Integration + zertifizierte Spezifikation + europäische Versorgungssicherheit. Kritische Materialien sind nicht austauschbar: Sie sind technologische Infrastruktur.",
+    items: [
+      { title: "Vertikale Integration", text: "Vollständige Kontrolle über Prozess, Metrologie und QA/QC." },
+      { title: "Energievorteil", text: "Optimierte und wettbewerbsfähige energieintensive Produktion." },
+      { title: "CBAM-Bereitschaft und Nachhaltigkeit", text: "Ausgerichtet auf Verteidigung, Luft- und Raumfahrt sowie die grüne Transformation." },
+      { title: "Europäischer IP-Schutz", text: "Robuster Rechtsrahmen und Nähe zu strategischen Kunden." },
+    ],
+    closing:
+      "Europa kann bei Halbleitern, Quantentechnologien oder Verteidigung nicht führend sein, wenn es bei kritischen Materialien von externen Lieferketten abhängt. Nanoker hilft, diese industrielle Basis aufzubauen.",
+    cta: "Strategische Botschaft ansehen",
+  },
   footer: {
     brandTextHtml:
       "Europäische Industrieplattform für kritische Technologien.<br/>Fortschrittliche Materialien mit garantierter Spezifikation, vollständiger Rückverfolgbarkeit und industrieller Skalierbarkeit.",
@@ -2471,7 +2751,37 @@ export const DE_OVERRIDES = {
       privacy: "Datenschutzerklärung",
       cookies: "Cookie-Richtlinie",
       notice: "Impressum",
+      publicProjects: "Bekanntmachungen zu F&E&I-Projekten",
     },
+  },
+  publicProjects: {
+    kicker: "Geförderte Projekte / F&E&I",
+    titleHtml: "Bekanntmachungen zu <span>F&E&I-Projekten</span>",
+    lead:
+      "Öffentliche Informationen zu Forschungs-, Entwicklungs- und Innovationsprojekten, an denen Nanoker Research, S.L. beteiligt ist, sowie zu den von Förderstellen geforderten Unterlagen.",
+    documentsKicker: "Öffentliche Dokumentation",
+    documentsTitle: "Projektposter und Dokumente",
+    viewDocument: "Dokument ansehen",
+    currentPage: "Bekanntmachungen zu F&E&I-Projekten",
+    open: {
+      lion: "LION-HD-Dokument öffnen",
+      estratesic: "EstrateSiC-PDF öffnen",
+      cpp: "CPP-PDF öffnen",
+      epita: "EPITA-PDF öffnen",
+      ifast: "I.FAST-PDF öffnen",
+      megavatio: "MEGAVATIO-PDF öffnen",
+      recon: "RECON-PDF öffnen",
+    },
+    alt: {
+      lion: "Poster des Projekts LION-HD",
+      estratesic: "Vorschau des EstrateSiC-Posters",
+      cpp: "Vorschau des CPP-Posters",
+      epita: "Vorschau des EPITA-Posters",
+      ifast: "Vorschau des I.FAST-Posters",
+      megavatio: "Vorschau des MEGAVATIO-Posters",
+      recon: "Vorschau des RECON-Posters",
+    },
+    cppTitle: "CPP - SiC-Wafer für Leistungselektronik",
   },
   legalCommon: {
     summary: "Zusammenfassung",
@@ -2707,5 +3017,718 @@ export const DE_OVERRIDES = {
     accept: "Akzeptieren",
     reject: "Ablehnen",
     learnMore: "Mehr erfahren",
+  },
+};
+
+export const IT_OVERRIDES = {
+  langSwitcher: {
+    label: "Lingua",
+    choose: "Scegli la lingua",
+    current: "Lingua attuale: {0}",
+    optionLabel: "Passa il sito a {0}",
+    names: {
+      es: "Spagnolo",
+      en: "Inglese",
+      fr: "Francese",
+      de: "Tedesco",
+      it: "Italiano",
+    },
+  },
+  nav: {
+    home: "Home",
+    company: "Azienda",
+    capabilities: "Capacità",
+    materials: "Materiali",
+    sectors: "Settori",
+    rnd: "R&S",
+    advantages: "Vantaggi",
+    contact: "Contatto",
+    sectorsLabel: "Settori:",
+    partner: "Accesso partner",
+    menu: "Apri menu",
+    closeMenu: "Chiudi menu",
+    mobileNavigationLabel: "Navigazione del sito",
+    quantum: "Quantistico",
+    semi: "Semiconduttori",
+    extreme: "Difesa e spazio",
+    medical: "Medicale",
+    implants: "Impianti",
+    lang: "IT",
+  },
+  hero: {
+    headline: "Materiali DeepTech per industrie critiche.",
+    lead:
+      "Materiali avanzati con specifiche garantite, tracciabilità completa e scalabilità industriale. Dal precursore al componente finito.",
+    bridgeEyebrow: "DEEPTECH EUROPEA · INFRASTRUTTURA DEI MATERIALI",
+    bridgeSectionAria: "Introduzione",
+    bridgeHtml:
+      "La transizione DeepTech europea dal prototipo alla produzione industriale dipende da un fattore critico: il dominio dei materiali avanzati.<br /><br />Nanoker integra capacità in ceramiche tecniche, diamante CVD, SiC e zaffiro per fornire soluzioni con specifiche garantite, tracciabilità completa e scalabilità industriale.",
+    bridgeCtaSectors: "Esplora i settori",
+    bridgeCtaContact: "Contatta l'ingegneria",
+    scroll: "Scorri per esplorare",
+  },
+  seo: {
+    home: {
+      metaTitle: "Nanoker | Materiali avanzati DeepTech e ceramiche tecniche",
+      metaDescription:
+        "Nanoker sviluppa e produce ceramiche tecniche, carburo di silicio, diamante CVD e zaffiro per semiconduttori, aerospazio, difesa e gestione termica.",
+    },
+    company: {
+      metaTitle: "Nanoker | Azienda DeepTech per materiali avanzati",
+      metaDescription:
+        "Scopri come Nanoker costruisce capacità manifatturiera europea nei materiali avanzati, combinando R&S industriale, qualificazione e produzione scalabile.",
+    },
+    capabilities: {
+      metaTitle: "Nanoker | Capacità di produzione avanzata e ceramiche tecniche",
+      metaDescription:
+        "Consulta le capacità Nanoker in formulazione, crescita cristallina, densificazione, lavorazione di precisione, metrologia e qualificazione.",
+    },
+    rnd: {
+      metaTitle: "Nanoker | R&S industriale in materiali avanzati",
+      metaDescription:
+        "Esplora la R&S industriale Nanoker in materiali avanzati, carburo di silicio, diamante per applicazioni quantistiche e processi per semiconduttori.",
+    },
+    materials: {
+      metaTitle: "Nanoker | Ceramiche tecniche, SiC e materiali avanzati",
+      metaDescription:
+        "Scopri il portafoglio Nanoker in ceramiche tecniche, carburo di silicio, diamante CVD e zaffiro per gestione termica, semiconduttori, difesa e aerospazio.",
+    },
+    sectors: {
+      metaTitle: "Nanoker | Materiali avanzati per aerospazio, difesa e semiconduttori",
+      metaDescription:
+        "Esplora i settori serviti da Nanoker, dall'aerospazio e difesa ai semiconduttori, energia, fotonica e R&S industriale.",
+    },
+    contact: {
+      metaTitle: "Nanoker | Contatta il team di ingegneria dei materiali DeepTech",
+      metaDescription:
+        "Contatta il team di ingegneria Nanoker per discutere ceramiche tecniche, carburo di silicio, gestione termica e requisiti di qualificazione.",
+    },
+    evaluation: {
+      metaTitle: "Nanoker | Valutazione tecnica per applicazioni in materiali avanzati",
+      metaDescription:
+        "Richiedi una valutazione tecnica per applicazioni critiche e allinea architettura del materiale, percorso produttivo e validazione con Nanoker.",
+    },
+    certifications: {
+      metaTitle: "Nanoker | Qualità, certificazioni e tracciabilità",
+      metaDescription:
+        "Consulta il quadro qualità, le certificazioni e gli standard di tracciabilità Nanoker per la produzione DeepTech in settori critici.",
+    },
+    privacy: {
+      metaTitle: "Informativa sulla privacy | Nanoker",
+      metaDescription:
+        "Informativa sulla privacy di Nanoker Research S.L. con informazioni su titolare, finalità, basi giuridiche, conservazione, diritti e sicurezza.",
+    },
+    cookies: {
+      metaTitle: "Informativa sui cookie | Nanoker",
+      metaDescription:
+        "Informativa sui cookie di Nanoker: cosa sono, tipologie utilizzate, cookie di terze parti e modalità di gestione.",
+    },
+    legalNotice: {
+      metaTitle: "Note legali | Nanoker",
+      metaDescription:
+        "Note legali di Nanoker Research S.L. con dati identificativi, condizioni d'uso, proprietà intellettuale e limitazione di responsabilità.",
+    },
+    publicProjects: {
+      metaTitle: "Pubblicità dei progetti di R&S&I | Nanoker Research",
+      metaDescription:
+        "Informazioni pubbliche sui progetti di ricerca, sviluppo e innovazione a cui partecipa Nanoker Research e sulla documentazione richiesta dai programmi pubblici di sostegno alla R&S&I.",
+    },
+  },
+  contact: {
+    metaTitle: "Contatto tecnico | Nanoker",
+    hero: {
+      kicker: "CONTATTO",
+      titleHtml: "Contatto <span class=\"page-hero__accent\">tecnico</span>",
+      lead: "La scelta corretta del materiale inizia da un brief tecnico solido.",
+      text:
+        "Se stai qualificando un componente, riducendo il rischio di fornitura o definendo una nuova architettura del materiale, il nostro team di ingegneria può valutare l'applicazione con una prospettiva industriale.",
+      cta: "Apri il modulo tecnico",
+    },
+    work: {
+      title: "Come lavoriamo",
+      intro: "Per accelerare la prima revisione, condividi:",
+      items: {
+        application: "Descrizione dell'applicazione",
+        specification: "Specifica target o disegni tecnici, se disponibili",
+        requirements: "Requisiti critici (temperatura, pressione, tolleranze, vita utile, ecc.)",
+        volume: "Domanda stimata, fase di qualificazione o maturità del progetto",
+      },
+      outro:
+        "Questo ci aiuta a inquadrare con precisione fattibilità, logica di qualificazione e prossimi passi tecnici.",
+    },
+    wizard: {
+      kicker: "INTERFACCIA DI INGEGNERIA",
+      title: "Raccolta tecnica",
+      progress: "Passo 1 di 6",
+      progressTemplate: "PASSO {current} DI {total}",
+      steps: {
+        step1: "PASSO 1",
+        step2: "PASSO 2",
+        step3: "PASSO 3",
+        step4: "PASSO 4",
+        step5: "PASSO 5",
+        step6: "PASSO 6",
+      },
+    },
+    form: {
+      actions: { continue: "Continua" },
+      step1: {
+        title: "Tipo di richiesta",
+        options: {
+          eval: "Valutazione tecnica del materiale",
+          coengineering: "Sviluppo congiunto / co-engineering",
+          sample: "Richiesta di campione",
+          rfq: "Richiesta di offerta (RFQ)",
+          rnd: "Collaborazione R&S",
+          institutional: "Investimento / istituzionale",
+          other: "Altro",
+        },
+      },
+      step2: {
+        title: "Settore",
+        options: {
+          industry: "Industria",
+          energy: "Energia",
+          health: "Salute",
+          semiconductors: "Semiconduttori",
+          photonics: "Fotonica",
+          quantum: "Quantistico",
+          defense: "Difesa / spazio",
+          science: "Scienza e infrastrutture",
+        },
+      },
+      step3: {
+        title: "Materiale di interesse (opzionale)",
+        options: {
+          diamond: "Diamante evo",
+          sic: "SiC",
+          sapphire: "Zaffiro",
+          ceramics: "Ceramiche tecniche",
+          composites: "Compositi termici",
+          undefined: "Non definito",
+        },
+      },
+      step4: {
+        title: "Informazioni tecniche",
+        label: "Informazioni tecniche",
+        placeholder: "Descrivi applicazione, ambiente operativo e requisiti principali.",
+      },
+      step5: {
+        title: "Dati di contatto",
+        fields: {
+          name: "Nome *",
+          company: "Azienda *",
+          role: "Ruolo",
+          email: "Email aziendale *",
+          country: "Paese *",
+          phone: "Telefono (opzionale)",
+        },
+      },
+      step6: {
+        title: "Invia richiesta",
+        submit: "Invia richiesta tecnica",
+        sending: "Invio...",
+        note: "Elaboriamo le richieste tecniche entro 3-5 giorni lavorativi.",
+      },
+      status: {
+        requiredFields: "Completa i campi obbligatori per continuare.",
+        completePrevious: "Completa i passaggi precedenti prima dell'invio.",
+        reviewRequired: "Controlla i campi obbligatori prima dell'invio.",
+        invalidEmail: "Inserisci un'email valida per poterti rispondere.",
+        sending: "Invio...",
+        received:
+          "Richiesta inviata correttamente. Grazie per aver contattato Nanoker. Il nostro team esaminerà la richiesta e risponderà appena possibile.",
+        error:
+          'Non siamo riusciti a inviare la richiesta in questo momento. Riprova o scrivi a <a href="mailto:web@nanoker.com">web@nanoker.com</a>.',
+      },
+    },
+    processingNote: "ELABORIAMO LE RICHIESTE TECNICHE ENTRO 3-5 GIORNI LAVORATIVI",
+    duo: {
+      strategic: {
+        title: "Relazioni strategiche",
+        text:
+          "Per alleanze industriali, collaborazioni istituzionali o informazioni corporate, puoi scrivere direttamente a:",
+      },
+      presence: {
+        title: "Presenza industriale",
+        oviedo: "Oviedo - Sviluppo e validazione",
+        leon: "León - Hub industriale strategico",
+      },
+      readiness: {
+        title: "Pronti per programmi critici",
+        text:
+          "Le prime conversazioni sono gestite con rigore ingegneristico, disciplina di riservatezza e criteri di qualificazione industriale.",
+        item1: "Interlocutore tecnico dalla prima revisione",
+        item2: "Focus su CTQ, rischio e scale-up",
+        item3: "Prima risposta entro 3-5 giorni lavorativi",
+      },
+    },
+    close: {
+      title: "Ingegneria dei materiali allineata a qualificazione e scale-up",
+      text:
+        "Nel DeepTech, la trazione commerciale dipende dalla credibilità tecnica. Supportiamo i clienti dalla prima revisione della specifica alla qualificazione industriale e alla continuità di fornitura.",
+    },
+  },
+  evaluation: {
+    metaTitle: "Valutazione tecnica | Nanoker",
+    metaDescription:
+      "Richiedi una valutazione tecnica per tecnologie critiche e allinea architettura del materiale, esecuzione ingegneristica e roadmap di validazione con Nanoker.",
+    hero: {
+      kicker: "VALUTAZIONE",
+      titleHtml: "Valutazione tecnica per <span class=\"page-hero__accent\">tecnologie critiche</span>",
+      lead:
+        "Definiamo architettura del materiale, rischi ingegneristici e percorsi di validazione per accelerare decisioni critiche con affidabilità industriale.",
+    },
+    work: {
+      title: "Come lavoriamo",
+      items: {
+        scope: "Allineiamo obiettivi tecnici, vincoli e criticità del sistema.",
+        architecture: "Proponiamo architetture di materiali ed elettronica con attenzione alla producibilità.",
+        validation: "Progettiamo un piano di validazione con milestone misurabili e criteri di successo.",
+        execution: "Forniamo raccomandazioni operative in settimane, non trimestri.",
+      },
+    },
+    wizard: {
+      kicker: "INTERFACCIA DI INGEGNERIA",
+      title: "Valutazione guidata",
+      confidentiality: "Tutte le informazioni saranno trattate in modo riservato.",
+    },
+  },
+  certifications: {
+    metaTitle: "Nanoker | Qualità e certificazioni",
+    kicker: "QUADRO QUALITÀ",
+    titleHtml: "Qualità e <span class=\"cert-accent\">Certificazioni</span>",
+    intro:
+      "Nanoker opera secondo standard riconosciuti a livello internazionale per garantire affidabilità del prodotto, conformità normativa e piena tracciabilità industriale.",
+    labels: {
+      standard: "Standard",
+      scope: "Ambito",
+      body: "Ente di certificazione",
+      number: "Numero certificato",
+      valid: "Valido fino al",
+    },
+    cards: {
+      iso9001: {
+        desc:
+          "Sistema di gestione della qualità certificato per processi coerenti, miglioramento continuo e prestazioni orientate al cliente.",
+        fields: {
+          scope: "Progettazione, sviluppo e produzione industriale di materiali tecnici avanzati.",
+          valid: "31 dicembre 2028",
+        },
+        download: "Scarica certificato",
+      },
+      iso14001: {
+        desc:
+          "Sistema di gestione ambientale per uso responsabile delle risorse, controllo delle emissioni e pratiche industriali sostenibili.",
+        fields: {
+          scope: "Gestione ambientale della produzione di materiali avanzati e dei servizi industriali associati.",
+          valid: "30 settembre 2028",
+        },
+        download: "Scarica certificato",
+      },
+      iso13485: {
+        desc:
+          "Sistema di gestione della qualità per ambienti regolati, a supporto di requisiti medical-grade e documentazione robusta.",
+        fields: {
+          scope: "Controlli di sviluppo e produzione per materiali avanzati in ambienti medicali regolati.",
+          valid: "30 giugno 2028",
+        },
+        download: "Scarica certificato",
+      },
+    },
+  },
+  pages: {
+    company: {
+      metaTitle: "Nanoker | Azienda",
+      hero: {
+        eyebrow: "Azienda",
+        titleHtml:
+          "Infrastruttura industriale per <span class=\"empresa-accent\">tecnologie strategiche.</span>",
+        text:
+          "Nanoker è una piattaforma industriale per materiali avanzati e componenti ad alta specifica in settori in cui i cicli di qualificazione sono lunghi, i guasti sono costosi e la continuità di fornitura è strategica.",
+      },
+      mission: {
+        title: "Posizionamento industriale",
+        priorities: {
+          title: "Cosa i clienti si aspettano da noi",
+          item1: "Purezza lotto a lotto e stabilità del processo",
+          item2: "Documentazione pronta per la qualificazione e tracciabilità",
+          item3: "Minore esposizione a catene di fornitura esterne fragili",
+          item4: "Scale-up industriale europeo per programmi critici",
+        },
+        who: {
+          title: "Per cosa è costruita Nanoker",
+          item1: "Produrre componenti ceramici avanzati e a base cristallina",
+          item2: "Sviluppare formulazioni proprietarie e percorsi materiali",
+          item3: "Integrare processo, metrologia e logica di qualificazione",
+          item4: "Supportare OEM europei in applicazioni critiche a ciclo lungo",
+        },
+      },
+      platform: {
+        titleHtml: "Piattaforma <span class=\"empresa-accent\">integrata</span>",
+        subtitle: "Dall'architettura del materiale al componente qualificato",
+        card1: "Sintesi, formulazione e crescita",
+        card2: "Lavorazione di precisione",
+        card3: "Ingegneria di superficie e metrologia",
+        card4: "QA, tracciabilità e controllo",
+      },
+      alliance: {
+        title: "Alleanza tecnologica strategica",
+        text:
+          "Nanoker integra capacità avanzate nella crescita di diamante monocristallino e nel controllo del drogaggio su scala atomica, ampliando il portafoglio verso applicazioni quantistiche, termiche e per semiconduttori di nuova generazione.",
+        item1: "Diamante CVD",
+        item2: "Carburo di silicio",
+        item3: "Zaffiro",
+        item4: "Ceramiche estreme",
+      },
+      infrastructure: {
+        title: "Modello di esecuzione industriale",
+        item1: "Percorsi di qualificazione progressivi allineati ai requisiti di settore",
+        item2: "Scale-up industriale per fasi",
+        item3: "Operatività 24/7",
+        item4: "Disponibilità target superiore al 95%",
+      },
+      advantage: {
+        title: "Vantaggio strutturale europeo",
+        subtitle: "Energia, sostenibilità e sovranità",
+        text:
+          "La produzione di materiali avanzati è intensiva in energia e sensibile al capitale. Operare in un contesto competitivo di energia rinnovabile a bassa intensità di carbonio offre:",
+        item1: "Un vantaggio strutturale di costo",
+        item2: "Conformità CBAM",
+        item3: "Accesso a mercati regolati ed esigenti",
+        item4: "Certezza giuridica europea e protezione della PI",
+        closingHtml:
+          "Non è solo un argomento di sostenibilità.<br />È un vantaggio di posizionamento industriale.",
+      },
+      approach: {
+        title: "Modello di relazione con il cliente",
+        subtitle: "Come passiamo dal requisito all'esecuzione industriale",
+        item1: "Definire la specifica materiale critica per la qualità",
+        item2: "Validare tramite metrologia, finestre di processo ed evidenza tecnica",
+        item3: "Qualificare in base a vincoli e standard specifici del settore",
+        item4: "Scalare con ripetibilità industriale e continuità di fornitura",
+        text: "Lavoriamo all'interno della roadmap del cliente, non al di fuori di essa.",
+      },
+      vision: {
+        title: "Visione",
+        subtitle: "Infrastruttura strategica per la DeepTech europea",
+        text:
+          "Nanoker vuole consolidare una capacità industriale europea nei materiali avanzati che riduca il rischio tecnologico, abiliti applicazioni critiche e sostenga la sovranità industriale.",
+      },
+    },
+  },
+  advantages: {
+    tag: "BLOCCO 7 · VANTAGGIO COMPETITIVO",
+    titleHtml: "Vantaggi<br /><b>strutturali.</b>",
+    subtitle:
+      "Integrazione verticale + specifiche certificate + sicurezza di fornitura europea. I materiali critici non sono intercambiabili: sono infrastruttura tecnologica.",
+    items: [
+      { title: "Integrazione verticale", text: "Controllo completo di processo, metrologia e QA/QC." },
+      { title: "Vantaggio energetico", text: "Produzione energivora ottimizzata e competitiva." },
+      { title: "Preparazione CBAM e sostenibilità", text: "Allineamento con difesa, aerospazio e transizione verde." },
+      { title: "Protezione europea della PI", text: "Quadro giuridico robusto e prossimità ai clienti strategici." },
+    ],
+    closing:
+      "L'Europa non può guidare semiconduttori, tecnologie quantistiche o difesa dipendendo da catene esterne per materiali critici. Nanoker contribuisce a costruire questa base industriale.",
+    cta: "Vedi il messaggio strategico",
+  },
+  footer: {
+    brandTextHtml:
+      "Piattaforma industriale europea per tecnologie critiche.<br/>Materiali avanzati con specifiche garantite, tracciabilità completa e scalabilità industriale.",
+    noteHtml:
+      "<b>Contatto tecnico:</b> elaboriamo le richieste entro <b>3-5 giorni lavorativi</b>.",
+    colSite: {
+      title: "Sito",
+      links: {
+        home: "Home",
+        company: "Azienda",
+        sectors: "Settori",
+        materials: "Materiali",
+        capabilities: "Capacità",
+        rnd: "R&S",
+        contact: "Contatto",
+      },
+    },
+    colHubs: {
+      title: "Hub industriali",
+      links: {
+        oviedo: "Oviedo - Sviluppo e validazione",
+        leon: "León - Hub industriale",
+        supply: "Fornitura europea",
+      },
+    },
+    colPolicies: {
+      title: "Politiche",
+      links: {
+        quality: "Qualità",
+        sustainability: "Sostenibilità",
+        occupationalSafety: "Sicurezza sul lavoro",
+        infoSecurity: "Sicurezza delle informazioni",
+        ethicsCompliance: "Etica e conformità",
+        equalityDiversity: "Uguaglianza e diversità",
+        certifications: "Certificazioni →",
+      },
+    },
+    colConnect: {
+      title: "Contatto",
+      links: { linkedin: "LinkedIn ↗" },
+    },
+    system: { label: "STATO DEL SISTEMA:", value: "OPERATIVO" },
+    legal: {
+      copyright: "© 2026 Nanoker Research S.L.",
+      privacy: "Informativa sulla privacy",
+      cookies: "Informativa sui cookie",
+      notice: "Note legali",
+      publicProjects: "Pubblicità dei progetti di R&S&I",
+    },
+  },
+  legalCommon: {
+    summary: "Sintesi",
+    moreInfo: "Maggiori informazioni",
+    footerLegalTitle: "Legale",
+  },
+  cookieBanner: {
+    title: "Cookie",
+    description: "Utilizziamo i cookie per migliorare l'esperienza e analizzare l'uso del sito.",
+    accept: "Accetta",
+    reject: "Rifiuta",
+    learnMore: "Maggiori informazioni",
+  },
+  privacy: {
+    metaTitle: "Informativa sulla privacy | Nanoker",
+    metaDescription:
+      "Informativa sulla privacy di Nanoker Research S.L. con informazioni su titolare, finalità, basi giuridiche, conservazione, diritti e sicurezza.",
+    ogLocale: "it_IT",
+    hero: {
+      kicker: "Legale / GDPR",
+      titleHtml: "Informativa sulla <span>Privacy</span>",
+      lead:
+        "Questa informativa spiega come Nanoker Research S.L. raccoglie, utilizza, conserva e protegge i dati personali ottenuti tramite il sito aziendale e le comunicazioni professionali connesse alla sua attività.",
+      metaUpdated: "Ultimo aggiornamento: 24 marzo 2026",
+      metaLaw: "Normativa: GDPR e LOPDGDD",
+      metaScope: "Ambito: sito aziendale e contatto commerciale",
+    },
+    sections: {
+      controller: {
+        title: "1. Titolare del trattamento",
+        labelCompany: "Titolare",
+        valueCompany: "Nanoker Research S.L.",
+        labelAddress: "Sede",
+        valueAddress: "Parque Empresarial de Oviedo, Parcela 22C, Nave 6, 33660 Oviedo, Asturias, Spagna.",
+        labelEmail: "Email",
+        valueEmail: "info@nanoker.com",
+        labelPhone: "Telefono",
+        valuePhone: "(+34) 985 76 11 41 / 985 20 76 13",
+      },
+      purpose: {
+        title: "2. Finalità del trattamento",
+        p1:
+          "Trattiamo dati personali per gestire richieste, opportunità commerciali e tecniche, rapporti contrattuali e la sicurezza del sito e delle comunicazioni aziendali.",
+        p2:
+          "Quando l'utente invia informazioni tramite moduli, email o telefonate, i dati sono utilizzati esclusivamente per rispondere, elaborare richieste o sviluppare il rapporto professionale corrispondente.",
+      },
+      legalBasis: {
+        title: "3. Base giuridica",
+        item1: "Consenso dell'interessato quando invia richieste o accetta trattamenti opzionali.",
+        item2: "Misure precontrattuali per preparare proposte, valutazioni tecniche o preventivi.",
+        item3: "Esecuzione di un contratto quando esiste un rapporto commerciale o di fornitura.",
+        item4: "Adempimento di obblighi legali in materia commerciale, fiscale o regolatoria.",
+        item5: "Legittimo interesse a preservare sicurezza, continuità e tracciabilità dell'attività aziendale.",
+      },
+      retention: {
+        title: "4. Conservazione dei dati",
+        p1:
+          "I dati sono conservati solo per il tempo necessario alla finalità per cui sono stati raccolti e, successivamente, per i termini di conservazione legalmente richiesti.",
+        item1: "Richieste generali: fino a 24 mesi dall'ultima interazione.",
+        item2: "Richieste commerciali o tecniche: finché l'opportunità resta attiva e per i termini applicabili di tutela legale.",
+        item3: "Dati contrattuali e amministrativi: per i termini legali di conservazione commerciale, fiscale e contabile.",
+        item4: "Trattamenti basati sul consenso: fino alla revoca o finché i dati non siano più necessari.",
+      },
+      rights: {
+        title: "5. Diritti dell'utente",
+        p1:
+          "L'interessato può esercitare i diritti di accesso, rettifica, cancellazione, opposizione, limitazione del trattamento, portabilità e revoca del consenso.",
+        p2:
+          'A tal fine può scrivere a <a href="mailto:info@nanoker.com">info@nanoker.com</a>. Può inoltre presentare un reclamo all\'<a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer">Agenzia Spagnola per la Protezione dei Dati</a> se ritiene che il trattamento non sia conforme alla normativa.',
+      },
+      security: {
+        title: "6. Sicurezza",
+        p1:
+          "Nanoker applica misure tecniche e organizzative ragionevoli per evitare perdita, alterazione, accesso non autorizzato o divulgazione indebita dei dati.",
+        p2:
+          "Nessun ambiente connesso a Internet può garantire sicurezza assoluta; la protezione viene quindi applicata secondo criteri di diligenza e miglioramento continuo.",
+      },
+    },
+    summary: {
+      item1Title: "Titolare",
+      item1Text: "Nanoker Research S.L.",
+      item2Title: "Finalità",
+      item2Text: "Contatto, gestione commerciale, operazioni e sicurezza.",
+      item3Title: "Base giuridica",
+      item3Text: "Consenso, contratto, obbligo legale e legittimo interesse.",
+      item4Title: "Diritti",
+      item4Text: "Accesso, rettifica, cancellazione, opposizione, limitazione e portabilità.",
+    },
+    more: {
+      cookiesTitle: "Informativa sui cookie",
+      cookiesText: "Uso dei cookie, tecnologie simili e gestione del consenso.",
+      noticeTitle: "Note legali",
+      noticeText: "Condizioni d'uso, proprietà intellettuale e responsabilità.",
+    },
+  },
+  cookies: {
+    metaTitle: "Informativa sui cookie | Nanoker",
+    metaDescription:
+      "Informativa sui cookie di Nanoker con spiegazione su cosa sono, tipologie utilizzate, cookie di terze parti e gestione.",
+    ogLocale: "it_IT",
+    hero: {
+      kicker: "Legale / Cookie",
+      titleHtml: "Informativa sui <span>Cookie</span>",
+      lead:
+        "Questa informativa illustra l'uso di cookie e tecnologie simili sul sito Nanoker, le relative finalità, l'eventuale intervento di terze parti e le opzioni di gestione disponibili.",
+      metaUpdated: "Ultimo aggiornamento: 24 marzo 2026",
+      metaLaw: "Normativa: GDPR, LSSI-CE e guida AEPD",
+      metaScope: "Ambito: navigazione web",
+    },
+    sections: {
+      definition: {
+        title: "1. Cosa sono i cookie",
+        p1:
+          "I cookie sono piccoli file scaricati sul dispositivo dell'utente quando accede a un sito web. Servono a memorizzare e recuperare informazioni sulla navigazione, ricordare preferenze o abilitare servizi tecnici.",
+        p2:
+          "Oltre ai cookie, il sito può utilizzare tecnologie equivalenti come l'archiviazione locale del browser per mantenere impostazioni di base dell'interfaccia.",
+      },
+      types: {
+        title: "2. Tipi di cookie",
+        item1: "<strong>Tecnici:</strong> necessari per funzionamento di base, sicurezza, navigazione e gestione della sessione.",
+        item2: "<strong>Preferenze:</strong> ricordano impostazioni come lingua o visualizzazione.",
+        item3: "<strong>Analitici:</strong> consentono di misurare l'uso del sito e migliorarne le prestazioni.",
+        item4: "<strong>Marketing:</strong> destinati a tracciamento pubblicitario e personalizzazione commerciale.",
+      },
+      thirdParty: {
+        title: "3. Cookie di terze parti",
+        p1:
+          "Alcuni servizi integrati nel sito possono installare cookie di terze parti, ad esempio strumenti di analisi, mappe, video incorporati o piattaforme esterne.",
+        p2:
+          "Nella configurazione attuale del sito Nanoker non vengono attivati cookie pubblicitari per impostazione predefinita. Se saranno incorporati servizi opzionali soggetti a consenso, verrà fornita informazione preventiva.",
+      },
+      manage: {
+        title: "4. Come gestirli",
+        p1:
+          "L'utente può consentire, bloccare o eliminare i cookie dalle impostazioni del browser. La disattivazione di alcuni cookie tecnici può incidere sul corretto funzionamento del sito.",
+        item1: "Chrome: impostazioni di privacy e sicurezza.",
+        item2: "Firefox: preferenze di privacy e cookie.",
+        item3: "Safari: gestione di cookie e dati dei siti web.",
+        item4: "Edge: autorizzazioni del sito ed eliminazione dei dati di navigazione.",
+      },
+    },
+    summary: {
+      item1Title: "Cookie tecnici",
+      item1Text: "Necessari per sicurezza, navigazione e funzioni di base.",
+      item2Title: "Cookie opzionali",
+      item2Text: "Analitici o di terze parti solo quando applicabile e previa informazione.",
+      item3Title: "Gestione",
+      item3Text: "L'utente può configurare o eliminare i cookie dal browser.",
+    },
+    more: {
+      privacyTitle: "Informativa sulla privacy",
+      privacyText: "Trattamento dei dati personali e diritti dell'utente.",
+      noticeTitle: "Note legali",
+      noticeText: "Condizioni d'uso, proprietà intellettuale e limitazione di responsabilità.",
+    },
+  },
+  legalNotice: {
+    metaTitle: "Note legali | Nanoker",
+    metaDescription:
+      "Note legali di Nanoker Research S.L. con dati identificativi, condizioni d'uso, proprietà intellettuale e limitazione di responsabilità.",
+    ogLocale: "it_IT",
+    hero: {
+      kicker: "Legale / Corporate",
+      titleHtml: "Note <span>legali</span>",
+      lead:
+        "Questo documento disciplina l'accesso, la navigazione e l'uso del sito web di Nanoker Research S.L., nonché le condizioni applicabili ai contenuti, ai diritti di proprietà intellettuale e alla responsabilità.",
+      metaUpdated: "Ultimo aggiornamento: 24 marzo 2026",
+      metaScope: "Ambito: sito web aziendale",
+      metaLaw: "Legge applicabile: Spagna",
+    },
+    sections: {
+      identification: {
+        title: "1. Dati identificativi",
+        labelOwner: "Titolare del sito",
+        valueOwner: "Nanoker Research S.L.",
+        labelAddress: "Sede",
+        valueAddress: "Parque Empresarial de Oviedo, Parcela 22C, Nave 6, 33660 Oviedo, Asturias, Spagna.",
+        labelEmail: "Email",
+        valueEmail: "info@nanoker.com",
+        labelPhone: "Telefono",
+        valuePhone: "(+34) 985 76 11 41 / 985 20 76 13",
+      },
+      terms: {
+        title: "2. Condizioni d'uso",
+        p1:
+          "L'accesso e la navigazione su questo sito attribuiscono la condizione di utente e implicano l'accettazione delle presenti note legali.",
+        p2:
+          "È vietato utilizzare il sito per finalità illecite, dannose per Nanoker o terzi, nonché introdurre virus, script malevoli o azioni che possano alterare il funzionamento della piattaforma.",
+      },
+      ip: {
+        title: "3. Proprietà intellettuale",
+        p1:
+          "Tutti i contenuti del sito, inclusi testi, design, struttura, grafica, loghi, immagini, video, codice sorgente ed elementi distintivi, appartengono a Nanoker o sono utilizzati con autorizzazione sufficiente.",
+        p2:
+          "Sono vietate riproduzione, distribuzione, trasformazione, comunicazione pubblica o sfruttamento totale o parziale senza preventiva autorizzazione scritta, salvo i casi consentiti dalla legge.",
+      },
+      liability: {
+        title: "4. Responsabilità",
+        p1:
+          "Nanoker adotta misure ragionevoli per assicurare disponibilità, esattezza e aggiornamento del sito, ma non garantisce l'assenza di errori, interruzioni o incidenti tecnici puntuali.",
+        p2:
+          "Nanoker non risponde dei danni derivanti da uso improprio del sito, decisioni prese sulla base delle informazioni pubblicate o contenuti di terzi collegati da questo sito, salvo quanto previsto dalla legge.",
+      },
+    },
+    summary: {
+      item1Title: "Titolare",
+      item1Text: "Nanoker Research S.L.",
+      item2Title: "Uso consentito",
+      item2Text: "Navigazione e consultazione legittima di informazioni aziendali.",
+      item3Title: "Protezione",
+      item3Text: "I contenuti e gli asset del sito sono protetti da diritti di proprietà intellettuale.",
+      item4Title: "Responsabilità",
+      item4Text: "Le informazioni sono fornite con criteri di diligenza, senza garanzia assoluta di assenza di incidenti.",
+    },
+    more: {
+      privacyTitle: "Informativa sulla privacy",
+      privacyText: "Trattamento dei dati, conservazione e diritti dell'utente.",
+      cookiesTitle: "Informativa sui cookie",
+      cookiesText: "Cookie, tecnologie simili e gestione delle preferenze.",
+    },
+  },
+  publicProjects: {
+    kicker: "Progetti finanziati / R&S&I",
+    titleHtml: "Pubblicità dei progetti di <span>R&S&I</span>",
+    lead:
+      "Informazioni pubbliche relative ai progetti di ricerca, sviluppo e innovazione a cui partecipa Nanoker Research, S.L., nonché alla documentazione richiesta dagli enti finanziatori.",
+    documentsKicker: "Documentazione pubblica",
+    documentsTitle: "Poster e documenti di progetto",
+    viewDocument: "Visualizza documento",
+    currentPage: "Pubblicità dei progetti di R&S&I",
+    open: {
+      lion: "Apri documento LION-HD",
+      estratesic: "Apri PDF EstrateSiC",
+      cpp: "Apri PDF CPP",
+      epita: "Apri PDF EPITA",
+      ifast: "Apri PDF I.FAST",
+      megavatio: "Apri PDF MEGAVATIO",
+      recon: "Apri PDF RECON",
+    },
+    alt: {
+      lion: "Poster del progetto LION-HD",
+      estratesic: "Anteprima del poster EstrateSiC",
+      cpp: "Anteprima del poster CPP",
+      epita: "Anteprima del poster EPITA",
+      ifast: "Anteprima del poster I.FAST",
+      megavatio: "Anteprima del poster MEGAVATIO",
+      recon: "Anteprima del poster RECON",
+    },
+    cppTitle: "CPP - Wafer SiC per elettronica di potenza",
   },
 };

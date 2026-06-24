@@ -2,7 +2,7 @@
   const API_BASE_URL = "https://nanoker-deeptech-web.vercel.app";
   const STORAGE_KEY = "nanoker_eval_wizard_v1";
   const TOTAL_STEPS = 11;
-  const SUPPORTED_LANGS = new Set(["es", "en", "fr", "de"]);
+  const SUPPORTED_LANGS = new Set(["es", "en", "fr", "de", "it"]);
   const MAX_TOTAL_FILE_SIZE = 5 * 1024 * 1024;
   const ALLOWED_FILE_EXTENSIONS = new Set(["pdf", "dwg", "step", "stp", "png", "jpg", "jpeg"]);
   const REQUEST_TIMEOUT_MS = 25000;
@@ -166,6 +166,46 @@
         9: { title: "Hauptfunktion des Bauteils", help: "Welche Hauptfunktion muss das Bauteil erfüllen? (Mehrfachauswahl möglich)", options: { "func-wear": "Verschleiß- oder Abriebfestigkeit", "func-hardness": "Hohe Härte", "func-insulation": "Elektrische Isolation", "func-high-temp": "Beständigkeit gegen hohe Temperaturen", "func-chemical": "Chemikalien- oder Korrosionsbeständigkeit", "func-mechanical": "Hohe mechanische oder strukturelle Festigkeit", "func-tribology": "Geringe Reibung oder tribologische Eigenschaften", "func-thermal": "Thermisches Management / hohe Wärmeleitfähigkeit", "func-stability": "Maßstabilität oder Präzision", "func-biocompatibility": "Biokompatibilität", "func-optical": "Optische Anwendung", "func-other": "Andere" } },
         10: { title: "Vorgesehenes Material", help: "Welches Material ziehen Sie für Ihre Anwendung in Betracht?", options: { "mat-sapphire": "Saphir (EPI / SOS / optische Lösungen)", "mat-sic": "Siliziumkarbid (SiC) - Wafer oder Fab-Komponenten", "mat-cvd-diamond": "CVD-Diamant - Quanten, Optik oder Wärmemanagement", "mat-alumina": "Aluminiumoxid (Al2O3)", "mat-zirconia": "Stabilisiertes Zirkonoxid (ZrO2 / Y-TZP)", "mat-b4c": "Borkarbid (B4C)", "mat-aln": "Aluminiumnitrid (AlN)", "mat-nanocomposites": "Keramische Nanokomposite", "mat-other": "Anderes fortschrittliches Keramikmaterial", "mat-unsure": "Ich bin nicht sicher / ich brauche Beratung" } },
         11: { title: "Kontakt und Beschreibung", help: "Teilen Sie Ihre Kontaktdaten und eine kurze Beschreibung, um die technische Bewertung zu starten.", labels: { "eval-name": "Name *", "eval-company": "Unternehmen / Organisation *", "eval-role": "Position", "eval-email": "E-Mail *", "eval-phone": "Telefon", "eval-country": "Land *", "eval-project-description": "Kurze Projektbeschreibung *", "eval-files": "Dateien hochladen (optional, mehrere): PDF, DWG, STEP, PNG, JPG" }, projectPlaceholder: "Beschreiben Sie die Anwendung, die Einsatzumgebung und die wichtigsten Anforderungen." },
+      },
+    },
+    it: {
+      tablist: "Passaggi della valutazione",
+      stepLabel: "PASSO {n}",
+      progress: "PASSO {current} DI {total}",
+      next: "Continua",
+      back: "Indietro",
+      submit: "Invia valutazione tecnica",
+      sending: "Invio...",
+      fileMeta: {
+        idle: "Formati consentiti: PDF, DWG, STEP, PNG, JPG. Dimensione totale consigliata: fino a 5 MB.",
+        selected: "{count} file selezionato/i · {size}. Formati consentiti: PDF, DWG, STEP, PNG, JPG.",
+      },
+      status: {
+        idle: "",
+        required: "Completa i campi obbligatori per continuare.",
+        completePrevious: "Completa i passaggi precedenti prima dell'invio.",
+        otherRequired: "Se selezioni 'Altro', specifica il dettaglio.",
+        descriptionShort: "La descrizione del progetto deve contenere almeno 20 caratteri.",
+        invalidEmail: "Inserisci un'email valida per poterti rispondere.",
+        fileType: "Controlla gli allegati. Sono consentiti solo file PDF, DWG, STEP, PNG e JPG.",
+        fileSize: "La dimensione totale degli allegati non può superare 5 MB.",
+        sending: "Invio della richiesta di valutazione tecnica...",
+        success: "Richiesta inviata. Il team Nanoker esaminerà la valutazione e risponderà via email.",
+        error: "Non siamo riusciti a elaborare la richiesta in questo momento. Riprova tra qualche minuto.",
+      },
+      fields: { specify: "Specifica" },
+      steps: {
+        1: { title: "Tipo di richiesta", help: "Di che tipo di supporto hai bisogno?", options: { "request-manufacturing": "Produzione di un pezzo in materiale ceramico o cristallino avanzato (include valutazione di fattibilità)", "request-selection": "Selezione del materiale adatto per un'applicazione", "request-rd": "Sviluppo tecnologico o progetto di R&S", "request-general": "Richiesta di offerta o consulenza generale" } },
+        2: { title: "Situazione attuale", help: "Quali informazioni hai attualmente sul pezzo o sull'applicazione?", options: { "current-drawings": "Disegni tecnici", "current-cad": "Modello 3D (CAD)", "current-existing-part": "Un pezzo esistente", "current-functional": "Requisiti funzionali definiti", "current-idea": "Solo un'idea iniziale" } },
+        3: { title: "Fase del progetto", help: "In quale fase si trova attualmente il progetto?", options: { "phase-concept": "Concept / studio iniziale", "phase-design": "Sviluppo o progettazione", "phase-prototype": "Prototipo", "phase-series": "Produzione in serie", "phase-improvement": "Prodotto esistente da migliorare" } },
+        4: { title: "Quantità stimata", help: "Quale volume approssimativo ti servirebbe?", options: { "qty-prototype": "Prototipo (1-10 unità)", "qty-small": "Piccola serie (10-100)", "qty-medium": "Serie media (100-1000)", "qty-industrial": "Produzione industriale (+1000)", "qty-undefined": "Non ancora definito" } },
+        5: { title: "Dimensioni approssimative", help: "Quali sono le dimensioni approssimative del pezzo?", options: { "dim-lt10": "< 10 mm", "dim-10-50": "10 - 50 mm", "dim-50-200": "50 - 200 mm", "dim-200-500": "200 - 500 mm", "dim-gt500": "> 500 mm", "dim-undefined": "Non ancora definito" }, exactLabel: "Dimensioni esatte (mm)", exactPlaceholder: "Es.: 30x20x5" },
+        6: { title: "Applicazione o ambiente tecnologico", help: "In quale tipo di applicazione verrà utilizzato il pezzo?", options: { "app-semiconductors": "Semiconduttori / microelettronica (fab, epitassia, wafer)", "app-optics": "Ottica / fotonica", "app-energy": "Energia", "app-electronics": "Elettronica", "app-industry": "Industria / macchinari", "app-space": "Aerospazio / spazio", "app-medical": "Medicina / biotecnologia", "app-research": "Ricerca scientifica", "app-vacuum": "Vuoto", "app-chemical": "Ambiente chimico o corrosivo", "app-wear": "Alta usura o abrasione", "app-other": "Altro" } },
+        7: { title: "Settore industriale", help: "Quale settore descrive meglio il progetto?", options: { "sector-semiconductors": "Semiconduttori", "sector-space": "Aerospazio / spazio", "sector-energy": "Energia", "sector-industrial": "Industria / macchinari", "sector-electronics": "Elettronica", "sector-medical": "Medicina / biotech", "sector-research": "Ricerca / laboratorio", "sector-other": "Altro" } },
+        8: { title: "Temperatura di esercizio", help: "In quale intervallo di temperatura opererà approssimativamente il pezzo?", options: { "temp-cryo": "< -100 °C (criogenia / spazio)", "temp-minus100-0": "-100 - 0 °C", "temp-0-200": "0 - 200 °C", "temp-200-800": "200 - 800 °C", "temp-gt800": "> 800 °C", "temp-unknown": "Non lo so ancora" } },
+        9: { title: "Funzione principale del pezzo", help: "Quale funzione principale deve svolgere il pezzo? (puoi selezionarne più di una)", options: { "func-wear": "Resistenza a usura o abrasione", "func-hardness": "Alta durezza", "func-insulation": "Isolamento elettrico", "func-high-temp": "Resistenza ad alte temperature", "func-chemical": "Resistenza chimica o alla corrosione", "func-mechanical": "Alta resistenza meccanica o strutturale", "func-tribology": "Basso attrito o proprietà tribologiche", "func-thermal": "Gestione termica / alta conducibilità termica", "func-stability": "Stabilità dimensionale o precisione", "func-biocompatibility": "Biocompatibilità", "func-optical": "Applicazione ottica", "func-other": "Altro" } },
+        10: { title: "Materiale considerato", help: "Quale materiale stai considerando per la tua applicazione?", options: { "mat-sapphire": "Zaffiro (EPI / SOS / soluzioni ottiche)", "mat-sic": "Carburo di silicio (SiC) - wafer o componenti per fab", "mat-cvd-diamond": "Diamante CVD - quantistico, ottico o gestione termica", "mat-alumina": "Allumina (Al2O3)", "mat-zirconia": "Zirconia stabilizzata (ZrO2 / Y-TZP)", "mat-b4c": "Carburo di boro (B4C)", "mat-aln": "Nitruro di alluminio (AlN)", "mat-nanocomposites": "Nanocompositi ceramici", "mat-other": "Altro materiale ceramico avanzato", "mat-unsure": "Non sono sicuro / ho bisogno di consulenza" } },
+        11: { title: "Contatto e descrizione", help: "Condividi i tuoi dati e una breve descrizione per avviare la valutazione tecnica.", labels: { "eval-name": "Nome *", "eval-company": "Azienda / organizzazione *", "eval-role": "Ruolo", "eval-email": "Email *", "eval-phone": "Telefono", "eval-country": "Paese *", "eval-project-description": "Breve descrizione del progetto *", "eval-files": "Carica file (opzionale, multipli): PDF, DWG, STEP, PNG, JPG" }, projectPlaceholder: "Descrivi l'applicazione, l'ambiente operativo e i requisiti principali." },
       },
     },
   };

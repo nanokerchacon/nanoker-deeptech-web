@@ -4,7 +4,7 @@ import { BASE_LOCALES, I18N, LOCALE_OVERRIDES } from "./i18n.js";
 const KEY = "nanoker-lang";
 const SEO_BASE_URL = "https://nanoker.com";
 const SEO_DEFAULT_IMAGE = `${SEO_BASE_URL}/img/og/og-default.png`;
-const SUPPORTED_LANGS = ["es", "en", "fr", "de"];
+const SUPPORTED_LANGS = ["es", "en", "fr", "de", "it"];
 const DEFAULT_LANG = "en";
 const SEO_PAGE_CONFIG = {
   "/": { titleKey: "seo.home.metaTitle", descriptionKey: "seo.home.metaDescription" },
@@ -50,12 +50,21 @@ const SEO_PAGE_CONFIG = {
     titleKey: "seo.legalNotice.metaTitle",
     descriptionKey: "seo.legalNotice.metaDescription",
   },
+  "/publicidad-proyectos-idi/": {
+    titleKey: "seo.publicProjects.metaTitle",
+    descriptionKey: "seo.publicProjects.metaDescription",
+  },
+  "/publicidad-proyectos-idi/index.html": {
+    titleKey: "seo.publicProjects.metaTitle",
+    descriptionKey: "seo.publicProjects.metaDescription",
+  },
 };
 const SEO_LOCALES = {
-  es: { og: "es_ES", alternates: ["en_US", "fr_FR", "de_DE"] },
-  en: { og: "en_US", alternates: ["es_ES", "fr_FR", "de_DE"] },
-  fr: { og: "fr_FR", alternates: ["en_US", "es_ES", "de_DE"] },
-  de: { og: "de_DE", alternates: ["en_US", "es_ES", "fr_FR"] },
+  es: { og: "es_ES", alternates: ["en_US", "fr_FR", "de_DE", "it_IT"] },
+  en: { og: "en_US", alternates: ["es_ES", "fr_FR", "de_DE", "it_IT"] },
+  fr: { og: "fr_FR", alternates: ["en_US", "es_ES", "de_DE", "it_IT"] },
+  de: { og: "de_DE", alternates: ["en_US", "es_ES", "fr_FR", "it_IT"] },
+  it: { og: "it_IT", alternates: ["en_US", "es_ES", "fr_FR", "de_DE"] },
 };
 
 // Normaliza: "es-ES" -> "es"
@@ -666,6 +675,158 @@ const AUTO_TRANSLATION_RULES = {
       qualification: "Qualifizierung", qualified: "qualifiziert", scaling: "Skalierung"
     },
   },
+  it: {
+    phrases: [
+      ["DeepTech Materials for Critical Industries", "Materiali DeepTech per industrie critiche"],
+      [
+        "Nanoker is an industrial platform for advanced materials and high-specification components in sectors where qualification cycles are long, failure is expensive, and supply continuity is strategic.",
+        "Nanoker è una piattaforma industriale per materiali avanzati e componenti ad alta specifica in settori in cui i cicli di qualificazione sono lunghi, il guasto è costoso e la continuità di fornitura è strategica.",
+      ],
+      [
+        "Material control defines performance, qualification risk and industrial scalability in critical technologies.",
+        "Il controllo del materiale definisce prestazioni, rischio di qualificazione e scalabilità industriale nelle tecnologie critiche.",
+      ],
+      [
+        "Advanced materials for industries where reliability depends on controlling material functionality.",
+        "Materiali avanzati per industrie in cui l'affidabilità dipende dal controllo della funzionalità del materiale.",
+      ],
+      [
+        "Tell us about your application and let us work together on the material architecture that makes it viable.",
+        "Raccontaci la tua applicazione e lavoriamo insieme sull'architettura del materiale che la rende praticabile.",
+      ],
+      ["Architecting the invisible layer of innovation.", "Progettiamo lo strato invisibile dell'innovazione."],
+      ["European Sovereignty in Advanced Materials.", "Sovranità europea nei materiali avanzati."],
+      ["2. Terms of Use", "2. Condizioni d'uso"],
+      ["Select one or more categories.", "Seleziona una o più categorie."],
+      ["We need these details to coordinate a technical session.", "Ci servono questi dati per coordinare una sessione tecnica."],
+      ["Full control of process, metrology and QA/QC.", "Controllo completo di processo, metrologia e QA/QC."],
+      ["Whoever controls the material controls the technology.", "Chi controlla il materiale controlla la tecnologia."],
+      ["industrial platform", "piattaforma industriale"],
+      ["advanced materials", "materiali avanzati"],
+      ["critical technologies", "tecnologie critiche"],
+      ["critical applications", "applicazioni critiche"],
+      ["technical evaluation", "valutazione tecnica"],
+      ["technical request", "richiesta tecnica"],
+      ["technical contact", "contatto tecnico"],
+      ["technical assessment", "valutazione tecnica"],
+      ["engineering needs", "esigenze di ingegneria"],
+      ["material/component selection", "selezione materiale/componente"],
+      ["performance optimization", "ottimizzazione delle prestazioni"],
+      ["validation/testing", "validazione/test"],
+      ["scale-up / industrialization", "scale-up / industrializzazione"],
+      ["batch-to-batch", "lotto a lotto"],
+      ["qualification-ready", "pronto per la qualificazione"],
+      ["next-generation", "di nuova generazione"],
+      ["long-cycle", "a ciclo lungo"],
+      ["atomic-scale", "su scala atomica"],
+      ["guided assessment", "valutazione guidata"],
+      ["industrial capabilities", "capacità industriali"],
+      ["integrated industrial capabilities", "capacità industriali integrate"],
+      ["vertical integration", "integrazione verticale"],
+      ["process control", "controllo di processo"],
+      ["process window", "finestra di processo"],
+      ["precision machining", "lavorazione di precisione"],
+      ["surface finishing", "finitura superficiale"],
+      ["quality management system", "sistema di gestione della qualità"],
+      ["environmental management system", "sistema di gestione ambientale"],
+      ["full traceability", "tracciabilità completa"],
+      ["industrial scalability", "scalabilità industriale"],
+      ["supply continuity", "continuità di fornitura"],
+      ["supply resilience", "resilienza della fornitura"],
+      ["qualification logic", "logica di qualificazione"],
+      ["qualification cycles", "cicli di qualificazione"],
+      ["qualified component", "componente qualificato"],
+      ["industrial execution", "esecuzione industriale"],
+      ["industrial scale-up", "scale-up industriale"],
+      ["critical programs", "programmi critici"],
+      ["strategic sectors", "settori strategici"],
+      ["strategic technologies", "tecnologie strategiche"],
+      ["European sovereignty", "sovranità europea"],
+      ["high specification", "alta specifica"],
+      ["single-crystal", "monocristallino"],
+      ["surface engineering", "ingegneria di superficie"],
+      ["validation plan", "piano di validazione"],
+      ["success criteria", "criteri di successo"],
+      ["industrial manufacturing", "produzione industriale"],
+      ["operating conditions", "condizioni operative"],
+      ["operating environment", "ambiente operativo"],
+      ["material architecture", "architettura del materiale"],
+      ["material functionality", "funzionalità del materiale"],
+      ["industrial readiness", "preparazione industriale"],
+      ["technical rigor", "rigore tecnico"],
+      ["continuous improvement", "miglioramento continuo"],
+      ["occupational safety", "sicurezza sul lavoro"],
+      ["information security", "sicurezza delle informazioni"],
+      ["ethics and compliance", "etica e conformità"],
+      ["equality and diversity", "uguaglianza e diversità"],
+      ["legal notice", "note legali"],
+      ["privacy policy", "informativa sulla privacy"],
+      ["cookie policy", "informativa sui cookie"],
+      ["last updated", "ultimo aggiornamento"],
+      ["legal basis", "base giuridica"],
+      ["data retention", "conservazione dei dati"],
+      ["user rights", "diritti dell'utente"],
+      ["customer satisfaction survey", "sondaggio di soddisfazione cliente"],
+      ["fill out form", "compila il modulo"],
+      ["view document", "visualizza documento"],
+      ["download certificate", "scarica certificato"],
+    ],
+    words: {
+      home: "home", company: "azienda", capabilities: "capacità", materials: "materiali", sectors: "settori",
+      contact: "contatto", evaluation: "valutazione", guided: "guidata", research: "ricerca",
+      innovation: "innovazione", industrial: "industriale", integrated: "integrato", platform: "piattaforma",
+      applications: "applicazioni", application: "applicazione", components: "componenti",
+      component: "componente", specification: "specifica", specifications: "specifiche",
+      guaranteed: "garantite", traceability: "tracciabilità", repeatability: "ripetibilità",
+      output: "produzione", scalability: "scalabilità", scale: "scala", supply: "fornitura",
+      chain: "catena", continuity: "continuità", strategic: "strategico", quality: "qualità",
+      system: "sistema", systems: "sistemi", operational: "operativo", policy: "politica",
+      cookies: "cookie", legal: "legale", notice: "avviso", terms: "condizioni",
+      use: "uso", privacy: "privacy", rights: "diritti", security: "sicurezza",
+      information: "informazioni", equality: "uguaglianza", diversity: "diversità",
+      sustainability: "sostenibilità", certifications: "certificazioni", form: "modulo",
+      submit: "invia", send: "invia", sending: "invio", continue: "continua", back: "indietro",
+      name: "nome", email: "email", phone: "telefono", country: "paese", project: "progetto",
+      description: "descrizione", brief: "breve", request: "richiesta", type: "tipo", current: "attuale",
+      situation: "situazione", phase: "fase", estimated: "stimata", quantity: "quantità",
+      approximate: "approssimative", dimensions: "dimensioni", exact: "esatte", material: "materiale",
+      technology: "tecnologia", environment: "ambiente", sector: "settore", operating: "operativo",
+      temperature: "temperatura", function: "funzione", main: "principale", considered: "considerato",
+      upload: "carica", files: "file", optional: "opzionale", manufacturing: "produzione",
+      selection: "selezione", development: "sviluppo", quotation: "offerta", inquiry: "richiesta",
+      technical: "tecnico", drawings: "disegni", model: "modello", existing: "esistente",
+      part: "pezzo", defined: "definiti", requirements: "requisiti", idea: "idea",
+      prototype: "prototipo", serial: "serie", production: "produzione", improvement: "miglioramento",
+      batch: "lotto", not: "non", yet: "ancora", optics: "ottica", photonics: "fotonica",
+      energy: "energia", electronics: "elettronica", industry: "industria", machinery: "macchinari",
+      aerospace: "aerospazio", space: "spazio", medical: "medicale", biotechnology: "biotecnologia",
+      scientific: "scientifica", vacuum: "vuoto", chemical: "chimico", corrosive: "corrosivo",
+      wear: "usura", abrasion: "abrasione", semiconductors: "semiconduttori", high: "alta",
+      hardness: "durezza", electrical: "elettrico", insulation: "isolamento", resistance: "resistenza",
+      mechanical: "meccanica", structural: "strutturale", friction: "attrito", tribological: "tribologiche",
+      thermal: "termico", conductivity: "conducibilità", dimensional: "dimensionale", stability: "stabilità",
+      precision: "precisione", biocompatibility: "biocompatibilità", optical: "ottico", other: "altro",
+      sapphire: "zaffiro", silicon: "silicio", carbide: "carburo", wafers: "wafer",
+      alumina: "allumina", zirconia: "zirconia", boron: "boro", aluminum: "alluminio",
+      nitride: "nitruro", ceramic: "ceramico", ceramics: "ceramiche", nanocomposites: "nanocompositi",
+      unsure: "incerto", guidance: "supporto", title: "titolo", subtitle: "sottotitolo", text: "testo",
+      item: "elemento", process: "processo", control: "controllo", controls: "controlli",
+      management: "gestione", architecture: "architettura", risks: "rischi", validation: "validazione",
+      pathways: "percorsi", critical: "critico", decisions: "decisioni", reliability: "affidabilità",
+      objectives: "obiettivi", constraints: "vincoli", plan: "piano", measurable: "misurabili",
+      milestones: "milestone", recommendations: "raccomandazioni", weeks: "settimane", quarters: "trimestri",
+      survey: "sondaggio", available: "disponibili", certificates: "certificati", access: "accesso",
+      complete: "completa", close: "chiudi", open: "apri", tab: "scheda", download: "scarica",
+      device: "dispositivo", website: "sito", site: "sito", browsing: "navigazione",
+      introduction: "introduzione", commitment: "impegno", scope: "ambito", related: "correlati",
+      standard: "standard", valid: "valido", number: "numero", body: "ente", european: "europeo",
+      customer: "cliente", clients: "clienti", roadmap: "roadmap", readiness: "preparazione",
+      performance: "prestazioni", processes: "processi", growth: "crescita", crystal: "cristallo",
+      engineering: "ingegneria", surface: "superficie", support: "supporto", densification: "densificazione",
+      finishing: "finitura", polishing: "lucidatura", qualification: "qualificazione",
+      qualified: "qualificato", scaling: "scalabilità"
+    },
+  },
 };
 
 function applyPhraseRules(text, lang) {
@@ -686,7 +847,7 @@ function translateWords(text, lang) {
 }
 
 export function translateVisibleText(text, lang = current) {
-  if (lang !== "fr" && lang !== "de") return text;
+  if (lang !== "fr" && lang !== "de" && lang !== "it") return text;
   if (typeof text !== "string" || text.trim() === "") return text;
 
   return text
@@ -699,7 +860,7 @@ export function translateVisibleText(text, lang = current) {
 }
 
 export function t(path, fallback) {
-  if (current === "fr" || current === "de") {
+  if (current === "fr" || current === "de" || current === "it") {
     const explicitCurrent = hasExplicitLocaleValue(current, path)
       ? getValueByPath(LOCALE_OVERRIDES[current], path)
       : undefined;
@@ -769,6 +930,69 @@ function buildLocalizedUrl(lang) {
   const url = new URL(buildCanonicalUrl());
   url.searchParams.set("lang", lang);
   return url.toString();
+}
+
+function isSkippableHref(rawHref) {
+  const href = String(rawHref || "").trim();
+  return (
+    href === "" ||
+    href === "#" ||
+    href.startsWith("#") ||
+    /^(?:mailto|tel|sms|javascript|data):/i.test(href)
+  );
+}
+
+function isStaticAssetPath(pathname) {
+  return /\.(?:pdf|png|jpe?g|webp|gif|svg|ico|css|js|json|xml|txt|zip|dwg|step|stp)$/i.test(
+    pathname
+  );
+}
+
+function shouldPreserveLangForHref(rawHref) {
+  if (isSkippableHref(rawHref)) return false;
+
+  try {
+    const url = new URL(rawHref, window.location.href);
+    if (url.origin !== window.location.origin) return false;
+    if (isStaticAssetPath(url.pathname)) return false;
+    return true;
+  } catch (_error) {
+    return false;
+  }
+}
+
+function hrefWithLang(rawHref, lang) {
+  const href = String(rawHref || "");
+  const isAbsolute = /^[a-z][a-z0-9+.-]*:/i.test(href);
+
+  if (isAbsolute) {
+    const url = new URL(href);
+    url.searchParams.set("lang", lang);
+    return url.toString();
+  }
+
+  const hashIndex = href.indexOf("#");
+  const beforeHash = hashIndex >= 0 ? href.slice(0, hashIndex) : href;
+  const hash = hashIndex >= 0 ? href.slice(hashIndex) : "";
+  const queryIndex = beforeHash.indexOf("?");
+  const pathPart = queryIndex >= 0 ? beforeHash.slice(0, queryIndex) : beforeHash;
+  const queryPart = queryIndex >= 0 ? beforeHash.slice(queryIndex + 1) : "";
+  const params = new URLSearchParams(queryPart);
+  params.set("lang", lang);
+  return `${pathPart}?${params.toString()}${hash}`;
+}
+
+function syncInternalLinks(root = document) {
+  const context = root.nodeType === 1 ? root : document;
+  const links = context.matches?.("a[href]")
+    ? [context]
+    : Array.from(context.querySelectorAll?.("a[href]") || []);
+
+  links.forEach((link) => {
+    const href = link.getAttribute("href");
+    if (!shouldPreserveLangForHref(href)) return;
+    link.setAttribute("href", hrefWithLang(href, current));
+  });
 }
 
 function syncLanguageQueryParam(lang) {
@@ -1212,6 +1436,7 @@ export function applyTranslations(root = document) {
 
   applyCommonAttributeTranslations(root);
   bindLanguageControls(root);
+  syncInternalLinks(root);
 }
 
 export function setLang(lang) {
@@ -1225,6 +1450,7 @@ export function setLang(lang) {
   setHtmlLang(next);
 
   applyTranslations();
+  syncInternalLinks();
   syncSeoMetadata();
 
   window.dispatchEvent(new CustomEvent("lang:change", { detail: { lang: next } }));

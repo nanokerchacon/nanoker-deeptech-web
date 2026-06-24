@@ -2,7 +2,7 @@
 // Single source of truth for UI copy.
 // Tip: Keep keys identical between languages.
 
-import { DE_OVERRIDES, FR_OVERRIDES } from "./i18n-overrides.js";
+import { DE_OVERRIDES, FR_OVERRIDES, IT_OVERRIDES } from "./i18n-overrides.js";
 
 function deepFreeze(obj) {
   if (!obj || typeof obj !== "object" || Object.isFrozen(obj)) return obj;
@@ -31,6 +31,20 @@ function mergeDeep(base, overrides) {
 
 const BASE_I18N = deepFreeze({
   en: {
+    langSwitcher: {
+      label: "Language",
+      choose: "Choose language",
+      current: "Current language: {0}",
+      optionLabel: "Switch site to {0}",
+      names: {
+        es: "Spanish",
+        en: "English",
+        fr: "French",
+        de: "German",
+        it: "Italian",
+      },
+    },
+
     nav: {
       // ✅ NAV MENU (matches index.html data-i18n)
       home: "Home",
@@ -135,6 +149,11 @@ const BASE_I18N = deepFreeze({
         metaDescription:
           "Nanoker Research S.L. legal notice including identifying details, terms of use, intellectual property, and limitation of liability.",
       },
+      publicProjects: {
+        metaTitle: "Public Funding Notices for R&D&I Projects | Nanoker Research",
+        metaDescription:
+          "Public information on research, development and innovation projects involving Nanoker Research and the required notices for publicly funded R&D&I programs.",
+      },
     },
 
     contact: {
@@ -231,7 +250,19 @@ const BASE_I18N = deepFreeze({
         step6: {
           title: "Submit request",
           submit: "Send technical request",
+          sending: "Sending...",
           note: "We process technical requests within 3-5 business days.",
+        },
+        status: {
+          requiredFields: "Complete required fields to continue.",
+          completePrevious: "Complete previous steps before submitting.",
+          reviewRequired: "Review the required fields before submitting.",
+          invalidEmail: "Enter a valid email so we can reply.",
+          sending: "Sending...",
+          received:
+            "Contact request sent successfully. Thank you for contacting Nanoker. Our team will review your inquiry and respond as soon as possible.",
+          error:
+            'We could not send your request right now. Please try again or email <a href="mailto:web@nanoker.com">web@nanoker.com</a>.',
         },
       },
       processingNote: "WE PROCESS TECHNICAL REQUESTS WITHIN 3–5 BUSINESS DAYS",
@@ -1523,6 +1554,7 @@ const BASE_I18N = deepFreeze({
         privacy: "Privacy Policy",
         cookies: "Cookie Policy",
         notice: "Legal Notice",
+        publicProjects: "R&D&I Project Notices",
       },
     },
 
@@ -1733,6 +1765,36 @@ const BASE_I18N = deepFreeze({
       },
     },
 
+    publicProjects: {
+      kicker: "Funded projects / R&D&I",
+      titleHtml: "R&D&I Project <span>Notices</span>",
+      lead:
+        "Public information regarding research, development and innovation projects involving Nanoker Research, S.L., together with the documentation required by funding bodies.",
+      documentsKicker: "Public documentation",
+      documentsTitle: "Project posters and documents",
+      viewDocument: "View document",
+      currentPage: "R&D&I Project Notices",
+      open: {
+        lion: "Open LION-HD document",
+        estratesic: "Open EstrateSiC PDF",
+        cpp: "Open CPP PDF",
+        epita: "Open EPITA PDF",
+        ifast: "Open I.FAST PDF",
+        megavatio: "Open MEGAVATIO PDF",
+        recon: "Open RECON PDF",
+      },
+      alt: {
+        lion: "LION-HD project poster",
+        estratesic: "EstrateSiC poster preview",
+        cpp: "CPP poster preview",
+        epita: "EPITA poster preview",
+        ifast: "I.FAST poster preview",
+        megavatio: "MEGAVATIO poster preview",
+        recon: "RECON poster preview",
+      },
+      cppTitle: "CPP - SiC wafers for power electronics",
+    },
+
     // Keep your old "cards/value" blocks if you still use them elsewhere
     cards: {
       quantum: {
@@ -1815,9 +1877,23 @@ const BASE_I18N = deepFreeze({
   },
 
   es: {
+    langSwitcher: {
+      label: "Idioma",
+      choose: "Elegir idioma",
+      current: "Idioma actual: {0}",
+      optionLabel: "Cambiar el sitio a {0}",
+      names: {
+        es: "Español",
+        en: "Inglés",
+        fr: "Francés",
+        de: "Alemán",
+        it: "Italiano",
+      },
+    },
+
     nav: {
       // ✅ NAV MENU (matches index.html data-i18n)
-      home: "Home",
+      home: "Inicio",
       company: "Empresa",
       capabilities: "Capacidades",
       materials: "Materiales",
@@ -1852,7 +1928,7 @@ const BASE_I18N = deepFreeze({
       bridgeCtaContact: "Contactar con ingeniería",
       title: "nanoker",
       subtitleHtml:
-        "<b>DeepTech Materials for Critical Industries.</b><br/>Materiales avanzados con especificación garantizada, trazabilidad completa y escalabilidad industrial. De precursor a componente terminado.",
+        "<b>Materiales DeepTech para industrias críticas.</b><br/>Materiales avanzados con especificación garantizada, trazabilidad completa y escalabilidad industrial. De precursor a componente terminado.",
       tagline:
         "Arquitectura de la capa invisible de la innovación.<br/>Soberanía europea en materiales avanzados.",
       scroll: "Desplázate para explorar",
@@ -1918,6 +1994,11 @@ const BASE_I18N = deepFreeze({
         metaTitle: "Aviso Legal | Nanoker",
         metaDescription:
           "Aviso legal de Nanoker Research S.L. con datos identificativos, condiciones de uso, propiedad intelectual y limitación de responsabilidad.",
+      },
+      publicProjects: {
+        metaTitle: "Publicidad de Proyectos de I+D+i | Nanoker Research",
+        metaDescription:
+          "Información pública sobre proyectos de investigación, desarrollo e innovación en los que participa Nanoker Research y documentación requerida por programas públicos de apoyo a la I+D+i.",
       },
     },
 
@@ -2015,7 +2096,19 @@ const BASE_I18N = deepFreeze({
         step6: {
           title: "Enviar solicitud",
           submit: "Enviar solicitud técnica",
+          sending: "Enviando...",
           note: "Procesamos solicitudes técnicas en un plazo de 3-5 días laborables.",
+        },
+        status: {
+          requiredFields: "Completa los campos obligatorios para continuar.",
+          completePrevious: "Completa los pasos previos antes de enviar.",
+          reviewRequired: "Revisa los campos obligatorios antes de enviar.",
+          invalidEmail: "Introduce un email válido para poder responder.",
+          sending: "Enviando...",
+          received:
+            "Solicitud enviada correctamente. Gracias por contactar con Nanoker. Nuestro equipo revisará tu consulta y te responderá lo antes posible.",
+          error:
+            'No hemos podido enviar la solicitud en este momento. Por favor, inténtalo de nuevo o escribe a <a href="mailto:web@nanoker.com">web@nanoker.com</a>.',
         },
       },
       processingNote: "PROCESAMOS SOLICITUDES TÉCNICAS EN UN PLAZO DE 3–5 DÍAS LABORABLES",
@@ -2627,9 +2720,9 @@ const BASE_I18N = deepFreeze({
             capability4: "Dopaje on-demand (NV / B / P)",
             capability5: "Capas multicapa personalizadas",
             gradesTitle: "Grados disponibles",
-            grade1: "Quantum Grade (centros NV controlados)",
-            grade2: "Thermal Grade (heat spreading extremo)",
-            grade3: "Optical Grade (transmisión amplia UV-IR)",
+          grade1: "Grado cuántico (centros NV controlados)",
+          grade2: "Grado térmico (disipación térmica extrema)",
+          grade3: "Grado óptico (transmisión amplia UV-IR)",
             grade4: "Semiconductor Grade (SBD / FET ready)",
             applicationsTitle: "Aplicaciones",
             application1: "Sensores cuánticos",
@@ -2749,7 +2842,7 @@ const BASE_I18N = deepFreeze({
           top7Html:
             "<tspan x=\"1190\" dy=\"0\">Infraestructura</tspan><tspan x=\"1190\" dy=\"15\">Científica</tspan>",
           mid1Html: "<tspan x=\"170\" dy=\"0\">Diamante CVD</tspan><tspan x=\"170\" dy=\"14\">(poly / sc)</tspan>",
-          mid2: "Silicon Carbide",
+        mid2: "Carburo de silicio",
           mid3: "Sapphire",
           mid4Html:
             "<tspan x=\"970\" dy=\"0\">Cerámicas Técnicas</tspan><tspan x=\"970\" dy=\"14\">(Alúmina, AlN, B₄C)</tspan>",
@@ -2950,7 +3043,7 @@ const BASE_I18N = deepFreeze({
           solution2: "Dopaje on-demand (B / P / N)",
           solution3: "Estructuras multicapa personalizadas",
           applicationsTitle: "Aplicaciones",
-          application1: "Quantum gyroscopes",
+        application1: "Giroscopios cuánticos",
           application2: "Magnetometría avanzada",
           application3: "Sensores en entornos hostiles",
         },
@@ -3013,13 +3106,13 @@ const BASE_I18N = deepFreeze({
           "Los equipos pueden diseñarse rápido. Pero fabricar materiales con pureza extrema, control de defectos y estabilidad lote a lote requiere años de desarrollo. En DeepTech, la restricción real es el material.",
         specs: {
           risk: "Riesgo",
-          riskVal: "Supply",
+        riskVal: "Suministro",
           variation: "Variación",
-          variationVal: "Batch",
-          leadtime: "Lead time",
-          leadtimeVal: "Long",
+        variationVal: "Lote",
+        leadtime: "Plazo",
+        leadtimeVal: "Largo",
           impact: "Impacto",
-          impactVal: "System",
+        impactVal: "Sistema",
         },
         cta: "Ver solución integrada",
       },
@@ -3053,7 +3146,7 @@ const BASE_I18N = deepFreeze({
             text: "Quantum / Thermal / Optical. Control NV/B/P.",
           },
           sic: {
-            title: "Silicon Carbide (SiC)",
+        title: "Carburo de silicio (SiC)",
             text: "Wafers SC + componentes PC para WBG y extremos.",
           },
           sapphire: {
@@ -3062,7 +3155,7 @@ const BASE_I18N = deepFreeze({
           },
           ceramics: {
             title: "Cerámicas SPS/HIP",
-            text: "Beyond standard para plasma, térmico y precisión.",
+        text: "Más allá del estándar para plasma, rendimiento térmico y precisión.",
           },
         },
         cta: "Ver sectores de aplicación",
@@ -3085,7 +3178,7 @@ const BASE_I18N = deepFreeze({
         },
         cards: {
           materials: {
-            label: "Stack material",
+          label: "Arquitectura material",
             title: "Materiales críticos bajo un mismo flujo industrial",
             text: "SiC, diamante CVD, cerámicas técnicas y zafiro alineados con ventanas de rendimiento específicas de aplicación.",
           },
@@ -3202,7 +3295,7 @@ const BASE_I18N = deepFreeze({
       items: [
         { title: "Integración vertical", text: "Control total de proceso, metrología y QA/QC." },
         { title: "Ventaja energética", text: "Producción intensiva en energía optimizada y competitiva." },
-        { title: "CBAM-ready & sostenibilidad", text: "Producción alineada con defensa, aeroespacial y transición verde." },
+        { title: "Preparación CBAM y sostenibilidad", text: "Producción alineada con defensa, aeroespacial y transición verde." },
         { title: "Protección de IP europea", text: "Marco jurídico robusto y proximidad a clientes estratégicos." },
       ],
       closing:
@@ -3238,9 +3331,9 @@ const BASE_I18N = deepFreeze({
         "<b>Contacto técnico:</b> procesamos solicitudes en <b>3–5 días laborables</b>.",
 
       colSite: {
-        title: "Site",
+        title: "Web",
         links: {
-          home: "Home",
+          home: "Inicio",
           company: "Empresa",
           sectors: "Sectores",
           materials: "Materiales",
@@ -3255,7 +3348,7 @@ const BASE_I18N = deepFreeze({
         links: {
           oviedo: "Oviedo — Desarrollo & Validación",
           leon: "León — Hub industrial",
-          supply: "European Supply",
+          supply: "Suministro europeo",
         },
       },
 
@@ -3293,6 +3386,7 @@ const BASE_I18N = deepFreeze({
         privacy: "Política de privacidad",
         cookies: "Política de cookies",
         notice: "Aviso legal",
+        publicProjects: "Publicidad de Proyectos de I+D+i",
       },
     },
 
@@ -3503,6 +3597,36 @@ const BASE_I18N = deepFreeze({
       },
     },
 
+    publicProjects: {
+      kicker: "Proyectos financiados / I+D+i",
+      titleHtml: "Publicidad de Proyectos de <span>I+D+i</span>",
+      lead:
+        "Información pública relativa a proyectos de investigación, desarrollo e innovación en los que participa Nanoker Research, S.L., así como la documentación requerida por los organismos financiadores.",
+      documentsKicker: "Documentación pública",
+      documentsTitle: "Carteles y documentos de proyectos",
+      viewDocument: "Ver documento",
+      currentPage: "Publicidad de Proyectos de I+D+i",
+      open: {
+        lion: "Abrir LION-HD",
+        estratesic: "Abrir PDF EstrateSiC",
+        cpp: "Abrir PDF CPP",
+        epita: "Abrir PDF EPITA",
+        ifast: "Abrir PDF I.FAST",
+        megavatio: "Abrir PDF MEGAVATIO",
+        recon: "Abrir PDF RECON",
+      },
+      alt: {
+        lion: "Cartel del proyecto LION-HD",
+        estratesic: "Vista previa del cartel EstrateSiC",
+        cpp: "Vista previa del cartel CPP",
+        epita: "Vista previa del cartel EPITA",
+        ifast: "Vista previa del cartel I.FAST",
+        megavatio: "Vista previa del cartel MEGAVATIO",
+        recon: "Vista previa del cartel RECON",
+      },
+      cppTitle: "CPP - Obleas de SiC para electrónica de potencia",
+    },
+
     // Keep your old "cards/value" blocks if you still use them elsewhere
     cards: {
       quantum: {
@@ -3593,11 +3717,13 @@ export const BASE_LOCALES = deepFreeze({
 export const LOCALE_OVERRIDES = deepFreeze({
   fr: FR_OVERRIDES,
   de: DE_OVERRIDES,
+  it: IT_OVERRIDES,
 });
 
 export const I18N = deepFreeze({
   ...BASE_I18N,
   fr: mergeDeep(BASE_I18N.en, FR_OVERRIDES),
   de: mergeDeep(BASE_I18N.en, DE_OVERRIDES),
+  it: mergeDeep(BASE_I18N.en, IT_OVERRIDES),
 });
 
