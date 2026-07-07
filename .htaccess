@@ -20,5 +20,6 @@ RedirectMatch 301 ^/contact/?$ https://nanoker.com/contacto.html
 RedirectMatch 301 ^/privacy-policy/?$ https://nanoker.com/privacy.html
 RedirectMatch 301 ^/cookie-policy/?$ https://nanoker.com/cookies.html
 RedirectMatch 301 ^/legal-notice/?$ https://nanoker.com/legal-notice.html
+RedirectMatch 301 ^/docs/poster/Cartel(?:%20|[[:space:]])EstrateSic\.pdf$ /docs/poster/Cartel_EstrateSic.pdf
 
 DirectoryIndex index.html
