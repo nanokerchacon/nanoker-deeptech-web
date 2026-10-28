@@ -123,8 +123,8 @@
       key: "contact.form.status.error",
       fallback: () =>
         trFallback(
-          'We could not send your request right now. Please try again or email <a href="mailto:web@nanoker.com">web@nanoker.com</a>.',
-          'No hemos podido enviar la solicitud en este momento. Por favor, inténtalo de nuevo o escribe a <a href="mailto:web@nanoker.com">web@nanoker.com</a>.'
+          'We could not send your request right now. Please try again or email <a href="mailto:info@nanoker.com">info@nanoker.com</a>.',
+          'No hemos podido enviar la solicitud en este momento. Por favor, inténtalo de nuevo o escribe a <a href="mailto:info@nanoker.com">info@nanoker.com</a>.'
         ),
       html: true,
     },
@@ -573,7 +573,7 @@
 
   window.addEventListener("lang:change", (event) => {
     runtimeLang = normalizeLang(event.detail?.lang || runtimeLang);
-    import("./lang.js?v=11")
+    import("./lang.js?v=12")
       .then((mod) => {
         if (typeof mod.applyTranslations === "function") {
           mod.applyTranslations(document.getElementById("wizard-form") || document);
@@ -585,7 +585,7 @@
       });
   });
 
-  import("./lang.js?v=11")
+  import("./lang.js?v=12")
     .then((mod) => {
       if (typeof mod.t === "function") {
         translate = mod.t;
