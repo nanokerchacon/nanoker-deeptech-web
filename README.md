@@ -11,7 +11,7 @@ Sitio corporativo estático de Nanoker con frontend en HTML/CSS/JS vanilla y bac
 - SMTP saliente:
   Microsoft 365 con una cuenta real de login en `SMTP_USER`
 - Destino final de leads:
-  `MAIL_TO=web@nanoker.com`
+  `MAIL_TO=info@nanoker.com`
 
 ## Variables de entorno en Vercel
 
@@ -22,13 +22,14 @@ SMTP_HOST=smtp.office365.com
 SMTP_PORT=587
 SMTP_USER=formularios@nanoker.com
 SMTP_PASS=PASSWORD_REAL_O_APP_PASSWORD
-MAIL_TO=web@nanoker.com
+MAIL_TO=info@nanoker.com
 ```
 
 Notas:
 
 - `SMTP_USER` debe ser una cuenta real autenticable en Microsoft 365.
-- `MAIL_TO` puede ser un buzón compartido o destinatario de distribución.
+- El destinatario de ambos formularios está fijado a `info@nanoker.com` en `api/_lib/mail.js`. Una variable `MAIL_TO` antigua no puede desviar los envíos.
+- Se recomienda actualizar también `MAIL_TO=info@nanoker.com` en Vercel para mantener coherente la configuración.
 - No pongas credenciales en el repo.
 
 ## Endpoints
@@ -89,7 +90,8 @@ node --check js/evaluacion.js
 
 1. Subir `contacto.html`, `evaluacion-tecnica.html`, `js/`, `css/` y assets relacionados.
 2. Confirmar que los formularios publican contra `https://nanoker-deeptech-web.vercel.app`.
-3. Probar ambos flujos desde producción.
+3. Vaciar la caché de SiteGround/CDN y confirmar que se cargan las nuevas versiones de JavaScript.
+4. Probar ambos flujos desde producción únicamente con una prueba de recepción autorizada.
 
 ## Comportamiento esperado
 

@@ -25,6 +25,8 @@ const MAX_TOTAL_ATTACHMENT_SIZE = 5 * 1024 * 1024;
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const RATE_LIMIT_MAX_REQUESTS = 8;
 
+const LEAD_RECIPIENT = "info@nanoker.com";
+
 const rateLimitStore = new Map();
 let cachedTransporter = null;
 
@@ -41,7 +43,7 @@ function getEnvConfig() {
     SMTP_PORT: Number(process.env.SMTP_PORT || 0),
     SMTP_USER: String(process.env.SMTP_USER || "").trim(),
     SMTP_PASS: String(process.env.SMTP_PASS || ""),
-    MAIL_TO: String(process.env.MAIL_TO || "").trim(),
+    MAIL_TO: LEAD_RECIPIENT,
   };
 }
 

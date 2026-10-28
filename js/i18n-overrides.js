@@ -3239,7 +3239,7 @@ export const IT_OVERRIDES = {
         received:
           "Richiesta inviata correttamente. Grazie per aver contattato Nanoker. Il nostro team esaminerà la richiesta e risponderà appena possibile.",
         error:
-          'Non siamo riusciti a inviare la richiesta in questo momento. Riprova o scrivi a <a href="mailto:web@nanoker.com">web@nanoker.com</a>.',
+          'Non siamo riusciti a inviare la richiesta in questo momento. Riprova o scrivi a <a href="mailto:info@nanoker.com">info@nanoker.com</a>.',
       },
     },
     processingNote: "ELABORIAMO LE RICHIESTE TECNICHE ENTRO 3-5 GIORNI LAVORATIVI",

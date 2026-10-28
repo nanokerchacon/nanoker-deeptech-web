@@ -1,5 +1,5 @@
 import { initThreeBackground } from "./three-bg.js?v=15";
-import { initLanguageSwitcher, t } from "./lang.js?v=11";
+import { initLanguageSwitcher, t } from "./lang.js?v=12";
 
 let three = null;
 let bgSections = [];

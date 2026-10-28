@@ -2,7 +2,7 @@
 // Single source of truth for UI copy.
 // Tip: Keep keys identical between languages.
 
-import { DE_OVERRIDES, FR_OVERRIDES, IT_OVERRIDES } from "./i18n-overrides.js";
+import { DE_OVERRIDES, FR_OVERRIDES, IT_OVERRIDES } from "./i18n-overrides.js?v=2";
 
 function deepFreeze(obj) {
   if (!obj || typeof obj !== "object" || Object.isFrozen(obj)) return obj;
@@ -262,7 +262,7 @@ const BASE_I18N = deepFreeze({
           received:
             "Contact request sent successfully. Thank you for contacting Nanoker. Our team will review your inquiry and respond as soon as possible.",
           error:
-            'We could not send your request right now. Please try again or email <a href="mailto:web@nanoker.com">web@nanoker.com</a>.',
+            'We could not send your request right now. Please try again or email <a href="mailto:info@nanoker.com">info@nanoker.com</a>.',
         },
       },
       processingNote: "WE PROCESS TECHNICAL REQUESTS WITHIN 3–5 BUSINESS DAYS",
@@ -2108,7 +2108,7 @@ const BASE_I18N = deepFreeze({
           received:
             "Solicitud enviada correctamente. Gracias por contactar con Nanoker. Nuestro equipo revisará tu consulta y te responderá lo antes posible.",
           error:
-            'No hemos podido enviar la solicitud en este momento. Por favor, inténtalo de nuevo o escribe a <a href="mailto:web@nanoker.com">web@nanoker.com</a>.',
+            'No hemos podido enviar la solicitud en este momento. Por favor, inténtalo de nuevo o escribe a <a href="mailto:info@nanoker.com">info@nanoker.com</a>.',
         },
       },
       processingNote: "PROCESAMOS SOLICITUDES TÉCNICAS EN UN PLAZO DE 3–5 DÍAS LABORABLES",

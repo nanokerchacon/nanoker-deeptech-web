@@ -1,5 +1,5 @@
 // js/lang.js
-import { BASE_LOCALES, I18N, LOCALE_OVERRIDES } from "./i18n.js";
+import { BASE_LOCALES, I18N, LOCALE_OVERRIDES } from "./i18n.js?v=2";
 
 const KEY = "nanoker-lang";
 const SEO_BASE_URL = "https://nanoker.com";

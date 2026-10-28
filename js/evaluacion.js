@@ -31,7 +31,7 @@
         fileSize: "El tamaño total de los adjuntos no puede superar 5 MB.",
         sending: "Enviando...",
         success: "Solicitud técnica enviada correctamente. Hemos recibido tu información y el equipo de Nanoker revisará tu caso.",
-        error: 'No hemos podido enviar la solicitud técnica en este momento. Por favor, inténtalo de nuevo o escribe a <a href="mailto:web@nanoker.com">web@nanoker.com</a>.',
+        error: 'No hemos podido enviar la solicitud técnica en este momento. Por favor, inténtalo de nuevo o escribe a <a href="mailto:info@nanoker.com">info@nanoker.com</a>.',
       },
       fields: { specify: "Especifica" },
       steps: {
@@ -71,7 +71,7 @@
         fileSize: "The total attachment size cannot exceed 5 MB.",
         sending: "Sending...",
         success: "Technical request sent successfully. We have received your information and the Nanoker team will review your case.",
-        error: 'We could not send your technical request right now. Please try again or email <a href="mailto:web@nanoker.com">web@nanoker.com</a>.',
+        error: 'We could not send your technical request right now. Please try again or email <a href="mailto:info@nanoker.com">info@nanoker.com</a>.',
       },
       fields: { specify: "Specify" },
       steps: {
